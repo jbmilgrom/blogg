@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/jbmilgrom/blogg/issues"
   },
-  "homepage": "https://github.com/jbmilgrom/blogg#readme"
+  "homepage": "https://github.com/jbmilgrom/blogg#readme",
+  "devDependencies": {
+    "mediumexporter": "^0.1.6"
+  }
 }
