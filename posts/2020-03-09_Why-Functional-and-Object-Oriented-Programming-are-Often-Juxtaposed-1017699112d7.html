@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Why Functional and Object-Oriented Programming are Often Juxtaposed</title>
+  <style>
+    * {
+      font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      font-size: 50px;
+      margin-bottom: 17px;
+      color: #333;
+    }
+
+    h2 {
+      font-size: 24px;
+      line-height: 1.6;
+      margin: 30px 0 0 0;
+      margin-bottom: 18px;
+      margin-top: 33px;
+      color: #333;
+    }
+
+    h3 {
+      font-size: 30px;
+      margin: 10px 0 20px 0;
+      color: #333;
+    }
+
+    header {
+      width: 640px;
+      margin: auto;
+    }
+
+    section {
+      width: 640px;
+      margin: auto;
+    }
+
+    section p {
+      margin-bottom: 27px;
+      font-size: 20px;
+      line-height: 1.6;
+      color: #333;
+    }
+
+    section img {
+      max-width: 640px;
+    }
+
+    footer {
+      padding: 0 20px;
+      margin: 50px 0;
+      text-align: center;
+      font-size: 12px;
+    }
+
+    .aspectRatioPlaceholder {
+      max-width: auto !important;
+      max-height: auto !important;
+    }
+
+    .aspectRatioPlaceholder-fill {
+      padding-bottom: 0 !important;
+    }
+
+    header,
+    section[data-field=subtitle],
+    section[data-field=description] {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+<article class="h-entry">
+  <header>
+    <h1 class="p-name">Why Functional and Object-Oriented Programming are Often Juxtaposed</h1>
+  </header>
+  <section data-field="subtitle" class="p-summary">
+    And the Implications for Change, State and Time
+  </section>
+  <section data-field="body" class="e-content">
+    <section name="f384" class="section section--body section--first">
+      <div class="section-divider">
+        <hr class="section-divider">
+      </div>
+      <div class="section-content">
+        <div class="section-inner sectionLayout--insetColumn"><h3 name="75c3" id="75c3"
+                                                                  class="graf graf--h3 graf--leading graf--title">The
+          Juxtaposition of Functional and Object-Oriented Programming Exposes an Alternative Model for Time</h3>
+          <figure name="03d6" id="03d6" class="graf graf--figure graf--layoutOutsetLeft graf-after--h3">
+            <div class="aspectRatioPlaceholder is-locked" style="max-width: 525px; max-height: 501px;">
+              <div class="aspectRatioPlaceholder-fill" style="padding-bottom: 95.5%;"></div>
+              <img class="graf-image" data-image-id="1*iCxs1E7X1MSUHGrYpxUu2A.png" data-width="1107" data-height="1057"
+                   data-is-featured="true" src="https://cdn-images-1.medium.com/max/600/1*iCxs1E7X1MSUHGrYpxUu2A.png">
+            </div>
+            <figcaption class="imageCaption">Oil &amp; water</figcaption>
+          </figure>
+          <p name="c23f" id="c23f" class="graf graf--p graf-after--figure">That functional programming opposes
+            object-oriented programming in some fundamental way is a widely-held programming cliche. We list features
+            like immutability, functions and composition in contrast to mutability, classes and inheritance. We tout
+            Clojure and Haskel as functional languages on one end of the spectrum and C++ and Java as object-oriented
+            languages on the other. Articulating the makeup of the spectrum is another story altogether however. None of
+            this trivia explains why certain features are seen together or apart, why languages themselves may skew in
+            one direction or another, or any inherent differences in program semantics. Nevertheless, the “functions vs.
+            objects” cliche is an artifact of a profound truth about program structures and semantics. Like up and down
+            and oil and water, functional and object-oriented programming indeed cannot coexist. We may choose objects
+            or functions, but not both at once, as advertised. Moreover, the choice between paradigms has dramatic
+            implications for program semantics, offering competing “world-views” involving concepts as basic as
+            identity, change, state and time. Where object-oriented programming focuses on “distinct objects whose
+            behaviors may change <em class="markup--em markup--p-em">over time</em>,” functional programming focuses on
+            state transitions between <em class="markup--em markup--p-em">discrete</em> <em
+                class="markup--em markup--p-em">moments in time</em> that can be seen together as “streams of
+            information that flow in the system.” — <a href="https://web.mit.edu/alexmv/6.037/sicp.pdf"
+                                                       data-href="https://web.mit.edu/alexmv/6.037/sicp.pdf"
+                                                       class="markup--anchor markup--p-anchor" rel="noopener"
+                                                       target="_blank">Structure and Interpretation of Computer
+              Programs</a> (SICP), Section 3</p>
+          <h3 name="d50f" id="d50f" class="graf graf--h3 graf-after--p">Functional Programming</h3>
+          <p name="c541" id="c541" class="graf graf--p graf-after--h3">Procedures that produce the same result when
+            provided the same argument can be viewed as computing mathematical functions. For example, a <code
+                class="markup--code markup--p-code">decrement100</code> procedure in JavaScript<a href="#c746"
+                                                                                                  data-href="#c746"
+                                                                                                  class="markup--anchor markup--p-anchor">⁰</a>,
+          </p>
+          <figure name="05fb" id="05fb" class="graf graf--figure graf--iframe graf-after--p"></figure>
+          <p name="1419" id="1419" class="graf graf--p graf-after--figure">or, more succinctly,</p>
+          <figure name="3b8a" id="3b8a" class="graf graf--figure graf--iframe graf-after--p"></figure>
+          <p name="63ad" id="63ad" class="graf graf--p graf-after--figure">can be viewed as computing the mathematical
+            function <code class="markup--code markup--p-code">f(x) = 100 — x</code>,</p>
+          <pre name="045d" id="045d" class="graf graf--pre graf-after--p">where f(x) = 100 - x,</pre>
+          <pre name="20a5" id="20a5" class="graf graf--pre graf-after--pre">f(20) = 80</pre>
+          <p name="3682" id="3682" class="graf graf--p graf-after--pre">since the return value of <code
+              class="markup--code markup--p-code">decrement100</code> depends only on the input value just as <code
+              class="markup--code markup--p-code">f(x)</code> depends only on <code class="markup--code markup--p-code">x</code>.
+            Invoke <code class="markup--code markup--p-code">decrement100</code> a second time with <code
+                class="markup--code markup--p-code">20</code> and it will return <code
+                class="markup--code markup--p-code">80</code> once again, regardless of time and place within a
+            program’s runtime. By contrast, an alternative implementation</p>
+          <figure name="36e8" id="36e8" class="graf graf--figure graf--iframe graf-after--p"></figure>
+          <p name="cf07" id="cf07" class="graf graf--p graf-after--figure">involving a mutable binding does not model
+            computing a mathematical function, since its behavior may depend on variable information in addition to its
+            input. Invoke <code class="markup--code markup--p-code">decrementOneHundred</code> a second time with <code
+                class="markup--code markup--p-code">20</code> and it will <em class="markup--em markup--p-em">not</em>
+            return <code class="markup--code markup--p-code">80</code> once again when such binding is intermediately
+            reassigned.</p>
+          <p name="daf5" id="daf5" class="graf graf--p graf-after--p">Functional procedures are not limited to numbers.
+            Procedures that involve character strings, for example,</p>
+          <figure name="53cb" id="53cb"
+                  class="graf graf--figure graf--iframe graf--startsWithDoubleQuote graf-after--p">
+            <figcaption class="imageCaption">“hello world” will result from (‘hello’, ‘world’) regardless of program
+              context.
+            </figcaption>
+          </figure>
+          <p name="5866" id="5866" class="graf graf--p graf-after--figure">a list of strings,</p>
+          <figure name="9422" id="9422"
+                  class="graf graf--figure graf--iframe graf--startsWithDoubleQuote graf-after--p">
+            <figcaption class="imageCaption">“i heart functions” will results from [‘i’, ‘heart’, ‘functions’]
+              regardless of program context.
+            </figcaption>
+          </figure>
+          <p name="d347" id="d347" class="graf graf--p graf-after--figure">or other arbitrary data types and
+            compositions may return the same value provided the same argument. Larger functional procedures can be
+            composed of smaller ones,</p>
+          <figure name="dcdb" id="dcdb" class="graf graf--figure graf--iframe graf-after--p"></figure>
+          <p name="778b" id="778b" class="graf graf--p graf-after--figure">as can programs themselves.</p>
+          <figure name="5962" id="5962" class="graf graf--figure graf--iframe graf-after--p"></figure>
+          <p name="0508" id="0508" class="graf graf--p graf-after--figure">When the output of one functional procedure
+            becomes the input of another, the wrapping program or procedure itself can be viewed as computing a
+            mathematical function; a second run with the same input results in the same output.<a href="#dba0"
+                                                                                                  data-href="#dba0"
+                                                                                                  class="markup--anchor markup--p-anchor">¹</a>
+          </p>
+          <h3 name="24b3" id="24b3" class="graf graf--h3 graf-after--p">Object-Oriented Programming</h3>
+          <p name="4742" id="4742" class="graf graf--p graf-after--h3"><em class="markup--em markup--p-em">Object-oriented
+            programming</em> has come to signify a common language for modeling the behavior of objects.<a href="#202d"
+                                                                                                           data-href="#202d"
+                                                                                                           class="markup--anchor markup--p-anchor">²</a>
+            Methods leverage privileged access to proscribe the ways in which private attributes may be viewed or
+            changed. A class specifies the blueprint for creating object instances of a certain kind. Together, these
+            constructs may create computational objects that simulate real objects. This <code
+                class="markup--code markup--p-code">bankAccount</code> object in TypeScript, for example,</p>
+          <figure name="270f" id="270f" class="graf graf--figure graf--iframe graf-after--p">
+            <figcaption class="imageCaption">This example is based on the “withdraw” procedure introduced in SICP
+              Section 3.1.
+            </figcaption>
+          </figure>
+          <p name="f840" id="f840" class="graf graf--p graf-after--figure">stores <code
+              class="markup--code markup--p-code">balance</code> data in a private attribute and exposes privileged
+            methods <code class="markup--code markup--p-code">checkBalance</code> and <code
+                class="markup--code markup--p-code">withdraw</code>, which proscribe the manner in which access to <code
+                class="markup--code markup--p-code">balance</code> can occur. Together, these constructs create a
+            computational object — e.g. <code class="markup--code markup--p-code">bankAccount</code> — that behaves like
+            a “bank account”, carrying a balance that may be diminished through “withdraw” and viewed through “check
+            balance” actions. Less abstract objects can be modeled with the same set of tools — an <code
+                class="markup--code markup--p-code">apple</code> may have a <code class="markup--code markup--p-code">bite</code>
+            method that reduces an internal <code class="markup--code markup--p-code">bites</code> state in order to
+            model an “apple” and a <code class="markup--code markup--p-code">house</code> may have a <code
+                class="markup--code markup--p-code">paint</code> method that changes an internal <code
+                class="markup--code markup--p-code">color</code> state in order to model a “house.” More abstract
+            objects can be modeled with the same set of tools as well— a <code class="markup--code markup--p-code">userMetaData</code>
+            object may have a <code class="markup--code markup--p-code">setEmail</code> method that updates an internal
+            <code class="markup--code markup--p-code">email</code> state in order to model “user meta data.”</p><h4
+              name="0b74" id="0b74" class="graf graf--h4 graf-after--p">An Evolution of Imperative Programming</h4>
+          <blockquote name="2e26" id="2e26" class="graf graf--blockquote graf-after--h4">And a key characteristic here
+            is that objects have methods… They are operationally defined. And we use them to provide a layer of
+            abstraction over the places that our program uses. — Rich Hickey, <a
+                href="https://github.com/matthiasn/talk-transcripts/blob/master/Hickey_Rich/ValueOfValuesLong.md"
+                data-href="https://github.com/matthiasn/talk-transcripts/blob/master/Hickey_Rich/ValueOfValuesLong.md"
+                class="markup--anchor markup--blockquote-anchor" rel="noopener" target="_blank">The Value of Values</a>
+          </blockquote>
+          <p name="2e31" id="2e31" class="graf graf--p graf-after--blockquote">Private state enforces the object
+            abstraction together with privileged, public methods. Expose <code class="markup--code markup--p-code">balance</code>
+            directly (i.e. make it public), for example, and it can “magically” change from say <code
+                class="markup--code markup--p-code">100</code> to <code class="markup--code markup--p-code">10</code>
+            despite no <code class="markup--code markup--p-code">withdraw</code>al ever having occurred. Expose <code
+                class="markup--code markup--p-code">color</code> directly and it can “magically” change from say <code
+                class="markup--code markup--p-code">WHITE</code> to <code
+                class="markup--code markup--p-code">BLUE</code> despite no <code class="markup--code markup--p-code">paint</code>ing
+            ever having occurred. In other words, object-oriented programming provides the means for identifying objects
+            (<code class="markup--code markup--p-code">bankAccount</code>) and associated behaviors (<code
+                class="markup--code markup--p-code">withdraw</code>)</p>
+          <figure name="0133" id="0133" class="graf graf--figure graf--iframe graf-after--p"></figure>
+          <p name="215b" id="215b" class="graf graf--p graf-after--figure">in place of imperative, direct manipulation
+            of variables (<code class="markup--code markup--p-code">balance</code>) ad hoc.</p>
+          <figure name="8bbc" id="8bbc" class="graf graf--figure graf--iframe graf-after--p"></figure>
+          <p name="b039" id="b039" class="graf graf--p graf-after--figure">Coincidentally, the private data / public
+            methods dynamic also provides the means for data encapsulation. That data is stored in private attributes,
+            accessible only through privileged methods, proscribes the ways in which such data may be viewed or changed.
+            The <code class="markup--code markup--p-code">balance</code> data of <code
+                class="markup--code markup--p-code">bankAccount</code> can only be changed by <code
+                class="markup--code markup--p-code">withdraw</code> or read by <code
+                class="markup--code markup--p-code">checkBalance</code>, in one sense, because it may not be accessed
+            directly.</p><h4 name="c7bc" id="c7bc" class="graf graf--h4 graf-after--p">Place-Oriented Programming</h4>
+          <p name="67e9" id="67e9" class="graf graf--p graf-after--h4">Nevertheless, object-oriented and imperative
+            programming share a fundamental orientation towards places in memory.</p>
+          <blockquote name="2aa9" id="2aa9" class="graf graf--blockquote graf-after--p">But mutable objects are actually
+            abstractions of places. They do not actually have meaning other than that. They are little barricades we
+            have set up in front of memory, so that we do not have to directly manipulate memory addresses any more. So
+            we have this abstraction that is an object, that helps us manipulate that place without too much
+            craziness…So I have a new label for this. It is called PLOP, and PLOP is place-oriented programming. — Rich
+            Hickey, <a href="https://github.com/matthiasn/talk-transcripts/blob/master/Hickey_Rich/ValueOfValuesLong.md"
+                       data-href="https://github.com/matthiasn/talk-transcripts/blob/master/Hickey_Rich/ValueOfValuesLong.md"
+                       class="markup--anchor markup--blockquote-anchor" rel="noopener" target="_blank">The Value of
+              Values</a></blockquote>
+          <p name="eb50" id="eb50" class="graf graf--p graf-after--blockquote">A method call to <code
+              class="markup--code markup--p-code">withdraw</code> effectively overwrites a <code
+              class="markup--code markup--p-code">balance</code> reference</p>
+          <figure name="8da3" id="8da3" class="graf graf--figure graf--iframe graf-after--p"></figure>
+          <p name="7ae8" id="7ae8" class="graf graf--p graf-after--figure">just as any direct assignment that
+            circumvents a method.</p>
+          <figure name="9af2" id="9af2" class="graf graf--figure graf--iframe graf-after--p"></figure>
+          <p name="84c3" id="84c3" class="graf graf--p graf-after--figure">A mutable variable and a place in memory
+            underly the reassignments in both cases.<a href="#1a6f" data-href="#1a6f"
+                                                       class="markup--anchor markup--p-anchor">³</a></p>
+          <h3 name="cb3a" id="cb3a" class="graf graf--h3 graf-after--p">Semantics, Not Syntax</h3>
+          <p name="b40d" id="b40d" class="graf graf--p graf-after--h3">Syntactic constructs like <code
+              class="markup--code markup--p-code">this</code>, <code class="markup--code markup--p-code">new</code>,
+            <code class="markup--code markup--p-code">class</code>, <code
+                class="markup--code markup--p-code">private</code> and <code
+                class="markup--code markup--p-code">public</code> clearly express object-oriented intent — <em
+                class="markup--em markup--p-em">this</em> instance of a <em class="markup--em markup--p-em">class</em>
+            of things <em class="markup--em markup--p-em">private</em>ly maintains data through <em
+                class="markup--em markup--p-em">public</em>ly available APIs — and are common to object-oriented
+            programming languages. However, they are not necessary. Object-oriented semantics may be achieved with
+            nontraditional syntax. For example, this <code class="markup--code markup--p-code">bankAccount</code> object
+            also stores the <code class="markup--code markup--p-code">balance</code> data privately;</p>
+          <figure name="6fd4" id="6fd4" class="graf graf--figure graf--iframe graf-after--p"></figure>
+          <p name="b37d" id="b37d" class="graf graf--p graf-after--figure"><code class="markup--code markup--p-code">balance</code>
+            is accessible only through the functions <code class="markup--code markup--p-code">checkBalance</code> and
+            <code class="markup--code markup--p-code">withdraw</code>, which proscribe the manner in which such access
+            can occur. <code class="markup--code markup--p-code">bankAccount</code> behaves like a “bank account” even
+            though the functions <code class="markup--code markup--p-code">checkBalance</code> and <code
+                class="markup--code markup--p-code">withdraw</code> have gained privileged access to private data
+            through the use of a function closure instead of through explicit syntactic constructs in this case.
+            Object-oriented syntax is also insufficient in and of itself to achieve object-oriented semantics. A <code
+                class="markup--code markup--p-code">bankAccount</code> “object” that avoids maintaining any underlying
+            balance state</p>
+          <figure name="1744" id="1744" class="graf graf--figure graf--iframe graf-after--p"></figure>
+          <p name="27cb" id="27cb" class="graf graf--p graf-after--figure">allows “its” balance to evolve in an
+            unspecified manner, which undermines the “bank account” abstraction. <code
+                class="markup--code markup--p-code">new</code>, <code class="markup--code markup--p-code">class</code>
+            and <code class="markup--code markup--p-code">public</code> constructs obscure the actual semantics in this
+            case. The same can be said of a <code class="markup--code markup--p-code">bankAccount</code> object that
+            publicly exposes the balance attribute, as was alluded to above.</p>
+          <figure name="bd04" id="bd04" class="graf graf--figure graf--iframe graf-after--p"></figure>
+          <p name="ec67" id="ec67" class="graf graf--p graf-after--figure">Now, <code
+              class="markup--code markup--p-code">balance</code> can magically change without a <code
+              class="markup--code markup--p-code">withdraw</code>al ever having occurred, undermining the “bank account”
+            abstraction. <code class="markup--code markup--p-code">new</code>, <code
+                class="markup--code markup--p-code">class</code> and <code
+                class="markup--code markup--p-code">public</code> constructs obscure the actual semantics in this
+            case.<a href="#9110" data-href="#9110" class="markup--anchor markup--p-anchor">⁴</a></p>
+          <p name="70d2" id="70d2" class="graf graf--p graf-after--p">With functional programming, syntax is also beside
+            the point. The use of functional syntactic constructs is necessary to perform computation against arguments.
+            <code class="markup--code markup--p-code">function</code> and <code class="markup--code markup--p-code">=&gt;</code>
+            (i.e. “arrow function”) syntax may express functional programming intent as well. However, they cannot alone
+            achieve functional semantics. Indeed, a method of an object may use the <code
+                class="markup--code markup--p-code">=&gt;</code> syntax without correctly modeling computing
+            mathematical functions.</p>
+          <figure name="da86" id="da86" class="graf graf--figure graf--iframe graf-after--p"></figure>
+          <p name="4e79" id="4e79" class="graf graf--p graf-after--figure">Subsequent calls to <code
+              class="markup--code markup--p-code">checkBalance</code> return different results despite identical inputs
+            (i.e. <code class="markup--code markup--p-code">undefined</code>) by design.</p>
+          <figure name="3dba" id="3dba" class="graf graf--figure graf--iframe graf-after--p"></figure>
+          <p name="64ae" id="64ae" class="graf graf--p graf-after--figure">Additionally, an alternative implementation
+            of “decrement one hundred” in JavaScript may fall short of correctly modeling a mathematical function even
+            though an <code class="markup--code markup--p-code">=&gt;</code> construct is used, as was alluded to above.
+          </p>
+          <figure name="e3ea" id="e3ea" class="graf graf--figure graf--iframe graf-after--p"></figure>
+          <p name="cefd" id="cefd" class="graf graf--p graf-after--figure">Invoking this procedure a second time with
+            the same argument produces a different result when the let binding is amended between invocations.</p>
+          <h3 name="8fa9" id="8fa9" class="graf graf--h3 graf-after--p">Changeability is Fundamental to Object
+            Semantics</h3>
+          <p name="4f67" id="4f67" class="graf graf--p graf-after--h3">Objects can change. An apple can be bitten, a
+            house painted, and a bank account withdrawn from. Object implementations follow suit —</p>
+          <blockquote name="e36f" id="e36f" class="graf graf--blockquote graf-after--p">[W]e make computational
+            objects…whose behavior changes with time. We model state with local state variables, and we model the
+            changes of state with assignments to those variables. — SICP Section 3.1.2
+          </blockquote>
+          <p name="8f4d" id="8f4d" class="graf graf--p graf-after--blockquote">— <code
+              class="markup--code markup--p-code">bite</code>’ing an <code
+              class="markup--code markup--p-code">apple</code> changes <code
+              class="markup--code markup--p-code">bites</code> state, <code
+              class="markup--code markup--p-code">paint</code>’ing a <code
+              class="markup--code markup--p-code">house</code> changes <code
+              class="markup--code markup--p-code">color</code> state and <code class="markup--code markup--p-code">withdraw</code>’ing
+            from a <code class="markup--code markup--p-code">bankAccount</code> changes <code
+                class="markup--code markup--p-code">balance</code> state. The class implementation of a bank account
+            object</p>
+          <figure name="d22b" id="d22b" class="graf graf--figure graf--iframe graf-after--p">
+            <figcaption class="imageCaption">The bank account’s balance is overwritten by the withdraw method.
+            </figcaption>
+          </figure>
+          <p name="0ccf" id="0ccf" class="graf graf--p graf-after--figure">involves overwriting <code
+              class="markup--code markup--p-code">balance</code> as much as the closure implementation does.</p>
+          <figure name="410a" id="410a" class="graf graf--figure graf--iframe graf-after--p">
+            <figcaption class="imageCaption">The bank account’s balance is overwritten by the withdraw method.
+            </figcaption>
+          </figure>
+          <p name="d6b7" id="d6b7" class="graf graf--p graf-after--figure">As mentioned above, a state<em
+              class="markup--em markup--p-em">less</em> “object” (e.g. <code class="markup--code markup--p-code">bankAccount</code>)
+            that avoids maintaining any underlying state (e.g. <code class="markup--code markup--p-code">balance</code>)
+          </p>
+          <figure name="55a3" id="55a3" class="graf graf--figure graf--iframe graf-after--p"></figure>
+          <p name="f460" id="f460" class="graf graf--p graf-after--figure">also avoids modeling any underlying object
+            (e.g. “bank account”).</p>
+          <h3 name="2b87" id="2b87" class="graf graf--h3 graf-after--p">Unchangeability is Fundamental to Functional
+            Semantics</h3>
+          <p name="1151" id="1151" class="graf graf--p graf-after--h3">On the other hand, changeable things undermine
+            functional semantics. The <code class="markup--code markup--p-code">decrement100</code> procedure can be
+            viewed as computing a mathematical function because its output depends only on its input; there is no other
+            <em class="markup--em markup--p-em">variable</em> information on which it depends. <code
+                class="markup--code markup--p-code">decrementOneHundred</code> introduces a changeable thing. As the
+            value of the mutable <code class="markup--code markup--p-code">let</code> binding changes, so does the
+            behavior of <code class="markup--code markup--p-code">decrementOneHundred</code> as a side-effect.
+            Consequently, <code class="markup--code markup--p-code">decrementOneHundred</code> depends on the ongoing
+            value of some contextual thing in addition to its input <code class="markup--code markup--p-code">x</code>
+            and does not resemble computing a mathematical function as a result.</p>
+          <p name="9a38" id="9a38" class="graf graf--p graf-after--p">Conversely, immutability restores functional
+            semantics. No contextual changes means no side-effects, and no side-effects means functional behavior:</p>
+          <blockquote name="845c" id="845c" class="graf graf--blockquote graf-after--p">So long as we do not use
+            assignments, two evaluations of the same procedure with the same arguments will produce the same result, so
+            that procedures can be viewed as computing mathematical functions. Programming without any use of
+            assignment…is accordingly known as <em class="markup--em markup--blockquote-em">functional programming</em>. — SICP
+            Section 3.1.3
+          </blockquote>
+          <p name="c8cf" id="c8cf" class="graf graf--p graf-after--blockquote">An externally scoped variable cannot
+            change the semantics of <code class="markup--code markup--p-code">decrementOneHundred</code> when immutable.
+          </p>
+          <figure name="c857" id="c857" class="graf graf--figure graf--iframe graf-after--p"></figure>
+          <p name="7daa" id="7daa" class="graf graf--p graf-after--figure">It simple cannot change and without change,
+            the output can depend only on the single thing that can — i.e. the input.<a href="#995e" data-href="#995e"
+                                                                                        class="markup--anchor markup--p-anchor">⁵</a>
+          </p>
+          <h3 name="1ef1" id="1ef1" class="graf graf--h3 graf--startsWithDoubleQuote graf-after--p">“Object” Names
+            Changeability</h3>
+          <p name="b3ee" id="b3ee" class="graf graf--p graf-after--h3">Moreover, changeability <em
+              class="markup--em markup--p-em">implies</em> an object. The rational number “2/3” cannot change, for
+            example. Change the denominator of “2/3” from 3 to 5 and its identity changes as well to “2/5”. Increase the
+            number of units represented by “24” and it may change to “25.”</p>
+          <figure name="fb2e" id="fb2e" class="graf graf--figure graf--iframe graf-after--p">
+            <figcaption class="imageCaption">JavaScript implements number literals as immutable primitive values,
+              preventing this imagined change.
+            </figcaption>
+          </figure>
+          <p name="815d" id="815d" class="graf graf--p graf-after--figure">Similarly, change the molecular construction
+            of “iron” and it may very well change to “gold” or the wave length of “green” and it may change to “red”.
+            The rational number “2/3”, the integer “24”, the metal “iron” and the color “green” are unchangeable things
+            that are not recognizable as objects. Conversely, find changeability and find an object. A cup that is
+            two-thirds full of water can be poured, an iron rod can be dented, a green house can be painted. “That cup”
+            remains that cup notwithstanding less water; “that rod” remains that rod notwithstanding a dent; “that
+            house” remains that house notwithstanding a fresh coat of paint. A “cup”, “rod” and “house” are changeable
+            things that <em class="markup--em markup--p-em">are</em> recognizable as objects. Coincidence of
+            “changeability” and “object” is not happenstance. That parts can change without changing the identity of the
+            whole <em class="markup--em markup--p-em">distinguishes</em> an identity distinct from underlying parts.
+            Changeability distinguishes an object. “Object” in a sense articulates this ability to change.</p>
+          <p name="b19c" id="b19c" class="graf graf--p graf-after--p">Said another way, a new notion of “sameness”
+            emerges with changeability. Unchangeable things can be identified as “the same” simply by examining
+            contents. For example, because <em class="markup--em markup--p-em">immutable</em> rational number
+            implementations, <code class="markup--code markup--p-code">r1</code> and <code
+                class="markup--code markup--p-code">r2</code>,</p>
+          <figure name="d1e2" id="d1e2" class="graf graf--figure graf--iframe graf-after--p">
+            <figcaption class="imageCaption">TypeScript’s `readonly` qualifier prevents mutative actions (e.g. p2[1] =
+              3) at compile time.
+            </figcaption>
+          </figure>
+          <p name="cebc" id="cebc" class="graf graf--p graf-after--figure">will <em class="markup--em markup--p-em">always</em>
+            be comprised of <code class="markup--code markup--p-code">2</code> in the first slot and <code
+                class="markup--code markup--p-code">3</code> in the second and reduce to two-thirds, a reasonable
+            conclusion is that they are the same. To be sure, substitute one for the other and the meaning of a program
+            is unchanged.<a href="#cc5a" data-href="#cc5a" class="markup--anchor markup--p-anchor">⁶</a> By contrast,
+            consider when two <em class="markup--em markup--p-em">mutable (changeable) </em>rational number
+            implementations may be deemed the “same.”</p>
+          <figure name="283f" id="283f" class="graf graf--figure graf--iframe graf-after--p">
+            <figcaption class="imageCaption">Absent the `readonly` qualifier, `RationalNumber`s are mutable at compile
+              time. At runtime, JavaScript’s `const` binding only prevents reassignment; it does not prevent mutation of
+              an underlying array.
+            </figcaption>
+          </figure>
+          <p name="dd8a" id="dd8a" class="graf graf--p graf-after--figure"><code
+              class="markup--code markup--p-code">r1</code> may have the same contents as <code
+              class="markup--code markup--p-code">r2</code> to start, but this affect is shortly lived. Substitute one
+            for the other and the meaning of the program is changed — references to <code
+                class="markup--code markup--p-code">r2</code> now incorrectly reduce to two-fifths instead of
+            two-thirds. <code class="markup--code markup--p-code">r1</code> and <code
+                class="markup--code markup--p-code">r2</code> are not exactly “the same” in this case. Since two
+            changeable things may evolve independently notwithstanding an analysis of parts performed at any one point
+            in time, a new notion of “sameness” above an examination of parts must be admitted. Remarkably, this “new”
+            notion is less remarkable with intentional object-oriented programming, where the creation of a new
+            identity — i.e. an <em class="markup--em markup--p-em">object</em> — is precisely the goal. <code
+                class="markup--code markup--p-code">georgesAccount</code> and <code class="markup--code markup--p-code">elainesAccount</code>,
+            for example,</p>
+          <figure name="a07b" id="a07b" class="graf graf--figure graf--iframe graf-after--p">
+            <figcaption class="imageCaption">We may determine equality b/w 2 objects by whether they are the same
+              object — i.e. reference equality.
+            </figcaption>
+          </figure>
+          <p name="cf6a" id="cf6a" class="graf graf--p graf-after--figure">may share a balance at some point in time.
+            But even if they start with the same funds, <code class="markup--code markup--p-code">georgesAccount</code>
+            and <code class="markup--code markup--p-code">elainesAccount</code> can register different balances at some
+            other point in time because they are<em class="markup--em markup--p-em"> </em>in fact<em
+                class="markup--em markup--p-em"> </em>different<em class="markup--em markup--p-em"> objects</em>. Of
+            course, that two distinct objects can evolve independently goes without saying. That is because “object”
+            clearly articulates the creation of an identity that is not tied to any part, arrangement or
+            quality — “object” names the ability to change.<a href="#6d03" data-href="#6d03"
+                                                              class="markup--anchor markup--p-anchor">⁷</a></p>
+          <h3 name="2702" id="2702" class="graf graf--h3 graf-after--p">Mutually Exclusive</h3>
+          <p name="72eb" id="72eb" class="graf graf--p graf-after--h3">In this light, object-oriented can be seen as the
+            opposite of functional programming. Objects are inherently changeable. In fact, changeability and “object”
+            are intertwined as concepts. Yet, changeability undermines functional programming. Just as oil cannot
+            inhabit the same physical space as water, object-oriented cannot occupy the same virtual space as functional
+            programming. Use of one necessarily excludes the other.</p>
+          <h3 name="599b" id="599b" class="graf graf--h3 graf-after--p">Program Semantics</h3>
+          <p name="8947" id="8947" class="graf graf--p graf-after--h3">Mutual exclusion forks the road. When writing
+            programs, we may choose mutability or immutability, objects or functions, but not both at once. Yet,
+            whatever paradigm we choose must include a model for state, and perhaps time. As we saw above, programs that
+            are composed of functions themselves model well-behaved state<em class="markup--em markup--p-em">less</em>
+            mathematical functions,</p>
+          <figure name="60bb" id="60bb" class="graf graf--figure graf--iframe graf-after--p">
+            <figcaption class="imageCaption">The output of `functionalProgram.js` depends only on input.</figcaption>
+          </figure>
+          <p name="7efd" id="7efd" class="graf graf--p graf-after--figure">since they produce the same output provided
+            the same input. Some real programs also simply produce output based on input. Compilers, for example, must
+            output the same binaries provided the same input files. More frequently, however, programs require state,
+            and the current state of the program, <em class="markup--em markup--p-em">together</em> with any user input,
+            will determine the next state or output of the program. The current balance, for example, is crucial to
+            calculating any subsequent balance post withdrawal. ATM machines are stateful programs.</p>
+          <h3 name="d986" id="d986" class="graf graf--h3 graf-after--p">Stateful Object-Oriented Programs</h3>
+          <blockquote name="bfb1" id="bfb1" class="graf graf--blockquote graf-after--h3">Modeling with objects is
+            powerful and intuitive, largely because this matches the perception of interacting with a world of which we
+            are part. — SICP Section 3.5.5
+          </blockquote>
+          <p name="acb3" id="acb3" class="graf graf--p graf-after--blockquote">Object-oriented programming provides
+            intuitive building-blocks for creating stateful programs. An ATM program, for example, that allows the user
+            to set a “withdrawal amount” and effect a withdraw,</p>
+          <figure name="41d8" id="41d8" class="graf graf--figure graf--iframe graf-after--p"></figure>
+          <p name="19af" id="19af" class="graf graf--p graf-after--figure">breaks down naturally into <code
+              class="markup--code markup--p-code">withdrawalAmount</code>, representing the chosen amount to be
+            withdrawn, and <code class="markup--code markup--p-code">bankAccount</code>, representing the user account
+            underlying the session. The withdrawal amounts are incorporated by and read from <code
+                class="markup--code markup--p-code">withdrawalAmount</code>. Withdrawals are incorporated by, and
+            balance confirmations are read from, <code class="markup--code markup--p-code">bankAccount</code>. The
+            current balance and the amount to potentially withdraw — the state of the program — are reflected directly
+            by the state of <code class="markup--code markup--p-code">bankAccount</code> and <code
+                class="markup--code markup--p-code">withdrawalAmount</code> — the state of its composite objects.</p><h4
+              name="12e1" id="12e1" class="graf graf--h4 graf-after--p">Time</h4>
+          <blockquote name="cb14" id="cb14" class="graf graf--blockquote graf-after--h4">If we wish to write programs
+            that model this kind of natural decomposition in our world (as we see it from our viewpoint as a part of
+            that world) with structures in our computer, we make computational objects that… must change with
+            time. — SICP Section 3.5.5
+          </blockquote>
+          <p name="beb0" id="beb0" class="graf graf--p graf-after--blockquote">Objects are intuitive in large part
+            because they are consistent with a familiar model for time. Objects change — as we discussed, the notion of
+            an “object,” having parts that change without changing the identity of the whole, articulates this ability.
+            The flip-side to change is time. Since objects change, <em class="markup--em markup--p-em">when</em> an
+            object is examined is vital to the examination, it goes without saying. The “having parts that can change
+            without changing the identity of the whole” quality of <code
+                class="markup--code markup--p-code">bankAccount</code>, for example, is implemented by <code
+                class="markup--code markup--p-code">withdraw</code>.</p>
+          <figure name="06f9" id="06f9" class="graf graf--figure graf--iframe graf-after--p"></figure>
+          <p name="c5b8" id="c5b8" class="graf graf--p graf-after--figure">Underlying <code
+              class="markup--code markup--p-code">withdraw</code> lies a mutable <code
+              class="markup--code markup--p-code">balance</code> binding that may be assigned new values. Calls to <code
+              class="markup--code markup--p-code">withdraw</code> change the associated balance of <code
+              class="markup--code markup--p-code">bankAccount</code> as a side-effect, without altering the identity of
+            <code class="markup--code markup--p-code">bankAccount</code>, by design.</p>
+          <figure name="d9d3" id="d9d3"
+                  class="graf graf--figure graf--iframe graf--layoutOutsetLeft graf-after--p"></figure>
+          <p name="d878" id="d878" class="graf graf--p graf-after--figure">The flip-side to change is time. Any call to
+            <code class="markup--code markup--p-code">withdraw</code> also “delineates moments in time” <em
+                class="markup--em markup--p-em">when</em> <code class="markup--code markup--p-code">balance</code> <em
+                class="markup--em markup--p-em">may</em> change. As a result, the meaning of <code
+                class="markup--code markup--p-code">bankAccount.checkBalance()</code> “depends not only on the
+            expression itself, but also on whether the evaluation occurs before or after these moments.” By modeling
+            objects, “we are forced to admit time into our computational models.” (SICP Section 3.4)</p><h4 name="f7c7"
+                                                                                                            id="f7c7"
+                                                                                                            class="graf graf--h4 graf-after--p">
+            Stateful</h4>
+          <p name="d064" id="d064" class="graf graf--p graf-after--h4">Object-oriented programming reifies
+            objects — objects can be composed in other objects, received and returned by object methods, and generally
+            manipulated like numbers, strings and other <a href="https://en.wikipedia.org/wiki/First-class_citizen"
+                                                           data-href="https://en.wikipedia.org/wiki/First-class_citizen"
+                                                           class="markup--anchor markup--p-anchor" rel="noopener"
+                                                           target="_blank">citizens</a> of the program. On the other
+            hand, object-oriented programming presents no direct representation of state. Since object methods proscribe
+            the ways in which state may be viewed or changed, state may not be accessed directly. Rather, state is a <em
+                class="markup--em markup--p-em">quality</em> of objects — i.e. “stateful” or “statefulness” — that may
+            be available at runtime to the extent proscribed by object definitions. <code
+                class="markup--code markup--p-code">bankAccount</code> and <code class="markup--code markup--p-code">withdrawalAmount</code>,
+            for example, may together incorporate the state of the ATM program — the statefulness of the program is
+            reflect by the statefulness of its composite objects. However, access to such state is hidden by methods
+            <code class="markup--code markup--p-code">checkBalance</code> and <code class="markup--code markup--p-code">get</code>.
+            The state of program may only be “expressed” by <em class="markup--em markup--p-em">calling</em> both
+            getters at runtime, like any other attribute, characteristic or object quality.</p>
+          <p name="08e7" id="08e7" class="graf graf--p graf-after--p">That objects indeed lack any express notion of
+            state is highlighted by object signatures with more than one getter, where any such notion may only exist
+            through definition, signature by signature:</p>
+          <blockquote name="3bea" id="3bea" class="graf graf--blockquote graf-after--p">How can you perceive a mutable
+            object that has more than one getter? … How do you it? … Who could say right now how to do this? No one can,
+            right? You cannot do this, because you need this other thing. You need the recipe for doing this, and the
+            recipe is something that everybody has to make up over and over and over again. … We cannot actually
+            perceive the whole. Cannot do it without help. Without these recipes. — Rich Hickey, <a
+                href="https://github.com/matthiasn/talk-transcripts/blob/master/Hickey_Rich/ValueOfValuesLong.md"
+                data-href="https://github.com/matthiasn/talk-transcripts/blob/master/Hickey_Rich/ValueOfValuesLong.md"
+                class="markup--anchor markup--blockquote-anchor" rel="noopener" target="_blank">The Value of Values</a>
+          </blockquote>
+          <p name="91d4" id="91d4" class="graf graf--p graf-after--blockquote">An object with a single read method (like
+            <code class="markup--code markup--p-code">bankAccount</code>) in a sense defines <em
+                class="markup--em markup--p-em">the</em> method for accessing the whole of an object’s state. However,
+            each additional read method dilutes this claim, underscoring the need for a method specific to the task
+            (e.g. <code class="markup--code markup--p-code">toJSON</code>, <code class="markup--code markup--p-code">serialize</code>,
+            <code class="markup--code markup--p-code">inspect</code>, etc.). In stark contrast to numbers, string and
+            objects themselves, state may be expressed only through programmer-defined constructs evaluated at runtime.
+          </p>
+          <h3 name="e288" id="e288" class="graf graf--h3 graf-after--p">Stateful Functional Programs</h3>
+          <blockquote name="ea30" id="ea30" class="graf graf--blockquote graf-after--h3">Is there another approach? Can
+            we avoid identifying time in the computer with time in the modeled world? Must we make the model change with
+            time in order to model phenomena in a changing world? — SICP Section 3.5
+          </blockquote>
+          <p name="0073" id="0073" class="graf graf--p graf-after--blockquote">Building stateful functional programs is
+            less intuitive. To start, notice that imperative iteration can be restructured into functional iteration by
+            recursively calling an iterative function with the results of the previous call. An imperative
+            implementation of factorial, for example,</p>
+          <figure name="5494" id="5494" class="graf graf--figure graf--iframe graf-after--p"></figure>
+          <p name="1297" id="1297" class="graf graf--p graf-after--figure">maintains iteration and running total state
+            through assignments to <code class="markup--code markup--p-code">n</code> and <code
+                class="markup--code markup--p-code">total</code>, respectively, with every iteration. An alternative
+            implementation avoids mutation by returning the iteration and running total state from an iteration
+            function,</p>
+          <figure name="abda" id="abda" class="graf graf--figure graf--iframe graf-after--p"></figure>
+          <p name="ce00" id="ce00" class="graf graf--p graf-after--figure">which may be used by the same function to
+            calculate the next values in the next iteration.</p>
+          <p name="5576" id="5576" class="graf graf--p graf-after--p">Stateful functional programs can be constructed in
+            a similar fashion — state that is returned from the previous turn of some larger, iterative “program”
+            function becomes the starter state for the next — with one caveat. With <em class="markup--em markup--p-em">synchronous</em>
+            iteration, results of the previous run can simply be passed to the next. The <code
+                class="markup--code markup--p-code">total</code> result from <code class="markup--code markup--p-code">factorial</code>
+            iteration, for example, is passed directly to the next. In a JavaScript web application, however, events are
+            initiated <em class="markup--em markup--p-em">asynchronously</em> as the user interacts with the page,
+            calling callbacks bound to such events, which run pieces of the program so encoded.</p>
+          <pre name="b62d" id="b62d" class="graf graf--pre graf-after--p">event → callback → javascript<br>event → callback → javascript<br>...</pre>
+          <p name="dfc2" id="dfc2" class="graf graf--p graf-after--pre">Communication between <em
+              class="markup--em markup--p-em">asynchronous</em> scripts is performed through shared references. One
+            script updates (mutates!) a place in memory from which another script may later read. Look no further than
+            the object-oriented ATM program above for a concrete example. A user may begin the program by first
+            selecting a withdrawal amount, <em class="markup--em markup--p-em">then</em> clicking withdraw:</p>
+          <pre name="d9ca" id="d9ca" class="graf graf--pre graf-after--p">select → <code
+              class="markup--code markup--pre-code">onchange</code> → &quot;<code class="markup--code markup--pre-code">withdrawalAmount.set(value)&quot;<br></code>click → <code
+              class="markup--code markup--pre-code">onclick</code> → &quot;<code class="markup--code markup--pre-code">bankAccount.withdraw(withdrawalAmount.get())&quot;<br>...</code></pre>
+          <p name="578e" id="578e" class="graf graf--p graf-after--pre">The “click withdraw” script occurs
+            asynchronously sometime after the “select withdrawal amount” script has completed. Communication between the
+            two scripts occurs through shared reference to the <code class="markup--code markup--p-code">amount</code>
+            variable underlying the <code class="markup--code markup--p-code">withdrawalAmount</code> object. Calls to
+            <code class="markup--code markup--p-code">withdrawalAmount.get()</code> will return updates by <code
+                class="markup--code markup--p-code">withdrawalAmount.set(value)</code>, notwithstanding the asynchrony
+            of such reads and writes.</p>
+          <p name="8003" id="8003" class="graf graf--p graf-after--p">Synchronous functions can communicate by simply
+            passing around results. The result from one function becomes the input of another. Asynchronous scripts, by
+            contrast, share a mutable place in memory instead of the values themselves. Consequently, we must also share
+            a mutable place in memory to communicate between asynchronous scripts in the functional program
+            implementation. On the other hand, with a light amount of infrastructure, we can usher such imperative code
+            to the application perimeter and carve out space for a functional core, creating a “<a
+                href="https://www.destroyallsoftware.com/screencasts/catalog/functional-core-imperative-shell"
+                data-href="https://www.destroyallsoftware.com/screencasts/catalog/functional-core-imperative-shell"
+                class="markup--anchor markup--p-anchor" rel="noopener" target="_blank">functional core, imperative
+              shell</a>.”</p>
+          <figure name="90ea" id="90ea" class="graf graf--figure graf--iframe graf-after--p">
+            <figcaption class="imageCaption">Calculate next state from (previous state + event info) using a functional
+              program: f(state, event) =&gt; state. The <a href="https://redux.js.org/"
+                                                           data-href="https://redux.js.org/"
+                                                           class="markup--anchor markup--figure-anchor" rel="noopener"
+                                                           target="_blank">redux JavaScript library</a> supports
+              building programs like this in practice.
+            </figcaption>
+          </figure>
+          <p name="8933" id="8933" class="graf graf--p graf-after--figure">The program now consists of functions <code
+              class="markup--code markup--p-code">parseInt</code> and <code
+              class="markup--code markup--p-code">withdraw</code>, called against specific events <code
+              class="markup--code markup--p-code">WITHDRAWAL_AMOUNT</code> and <code
+              class="markup--code markup--p-code">WITHDRAW</code>. The state of the program has not been reflected
+            directly into distinct objects. Instead, a <code class="markup--code markup--p-code">program</code> <em
+                class="markup--em markup--p-em">function</em> is called with the state resulting from the previous call,
+            together with event data from any user interaction, in order to produce the starter state for the next.
+            <code class="markup--code markup--p-code">program</code> resembles an iterative, recursive function. Yet,
+            calls to <code class="markup--code markup--p-code">program</code> occur asynchronously. Just as with the
+            object-oriented ATM program, a user may begin the functional ATM program by first selecting a withdrawal
+            amount, <em class="markup--em markup--p-em">then</em> clicking withdraw:</p>
+          <pre name="76bc" id="76bc" class="graf graf--pre graf-after--p">select → <code
+              class="markup--code markup--pre-code">onchange </code>→ &quot;store.publish(<br>                      &#39;WITHDRAWAL_AMOUNT&#39;, {amount: value}<br>                     )&quot;<code
+              class="markup--code markup--pre-code"><br></code>click → <code class="markup--code markup--pre-code">onclick</code> → &quot;store.publish(&#39;WITHDRAW&#39;)&quot;<code
+              class="markup--code markup--pre-code"><br>...</code></pre>
+          <p name="f383" id="f383" class="graf graf--p graf-after--pre">The imperative shell (i.e the <code
+              class="markup--code markup--p-code">store</code>) maintains a reference to the <code
+              class="markup--code markup--p-code">state</code> resulting from the previous call to <code
+              class="markup--code markup--p-code">program</code>, in order to pass such <code
+              class="markup--code markup--p-code">state</code> to the next, orchestrating communication between
+            asynchronous calls to <code class="markup--code markup--p-code">program</code>.</p><h4 name="6950" id="6950"
+                                                                                                   class="graf graf--h4 graf-after--p">
+            Time as a Series of States</h4>
+          <p name="ef9c" id="ef9c" class="graf graf--p graf-after--h4">Unlike object-oriented programming, functional
+            programming provides no model for traditional time. Mathematical functions are time<em
+                class="markup--em markup--p-em">less</em>. Computation of a function <code
+                class="markup--code markup--p-code">f(x)</code> a “second time” with the same argument will produce the
+            same result <em class="markup--em markup--p-em">whenever</em> computed; a mathematical statement like <code
+                class="markup--code markup--p-code">f(20) = 80</code> will not be made any less true by insinuating
+            time. Similarly, time is no matter against procedures that model mathematical function computation. Simple
+            functions,</p>
+          <figure name="9e5c" id="9e5c" class="graf graf--figure graf--iframe graf-after--p"></figure>
+          <p name="b92e" id="b92e" class="graf graf--p graf-after--figure">compositions of functions,</p>
+          <figure name="646b" id="646b" class="graf graf--figure graf--iframe graf-after--p"></figure>
+          <p name="ec02" id="ec02" class="graf graf--p graf-after--figure">as well as “program” functions like the ATM
+            program introduced above,</p>
+          <figure name="87f2" id="87f2" class="graf graf--figure graf--iframe graf-after--p"></figure>
+          <p name="9e31" id="9e31" class="graf graf--p graf-after--figure">will produce the same output provided the
+            same input <em class="markup--em markup--p-em">whenever</em> evaluated, independent of time.</p>
+          <p name="441b" id="441b" class="graf graf--p graf-after--p">Where we once saw object state change as time <em
+              class="markup--em markup--p-em">elapsed</em>, we now see the program jump from one state to the next at
+            individual (i.e. discrete!) <em class="markup--em markup--p-em">moments in time, </em>as if producing
+            entries in a list, log, “stream of information,” or other time-denominated series. Iterative, recursive
+            functions model this same behavior. <code class="markup--code markup--p-code">factorial</code>, for example,
+            produces a value, say <code class="markup--code markup--p-code">F</code>, for each step, say <code
+                class="markup--code markup--p-code">i</code>:</p>
+          <pre name="3207" id="3207" class="graf graf--pre graf-after--p">F₀: 1<br>F₁: 1<br>F₂: 2<br>...<br>factorial(i): iterate(Fᵢ₋₁ * i, i - 1)</pre>
+          <p name="2f57" id="2f57" class="graf graf--p graf-after--pre">Each run of <code
+              class="markup--code markup--p-code">iterate</code> against the result of the previous run produces a new
+            value just <em class="markup--em markup--p-em">after</em> <em class="markup--em markup--p-em">the</em> <em
+                class="markup--em markup--p-em">last</em> — a discrete piece of information that can viewed together
+            with the rest on the same list. Individual program events can be similarly listed,</p>
+          <pre name="a931" id="a931" class="graf graf--pre graf-after--p">E₀: DEFAULT_EVENT<br>E₁: <code
+              class="markup--code markup--pre-code">WITHDRAWAL_AMOUNT, amount:20</code><br>E₂: <code
+              class="markup--code markup--pre-code">WITHDRAWAL</code><br>...<br>E(i): Eᵢ</pre>
+          <p name="1465" id="1465" class="graf graf--p graf-after--pre">as can individual program states:</p>
+          <pre name="0951" id="0951" class="graf graf--pre graf-after--p">S₀: <code
+              class="markup--code markup--pre-code">balance:100, amount:10</code><br>S₁: <code
+              class="markup--code markup--pre-code">balance:100, amount:20</code><br>S₂: <code
+              class="markup--code markup--pre-code">balance:80, amount:20<br></code>...<br>S(i): program(Sᵢ₋₁, Eᵢ)</pre>
+          <p name="2067" id="2067" class="graf graf--p graf-after--pre">Each run of <code
+              class="markup--code markup--p-code">program</code> against the result of the previous run, together with
+            event data, produces a new value <em class="markup--em markup--p-em">after</em> the last. Yet, <code
+                class="markup--code markup--p-code">program</code> is a timeless function. With the object-oriented
+            approach, we decompose the state of the program into objects <em class="markup--em markup--p-em">within</em>
+            the program. Each object houses mutable state, and each piece of state may underly a mutative expression
+            that “delineates moments in time” when evaluated.</p>
+          <blockquote name="8e1b" id="8e1b" class="graf graf--blockquote graf-after--p">We modeled real-world objects
+            with local state by computational objects with local variables. We identified time variation in the real
+            world with time variation in the computer. We implemented the time variation of the states of the model
+            objects in the computer with assignments to the local variables of the model objects. — SICP Section 3.5
+          </blockquote>
+          <p name="d1dd" id="d1dd" class="graf graf--p graf-after--blockquote">A collection of objects, each delineating
+            moments in time when state may change <em class="markup--em markup--p-em">within</em> the program, embeds a
+            simulation of time within the program. By contrast, with the functional approach, state is kept at the
+            application perimeter and <em class="markup--em markup--p-em">functions</em> are composed together in order
+            to transition the program from one state to another. No simulation of time can be found <em
+                class="markup--em markup--p-em">within</em> the program; no moments can be found within the program <em
+                class="markup--em markup--p-em">when</em> state <em class="markup--em markup--p-em">may</em> change.
+            Rather, the program <em class="markup--em markup--p-em">provides</em> change from one state to the next
+            (i.e. it produces state) and program states represent <em class="markup--em markup--p-em">discrete</em>
+            moments in time when state <em class="markup--em markup--p-em">has</em> changed.</p>
+          <blockquote name="34cc" id="34cc" class="graf graf--blockquote graf-after--p">Think about the issue in terms
+            of mathematical functions. We can describe the time-varying behavior of a quantity x as a function of time
+            x(t). If we concentrate on x instant by instant, we think of it as a changing quantity. Yet if we
+            concentrate on the entire time history of values, we do not emphasize change — the function itself does not
+            change — SICP Section 3.5
+          </blockquote>
+          <p name="5f56" id="5f56" class="graf graf--p graf-after--blockquote">Said another way, in object-oriented
+            programs, we hold the identity of objects constant through change. Objects endure change as time elapses,
+            and thus we model time. In functional programs, we forgo object identity. Change creates something new
+            instead of altering something of old, and thus we model change directly. Change is described succinctly by
+            functions as well as by an “entire time history,” list, log, stream, or other series of resulting
+            states.</p><h4 name="f17a" id="f17a" class="graf graf--h4 graf-after--p">Reified State</h4>
+          <p name="0cf7" id="0cf7" class="graf graf--p graf-after--h4">Unlike object-oriented programs, functional
+            programs reify state. State can be passed to functions, returned by functions, and generally manipulated
+            like numbers, strings, lists, and other <a href="https://en.wikipedia.org/wiki/First-class_citizen"
+                                                       data-href="https://en.wikipedia.org/wiki/First-class_citizen"
+                                                       class="markup--anchor markup--p-anchor" rel="noopener"
+                                                       target="_blank">citizens</a> of the program. With a small
+            addition to the ATM program, for example,</p>
+          <figure name="ebbf" id="ebbf" class="graf graf--figure graf--iframe graf-after--p">
+            <figcaption class="imageCaption">Open console <em class="markup--em markup--figure-em">([option + command +
+              i] on mac) to inspect each application state.</em></figcaption>
+          </figure>
+          <p name="1695" id="1695" class="graf graf--p graf-after--figure">we can print (to the console) a
+            representation of the each state of the program in sequence. This change is trivial precisely because state
+            is a known quantity of the program and generally manipulable by program code. <code
+                class="markup--code markup--p-code">inspectReturn</code> takes direct advantage of this quality,
+            printing state to the console and returning state from the internal curried function.</p>
+          <h3 name="095f" id="095f" class="graf graf--h3 graf-after--p">Resolving the Time Paradox</h3>
+          <blockquote name="1dcf" id="1dcf" class="graf graf--blockquote graf--startsWithDoubleQuote graf-after--h3">“No
+            man can ever cross the same river twice.” Because what’s a river? I mean, we love this idea of objects; like
+            there’s this thing that changes. Right? There’s no river. Right? There’s water there at one point-in-time.
+            And another point-in-time, there’s other water there. — Rich Hickey, <a
+                href="https://github.com/matthiasn/talk-transcripts/blob/master/Hickey_Rich/AreWeThereYet.md"
+                data-href="https://github.com/matthiasn/talk-transcripts/blob/master/Hickey_Rich/AreWeThereYet.md"
+                class="markup--anchor markup--blockquote-anchor" rel="noopener" target="_blank">Are We There Yet</a>,
+            quoting Heraclitus.
+          </blockquote>
+          <p name="d718" id="d718" class="graf graf--p graf-after--blockquote">From the perspective of a user, a
+            functional program may appear stateful. Interact with the functional ATM program above and notice the
+            program remembering previous encounters. On the one hand, this is not surprising. We included an imperative
+            layer to remember previous states. Instead of decomposing the state of the program into distinct objects,
+            like <code class="markup--code markup--p-code">bankAccount</code> and <code
+                class="markup--code markup--p-code">withdrawalAmount</code>, we created a single global object, the
+            <code class="markup--code markup--p-code">store</code>. On the other hand, focusing on the “object” portion
+            of the program betrays an object-oriented predisposition. The imperative piece of the program is merely
+            syntax, a construct used to facilitate a computation based asynchronously on another; it is not semantics.
+            One can even imagine a programming language where such a construct is built into the language itself, hiding
+            any imperative implementation from the programmer’s view. In fact, such a language exists that compiles to
+            JavaScript.<a href="#908d" data-href="#908d" class="markup--anchor markup--p-anchor">⁸</a> The semantics of
+            the program better align with the semantics of a recursive, iterative function, having state S at a discrete
+            step i — run the functional ATM program with the output of the previous run to produce the input for the
+            next.</p>
+          <p name="3fdd" id="3fdd" class="graf graf--p graf-after--p">That a program with a functional, stateless and
+            timeless core can maintain state is surprising, to say the least. Look around the room, bus, park or
+            wherever you find yourself reading this sentence, and you will likely identify “a collection of distinct
+            objects,” such as dogs, people, and trees, “whose behaviors may change over time.” Look around the
+            functional ATM program, on the other hand, and there are no identifiable objects to be found. Yet, the
+            program appears to have state just like any other object in the room.</p>
+          <blockquote name="af48" id="af48" class="graf graf--blockquote graf-after--p">One way to resolve this paradox
+            is to realize that it is the user’s temporal existence that imposes state on the system. If the user could
+            step back from the interaction and think in terms of streams of balances rather than individual
+            transactions, the system would appear stateless — SICP Section 3.5.5
+          </blockquote>
+          <p name="91bc" id="91bc" class="graf graf--p graf-after--blockquote">In other words, the ostensible “paradox”
+            dissipates when the augmentation of our conception of time extends beyond the functional program to include
+            the rest of our physical reality. Instead of viewing the world as the sum of its objects, each reflecting
+            its latest state as time elapses, we may also think in terms of discrete state histories. We may interpret
+            the dog at the park as moving in discrete steps <code class="markup--code markup--p-code">S(i)</code> to
+            <code class="markup--code markup--p-code">S(i+1)</code>, just as we interpret the state of our functional
+            program as moving in discrete steps <code class="markup--code markup--p-code">S(i)</code> to <code
+                class="markup--code markup--p-code">S(i+1)</code>.</p>
+          <p name="c214" id="c214" class="graf graf--p graf-after--p">Consider video media. To movie scenes, we may
+            attribute the same object-oriented semantics. Character and inanimate objects shift, interact and evolve as
+            time elapses.</p>
+          <figure name="cd89" id="cd89" class="graf graf--figure graf--iframe graf-after--p"></figure>
+          <p name="3000" id="3000" class="graf graf--p graf-after--figure">Glancing above, for example, we may conclude
+            that “a cat is dancing.” Yet, videos are comprised of static frames stitched together in a certain sequence
+            at discrete time intervals. Each frame corresponds to a state of the video at a moment in time and the
+            frames, taken together, a time-denominated series of discrete states. The media chosen above is
+            intentionally meta. The video includes a TV animation of a scene mirrored by a flip-book, showing static
+            frames strung together at discrete time intervals, which itself is mirrored by a flip-book in “real” life,
+            showing static frames strung together at discrete time intervals. Take another step back to notice that the
+            above gif media being played on <em class="markup--em markup--p-em">your</em> computer is comprised of
+            static frames, strung together at discrete time intervals. There is nothing stopping us from taking another
+            step back and interpreting the real world in which your computer currently sits as static frames, strung
+            together at discrete time intervals. We <em class="markup--em markup--p-em">may</em> attribute normal
+            object-oriented semantics to the above gif, concluding that “a cat is dancing.” However, we may also
+            attribute functional semantics, concluding that “a cat has arms above its head on frame fᵢ.” At a park in
+            the real world, we may conclude that “a dog is chasing a squirrel.” However, we may also conclude that “a
+            dog is in the running motion behind a squirrel in the running motion on frame fᵢ.” In both cases, we may
+            identify a time-series of states instead of objects that change over time. The functional programming
+            paradigm can be coherently applied to world and program alike.</p>
+          <p name="e948" id="e948" class="graf graf--p graf-after--p">With a model for discrete time in mind, it is less
+            surprising that functional programs can appear stateful. A user of the program may be viewed as a series of
+            states, just like the program itself. A specific series of user states, for example,</p>
+          <pre name="0ae1" id="0ae1" class="graf graf--pre graf-after--p">U₀: &quot;Open up this blog post&quot;<br>U₁: “Select 20 option”<br>U₂: “Click withdraw”<br>...<br>U(i): Uᵢ</pre>
+          <p name="933b" id="933b" class="graf graf--p graf-after--pre">directly precipitate a series of program
+            states:</p>
+          <pre name="6b5b" id="6b5b" class="graf graf--pre graf-after--p">S₀: <code
+              class="markup--code markup--pre-code">balance:100, amount:10</code><br>S₁: <code
+              class="markup--code markup--pre-code">balance:100, amount:20</code><br>S₂: <code
+              class="markup--code markup--pre-code">balance:80, amount:20<br></code>...<br>S(i): program(Sᵢ₋₁, Eᵢ)</pre>
+          <p name="86c5" id="86c5" class="graf graf--p graf-after--pre graf--trailing">In both cases, pieces of static
+            information may be listed, one <em class="markup--em markup--p-em">after</em> another. Moreover, both lists
+            can be plotted along the same discrete timeline<em class="markup--em markup--p-em"> </em><code
+                class="markup--code markup--p-code">i</code>. User interactions come in a certain order <code
+                class="markup--code markup--p-code">U(i)</code>, triggering a run of the program function against the
+            result of the previous run <code class="markup--code markup--p-code">S(i-1)</code> and event data <code
+                class="markup--code markup--p-code">E(i)</code>, in order to produce <code
+                class="markup--code markup--p-code">S(i)</code>. Our reality can be viewed as a time-series of states,
+            just as it can be viewed as a collection of objects. Functional programming models a time-series of states,
+            just as as object-oriented programming models objects. When the program and world <em
+                class="markup--em markup--p-em">alike</em> can be viewed as “streams of information that flow in the
+            system,” (Section 3) the world can flow into the program and the program back into the world.</p></div>
+      </div>
+    </section>
+    <section name="98df" class="section section--body">
+      <div class="section-divider">
+        <hr class="section-divider">
+      </div>
+      <div class="section-content">
+        <div class="section-inner sectionLayout--insetColumn"><h3 name="714e" id="714e"
+                                                                  class="graf graf--h3 graf--leading">Addendum</h3><h4
+            name="4fdc" id="4fdc" class="graf graf--h4 graf-after--h3">Functional Programming as a Scientific
+          Revolution</h4>
+          <blockquote name="ab43" id="ab43" class="graf graf--blockquote graf-after--h4">We were all object-oriented
+            programmers at one point in time — Rich Hickey, <a
+                href="https://github.com/matthiasn/talk-transcripts/blob/master/Hickey_Rich/ValueOfValuesLong.md"
+                data-href="https://github.com/matthiasn/talk-transcripts/blob/master/Hickey_Rich/ValueOfValuesLong.md"
+                class="markup--anchor markup--blockquote-anchor" rel="noopener" target="_blank">The Value of Values</a>
+          </blockquote>
+          <p name="d2e6" id="d2e6" class="graf graf--p graf-after--blockquote">Assimilation of functional semantics with
+            any regular conception of the physical world is no easy task. I kicked around chapter 3 of SICP for over a
+            year before wrapping my head around it. Look again around the room, bus or park and you will likely still
+            identify distinct objects that may change over time. That we may still be experiencing disbelief at the
+            thought of a new model for time suggests a larger game at play.</p>
+          <p name="7133" id="7133" class="graf graf--p graf-after--p">Dominant scientific paradigms pervade our
+            language, on the one hand, and way of thinking, on the other.</p>
+          <blockquote name="4375" id="4375" class="graf graf--blockquote graf-after--p">Scientific practice always
+            involves the production and the explanation of generalizations about nature; those activities presuppose a
+            language with some minimal richness; and the acquisition of such a language brings knowledge of nature with
+            it. When the exhibit of examples is part of the process of learning terms like “motion,” ‘‘cell,‘‘ or
+            ‘‘energy element,’’ what is acquired is knowledge of language and of the world together. <strong
+                class="markup--strong markup--blockquote-strong">On the one hand</strong>, the student learns what these
+            terms mean, what features are relevant to attaching them to nature, what things cannot be said of them on
+            pain of self-contradiction, and so on. <strong class="markup--strong markup--blockquote-strong">On the other
+              hand</strong>, the student learns what categories of things populate the world, what their salient
+            features are, and something about the behavior that is and is not permitted to them. In much of language
+            learning these two sorts of knowledge —<strong class="markup--strong markup--blockquote-strong"> knowledge
+              of words and knowledge of nature</strong> — are acquired together, not really two sorts of knowledge at
+            all, but two faces of the single coinage that a language provides. — Thomas Kuhn, <a
+                href="http://sites.fas.harvard.edu/~hsci161/Sci._Rev._Reader/12_S6_Kuhn.pdf"
+                data-href="http://sites.fas.harvard.edu/~hsci161/Sci._Rev._Reader/12_S6_Kuhn.pdf"
+                class="markup--anchor markup--blockquote-anchor" rel="noopener" target="_blank">What are Scientific
+              Revolutions?</a></blockquote>
+          <p name="9b43" id="9b43" class="graf graf--p graf-after--blockquote">As a result, a new discovery “that cannot
+            be accommodated within the concepts in use before” may illicit surprise or even disbelief. “One cannot get
+            from the old to the new simply by an addition to what was already known. Nor can one quite describe the new
+            in the vocabulary of the old or vice versa.” (<a
+                href="http://sites.fas.harvard.edu/~hsci161/Sci._Rev._Reader/12_S6_Kuhn.pdf"
+                data-href="http://sites.fas.harvard.edu/~hsci161/Sci._Rev._Reader/12_S6_Kuhn.pdf"
+                class="markup--anchor markup--p-anchor" rel="noopener" target="_blank">Thomas Kuhn</a>)</p>
+          <blockquote name="807e" id="807e" class="graf graf--blockquote graf-after--p">Consider the compound sentence,
+            “In the Ptolemaic system planets revolve about the earth; in the Copernican they revolve about the sun.”
+            Strictly construed, that sentence is incoherent. The first occurrence of the term “planet” is Ptolemaic, the
+            second Copernican, and the two attach to nature differently. For no univocal reading of the term “planet” is
+            the compound sentence true. — Thomas Kuhn, <a
+                href="http://sites.fas.harvard.edu/~hsci161/Sci._Rev._Reader/12_S6_Kuhn.pdf"
+                data-href="http://sites.fas.harvard.edu/~hsci161/Sci._Rev._Reader/12_S6_Kuhn.pdf"
+                class="markup--anchor markup--blockquote-anchor" rel="noopener" target="_blank">What are Scientific
+              Revolutions?</a></blockquote>
+          <p name="e805" id="e805" class="graf graf--p graf-after--blockquote">Rather, in order to “make or to
+            assimilate such a discovery one must alter the way one thinks about and describes some range of natural
+            phenomena” — even the articulation of an observation that runs counter to the dominant paradigm can only be
+            “formulated by altering the language with which nature [is] described.” (<a
+                href="http://sites.fas.harvard.edu/~hsci161/Sci._Rev._Reader/12_S6_Kuhn.pdf"
+                data-href="http://sites.fas.harvard.edu/~hsci161/Sci._Rev._Reader/12_S6_Kuhn.pdf"
+                class="markup--anchor markup--p-anchor" rel="noopener" target="_blank">Thomas Kuhn</a>)</p>
+          <p name="2bc2" id="2bc2" class="graf graf--p graf-after--p">Similarly, object-orientation pervades our
+            language, on the one hand. That “objects change as time elapses” is a statement of obvious fact betrays the
+            object-oriented presumption embedded in our language. “Object” (and “identity”), “change” (and “state”), and
+            “time” work together to describe a coherent <em class="markup--em markup--p-em">object-oriented</em> view.
+            On the other hand, objects orient our perception of our own physical reality.</p>
+          <blockquote name="2d4e" id="2d4e" class="graf graf--blockquote graf-after--p">Modeling with objects is
+            powerful and intuitive, largely because this matches the perception of interacting with a world of which we
+            are part. — SICP Section 3.5.5
+          </blockquote>
+          <p name="8060" id="8060" class="graf graf--p graf-after--blockquote">Look again around the room, bus, park or
+            wherever you find yourself reading this sentence, and you will likely identify “a collection of distinct
+            objects ,” such as dogs, people, and trees, “whose behaviors may change over time.”</p>
+          <p name="8747" id="8747" class="graf graf--p graf-after--p">Yet, the behavior of a functional program cannot
+            be described in terms that attribute change to the enduring identity of objects as time elapses. And because
+            of the dominance of object-orientation as reflected in the presumptions of our natural language, we cannot
+            so much as describe the semantics of a functional program except through altering our language and
+            reconstituting our physical reality. Meaningful “identity” must disappear in favor of change itself. “State”
+            must describe the result of change instead of an object quality. “Time” must describe discrete state changes
+            rather than any continuous dynamicness attributable to all objects.</p>
+          <p name="3a08" id="3a08" class="graf graf--p graf-after--p">No wonder the functional model may still illicit
+            disbelief. This essay can be seen as an uphill climb against the gravity of a dominant paradigm. The
+            functional view is perhaps expressible now, but only because of the arduous work put in above. Our natural
+            language is not so easily distorted, violated and repurposed and our thought patterns are comorbid with our
+            language.</p>
+          <blockquote name="8205" id="8205" class="graf graf--blockquote graf-after--p">Until those changes had
+            occurred, language itself resisted the invention and introduction of the sought after new theories. The same
+            resistance by language is, I take it, the reason for Planck’s switch from ‘‘element’’ and ‘‘resonator’’ to
+            ‘‘quantum’’ and ‘‘oscillator.’’ Violation or distortion of a previously unproblematic scientific language is
+            the touchstone for revolutionary change. — Thomas Kuhn, <a
+                href="http://sites.fas.harvard.edu/~hsci161/Sci._Rev._Reader/12_S6_Kuhn.pdf"
+                data-href="http://sites.fas.harvard.edu/~hsci161/Sci._Rev._Reader/12_S6_Kuhn.pdf"
+                class="markup--anchor markup--blockquote-anchor" rel="noopener" target="_blank">What are Scientific
+              Revolutions?</a></blockquote>
+          <p name="cafa" id="cafa" class="graf graf--p graf-after--blockquote">As a result, teaching functional
+            programming is like teaching a Ptolemaic astronomer about Copernican astronomy or a Newtonian physicist
+            about quantum mechanics. We lack the basic language to articulate the underlying concepts. Worse still, the
+            language we do have is endemic to a conflicting paradigm. Perhaps the disparity between the efficacy<a
+                href="https://medium.com/p/1017699112d7/edit" data-href="https://medium.com/p/1017699112d7/edit"
+                class="markup--anchor markup--p-anchor" target="_blank">⁹</a> and popularity<a href="#5a4c"
+                                                                                               data-href="#5a4c"
+                                                                                               class="markup--anchor markup--p-anchor">¹⁰</a>
+            of functional programming languages is best explained in this light.</p>
+          <blockquote name="dbd6" id="dbd6" class="graf graf--blockquote graf-after--p">A new scientific truth does not
+            triumph by convincing its opponents and making them see the light, but rather because its opponents
+            eventually die, and a new generation grows up that is familiar with it — Max Plank, <a
+                href="https://pubs.acs.org/doi/pdf/10.1021/ed027p288.1"
+                data-href="https://pubs.acs.org/doi/pdf/10.1021/ed027p288.1"
+                class="markup--anchor markup--blockquote-anchor" rel="noopener" target="_blank">autobiography</a>,
+            quoted by Thomas Kuhn, <a href="https://en.wikipedia.org/wiki/The_Structure_of_Scientific_Revolutions"
+                                      data-href="https://en.wikipedia.org/wiki/The_Structure_of_Scientific_Revolutions"
+                                      class="markup--anchor markup--blockquote-anchor" rel="noopener" target="_blank">The
+              Structure of Scientific Revolutions</a></blockquote>
+          <p name="90f0" id="90f0" class="graf graf--p graf-after--blockquote graf--trailing">Nevertheless, the
+            functional view is indeed expressible as a result of the work put in above. We can see change as creating
+            something new, instead of altering something of old, and time as a series of successive states. We can alter
+            our language and reimagine our physical reality to support a functional view of change, state and time.</p>
+        </div>
+      </div>
+    </section>
+    <section name="7620" class="section section--body section--last">
+      <div class="section-divider">
+        <hr class="section-divider">
+      </div>
+      <div class="section-content">
+        <div class="section-inner sectionLayout--insetColumn"><p name="c746" id="c746"
+                                                                 class="graf graf--p graf--leading"><a href="#c541"
+                                                                                                       data-href="#c541"
+                                                                                                       class="markup--anchor markup--p-anchor">⁰</a>
+          Many of these insights can be found in original form in the <a
+              href="https://web.mit.edu/alexmv/6.037/sicp.pdf" data-href="https://web.mit.edu/alexmv/6.037/sicp.pdf"
+              class="markup--anchor markup--p-anchor" rel="noopener" target="_blank">Structure and Interpretation of
+            Computer Programs </a>(SICP). There you will find a life-altering discussion of the same topics using
+          Scheme, a Lisp dialect like Clojure. All code examples included here however, even if borrowed, will be
+          couched in terms of JavaScript. If you know JavaScript and are unfamiliar with Scheme, this article may be
+          immediately accessible to you without first learning how “<a
+              href="https://crockford.com/javascript/javascript.html"
+              data-href="https://crockford.com/javascript/javascript.html" class="markup--anchor markup--p-anchor"
+              rel="noopener" target="_blank">to balance all those parens</a>.” Little is lost in translation as well.
+          JavaScript has first-class functions (i.e. lambdas), closures (i.e. function-delimited lexical scoping) and
+          generally thrives when used functionally.</p>
+          <blockquote name="7cf2" id="7cf2" class="graf graf--blockquote graf-after--p">JavaScript’s functions are first
+            class objects with (mostly) lexical scoping. JavaScript is the first lambda language to go mainstream. Deep
+            down, JavaScript has more in common with Lisp and Scheme than with Java. It is Lisp in C’s
+            clothing. — Douglas Crockford, <a
+                href="https://www.oreilly.com/library/view/javascript-the-good/9780596517748/ch01s02.html"
+                data-href="https://www.oreilly.com/library/view/javascript-the-good/9780596517748/ch01s02.html"
+                class="markup--anchor markup--blockquote-anchor" rel="noopener" target="_blank">JavaScript: The Good
+              Parts</a></blockquote>
+          <p name="8b46" id="8b46" class="graf graf--p graf-after--blockquote">There is even an ongoing <a
+              href="https://sicp.comp.nus.edu.sg/" data-href="https://sicp.comp.nus.edu.sg/"
+              class="markup--anchor markup--p-anchor" rel="noopener" target="_blank">academic effort</a> to translate
+            the full text of SICP into JavaScript. Also considered, JavaScript is a close cousin of TypeScript, which
+            enables traditional object-oriented constructs like <code class="markup--code markup--p-code">private</code>
+            and <code class="markup--code markup--p-code">public</code> and functional constructs like <code
+                class="markup--code markup--p-code">readonly</code> and <code class="markup--code markup--p-code">as
+              const</code> at compile time. Perhaps in JavaScript (and TypeScript), we get enough support of functional
+            and object-oriented programming paradigms to enable a discussion of both within a single, ubiquitous
+            language.</p>
+          <p name="dba0" id="dba0" class="graf graf--p graf-after--p"><a href="#0508" data-href="#0508"
+                                                                         class="markup--anchor markup--p-anchor">¹</a>
+            Immutability is an important part of the equation as well. We’ll cover this soon in the section titled <em
+                class="markup--em markup--p-em">Unchangeability is Fundamental to Functional Programming.</em></p>
+          <p name="202d" id="202d" class="graf graf--p graf-after--p"><a href="#4742" data-href="#4742"
+                                                                         class="markup--anchor markup--p-anchor">²</a>
+            Object-oriented programming is also traditionally associated with code reuse through inheritance, among
+            other patterns, that reinforce the object model.</p>
+          <p name="1a6f" id="1a6f" class="graf graf--p graf-after--p"><a href="#84c3" data-href="#84c3"
+                                                                         class="markup--anchor markup--p-anchor">³</a>
+            The creator of Clojure at it again:</p>
+          <blockquote name="dc5a" id="dc5a" class="graf graf--blockquote graf-after--p">But as soon as we introduce… the
+            idea that the value of a variable can change, a variable can no longer be simply a name. Now a variable
+            somehow refers to a place where a value can be stored, and the value stored at this place can
+            change.” — Rich Hickey, <a
+                href="https://github.com/matthiasn/talk-transcripts/blob/master/Hickey_Rich/ValueOfValuesLong.md"
+                data-href="https://github.com/matthiasn/talk-transcripts/blob/master/Hickey_Rich/ValueOfValuesLong.md"
+                class="markup--anchor markup--blockquote-anchor" rel="noopener" target="_blank">The Value of Values</a>
+          </blockquote>
+          <p name="9110" id="9110" class="graf graf--p graf-after--blockquote"><a href="#ec67" data-href="#ec67"
+                                                                                  class="markup--anchor markup--p-anchor">⁴</a>
+            Never has the delineation between syntax and semantics been more pronounced than with <a
+                href="https://martinfowler.com/bliki/ValueObject.html"
+                data-href="https://martinfowler.com/bliki/ValueObject.html" class="markup--anchor markup--p-anchor"
+                rel="noopener" target="_blank">value objects</a>, which commandeer object-oriented syntax to effect <em
+                class="markup--em markup--p-em">non</em>-object semantics — i.e. immutable values. If not for the
+            divergence between syntax and semantics, so-called “value objects” would be a contradiction in terms. We’ll
+            cover the inherent mutability of objects soon in the sections titled <em class="markup--em markup--p-em">Changeability
+              is Fundamental to Object Semantics</em> and <em class="markup--em markup--p-em">“Object” Names
+              Changeability</em>.</p>
+          <p name="995e" id="995e" class="graf graf--p graf-after--p"><a href="#7daa" data-href="#7daa"
+                                                                         class="markup--anchor markup--p-anchor">⁵</a>
+            Contextual immutability says nothing of local variables. In fact, a variable that is reassigned within the
+            same procedure in which it was initialized cannot impact the semantics of such procedure.</p>
+          <blockquote name="5090" id="5090" class="graf graf--blockquote graf-after--p">…any mutation that is ever done
+            to any of these is to rebind local variables…that doesn’t affect the fact that these objects are immutable
+            from an outside perspective” Gary Bernhardt, <a
+                href="https://www.destroyallsoftware.com/screencasts/catalog/functional-core-imperative-shell"
+                data-href="https://www.destroyallsoftware.com/screencasts/catalog/functional-core-imperative-shell"
+                class="markup--anchor markup--blockquote-anchor" rel="noopener" target="_blank">Functional Core,
+              Imperative Shell</a></blockquote>
+          <p name="4986" id="4986" class="graf graf--p graf-after--blockquote"><code
+              class="markup--code markup--p-code">decrement100</code> may be implemented with internal mutability, for
+            example,</p>
+          <figure name="3f7e" id="3f7e" class="graf graf--figure graf--iframe graf-after--p"></figure>
+          <p name="f0fe" id="f0fe" class="graf graf--p graf-after--figure">without affecting external semantics; the
+            output of <code class="markup--code markup--p-code">decrement100</code> still depends only on the input.
+            Even block-scoped looping constructs like <code class="markup--code markup--p-code">while</code>, <code
+                class="markup--code markup--p-code">for</code> and <code class="markup--code markup--p-code">do</code>
+            may be part of procedures that produce the same output provided the same input, notwithstanding reassignment
+            of variables tracking iteration state (e.g. <code class="markup--code markup--p-code">i</code>, <code
+                class="markup--code markup--p-code">j</code>, <code class="markup--code markup--p-code">k</code>, <code
+                class="markup--code markup--p-code">n</code>, etc.) with every loop.</p>
+          <figure name="4044" id="4044" class="graf graf--figure graf--iframe graf-after--p">
+            <figcaption class="imageCaption">The mutability of `f` and `n` does not impact the functional semantics of
+              `factorial`
+            </figcaption>
+          </figure>
+          <p name="bbc3" id="bbc3" class="graf graf--p graf-after--figure"><code class="markup--code markup--p-code">factorial</code>
+            will produce the same output provided the same input. On the other hand, changeability that is internal to
+            one procedure definition may be positioned externally to another when <a
+                href="https://en.wikipedia.org/wiki/Nested_function"
+                data-href="https://en.wikipedia.org/wiki/Nested_function" class="markup--anchor markup--p-anchor"
+                rel="noopener" target="_blank">lexical procedural nesting is supported</a>. <code
+                class="markup--code markup--p-code">balance</code>, for example,</p>
+          <figure name="3788" id="3788" class="graf graf--figure graf--iframe graf-after--p"></figure>
+          <p name="c84a" id="c84a" class="graf graf--p graf-after--figure">is external to <code
+              class="markup--code markup--p-code">withdraw</code> although internal to <code
+              class="markup--code markup--p-code">makeBankAccount</code> and undermines the functional semantics of
+            <code class="markup--code markup--p-code">withdrawal</code> as a result, as discussed above. <a
+                href="https://stackoverflow.com/questions/750486/javascript-closure-inside-loops-simple-practical-example/750506"
+                data-href="https://stackoverflow.com/questions/750486/javascript-closure-inside-loops-simple-practical-example/750506"
+                class="markup--anchor markup--p-anchor" rel="noopener" target="_blank">Notoriously unintuitive
+              effects</a> manifest when looping is combined with procedural nesting.</p>
+          <figure name="97cd" id="97cd" class="graf graf--figure graf--iframe graf-after--p">
+            <figcaption class="imageCaption">Initializing `let` above the block scopes the variable above the for-loop.
+              Each iteration points at the same reference in memory as a result. By the time the callbacks are called, i
+              has been updated to `3` and is outside the `callback`&#39;s upper bound.
+            </figcaption>
+          </figure>
+          <p name="fa03" id="fa03" class="graf graf--p graf-after--figure">As a result, comprehensive immutability can
+            be seen as defending functional programming in the face of procedural nesting. It also appears that
+            functional semantics could theoretically coincide with traditional looping constructs and other
+            locally-scoped mutation so long as procedural nesting was prohibited. Nevertheless, immutability is
+            generally considered an inseparable part of functional programming; no distinction is made in SICP and
+            elsewhere (that I have encountered). Perhaps there is something else to be said here about lambda calculus
+            and a more formal definition of functional programming. Or, perhaps the many benefits of nested procedures
+            (e.g. modules, closures, etc.) so obviously outweigh the superficial “costs” of forgoing looping to even
+            consider such crazy talk. Recursive procedures can do anything looping constructs can and without
+            performance regressions because of tail recursion and other optimization techniques at the compiler
+            level.</p>
+          <p name="cc5a" id="cc5a" class="graf graf--p graf-after--p"><a href="#cebc" data-href="#cebc"
+                                                                         class="markup--anchor markup--p-anchor">⁶</a>
+            That two equivalent expressions may be substituted for one another without altering the meaning of the
+            program is known as <a href="https://en.wikipedia.org/wiki/Referential_transparency"
+                                   data-href="https://en.wikipedia.org/wiki/Referential_transparency"
+                                   class="markup--anchor markup--p-anchor" rel="noopener" target="_blank">referential
+              transparency</a>.</p>
+          <blockquote name="96ee" id="96ee" class="graf graf--blockquote graf-after--p">A language that supports the
+            concept that “equals can be substituted for equals” in an expression without changing the value of the
+            expression is said to be referentially transparent — SICP Section 3.1.3
+          </blockquote>
+          <p name="6d03" id="6d03" class="graf graf--p graf-after--blockquote"><a href="#cf6a" data-href="#cf6a"
+                                                                                  class="markup--anchor markup--p-anchor">⁷</a>
+            ❤️ The original insight️ ❤️</p>
+          <blockquote name="e4e2" id="e4e2" class="graf graf--blockquote graf-after--p">In general, so long as we never
+            modify data objects, we can regard a compound data object to be precisely the totality of its pieces. For
+            example, a rational number is determined by giving its numerator and its denominator. But this view is no
+            longer valid in the presence of change, where a compound data object has an “identity” that is something
+            different from the pieces of which it is composed. A bank account is still “the same” bank account even if
+            we change the balance by making a withdrawal; conversely, we could have two different bank accounts with the
+            same state information. This complication is a consequence, not of our programming language, but of our
+            perception of a bank account as an object. — SICP Section 3.1.3
+          </blockquote>
+          <p name="89dd" id="89dd" class="graf graf--p graf-after--blockquote">Rich Hickey on the same subject:</p>
+          <blockquote name="77fd" id="77fd" class="graf graf--blockquote graf-after--p">If it is immutable, it now taps
+            into that definition of value we saw before. Because by being immutable we can go and take a string value,
+            and another string value, and say: are they the same? Do they have the same magnitude? Are they talking
+            about the same thing? Are they expressing the same specific meaning? All of those definitions of values
+            apply to something that is not mutable. So that relative worth thing kicks in. — Rich Hickey, <a
+                href="https://github.com/matthiasn/talk-transcripts/blob/master/Hickey_Rich/ValueOfValuesLong.md"
+                data-href="https://github.com/matthiasn/talk-transcripts/blob/master/Hickey_Rich/ValueOfValuesLong.md"
+                class="markup--anchor markup--blockquote-anchor" rel="noopener" target="_blank">The Value of Values</a>
+          </blockquote>
+          <p name="908d" id="908d" class="graf graf--p graf-after--blockquote"><a href="#d718" data-href="#d718"
+                                                                                  class="markup--anchor markup--p-anchor">⁸</a>
+            <a href="https://guide.elm-lang.org/" data-href="https://guide.elm-lang.org/"
+               class="markup--anchor markup--p-anchor" rel="noopener" target="_blank">Elm</a> programs are trivially
+            made to be stateful, notwithstanding the exclusive use of pure functions <em
+                class="markup--em markup--p-em">and</em> the asynchrony of user interactions! This counter program</p>
+          <figure name="a2b4" id="a2b4" class="graf graf--figure graf--iframe graf-after--p"></figure>
+          <p name="5a8b" id="5a8b" class="graf graf--p graf-after--figure">can be seen <a
+              href="https://elm-lang.org/examples/buttons" data-href="https://elm-lang.org/examples/buttons"
+              class="markup--anchor markup--p-anchor" rel="noopener" target="_blank">here</a> tracking counter state,
+            even though a user may of course click the counter buttons asynchronously. Like garbage collection in
+            JavaScript, Elm hides any imperative code dedicated to communication between asynchronous scripts from the
+            programmer’s view.</p>
+          <p name="6bfa" id="6bfa" class="graf graf--p graf-after--p"><a href="#cafa" data-href="#cafa"
+                                                                         class="markup--anchor markup--p-anchor">⁹</a>
+            There are many advantages to functional programming. Programs that deal with mutation are “drastically more
+            difficult” to reason about than ones that do not.</p>
+          <blockquote name="3189" id="3189" class="graf graf--blockquote graf-after--p">Referential transparency is
+            violated when we include set! [i.e. assignment operations] in our computer language. This makes it tricky to
+            determine when we can simplify expressions by substituting equivalent expressions. Consequently, reasoning
+            about programs that use assignment becomes drastically more difficult — SICP Section 3.1.3
+          </blockquote>
+          <p name="a2a4" id="a2a4" class="graf graf--p graf-after--blockquote">In particular, functions avoid <a
+              href="https://www.yegor256.com/2015/12/08/temporal-coupling-between-method-calls.html"
+              data-href="https://www.yegor256.com/2015/12/08/temporal-coupling-between-method-calls.html"
+              class="markup--anchor markup--p-anchor" rel="noopener" target="_blank">temporal coupling</a> since there
+            is no time,</p>
+          <blockquote name="d4fb" id="d4fb" class="graf graf--blockquote graf-after--p">In general, programming with
+            assignment forces us to carefully consider the relative orders of the assignments to make sure that each
+            statement is using the correct version of the variables that have been changed. This issue simply does not
+            arise in functional programs. — SICP Section 3.1.3
+          </blockquote>
+          <p name="1e40" id="1e40" class="graf graf--p graf-after--blockquote">and dramatically reduce debugging and
+            unit testing complexity since there is no meaningful context.</p>
+          <blockquote name="2535" id="2535" class="graf graf--blockquote graf--startsWithDoubleQuote graf-after--p">“And
+            that is the problem with places. You have this sort of global state that you have to reproduce in order to
+            debug a field problem. That is very very tough.” Rich Hickey, <a
+                href="https://github.com/matthiasn/talk-transcripts/blob/master/Hickey_Rich/ValueOfValuesLong.md"
+                data-href="https://github.com/matthiasn/talk-transcripts/blob/master/Hickey_Rich/ValueOfValuesLong.md"
+                class="markup--anchor markup--blockquote-anchor" rel="noopener" target="_blank">The Value of Values</a>
+          </blockquote>
+          <p name="27b1" id="27b1" class="graf graf--p graf-after--blockquote">Reified state couches in writing what
+            must otherwise live as thoughts in programmers’ heads — each member of a team can read a function signature
+            instead of building up (hopefully) the same working memory for each object. Couching state in language makes
+            it accessible to static language analysis tools. <a
+                href="https://blog.ploeh.dk/2019/07/01/yes-silver-bullet/#bd2d47d8dac2401e936ca7902bc9109d"
+                data-href="https://blog.ploeh.dk/2019/07/01/yes-silver-bullet/#bd2d47d8dac2401e936ca7902bc9109d"
+                class="markup--anchor markup--p-anchor" rel="noopener" target="_blank">A compiler may exhaustively
+              permute the set of application states</a> without actually running manually-written (exhaust<em
+                class="markup--em markup--p-em">ing</em>) unit tests. Functional programs are more easily parallelized
+            since they are just functions with no internal model for time.</p>
+          <blockquote name="b4f4" id="b4f4" class="graf graf--blockquote graf-after--p">Unfortunately, the complexities
+            introduced by assignment become even more problematic in the presence of concurrency. — SICP Section 3.4
+          </blockquote>
+          <p name="ed8a" id="ed8a" class="graf graf--p graf-after--blockquote">These advantages have been known for
+            decades. John Backus “gave high visibility to functional programming” (SICP Section 3.5.5; also see Simon
+            Peyton-Jones, <a href="https://www.youtube.com/watch?v=re96UgMk6GQ"
+                             data-href="https://www.youtube.com/watch?v=re96UgMk6GQ"
+                             class="markup--anchor markup--p-anchor" rel="noopener" target="_blank">Escape from the
+              ivory tower: the Haskel journey</a>) through his <a
+                href="https://www.thocp.net/biographies/papers/backus_turingaward_lecture.pdf"
+                data-href="https://www.thocp.net/biographies/papers/backus_turingaward_lecture.pdf"
+                class="markup--anchor markup--p-anchor" rel="noopener" target="_blank">Turing Award lecture</a> in 1978,
+            seven years before the creation of <a href="https://en.wikipedia.org/wiki/C%2B%2B"
+                                                  data-href="https://en.wikipedia.org/wiki/C%2B%2B"
+                                                  class="markup--anchor markup--p-anchor" rel="noopener"
+                                                  target="_blank">C++</a> and thirteen before <a
+                href="https://en.wikipedia.org/wiki/Java_%28programming_language%29"
+                data-href="https://en.wikipedia.org/wiki/Java_%28programming_language%29"
+                class="markup--anchor markup--p-anchor" rel="noopener" target="_blank">Java</a>.</p>
+          <p name="5a4c" id="5a4c" class="graf graf--p graf-after--p graf--trailing"><a href="#cafa" data-href="#cafa"
+                                                                                        class="markup--anchor markup--p-anchor">¹⁰</a>
+            The <a href="https://www.tiobe.com/tiobe-index/" data-href="https://www.tiobe.com/tiobe-index/"
+                   class="markup--anchor markup--p-anchor" rel="noopener" target="_blank">20 most popular languages</a>
+            are predominantly imperative or object-oriented.</p></div>
+      </div>
+    </section>
+  </section>
+  <footer>
+    <p>By <a href="https://medium.com/@jbmilgrom" class="p-author h-card">Jonathan Milgrom</a> on <a
+        href="https://medium.com/p/1017699112d7">
+      <time class="dt-published" datetime="2020-03-09T17:44:37.154Z">March 9, 2020</time>
+    </a>.
+    </p>
+    <p><a
+        href="https://medium.com/@jbmilgrom/why-functional-and-object-oriented-programming-are-often-juxtaposed-1017699112d7"
+        class="p-canonical">Canonical link</a></p>
+    <p>Exported from <a href="https://medium.com">Medium</a> on May 2, 2020.</p></footer>
+</article>
+</body>
+</html>

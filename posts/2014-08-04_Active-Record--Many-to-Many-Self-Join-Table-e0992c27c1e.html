@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Active Record: Many-to-Many Self Join Table</title>
+  <style>
+    * {
+      font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      font-size: 50px;
+      margin-bottom: 17px;
+      color: #333;
+    }
+
+    h2 {
+      font-size: 24px;
+      line-height: 1.6;
+      margin: 30px 0 0 0;
+      margin-bottom: 18px;
+      margin-top: 33px;
+      color: #333;
+    }
+
+    h3 {
+      font-size: 30px;
+      margin: 10px 0 20px 0;
+      color: #333;
+    }
+
+    header {
+      width: 640px;
+      margin: auto;
+    }
+
+    section {
+      width: 640px;
+      margin: auto;
+    }
+
+    section p {
+      margin-bottom: 27px;
+      font-size: 20px;
+      line-height: 1.6;
+      color: #333;
+    }
+
+    section img {
+      max-width: 640px;
+    }
+
+    footer {
+      padding: 0 20px;
+      margin: 50px 0;
+      text-align: center;
+      font-size: 12px;
+    }
+
+    .aspectRatioPlaceholder {
+      max-width: auto !important;
+      max-height: auto !important;
+    }
+
+    .aspectRatioPlaceholder-fill {
+      padding-bottom: 0 !important;
+    }
+
+    header,
+    section[data-field=subtitle],
+    section[data-field=description] {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+<article class="h-entry">
+  <header>
+    <h1 class="p-name">Active Record: Many-to-Many Self Join Table</h1>
+  </header>
+  <section data-field="subtitle" class="p-summary">
+    From Plain Vanilla to Many-to-Many Self Join Table
+  </section>
+  <section data-field="body" class="e-content">
+    <section name="855b" class="section section--body section--first">
+      <div class="section-divider">
+        <hr class="section-divider">
+      </div>
+      <div class="section-content">
+        <div class="section-inner sectionLayout--insetColumn"><h2 name="dd6c" id="dd6c"
+                                                                  class="graf graf--h2 graf--leading graf--title">Active
+          Record Join Tables</h2>
+          <h3 name="467b" id="467b" class="graf graf--h3 graf-after--h2">From “Plain Vanilla” to Many-to-Many
+            Self Join</h3>
+          <p name="65d9" id="65d9" class="graf graf--p graf-after--h3 graf--trailing"><em
+              class="markup--em markup--p-em">(For a summary, visit my </em><a
+              href="http://stackoverflow.com/questions/25493368/many-to-many-self-join-in-rails/25493403#25493403"
+              data-href="http://stackoverflow.com/questions/25493368/many-to-many-self-join-in-rails/25493403#25493403"
+              class="markup--anchor markup--p-anchor" rel="noopener" target="_blank"><em
+              class="markup--em markup--p-em">SO post</em></a><em class="markup--em markup--p-em">.)</em></p></div>
+      </div>
+    </section>
+    <section name="d5cc" class="section section--body">
+      <div class="section-divider">
+        <hr class="section-divider">
+      </div>
+      <div class="section-content">
+        <div class="section-inner sectionLayout--insetColumn"><h4 name="cd11" id="cd11"
+                                                                  class="graf graf--h4 graf--leading">Plain Vanilla
+          Join Table</h4>
+          <p name="8a6b" id="8a6b" class="graf graf--p graf-after--h4">Ordinarily, a join table works to account for a
+            many-to-many relationship between two otherwise independent models. As an example, a <strong
+                class="markup--strong markup--p-strong">Player</strong> may be a member of many :teams over the course
+            of a career. Conversely, each <strong class="markup--strong markup--p-strong">Team</strong> may have
+            many <strong class="markup--strong markup--p-strong">:</strong>players. Each <strong
+                class="markup--strong markup--p-strong">Contract</strong> joins a <strong
+                class="markup--strong markup--p-strong">Player</strong> to a <strong
+                class="markup--strong markup--p-strong">Team</strong>.</p>
+          <p name="ea4b" id="ea4b" class="graf graf--p graf-after--p"><a
+              href="https://github.com/jbmilgrom/rails_crud_rspec/blob/master/app/models/team.rb"
+              data-href="https://github.com/jbmilgrom/rails_crud_rspec/blob/master/app/models/team.rb"
+              class="markup--anchor markup--p-anchor" rel="noopener" target="_blank">app/models/team.rb</a></p>
+          <pre name="4761" id="4761" class="graf graf--pre graf-after--p">class Team &lt; ActiveRecord::Base<br>  has_many :players, through: :contracts<br>  has_many :contracts<br>end</pre>
+          <p name="92d8" id="92d8" class="graf graf--p graf-after--pre"><a
+              href="https://github.com/jbmilgrom/rails_crud_rspec/blob/master/app/models/player.rb"
+              data-href="https://github.com/jbmilgrom/rails_crud_rspec/blob/master/app/models/player.rb"
+              class="markup--anchor markup--p-anchor" rel="noopener" target="_blank">app/models/player.rb</a></p>
+          <pre name="e41b" id="e41b" class="graf graf--pre graf-after--p">class Player &lt; ActiveRecord::Base<br>  has_many :teams, through: :contracts<br>  has_many :contracts<br>end</pre>
+          <p name="bb01" id="bb01" class="graf graf--p graf-after--pre"><a
+              href="https://github.com/jbmilgrom/rails_crud_rspec/blob/master/app/models/contract.rb"
+              data-href="https://github.com/jbmilgrom/rails_crud_rspec/blob/master/app/models/contract.rb"
+              class="markup--anchor markup--p-anchor" rel="noopener" target="_blank">app/models/contract.rb</a></p>
+          <pre name="3287" id="3287" class="graf graf--pre graf-after--p">class Contract &lt; ActiveRecord::Base<br>  belongs_to :player<br>  belongs_to :team<br>end</pre>
+          <p name="76e3" id="76e3" class="graf graf--p graf-after--pre"><a
+              href="https://github.com/jbmilgrom/rails_crud_rspec/blob/master/db/schema.rb"
+              data-href="https://github.com/jbmilgrom/rails_crud_rspec/blob/master/db/schema.rb"
+              class="markup--anchor markup--p-anchor" rel="noopener" target="_blank">db/schema.rb</a></p>
+          <pre name="d6d2" id="d6d2" class="graf graf--pre graf-after--p">ActiveRecord::Schema.define(version: 20140706210328) do<br><br> create_table &quot;contracts&quot;, force: true do |t|<br>   t.integer &quot;team_id&quot;<br>   t.integer &quot;player_id&quot;<br>   t.integer &quot;term&quot;<br>   t.integer &quot;deal_value&quot;<br> end<br><br> create_table &quot;players&quot;, force: true do |t|<br>   t.string &quot;name&quot;<br>   t.integer &quot;height&quot;<br>   t.datetime &quot;created_at&quot;<br>   t.datetime &quot;updated_at&quot;<br> end<br><br> create_table &quot;teams&quot;, force: true do |t|<br>   t.string &quot;name&quot;<br>   t.string &quot;city&quot;<br>   t.datetime &quot;created_at&quot;<br>   t.datetime &quot;updated_at&quot;<br> end<br><br>end</pre>
+          <p name="f2fe" id="f2fe" class="graf graf--p graf-after--pre graf--trailing">Under the hood, the “player” in
+            player_id and “team” in team_id in any instance of <strong
+                class="markup--strong markup--p-strong">Contract</strong> are understood by Active Record to join such
+            <strong class="markup--strong markup--p-strong">Player</strong> and <strong
+                class="markup--strong markup--p-strong">Team</strong> through (as foreign keys of) an instance of
+            <strong class="markup--strong markup--p-strong">Contract.</strong> @player.teams may then query the database
+            for all :teams sharing an instance of <strong class="markup--strong markup--p-strong">Contract</strong> with
+            @player and @team.players may query the database for all players sharing an instance of <strong
+                class="markup--strong markup--p-strong">Contract</strong> with @team.</p></div>
+      </div>
+    </section>
+    <section name="d38a" class="section section--body">
+      <div class="section-divider">
+        <hr class="section-divider">
+      </div>
+      <div class="section-content">
+        <div class="section-inner sectionLayout--insetColumn"><h4 name="1983" id="1983"
+                                                                  class="graf graf--h4 graf--leading">Has_many |
+          Belongs_to — Self Join Table</h4>
+          <p name="053b" id="053b" class="graf graf--p graf-after--h4">A table may have models that have relationships
+            with other models in the same table. Instead of creating two independent tables, it often makes more sense
+            to create a self-join table to account for these types of relationships. Rails documentation provides <a
+                href="http://guides.rubyonrails.org/association_basics.html#self-joins"
+                data-href="http://guides.rubyonrails.org/association_basics.html#self-joins"
+                class="markup--anchor markup--p-anchor" rel="noopener" target="_blank">a great example</a>. In addition
+            to having a name, phone number and other attributes, an <strong class="markup--strong markup--p-strong">Employee</strong>
+            may also be a manager of <em class="markup--em markup--p-em">other</em> <strong
+                class="markup--strong markup--p-strong">Employees</strong>. In this example, a :subordinate may only
+            have one :manager. Nonetheless, splitting the Employee model into two separate tables (maybe called Managers
+            and Subordinates), duplicating code, and muddying entity relationships (what do you do when a subordinate
+            gets promoted? How do you account for multilevel management, where a manager is the subordinate of another
+            manager), offers a less-than-optimal solution. Here’s how a has_many | belongs_to self-join might work
+            (taken from rails documentation linked above):</p>
+          <p name="1662" id="1662" class="graf graf--p graf-after--p">app/models/employee.rb</p>
+          <pre name="2401" id="2401" class="graf graf--pre graf-after--p">class Employee &lt; ActiveRecord::Base<br> has_many :subordinates, class_name: “Employee”, <br>                         foreign_key: “manager_id”<br><br> belongs_to :manager, class_name: “Employee”<br>end</pre>
+          <p name="d6c4" id="d6c4" class="graf graf--p graf-after--pre">As can be seen in the above code, self
+            referential relationships offer added complexity. :manager and :subordinates are both <strong
+                class="markup--strong markup--p-strong">Employees</strong> in the database, but must be identified as
+            such and distinguished. This is handled by supplying the :subordinates and :manager “names” expressly, and
+            explicitly referencing, in each case, the class_name: to which such names apply, in each case, “Employee”.
+          </p>
+          <p name="d1cc" id="d1cc" class="graf graf--p graf-after--p">Since each :subordinate may have only
+            one :manager, a single column may be added when creating the <strong
+                class="markup--strong markup--p-strong">Employee</strong> table to store the manager_id of each <strong
+                class="markup--strong markup--p-strong">Employee</strong>’s (:subordinate’s) :manager, as is done below:
+          </p>
+          <pre name="4cdc" id="4cdc" class="graf graf--pre graf-after--p">class CreateEmployees &lt; ActiveRecord::Migration<br>  def change <br>    create_table :employees do |t|<br>      t.references :manager<br><br>      t.timestamps<br>    end<br>  end<br>end</pre>
+          <p name="bdf6" id="bdf6" class="graf graf--p graf-after--pre graf--trailing">To determine
+            a :manager’s :subordinates (upon an @employee.subordinates call), Active Record may now look at each
+            instance of <strong class="markup--strong markup--p-strong">Employee</strong> where the manager_id (i.e.
+            foreign_key: :manager_id) of such :manager is stored in such <strong
+                class="markup--strong markup--p-strong">Employee</strong>’s :manager column. To determine
+            a :subordinate’s :manager (upon an @employee.manager call), Active Record may simply look at the :manager
+            corresponding to the :manager_id stored in such <strong
+                class="markup--strong markup--p-strong">Employee</strong>’s :manager column.</p></div>
+      </div>
+    </section>
+    <section name="314f" class="section section--body section--last">
+      <div class="section-divider">
+        <hr class="section-divider">
+      </div>
+      <div class="section-content">
+        <div class="section-inner sectionLayout--insetColumn"><h4 name="9919" id="9919"
+                                                                  class="graf graf--h4 graf--leading">Has_many |
+          Has_many — Self Join Table</h4>
+          <p name="e88b" id="e88b" class="graf graf--p graf-after--h4">The above :subordinates | :manager example is
+            useful only if a :subordinate belongs_to a single :manager. A different data structure is required if
+            a :subordinate may have more than one :manager. The :follower | :followee paradigm used by Twitter and
+            Instagram is analogous. A <strong class="markup--strong markup--p-strong">User</strong> can follow and be
+            followed by any number of :users. In other words, a <strong
+                class="markup--strong markup--p-strong">User</strong> can be both a :subordinate (:followee) and
+            a :manager (:follower) without any restrictions on the number of :managers (:followers) associated with it
+            in its :subordinate (:followee) capacity and the number of :subordinates (:followees) associated with it in
+            its :manager (:follower) capacity. Here’s how a has_many | has_many self-join might work:</p>
+          <p name="d893" id="d893" class="graf graf--p graf-after--p"><a
+              href="https://github.com/jbmilgrom/LEAf/blob/master/app/models/user.rb"
+              data-href="https://github.com/jbmilgrom/LEAf/blob/master/app/models/user.rb"
+              class="markup--anchor markup--p-anchor" rel="noopener" target="_blank">app/models/user.rb</a></p>
+          <figure name="d090" id="d090" class="graf graf--figure graf-after--p">
+            <div class="aspectRatioPlaceholder is-locked" style="max-width: 700px; max-height: 160px;">
+              <div class="aspectRatioPlaceholder-fill" style="padding-bottom: 22.8%;"></div>
+              <img class="graf-image" data-image-id="1*ae8lXxaCS6rwaJ6dV9BKaQ.png" data-width="1384" data-height="316"
+                   src="https://cdn-images-1.medium.com/max/800/1*ae8lXxaCS6rwaJ6dV9BKaQ.png"></div>
+          </figure>
+          <p name="955e" id="955e" class="graf graf--p graf-after--figure"><a
+              href="https://github.com/jbmilgrom/LEAf/blob/master/app/models/follow.rb"
+              data-href="https://github.com/jbmilgrom/LEAf/blob/master/app/models/follow.rb"
+              class="markup--anchor markup--p-anchor" rel="noopener" target="_blank">app/models/follow.rb</a></p>
+          <figure name="013b" id="013b" class="graf graf--figure graf-after--p">
+            <div class="aspectRatioPlaceholder is-locked" style="max-width: 700px; max-height: 104px;">
+              <div class="aspectRatioPlaceholder-fill" style="padding-bottom: 14.799999999999999%;"></div>
+              <img class="graf-image" data-image-id="1*LFc2vG8Rk2PNgt3rjsM2eg.png" data-width="1000" data-height="148"
+                   src="https://cdn-images-1.medium.com/max/800/1*LFc2vG8Rk2PNgt3rjsM2eg.png"></div>
+          </figure>
+          <p name="cd6b" id="cd6b" class="graf graf--p graf-after--figure">The most important things to note are
+            probably the terms :follower_follows and :followee_follows in user.rb, terms which I named as such for the
+            following reasons (but could just as well been named :route_a and :route_b). Ordinarily, a join table
+            between two independent objects is referenced identically in each model class. In the <strong
+                class="markup--strong markup--p-strong">Player</strong> | <strong
+                class="markup--strong markup--p-strong">Team</strong> example above, a <strong
+                class="markup--strong markup--p-strong">Team</strong> may have many :players through :contracts. This is
+            no different for a <strong class="markup--strong markup--p-strong">Player</strong>, who may have many :teams
+            through :contracts as well. But in this case, where only one named model exists (i.e. a <strong
+                class="markup--strong markup--p-strong">User</strong>), naming the through: relationship identically
+            (i.e. through: :follow) would result in a naming collision for different use cases of, or access points
+            into, the join table. Follower_follows and :followee_follows were created to avoid such a naming collision.
+            Now, a <strong class="markup--strong markup--p-strong">User</strong> can have many :followers
+            through :follower_follows and many :followees through :followee_follows.</p>
+          <p name="e192" id="e192" class="graf graf--p graf-after--p graf--trailing">To determine a <strong
+              class="markup--strong markup--p-strong">User</strong>’s :followees (upon an @user.followees call), Active
+            Record may now look at each instance of class_name: “Follow” where such <strong
+                class="markup--strong markup--p-strong">User</strong> is the follower (i.e. foreign_key: :follower_id)
+            through: such <strong class="markup--strong markup--p-strong">User</strong>’s :followee_follows. To
+            determine a <strong class="markup--strong markup--p-strong">User</strong>’s :followers (upon an
+            @user.followers call), Active Record may now look at each instance of class_name: “Follow” where such
+            <strong class="markup--strong markup--p-strong">User </strong>is the followee (i.e.
+            foreign_key: :followee_id) through: such <strong class="markup--strong markup--p-strong">User</strong>’s :follower_follows.
+          </p></div>
+      </div>
+    </section>
+  </section>
+  <footer>
+    <p>By <a href="https://medium.com/@jbmilgrom" class="p-author h-card">Jonathan Milgrom</a> on <a
+        href="https://medium.com/p/e0992c27c1e">
+      <time class="dt-published" datetime="2014-08-04T23:52:10.943Z">August 4, 2014</time>
+    </a>.
+    </p>
+    <p><a href="https://medium.com/@jbmilgrom/active-record-many-to-many-self-join-table-e0992c27c1e"
+          class="p-canonical">Canonical link</a></p>
+    <p>Exported from <a href="https://medium.com">Medium</a> on May 2, 2020.</p></footer>
+</article>
+</body>
+</html>
