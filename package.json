@@ -1,0 +1,19 @@
+{
+  "name": "blogg",
+  "version": "1.0.0",
+  "description": "personal static site",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jbmilgrom/blogg.git"
+  },
+  "author": "Jonathan Milgrom",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jbmilgrom/blogg/issues"
+  },
+  "homepage": "https://github.com/jbmilgrom/blogg#readme"
+}
