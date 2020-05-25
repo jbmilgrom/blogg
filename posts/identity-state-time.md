@@ -1,7 +1,12 @@
-yarn run v1.22.4
-$ /Users/jmilgrom/Desktop/hack/blogg/node_modules/.bin/mediumexporter https://medium.com/@jbmilgrom/why-functional-and-object-oriented-programming-are-often-juxtaposed-1017699112d7
-
-# Why Functional and Object-Oriented Programming are Often Juxtaposed
+---
+title: The Juxtaposition of Functional and Object-Oriented Programming Parardigms Presents a New Model for State, Change & Time.
+description: This is a post on My Blog about agile frameworks.
+date: 2020-03-09
+tags:
+  - another-tag
+layout: layouts/layout.liquid
+---
+# The Juxtaposition of Functional and Object-Oriented Programming Parardigms Presents a New Model for State, Change & Time.
 
 Oil & water
 
@@ -436,4 +441,3 @@ Reified state couches in writing what must otherwise live as thoughts in program
 These advantages have been known for decades. John Backus “gave high visibility to functional programming” (SICP Section 3.5.5; also see Simon Peyton-Jones, [Escape from the ivory tower: the Haskel journey](https://www.youtube.com/watch?v=re96UgMk6GQ)) through his [Turing Award lecture](https://www.thocp.net/biographies/papers/backus_turingaward_lecture.pdf) in 1978, seven years before the creation of [C++](https://en.wikipedia.org/wiki/C%2B%2B) and thirteen before [Java](https://en.wikipedia.org/wiki/Java_%28programming_language%29).
 
 [¹⁰](#cafa) The [20 most popular languages](https://www.tiobe.com/tiobe-index/) are predominantly imperative or object-oriented.
-Done in 2.98s.
