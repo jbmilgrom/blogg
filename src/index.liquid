@@ -1,0 +1,8 @@
+---
+layout: layouts/layout.liquid
+---
+<ul>
+    {%- for post in collections.post -%}
+        <li>{{ post.data.title }}</li>
+    {%- endfor -%}
+</ul>
