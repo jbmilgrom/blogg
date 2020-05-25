@@ -1,0 +1,9 @@
+body {
+    font-family: "Vollkorn", Georgia, Times, "Times New Roman", serif;
+    padding: 24px;
+}
+
+.post {
+    max-width: 680px;
+    margin: 0 auto;
+}
