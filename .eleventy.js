@@ -1,4 +1,4 @@
-const sourceDirectory = 'src';
+const sourceDirectory = "src";
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy(`${sourceDirectory}/img`);
@@ -6,7 +6,7 @@ module.exports = function (eleventyConfig) {
 
   return {
     dir: {
-      input: sourceDirectory
-    }
+      input: sourceDirectory,
+    },
   };
 };
