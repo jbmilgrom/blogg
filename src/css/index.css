@@ -30,6 +30,10 @@ h2 {
   font-weight: 500;
 }
 
+img {
+  max-width: 640px;
+}
+
 figcaption {
   text-align: center;
   font-size: 0.8em;
