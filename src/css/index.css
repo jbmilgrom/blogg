@@ -1,7 +1,8 @@
 :root {
   --darkgray: #333;
-  --lakeryellow: #FDB927;
+  --lakeryellow: #fdb927;
   --lakerpurple: #552583;
+  --lightestgray: rgba(0, 0, 0, 0.05);
 }
 
 a,
@@ -43,6 +44,13 @@ main {
   text-decoration: underline;
 }
 
+/*.post pre.language-text {*/
+/*  background: beige;*/
+/*}*/
+
+/*.post code.language-text {*/
+/*  color: var(--darkgray);*/
+/*}*/
 
 .post-list {
   line-height: 1.3;

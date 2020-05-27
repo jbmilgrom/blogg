@@ -14,21 +14,40 @@ That functional programming opposes object-oriented programming in some fundamen
 
 Procedures that produce the same result when provided the same argument can be viewed as computing mathematical functions. For example, a decrement100 procedure in JavaScript[⁰](#c746),
 
-<iframe src="https://medium.com/media/9b87471b460c4cf298660c79d3d6a708" frameborder=0></iframe>
+```js
+const decrement100 = function (x) {
+  return 100 - x;
+};
+
+decrement100(20); // 80
+```
 
 or, more succinctly,
 
-<iframe src="https://medium.com/media/364010e1acaf29399bc700270c53f856" frameborder=0></iframe>
+```js
+const decrement100 = (x) => 100 - x;
 
-can be viewed as computing the mathematical function f(x) = 100 — x,
+decrement100(20); // 80
+```
 
-    where f(x) = 100 - x,
+can be viewed as computing the mathematical function `f(x) = 100 — x`,
 
-    f(20) = 80
+```text
+where f(x) = 100 - x,
+
+f(20) = 80
+```
 
 since the return value of decrement100 depends only on the input value just as f(x) depends only on x. Invoke decrement100 a second time with 20 and it will return 80 once again, regardless of time and place within a program’s runtime. By contrast, an alternative implementation
 
-<iframe src="https://medium.com/media/f99b842570219fb9ad6c80d34a3d1086" frameborder=0></iframe>
+```js
+let oneHundred = 100;
+const decrementOneHundred = (x) => oneHundred - x;
+
+decrementOneHundred(20); // 80
+oneHundred = 80;
+decrementOneHundred(20); // 60
+```
 
 involving a mutable binding does not model computing a mathematical function, since its behavior may depend on variable information in addition to its input. Invoke decrementOneHundred a second time with 20 and it will _not_ return 80 once again when such binding is intermediately reassigned.
 
@@ -252,7 +271,7 @@ Synchronous functions can communicate by simply passing around results. The resu
 
 <iframe src="https://medium.com/media/140b0e17e9ed1ca79f68b1c13f0bd76a" frameborder=0></iframe>
 
-The program now consists of functions parseInt and withdraw, called against specific events WITHDRAWAL_AMOUNT and WITHDRAW. The state of the program has not been reflected directly into distinct objects. Instead, a program _function_ is called with the state resulting from the previous call, together with event data from any user interaction, in order to produce the starter state for the next. program resembles an iterative, recursive function. Yet, calls to program occur asynchronously. Just as with the object-oriented ATM program, a user may begin the functional ATM program by first selecting a withdrawal amount, _then_ clicking withdraw:
+The program now consists of functions parseInt and withdraw, called against specific events WITHDRAWAL*AMOUNT and WITHDRAW. The state of the program has not been reflected directly into distinct objects. Instead, a program \_function* is called with the state resulting from the previous call, together with event data from any user interaction, in order to produce the starter state for the next. program resembles an iterative, recursive function. Yet, calls to program occur asynchronously. Just as with the object-oriented ATM program, a user may begin the functional ATM program by first selecting a withdrawal amount, _then_ clicking withdraw:
 
     select → onchange → "store.publish(
                           'WITHDRAWAL_AMOUNT', {amount: value}

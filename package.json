@@ -18,6 +18,7 @@
   "homepage": "https://github.com/jbmilgrom/blogg#readme",
   "devDependencies": {
     "@11ty/eleventy": "^0.11.0",
+    "@11ty/eleventy-plugin-syntaxhighlight": "^3.0.1",
     "mediumexporter": "^0.1.6",
     "prettier": "^2.0.5"
   }
