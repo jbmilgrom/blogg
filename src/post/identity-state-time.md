@@ -53,28 +53,29 @@ involving a mutable binding does not model computing a mathematical function, si
 
 Functional procedures are not limited to numbers. Procedures that involve character strings, for example,
 
-
 ```js
 const space = (w1, w2) => `${w1} ${w2}`;
 
-space('hello', 'world'); // => "hello world"
+space("hello", "world"); // => "hello world"
 ```
+
 <figcaption>“hello world” will result from (‘hello’, ‘world’) regardless of program context.</figcaption>
 
 a list of strings,
 
 ```js
 const space = (w1, w2) => `${w1} ${w2}`;
-const sentence = words => `${words.reduce(space)}.`;
+const sentence = (words) => `${words.reduce(space)}.`;
 
-sentence(['i', 'heart', 'functions']); // => "i heart functions."
+sentence(["i", "heart", "functions"]); // => "i heart functions."
 ```
+
 <figcaption>“i heart functions” will results from [‘i’, ‘heart’, ‘functions’] regardless of program context.</figcaption>
 
 or other arbitrary data types and compositions may return the same value provided the same argument. Larger functional procedures can be composed of smaller ones,
 
 ```js
-const square = x => x * x;
+const square = (x) => x * x;
 const sum = (x, y) => x + y;
 
 const sumOfSquares = (x, y, z) => sum(sum(square(x), square(y)), square(z));
@@ -85,7 +86,7 @@ sumOfSquares(1, 2, 3); // 14
 as can programs themselves.
 
 ```js
-const square = x => x * x;
+const square = (x) => x * x;
 const sum = (x, y) => x + y;
 
 // PSUEDO CODE
