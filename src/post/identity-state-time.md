@@ -53,19 +53,48 @@ involving a mutable binding does not model computing a mathematical function, si
 
 Functional procedures are not limited to numbers. Procedures that involve character strings, for example,
 
-<iframe src="https://medium.com/media/67ec6ecadcd1d7c58b7ce639dd548616" frameborder=0></iframe>
+
+```js
+const space = (w1, w2) => `${w1} ${w2}`;
+
+space('hello', 'world'); // => "hello world"
+```
+<figcaption>“hello world” will result from (‘hello’, ‘world’) regardless of program context.</figcaption>
 
 a list of strings,
 
-<iframe src="https://medium.com/media/4ddc2682eee6d1e900fb03ed0966cf99" frameborder=0></iframe>
+```js
+const space = (w1, w2) => `${w1} ${w2}`;
+const sentence = words => `${words.reduce(space)}.`;
+
+sentence(['i', 'heart', 'functions']); // => "i heart functions."
+```
+<figcaption>“i heart functions” will results from [‘i’, ‘heart’, ‘functions’] regardless of program context.</figcaption>
 
 or other arbitrary data types and compositions may return the same value provided the same argument. Larger functional procedures can be composed of smaller ones,
 
-<iframe src="https://medium.com/media/e60784287b2156938c66d5053ccbf88d" frameborder=0></iframe>
+```js
+const square = x => x * x;
+const sum = (x, y) => x + y;
+
+const sumOfSquares = (x, y, z) => sum(sum(square(x), square(y)), square(z));
+
+sumOfSquares(1, 2, 3); // 14
+```
 
 as can programs themselves.
 
-<iframe src="https://medium.com/media/d99ec0e53ba5937a17ad3454833098d2" frameborder=0></iframe>
+```js
+const square = x => x * x;
+const sum = (x, y) => x + y;
+
+// PSUEDO CODE
+sum(sum(square(USER_INPUT_1), square(USER_INPUT_2)), square(USER_INPUT_3));
+
+// REPL PSUEDO CODE
+// > run functionalProgram.js with USER_INPUT_1=1, USER_INPUT_2=2, USER_INPUT_3=3,
+// > 14
+```
 
 When the output of one functional procedure becomes the input of another, the wrapping program or procedure itself can be viewed as computing a mathematical function; a second run with the same input results in the same output.[¹](#dba0)
 

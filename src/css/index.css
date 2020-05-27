@@ -14,8 +14,18 @@ a:visited {
 body {
   max-width: 680px;
   margin: 0 auto;
-  font-family: system-ui, sans-serif;
+  font-family: 'Lora', serif;
   color: var(--darkgray);
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Roboto', sans-serif;
+}
+
+figcaption {
+  text-align: center;
+  font-size: .8em;
+  font-style: italic;
 }
 
 header {
@@ -33,7 +43,7 @@ main {
 }
 
 .post p {
-  line-height: 1.45;
+  line-height: 1.5;
 }
 
 .post h1 {
@@ -44,16 +54,14 @@ main {
   text-decoration: underline;
 }
 
-/*.post pre.language-text {*/
-/*  background: beige;*/
-/*}*/
-
-/*.post code.language-text {*/
-/*  color: var(--darkgray);*/
-/*}*/
+.post pre,
+.post code {
+  font-size: .92em;
+}
 
 .post-list {
   line-height: 1.3;
+  font-family: 'Roboto', sans-serif;
 }
 
 .post-list ul {
@@ -63,10 +71,13 @@ main {
 
 .post-list li {
   display: flex;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--lightestgray);
 }
 
 .post-list .name {
   flex: 1;
+  font-weight: 500;
 }
 
 .post-list li span {
