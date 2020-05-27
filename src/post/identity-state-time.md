@@ -455,11 +455,9 @@ Synchronous functions can communicate by simply passing around results. The resu
 
 <iframe src="https://medium.com/media/140b0e17e9ed1ca79f68b1c13f0bd76a" frameborder=0></iframe>
 
-The program now consists of functions parseInt and withdraw, called against specific events WITHDRAWAL*AMOUNT and WITHDRAW. The state of the program has not been reflected directly into distinct objects. Instead, a program \_function* is called with the state resulting from the previous call, together with event data from any user interaction, in order to produce the starter state for the next. program resembles an iterative, recursive function. Yet, calls to program occur asynchronously. Just as with the object-oriented ATM program, a user may begin the functional ATM program by first selecting a withdrawal amount, _then_ clicking withdraw:
+The program now consists of functions parseInt and withdraw, called against specific events `WITHDRAWAL_AMOUNT` and `WITHDRAW`. The state of the program has not been reflected directly into distinct objects. Instead, a program *function* is called with the state resulting from the previous call, together with event data from any user interaction, in order to produce the starter state for the next. program resembles an iterative, recursive function. Yet, calls to program occur asynchronously. Just as with the object-oriented ATM program, a user may begin the functional ATM program by first selecting a withdrawal amount, _then_ clicking withdraw:
 
-    select → onchange → "store.publish(
-                          'WITHDRAWAL_AMOUNT', {amount: value}
-                         )"
+    select → onchange → "store.publish('WITHDRAWAL_AMOUNT', {amount:value})"
     click → onclick → "store.publish('WITHDRAW')"
     ...
 
