@@ -40,6 +40,10 @@ header {
   padding: 12px 0;
 }
 
+.direct-link {
+  font-size: .9em;
+}
+
 header h2 .title {
   color: var(--lakerpurple);
   text-decoration: underline;
