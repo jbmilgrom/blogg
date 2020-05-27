@@ -122,6 +122,7 @@ const bankAccount = new BankAccount(100);
 bankAccount.withdraw(20);
 bankAccount.checkBalance(); // 80
 ```
+
 <figcaption>This example is based on the “withdraw” procedure introduced in SICP Section 3.1.</figcaption>
 
 stores balance data in a private attribute and exposes privileged methods checkBalance and withdraw, which proscribe the manner in which access to balance can occur. Together, these constructs create a computational object — e.g. bankAccount — that behaves like a “bank account”, carrying a balance that may be diminished through “withdraw” and viewed through “check balance” actions. Less abstract objects can be modeled with the same set of tools — an apple may have a bite method that reduces an internal bites state in order to model an “apple” and a house may have a paint method that changes an internal color state in order to model a “house.” More abstract objects can be modeled with the same set of tools as well— a userMetaData object may have a setEmail method that updates an internal email state in order to model “user meta data.”
@@ -142,6 +143,7 @@ in place of imperative, direct manipulation of variables (balance) ad hoc.
 let balance = 100;
 balance = balance - 20;
 ```
+
 <figcaption>Does "balance" represent a withdrawal or something else entirely?</figcaption>
 
 Coincidentally, the private data / public methods dynamic also provides the means for data encapsulation. That data is stored in private attributes, accessible only through privileged methods, proscribes the ways in which such data may be viewed or changed. The balance data of bankAccount can only be changed by withdraw or read by checkBalance, in one sense, because it may not be accessed directly.
@@ -173,9 +175,9 @@ A mutable variable and a place in memory underly the reassignments in both cases
 Syntactic constructs like this, new, class, private and public clearly express object-oriented intent — _this_ instance of a _class_ of things *private*ly maintains data through *public*ly available APIs — and are common to object-oriented programming languages. However, they are not necessary. Object-oriented semantics may be achieved with nontraditional syntax. For example, this bankAccount object also stores the balance data privately;
 
 ```js
-const makeBankAccount = balance => ({
-  withdraw: amount => balance = balance - amount,
-  checkBalance: () => balance
+const makeBankAccount = (balance) => ({
+  withdraw: (amount) => (balance = balance - amount),
+  checkBalance: () => balance,
 });
 
 const bankAccount = makeBankAccount(100);
@@ -187,45 +189,46 @@ balance is accessible only through the functions checkBalance and withdraw, whic
 
 ```ts
 class BankAccount {
-    public withdraw(balance, amount) {
-        return balance - amount;
-    }
+  public withdraw(balance, amount) {
+    return balance - amount;
+  }
 
-    public checkBalance(balance) {
-        return balance;
-    }
+  public checkBalance(balance) {
+    return balance;
+  }
 }
 
 const bankAccount = new BankAccount();
 bankAccount.withdraw(100, 20); // 80
 bankAccount.checkBalance(100); // 100; whoops, shouldn't this be 80?
 ```
+
 <figcaption>Is "BankAccount" really a bank account?</figcaption>
 
 allows “its” balance to evolve in an unspecified manner, which undermines the “bank account” abstraction. new, class and public constructs obscure the actual semantics in this case. The same can be said of a bankAccount object that publicly exposes the balance attribute, as was alluded to above.
 
 ```ts
-
 class BankAccount {
-    public balance; // <-- now public
+  public balance; // <-- now public
 
-    constructor(funds) {
-        this.balance = funds;
-    }
+  constructor(funds) {
+    this.balance = funds;
+  }
 
-    public withdraw(amount) {
-        this.balance = this.balance - amount;
-    }
+  public withdraw(amount) {
+    this.balance = this.balance - amount;
+  }
 
-    public checkBalance() {
-        return this.balance;
-    }
+  public checkBalance() {
+    return this.balance;
+  }
 }
 
 const bankAccount = new BankAccount(100);
-bankAccount.balance = 80
+bankAccount.balance = 80;
 bankAccount.checkBalance(); // 80, eventhough no funds have been withdrawn
 ```
+
 <figcaption>Is "BankAccount" really a bank account?</figcaption>
 
 Now, balance can magically change without a withdrawal ever having occurred, undermining the “bank account” abstraction. new, class and public constructs obscure the actual semantics in this case.[⁴](#9110)
@@ -233,9 +236,9 @@ Now, balance can magically change without a withdrawal ever having occurred, und
 With functional programming, syntax is also beside the point. The use of functional syntactic constructs is necessary to perform computation against arguments. function and => (i.e. “arrow function”) syntax may express functional programming intent as well. However, they cannot alone achieve functional semantics. Indeed, a method of an object may use the => syntax without correctly modeling computing mathematical functions.
 
 ```js
-const makeBankAccount = balance => ({
-  withdraw: amount => balance = balance - amount,
-  checkBalance: () => balance
+const makeBankAccount = (balance) => ({
+  withdraw: (amount) => (balance = balance - amount),
+  checkBalance: () => balance,
 });
 ```
 
@@ -253,7 +256,7 @@ Additionally, an alternative implementation of “decrement one hundred” in Ja
 
 ```js
 let oneHundred = 100;
-const decrementOneHundred = x => oneHundred - x;
+const decrementOneHundred = (x) => oneHundred - x;
 
 decrementOneHundred(20); // 80
 oneHundred = 80;
@@ -291,39 +294,42 @@ const bankAccount = new BankAccount(100);
 bankAccount.withdraw(20);
 bankAccount.checkBalance(); // 80
 ```
+
 <figcaption>The bank account’s balance is overwritten by the withdraw method.</figcaption>
 
 involves overwriting balance as much as the closure implementation does.
 
 ```js
-const makeBankAccount = balance => ({
-  withdraw: amount => balance = balance - amount,  // <-- assign `balance` a new value
-  checkBalance: () => balance
+const makeBankAccount = (balance) => ({
+  withdraw: (amount) => (balance = balance - amount), // <-- assign `balance` a new value
+  checkBalance: () => balance,
 });
 
 const bankAccount = makeBankAccount(100);
 bankAccount.withdraw(20);
 bankAccount.checkBalance(); // 80
 ```
+
 <figcaption>The bank account’s balance is overwritten by the withdraw method.</figcaption>
 
 As mentioned above, a state*less* “object” (e.g. bankAccount) that avoids maintaining any underlying state (e.g. balance)
 
 ```ts
 class BankAccount {
-    public withdraw(balance, amount) {
-        return balance - amount;
-    }
+  public withdraw(balance, amount) {
+    return balance - amount;
+  }
 
-    public checkBalance(balance) {
-        return balance;
-    }
+  public checkBalance(balance) {
+    return balance;
+  }
 }
 
 const bankAccount = new BankAccount();
 bankAccount.withdraw(100, 20); // 80
 bankAccount.checkBalance(100); // 100; whoops, shouldn't this be 80?
 ```
+
 <figcaption>Is "BankAccount" really a bank account?</figcaption>
 
 also avoids modeling any underlying object (e.g. “bank account”).
@@ -340,7 +346,7 @@ An externally scoped variable cannot change the semantics of decrementOneHundred
 
 ```js
 const oneHundred = 100; // <-- now a `const` instead of a `let`
-const decrementOneHundred = x => oneHundred - x;
+const decrementOneHundred = (x) => oneHundred - x;
 
 decrementOneHundred(20); // 80
 // oneHundred = 80; <-- would be runtime error: "TypeError: Assignment to constant variable."
