@@ -79,7 +79,8 @@ main {
 }
 
 .post a {
-  text-decoration: underline;
+  padding: 1px 0;
+  border-bottom: 1px solid var(--darkgray);
 }
 
 .post pre.language-text,
@@ -116,8 +117,10 @@ main {
   margin-right: 16px;
 }
 
-a:hover {
+.post a:hover {
   color: var(--lakerpurple);
-  text-decoration: underline;
-  text-decoration-color: var(--lakeryellow);
+  text-decoration: none;
+  background: var(--sweetbeige);
+  padding: 1px 0;
+  border-bottom: 2px solid var(--lakeryellow);
 }
