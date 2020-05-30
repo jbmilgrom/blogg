@@ -2,7 +2,7 @@
 title: watch, watchGroup, watchCollection and Deep Watching in AngularJS
 date: 2016-05-20
 tags: post
-layout: layouts/post.njk
+layout: layouts/post.liquid
 ---
 ### The Many Layers of Change Detection in Angular 1.x
 
