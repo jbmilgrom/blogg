@@ -35,7 +35,7 @@ h4 {
 
 h1,
 h2 {
-  font-weight: 500;
+  font-weight: 400;
 }
 
 img {
@@ -109,9 +109,14 @@ main {
 }
 
 .post-list .name {
-  flex: 1;
+  flex: 5;
   font-weight: 500;
 }
+
+.post-list .date {
+  flex: 1;
+}
+
 
 .post-list li span {
   margin-right: 16px;

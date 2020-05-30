@@ -1,6 +1,6 @@
 ---
 title: The Juxtaposition of Functional and Object-Oriented Programming Parardigms Presents a New Model for State, Change & Time.
-description: This is a post on My Blog about agile frameworks.
+description: This is a post on My Blog about agile frameworks
 date: 2020-03-09
 tags: post
 layout: layouts/post.liquid
