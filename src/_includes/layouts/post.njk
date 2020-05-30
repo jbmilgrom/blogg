@@ -1,9 +1,9 @@
 ---
-layout: layouts/layout.liquid
+layout: layouts/layout.njk
 templateClass: post
 ---
 <h1>{{ title }}</h1>
 
-{{ content }}
+{{ content | safe }}
 
 <p><a href="/">← Home</a></p>
