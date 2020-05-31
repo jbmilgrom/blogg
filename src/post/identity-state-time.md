@@ -751,137 +751,133 @@ As a result, teaching functional programming is like teaching a Ptolemaic astron
 
 Nevertheless, the functional view is indeed expressible as a result of the work put in above. We can see change as creating something new, instead of altering something of old, and time as a series of successive states. We can alter our language and reimagine our physical reality to support a functional view of change, state and time.
 
-[^1]:
-  Many of these insights can be found in original form in the [Structure and Interpretation of Computer Programs ](https://web.mit.edu/alexmv/6.037/sicp.pdf)(SICP). There you will find a life-altering discussion of the same topics using Scheme, a Lisp dialect like Clojure. All code examples included here however, even if borrowed, will be couched in terms of JavaScript. If you know JavaScript and are unfamiliar with Scheme, this article may be immediately accessible to you without first learning how “[to balance all those parens](https://crockford.com/javascript/javascript.html).” Little is lost in translation as well. JavaScript has first-class functions (i.e. lambdas), closures (i.e. function-delimited lexical scoping) and generally thrives when used functionally.
+[^1]: Many of these insights can be found in original form in the [Structure and Interpretation of Computer Programs ](https://web.mit.edu/alexmv/6.037/sicp.pdf)(SICP). There you will find a life-altering discussion of the same topics using Scheme, a Lisp dialect like Clojure. All code examples included here however, even if borrowed, will be couched in terms of JavaScript. If you know JavaScript and are unfamiliar with Scheme, this article may be immediately accessible to you without first learning how “[to balance all those parens](https://crockford.com/javascript/javascript.html).” Little is lost in translation as well. JavaScript has first-class functions (i.e. lambdas), closures (i.e. function-delimited lexical scoping) and generally thrives when used functionally.
 
-  > JavaScript’s functions are first class objects with (mostly) lexical scoping. JavaScript is the first lambda language to go mainstream. Deep down, JavaScript has more in common with Lisp and Scheme than with Java. It is Lisp in C’s clothing. — Douglas Crockford, [JavaScript: The Good Parts](https://www.oreilly.com/library/view/javascript-the-good/9780596517748/ch01s02.html)
+    > JavaScript’s functions are first class objects with (mostly) lexical scoping. JavaScript is the first lambda language to go mainstream. Deep down, JavaScript has more in common with Lisp and Scheme than with Java. It is Lisp in C’s clothing. — Douglas Crockford, [JavaScript: The Good Parts](https://www.oreilly.com/library/view/javascript-the-good/9780596517748/ch01s02.html)
 
-  There is even an ongoing [academic effort](https://sicp.comp.nus.edu.sg/) to translate the full text of SICP into JavaScript. Also considered, JavaScript is a close cousin of TypeScript, which enables traditional object-oriented constructs like private and public and functional constructs like readonly and as const at compile time. Perhaps in JavaScript (and TypeScript), we get enough support of functional and object-oriented programming paradigms to enable a discussion of both within a single, ubiquitous language.
+    There is even an ongoing [academic effort](https://sicp.comp.nus.edu.sg/) to translate the full text of SICP into JavaScript. Also considered, JavaScript is a close cousin of TypeScript, which enables traditional object-oriented constructs like private and public and functional constructs like readonly and as const at compile time. Perhaps in JavaScript (and TypeScript), we get enough support of functional and object-oriented programming paradigms to enable a discussion of both within a single, ubiquitous language.
 
 [^2]: Immutability is an important part of the equation as well. We’ll cover this soon in the section titled _Unchangeability is Fundamental to Functional Programming._
 [^3]: Object-oriented programming is also traditionally associated with code reuse through inheritance, among other patterns, that reinforce the object model.
 [^4]: The creator of Clojure at it again:
 
-  > But as soon as we introduce… the idea that the value of a variable can change, a variable can no longer be simply a name. Now a variable somehow refers to a place where a value can be stored, and the value stored at this place can change.” — Rich Hickey, [The Value of Values](https://github.com/matthiasn/talk-transcripts/blob/master/Hickey_Rich/ValueOfValuesLong.md)
+    > But as soon as we introduce… the idea that the value of a variable can change, a variable can no longer be simply a name. Now a variable somehow refers to a place where a value can be stored, and the value stored at this place can change.” — Rich Hickey, [The Value of Values](https://github.com/matthiasn/talk-transcripts/blob/master/Hickey_Rich/ValueOfValuesLong.md)
 
 [^5]: Never has the delineation between syntax and semantics been more pronounced than with [value objects](https://martinfowler.com/bliki/ValueObject.html), which commandeer object-oriented syntax to effect _non_-object semantics — i.e. immutable values. If not for the divergence between syntax and semantics, so-called “value objects” would be a contradiction in terms. We’ll cover the inherent mutability of objects soon in the sections titled _Changeability is Fundamental to Object Semantics_ and _“Object” Names Changeability_.
-[^6]:
-  Contextual immutability says nothing of local variables. In fact, a variable that is reassigned within the same procedure in which it was initialized cannot impact the semantics of such procedure.
+[^6]: Contextual immutability says nothing of local variables. In fact, a variable that is reassigned within the same procedure in which it was initialized cannot impact the semantics of such procedure.
 
-  > …any mutation that is ever done to any of these is to rebind local variables…that doesn’t affect the fact that these objects are immutable from an outside perspective” Gary Bernhardt, [Functional Core, Imperative Shell](https://www.destroyallsoftware.com/screencasts/catalog/functional-core-imperative-shell)
+    > …any mutation that is ever done to any of these is to rebind local variables…that doesn’t affect the fact that these objects are immutable from an outside perspective” Gary Bernhardt, [Functional Core, Imperative Shell](https://www.destroyallsoftware.com/screencasts/catalog/functional-core-imperative-shell)
 
-  decrement100 may be implemented with internal mutability, for example,
+    decrement100 may be implemented with internal mutability, for example,
 
-  ```js
-  const decrement100 = (x) => {
-    let r = 100;
-    r = 100 - x;
-    return r;
-  };
+      ```js
+      const decrement100 = (x) => {
+        let r = 100;
+        r = 100 - x;
+        return r;
+      };
+    
+      decrement100(20); // => 80
+      ```
 
-  decrement100(20); // => 80
-  ```
+    without affecting external semantics; the output of decrement100 still depends only on the input. Even block-scoped looping constructs like while, for and do may be part of procedures that produce the same output provided the same input, notwithstanding reassignment of variables tracking iteration state (e.g. <code>i</code>, <code>j</code>, <code>k</code>, <code>n</code>, etc.) with every loop.
 
-  without affecting external semantics; the output of decrement100 still depends only on the input. Even block-scoped looping constructs like while, for and do may be part of procedures that produce the same output provided the same input, notwithstanding reassignment of variables tracking iteration state (e.g. <code>i</code>, <code>j</code>, <code>k</code>, <code>n</code>, etc.) with every loop.
-
-  ```js
-  const factorial = (n) => {
-    let total = 1;
-    while (n > 0) {
-      total = total * n;
-      n = n - 1;
-    }
-    return total;
-  };
-
-  factorial(0); // => 1
-  factorial(1); // => 1
-  factorial(2); // => 2
-  factorial(3); // => 6
-  ```
+      ```js
+      const factorial = (n) => {
+        let total = 1;
+        while (n > 0) {
+          total = total * n;
+          n = n - 1;
+        }
+        return total;
+      };
+    
+      factorial(0); // => 1
+      factorial(1); // => 1
+      factorial(2); // => 2
+      factorial(3); // => 6
+      ```
 
     <figcaption>The mutability of <code>f</code> and <code>n</code> does not impact the functional semantics of <code>factorial</code></figcaption>
 
-  <code>factorial</code> will produce the same output provided the same input. On the other hand, changeability that is internal to one procedure definition may be positioned externally to another when [lexical procedural nesting is supported](https://en.wikipedia.org/wiki/Nested_function). <code>balance</code>, for example,
+    <code>factorial</code> will produce the same output provided the same input. On the other hand, changeability that is internal to one procedure definition may be positioned externally to another when [lexical procedural nesting is supported](https://en.wikipedia.org/wiki/Nested_function). <code>balance</code>, for example,
 
-  ```js
-  const makeBankAccount = (balance) => ({
-    withdraw: (amount) => (balance = balance - amount),
-    checkBalance: () => balance,
-  });
+      ```js
+      const makeBankAccount = (balance) => ({
+        withdraw: (amount) => (balance = balance - amount),
+        checkBalance: () => balance,
+      });
+    
+      const bankAccount = makeBankAccount(100);
+      bankAccount.withdraw(20);
+      bankAccount.checkBalance(); // 80
+      ```
 
-  const bankAccount = makeBankAccount(100);
-  bankAccount.withdraw(20);
-  bankAccount.checkBalance(); // 80
-  ```
+    is external to withdraw although internal to makeBankAccount and undermines the functional semantics of withdrawal as a result, as discussed above. [Notoriously unintuitive effects](https://stackoverflow.com/questions/750486/javascript-closure-inside-loops-simple-practical-example/750506) manifest when looping is combined with procedural nesting.
 
-  is external to withdraw although internal to makeBankAccount and undermines the functional semantics of withdrawal as a result, as discussed above. [Notoriously unintuitive effects](https://stackoverflow.com/questions/750486/javascript-closure-inside-loops-simple-practical-example/750506) manifest when looping is combined with procedural nesting.
-
-  ```js
-  const buildCallbacks = (items) => {
-    const callbacks = [];
-    let i;
-    for (i = 0; i < items.length; i++) {
-      callbacks.push(() => items[i]);
-    }
-    return callbacks;
-  };
-
-  const callbacks = buildCallbacks(["hello", "cruel", "world"]);
-
-  callbacks.length; // => 3
-  callbacks[0](); // => undefined
-  callbacks[1](); // => undefined
-  callbacks[2](); // => undefined
-  ```
+      ```js
+      const buildCallbacks = (items) => {
+        const callbacks = [];
+        let i;
+        for (i = 0; i < items.length; i++) {
+          callbacks.push(() => items[i]);
+        }
+        return callbacks;
+      };
+    
+      const callbacks = buildCallbacks(["hello", "cruel", "world"]);
+    
+      callbacks.length; // => 3
+      callbacks[0](); // => undefined
+      callbacks[1](); // => undefined
+      callbacks[2](); // => undefined
+      ```
 
     <figcaption>Initializing <code>let</code> above the block scopes the variable above the for-loop. Each iteration points at the same reference in memory as a result. By the time the callbacks are called, i has been updated to <code>3</code> and is outside the <code>callback</code>'s upper bound.</figcaption>
 
-  As a result, comprehensive immutability can be seen as defending functional programming in the face of procedural nesting. It also appears that functional semantics could theoretically coincide with traditional looping constructs and other locally-scoped mutation so long as procedural nesting was prohibited. Nevertheless, immutability is generally considered an inseparable part of functional programming; no distinction is made in SICP and elsewhere (that I have encountered). Perhaps there is something else to be said here about lambda calculus and a more formal definition of functional programming. Or, perhaps the many benefits of nested procedures (e.g. modules, closures, etc.) so obviously outweigh the superficial “costs” of forgoing looping to even consider such crazy talk. Recursive procedures can do anything looping constructs can and without performance regressions because of tail recursion and other optimization techniques at the compiler level.
+    As a result, comprehensive immutability can be seen as defending functional programming in the face of procedural nesting. It also appears that functional semantics could theoretically coincide with traditional looping constructs and other locally-scoped mutation so long as procedural nesting was prohibited. Nevertheless, immutability is generally considered an inseparable part of functional programming; no distinction is made in SICP and elsewhere (that I have encountered). Perhaps there is something else to be said here about lambda calculus and a more formal definition of functional programming. Or, perhaps the many benefits of nested procedures (e.g. modules, closures, etc.) so obviously outweigh the superficial “costs” of forgoing looping to even consider such crazy talk. Recursive procedures can do anything looping constructs can and without performance regressions because of tail recursion and other optimization techniques at the compiler level.
 
-[^7]:
-  That two equivalent expressions may be substituted for one another without altering the meaning of the program is known as [referential transparency](https://en.wikipedia.org/wiki/Referential_transparency).
+[^7]: That two equivalent expressions may be substituted for one another without altering the meaning of the program is known as [referential transparency](https://en.wikipedia.org/wiki/Referential_transparency).
 
-  > A language that supports the concept that “equals can be substituted for equals” in an expression without changing the value of the expression is said to be referentially transparent — SICP Section 3.1.3
+    > A language that supports the concept that “equals can be substituted for equals” in an expression without changing the value of the expression is said to be referentially transparent — SICP Section 3.1.3
 
 [^8]: ❤️ The original insight️ ❤️
 
-  > In general, so long as we never modify data objects, we can regard a compound data object to be precisely the totality of its pieces. For example, a rational number is determined by giving its numerator and its denominator. But this view is no longer valid in the presence of change, where a compound data object has an “identity” that is something different from the pieces of which it is composed. A bank account is still “the same” bank account even if we change the balance by making a withdrawal; conversely, we could have two different bank accounts with the same state information. This complication is a consequence, not of our programming language, but of our perception of a bank account as an object. — SICP Section 3.1.3
+    > In general, so long as we never modify data objects, we can regard a compound data object to be precisely the totality of its pieces. For example, a rational number is determined by giving its numerator and its denominator. But this view is no longer valid in the presence of change, where a compound data object has an “identity” that is something different from the pieces of which it is composed. A bank account is still “the same” bank account even if we change the balance by making a withdrawal; conversely, we could have two different bank accounts with the same state information. This complication is a consequence, not of our programming language, but of our perception of a bank account as an object. — SICP Section 3.1.3
 
-  Rich Hickey on the same subject:
+    Rich Hickey on the same subject:
 
-  > If it is immutable, it now taps into that definition of value we saw before. Because by being immutable we can go and take a string value, and another string value, and say: are they the same? Do they have the same magnitude? Are they talking about the same thing? Are they expressing the same specific meaning? All of those definitions of values apply to something that is not mutable. So that relative worth thing kicks in. — Rich Hickey, [The Value of Values](https://github.com/matthiasn/talk-transcripts/blob/master/Hickey_Rich/ValueOfValuesLong.md)
+    > If it is immutable, it now taps into that definition of value we saw before. Because by being immutable we can go and take a string value, and another string value, and say: are they the same? Do they have the same magnitude? Are they talking about the same thing? Are they expressing the same specific meaning? All of those definitions of values apply to something that is not mutable. So that relative worth thing kicks in. — Rich Hickey, [The Value of Values](https://github.com/matthiasn/talk-transcripts/blob/master/Hickey_Rich/ValueOfValuesLong.md)
 
-[^9]:
-  [Elm](https://guide.elm-lang.org/) programs are trivially made to be stateful, notwithstanding the exclusive use of pure functions _and_ the asynchrony of user interactions! This counter program
+[^9]: [Elm](https://guide.elm-lang.org/) programs are trivially made to be stateful, notwithstanding the exclusive use of pure functions _and_ the asynchrony of user interactions! This counter program
 
-  ```elm
-  import Browser
-  import Html exposing (Html, button, div, text)
-  import Html.Events exposing (onClick)
+      ```elm
+      import Browser
+      import Html exposing (Html, button, div, text)
+      import Html.Events exposing (onClick)
+    
+      main =
+      Browser.sandbox { init = 0, update = update, view = view }
+    
+      type Msg = Increment | Decrement
+    
+      update msg model =
+      case msg of
+      Increment ->
+        model + 1
+    
+      Decrement ->
+        model - 1
+    
+      view model =
+      div []
+      [ button [ onClick Decrement ] [ text "-" ]
+      , div [] [ text (String.fromInt model) ]
+      , button [ onClick Increment ] [ text "+" ]
+      ]
+      ```
 
-  main =
-  Browser.sandbox { init = 0, update = update, view = view }
-
-  type Msg = Increment | Decrement
-
-  update msg model =
-  case msg of
-  Increment ->
-    model + 1
-
-  Decrement ->
-    model - 1
-
-  view model =
-  div []
-  [ button [ onClick Decrement ] [ text "-" ]
-  , div [] [ text (String.fromInt model) ]
-  , button [ onClick Increment ] [ text "+" ]
-  ]
-  ```
-
-  can be seen [here](https://elm-lang.org/examples/buttons) tracking counter state, even though a user may of course click the counter buttons asynchronously. Like garbage collection in JavaScript, Elm hides any imperative code dedicated to communication between asynchronous scripts from the programmer’s view.
+    can be seen [here](https://elm-lang.org/examples/buttons) tracking counter state, even though a user may of course click the counter buttons asynchronously. Like garbage collection in JavaScript, Elm hides any imperative code dedicated to communication between asynchronous scripts from the programmer’s view.
 
 [⁹](#cafa) There are many advantages to functional programming. Programs that deal with mutation are “drastically more difficult” to reason about than ones that do not.
 
