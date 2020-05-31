@@ -7,7 +7,7 @@ layout: layouts/post.liquid
 
 From “Plain Vanilla” to Many-to-Many Self Join
 
-*(For a summary, visit my [SO post](http://stackoverflow.com/questions/25493368/many-to-many-self-join-in-rails/25493403#25493403).)*
+_(For a summary, visit my [SO post](http://stackoverflow.com/questions/25493368/many-to-many-self-join-in-rails/25493403#25493403).)_
 
 ### Plain Vanilla Join Table
 
@@ -37,42 +37,42 @@ Ordinarily, a join table works to account for a many-to-many relationship betwee
 [db/schema.rb](https://github.com/jbmilgrom/rails_crud_rspec/blob/master/db/schema.rb)
 
     ActiveRecord::Schema.define(version: 20140706210328) do
-    
+
      create_table "contracts", force: true do |t|
        t.integer "team_id"
        t.integer "player_id"
        t.integer "term"
        t.integer "deal_value"
      end
-    
+
      create_table "players", force: true do |t|
        t.string "name"
        t.integer "height"
        t.datetime "created_at"
        t.datetime "updated_at"
      end
-    
+
      create_table "teams", force: true do |t|
        t.string "name"
        t.string "city"
        t.datetime "created_at"
        t.datetime "updated_at"
      end
-    
+
     end
 
 Under the hood, the “player” in player_id and “team” in team_id in any instance of **Contract** are understood by Active Record to join such **Player** and **Team** through (as foreign keys of) an instance of **Contract.** @player.teams may then query the database for all :teams sharing an instance of **Contract** with @player and @team.players may query the database for all players sharing an instance of **Contract** with @team.
 
 ### Has_many | Belongs_to — Self Join Table
 
-A table may have models that have relationships with other models in the same table. Instead of creating two independent tables, it often makes more sense to create a self-join table to account for these types of relationships. Rails documentation provides [a great example](http://guides.rubyonrails.org/association_basics.html#self-joins). In addition to having a name, phone number and other attributes, an **Employee** may also be a manager of *other* **Employees**. In this example, a :subordinate may only have one :manager. Nonetheless, splitting the Employee model into two separate tables (maybe called Managers and Subordinates), duplicating code, and muddying entity relationships (what do you do when a subordinate gets promoted? How do you account for multilevel management, where a manager is the subordinate of another manager), offers a less-than-optimal solution. Here’s how a has_many | belongs_to self-join might work (taken from rails documentation linked above):
+A table may have models that have relationships with other models in the same table. Instead of creating two independent tables, it often makes more sense to create a self-join table to account for these types of relationships. Rails documentation provides [a great example](http://guides.rubyonrails.org/association_basics.html#self-joins). In addition to having a name, phone number and other attributes, an **Employee** may also be a manager of _other_ **Employees**. In this example, a :subordinate may only have one :manager. Nonetheless, splitting the Employee model into two separate tables (maybe called Managers and Subordinates), duplicating code, and muddying entity relationships (what do you do when a subordinate gets promoted? How do you account for multilevel management, where a manager is the subordinate of another manager), offers a less-than-optimal solution. Here’s how a has_many | belongs_to self-join might work (taken from rails documentation linked above):
 
 app/models/employee.rb
 
     class Employee < ActiveRecord::Base
-     has_many :subordinates, class_name: “Employee”, 
+     has_many :subordinates, class_name: “Employee”,
                              foreign_key: “manager_id”
-    
+
      belongs_to :manager, class_name: “Employee”
     end
 
@@ -81,10 +81,10 @@ As can be seen in the above code, self referential relationships offer added com
 Since each :subordinate may have only one :manager, a single column may be added when creating the **Employee** table to store the manager_id of each **Employee**’s (:subordinate’s) :manager, as is done below:
 
     class CreateEmployees < ActiveRecord::Migration
-      def change 
+      def change
         create_table :employees do |t|
           t.references :manager
-    
+
           t.timestamps
         end
       end

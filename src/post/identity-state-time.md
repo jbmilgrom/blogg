@@ -369,6 +369,7 @@ const HOURS_IN_DAY = 24;
 
 HOURS_IN_DAY === 25; // true
 ```
+
 <figcaption>JavaScript implements number literals as immutable primitive values, preventing this imagined change.
 </figcaption>
 
@@ -377,10 +378,14 @@ Similarly, change the molecular construction of “iron” and it may very well 
 Said another way, a new notion of “sameness” emerges with changeability. Unchangeable things can be identified as “the same” simply by examining contents. For example, because _immutable_ rational number implementations, r1 and r2,
 
 ```ts
-type RationalNumber = readonly [number /* numerator */, number /* denominator */];
+type RationalNumber = readonly [
+  number /* numerator */,
+  number /* denominator */
+];
 
 // turn into decimal form before comparing in order to reduce fraction
-const isEqual = (a: RationalNumber, b: RationalNumber) => (a[0] / a[1]) === (b[0] / b[1]);
+const isEqual = (a: RationalNumber, b: RationalNumber) =>
+  a[0] / a[1] === b[0] / b[1];
 
 const r1: RationalNumber = [2, 3];
 const r2: RationalNumber = [2, 3];
@@ -389,6 +394,7 @@ const r3: RationalNumber = [2, 5];
 isEqual(r1, r2); // => true
 isEqual(r1, r3); // => false
 ```
+
 <figcaption>TypeScript’s <code>readonly</code> qualifier prevents mutative actions (e.g. <code>p2[1] = 3</code>) at compile time.
 </figcaption>
 
@@ -398,7 +404,8 @@ will _always_ be comprised of 2 in the first slot and 3 in the second and reduce
 type RationalNumber = [number /* numerator */, number /* denominator */];
 
 // turn into decimal form before comparing in order to reduce fraction
-const isEqual = (a: RationalNumber, b: RationalNumber) => (a[0] / a[1]) === (b[0] / b[1]);
+const isEqual = (a: RationalNumber, b: RationalNumber) =>
+  a[0] / a[1] === b[0] / b[1];
 
 const r1: RationalNumber = [2, 3];
 const r2: RationalNumber = [2, 3];
@@ -409,6 +416,7 @@ r2[1] = 5;
 isEqual(r1, r2); // => false
 isEqual(r2, r3); // => true
 ```
+
 <figcaption>
 Absent the <code>readonly</code> qualifier, <code>RationalNumber</code>'s are mutable at compile time. At runtime, JavaScript’s <code>const</code> binding only prevents reassignment; it does not prevent mutation of an underlying array.
 </figcaption>
@@ -438,6 +446,7 @@ georgesAccount.checkBalance(); // 25
 areAccountsEqual(elainesAccount, elainesAccount); // true
 areAccountsEqual(elainesAccount, georgesAccount); // false
 ```
+
 <figcaption>We may determine equality b/w 2 objects by whether they are the same object — i.e. reference equality.
 </figcaption>
 
@@ -452,7 +461,7 @@ In this light, object-oriented can be seen as the opposite of functional program
 Mutual exclusion forks the road. When writing programs, we may choose mutability or immutability, objects or functions, but not both at once. Yet, whatever paradigm we choose must include a model for state, and perhaps time. As we saw above, programs that are composed of functions themselves model well-behaved state*less* mathematical functions,
 
 ```js
-const square = x => x * x;
+const square = (x) => x * x;
 const sum = (x, y) => x + y;
 
 // PSUEDO CODE
@@ -462,6 +471,7 @@ sum(sum(square(USER_INPUT_1), square(USER_INPUT_2)), square(USER_INPUT_3));
 // > run functionalProgram.js with USER_INPUT_1=1, USER_INPUT_2=2, USER_INPUT_3=3,
 // > 14
 ```
+
 <figcaption>The output of this program depends only on its input.
 </figcaption>
 
@@ -483,7 +493,15 @@ breaks down naturally into withdrawalAmount, representing the chosen amount to b
 
 Objects are intuitive in large part because they are consistent with a familiar model for time. Objects change — as we discussed, the notion of an “object,” having parts that change without changing the identity of the whole, articulates this ability. The flip-side to change is time. Since objects change, _when_ an object is examined is vital to the examination, it goes without saying. The “having parts that can change without changing the identity of the whole” quality of bankAccount, for example, is implemented by withdraw.
 
-<iframe src="https://medium.com/media/2c69e80507f8b615e862271fc2cab0ac" frameborder=0></iframe>
+```ts
+class BankAccount {
+  ...
+  public withdraw(amount) {
+    this.balance = this.balance - amount;
+  }
+  ...
+}
+```
 
 Underlying withdraw lies a mutable balance binding that may be assigned new values. Calls to withdraw change the associated balance of bankAccount as a side-effect, without altering the identity of bankAccount, by design.
 
@@ -533,7 +551,7 @@ Synchronous functions can communicate by simply passing around results. The resu
 
 <iframe src="https://medium.com/media/140b0e17e9ed1ca79f68b1c13f0bd76a" frameborder=0></iframe>
 
-The program now consists of functions parseInt and withdraw, called against specific events `WITHDRAWAL_AMOUNT` and `WITHDRAW`. The state of the program has not been reflected directly into distinct objects. Instead, a program *function* is called with the state resulting from the previous call, together with event data from any user interaction, in order to produce the starter state for the next. program resembles an iterative, recursive function. Yet, calls to program occur asynchronously. Just as with the object-oriented ATM program, a user may begin the functional ATM program by first selecting a withdrawal amount, _then_ clicking withdraw:
+The program now consists of functions parseInt and withdraw, called against specific events `WITHDRAWAL_AMOUNT` and `WITHDRAW`. The state of the program has not been reflected directly into distinct objects. Instead, a program _function_ is called with the state resulting from the previous call, together with event data from any user interaction, in order to produce the starter state for the next. program resembles an iterative, recursive function. Yet, calls to program occur asynchronously. Just as with the object-oriented ATM program, a user may begin the functional ATM program by first selecting a withdrawal amount, _then_ clicking withdraw:
 
     select → onchange → "store.publish('WITHDRAWAL_AMOUNT', {amount:value})"
     click → onclick → "store.publish('WITHDRAW')"

@@ -7,7 +7,7 @@
   --main-margin: 16px;
   --border-size: 2px;
   --border: var(--border-size) solid var(--sweetbeige);
-  --native-header-margin: .83em;
+  --native-header-margin: 0.83em;
 }
 
 a,
@@ -142,7 +142,6 @@ main {
   flex: 1;
 }
 
-
 .post-list li span {
   margin-right: 16px;
 }
@@ -155,6 +154,7 @@ main {
   border-bottom: 2px solid var(--lakeryellow);
 }
 
-.post iframe[src="http://jsfiddle.net/notc93Lv/embedded/?username=jmilgrom"] {
+.post iframe[src="http://jsfiddle.net/notc93Lv/embedded/?username=jmilgrom"]
+{
   min-height: 320px;
 }
