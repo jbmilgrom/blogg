@@ -30,11 +30,7 @@ decrement100(20); // 80
 
 can be viewed as computing the mathematical function `f(x) = 100 — x`,
 
-```text
-where f(x) = 100 - x,
-
-f(20) = 80
-```
+    f(20) = 80; where f(x) = 100 - x
 
 since the return value of decrement100 depends only on the input value just as f(x) depends only on x. Invoke decrement100 a second time with 20 and it will return 80 once again, regardless of time and place within a program’s runtime. By contrast, an alternative implementation
 
@@ -582,7 +578,7 @@ The “click withdraw” script occurs asynchronously sometime after the “sele
 
 Synchronous functions can communicate by simply passing around results. The result from one function becomes the input of another. Asynchronous scripts, by contrast, share a mutable place in memory instead of the values themselves. Consequently, we must also share a mutable place in memory to communicate between asynchronous scripts in the functional program implementation. On the other hand, with a light amount of infrastructure, we can usher such imperative code to the application perimeter and carve out space for a functional core, creating a “[functional core, imperative shell](https://www.destroyallsoftware.com/screencasts/catalog/functional-core-imperative-shell).”
 
-<script async src="//jsfiddle.net/jmilgrom/mv2187zo/embed/"></script>
+<script async src="//jsfiddle.net/jmilgrom/mv2187zo/embed/js,html,result/"></script>
 
 The program now consists of functions parseInt and withdraw, called against specific events `WITHDRAWAL_AMOUNT` and `WITHDRAW`. The state of the program has not been reflected directly into distinct objects. Instead, a program _function_ is called with the state resulting from the previous call, together with event data from any user interaction, in order to produce the starter state for the next. program resembles an iterative, recursive function. Yet, calls to program occur asynchronously. Just as with the object-oriented ATM program, a user may begin the functional ATM program by first selecting a withdrawal amount, _then_ clicking withdraw:
 
@@ -676,7 +672,7 @@ Said another way, in object-oriented programs, we hold the identity of objects c
 
 Unlike object-oriented programs, functional programs reify state. State can be passed to functions, returned by functions, and generally manipulated like numbers, strings, lists, and other [citizens](https://en.wikipedia.org/wiki/First-class_citizen) of the program. With a small addition to the ATM program, for example,
 
-<iframe src="https://medium.com/media/72724b472a72c8b823204cd0023122ac" frameborder=0></iframe>
+<script async src="//jsfiddle.net/jmilgrom/jfmea63q/embed/js,html,result/"></script>
 
 we can print (to the console) a representation of the each state of the program in sequence. This change is trivial precisely because state is a known quantity of the program and generally manipulable by program code. inspectReturn takes direct advantage of this quality, printing state to the console and returning state from the internal curried function.
 
@@ -694,7 +690,10 @@ In other words, the ostensible “paradox” dissipates when the augmentation of
 
 Consider video media. To movie scenes, we may attribute the same object-oriented semantics. Character and inanimate objects shift, interact and evolve as time elapses.
 
-<iframe src="https://medium.com/media/54d4877d5c90cd6d1730a5ef4608e889" frameborder=0></iframe>
+<video id="metavideo" poster="/media/metavideoposter.gif" style="margin:0;padding:0" width="480" height="270" controls loop autoplay>
+    <source src="/media/metavideo.mp4" type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;">
+    <img src="/media/metavideo.mp4" title="Your browser does not support the mp4 video codec.">
+</video>
 
 Glancing above, for example, we may conclude that “a cat is dancing.” Yet, videos are comprised of static frames stitched together in a certain sequence at discrete time intervals. Each frame corresponds to a state of the video at a moment in time and the frames, taken together, a time-denominated series of discrete states. The media chosen above is intentionally meta. The video includes a TV animation of a scene mirrored by a flip-book, showing static frames strung together at discrete time intervals, which itself is mirrored by a flip-book in “real” life, showing static frames strung together at discrete time intervals. Take another step back to notice that the above gif media being played on _your_ computer is comprised of static frames, strung together at discrete time intervals. There is nothing stopping us from taking another step back and interpreting the real world in which your computer currently sits as static frames, strung together at discrete time intervals. We _may_ attribute normal object-oriented semantics to the above gif, concluding that “a cat is dancing.” However, we may also attribute functional semantics, concluding that “a cat has arms above its head on frame fᵢ.” At a park in the real world, we may conclude that “a dog is chasing a squirrel.” However, we may also conclude that “a dog is in the running motion behind a squirrel in the running motion on frame fᵢ.” In both cases, we may identify a time-series of states instead of objects that change over time. The functional programming paradigm can be coherently applied to world and program alike.
 

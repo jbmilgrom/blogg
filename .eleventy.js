@@ -15,7 +15,7 @@ md.use(markdownItAnchor, {
 });
 
 module.exports = function (eleventyConfig) {
-  eleventyConfig.addPassthroughCopy(`${sourceDirectory}/img`);
+  eleventyConfig.addPassthroughCopy(`${sourceDirectory}/media`);
   eleventyConfig.addPassthroughCopy(`${sourceDirectory}/css`);
 
   eleventyConfig.addPlugin(syntaxHighlight);
