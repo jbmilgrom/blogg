@@ -154,7 +154,6 @@ main {
   border-bottom: 2px solid var(--lakeryellow);
 }
 
-.post iframe[src="http://jsfiddle.net/notc93Lv/embedded/?username=jmilgrom"]
-{
+.post iframe#JSFEMB_18413 {
   min-height: 320px;
 }

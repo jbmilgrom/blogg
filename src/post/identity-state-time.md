@@ -505,7 +505,13 @@ class BankAccount {
 
 Underlying withdraw lies a mutable balance binding that may be assigned new values. Calls to withdraw change the associated balance of bankAccount as a side-effect, without altering the identity of bankAccount, by design.
 
-<iframe src="https://medium.com/media/1c4c8fe170ca8f6f12048271175b257b" frameborder=0></iframe>
+```ts
+const bankAccount = new BankAccount(100);
+
+bankAccount.checkBalance(); // 100
+bankAccount.withdraw(20);
+bankAccount.checkBalance(); // 80
+```
 
 The flip-side to change is time. Any call to withdraw also “delineates moments in time” _when_ balance _may_ change. As a result, the meaning of bankAccount.checkBalance() “depends not only on the expression itself, but also on whether the evaluation occurs before or after these moments.” By modeling objects, “we are forced to admit time into our computational models.” (SICP Section 3.4)
 
@@ -525,11 +531,38 @@ An object with a single read method (like bankAccount) in a sense defines _the_ 
 
 Building stateful functional programs is less intuitive. To start, notice that imperative iteration can be restructured into functional iteration by recursively calling an iterative function with the results of the previous call. An imperative implementation of factorial, for example,
 
-<iframe src="https://medium.com/media/cec6dcfce360be458459f6e677816e80" frameborder=0></iframe>
+```js
+const factorial = (n) => {
+  let total = 1;
+  while (n > 0) {
+    total = total * n;
+    n = n - 1;
+  }
+  return total;
+};
+
+factorial(0); // => 1
+factorial(1); // => 1
+factorial(2); // => 2
+factorial(3); // => 6
+```
 
 maintains iteration and running total state through assignments to n and total, respectively, with every iteration. An alternative implementation avoids mutation by returning the iteration and running total state from an iteration function,
 
-<iframe src="https://medium.com/media/36d7e46f7c57f51d069e23ff51d20920" frameborder=0></iframe>
+```js
+const factorial = (n) => {
+  const iterate = (total, i) => {
+    if (i === 0) return total;
+    return iterate(total * i, i - 1);
+  };
+  return iterate(1, n);
+};
+
+factorial(0); // => 1
+factorial(1); // => 1
+factorial(2); // => 2
+factorial(3); // => 6
+```
 
 which may be used by the same function to calculate the next values in the next iteration.
 
@@ -549,7 +582,7 @@ The “click withdraw” script occurs asynchronously sometime after the “sele
 
 Synchronous functions can communicate by simply passing around results. The result from one function becomes the input of another. Asynchronous scripts, by contrast, share a mutable place in memory instead of the values themselves. Consequently, we must also share a mutable place in memory to communicate between asynchronous scripts in the functional program implementation. On the other hand, with a light amount of infrastructure, we can usher such imperative code to the application perimeter and carve out space for a functional core, creating a “[functional core, imperative shell](https://www.destroyallsoftware.com/screencasts/catalog/functional-core-imperative-shell).”
 
-<iframe src="https://medium.com/media/140b0e17e9ed1ca79f68b1c13f0bd76a" frameborder=0></iframe>
+<script async src="//jsfiddle.net/jmilgrom/mv2187zo/embed/"></script>
 
 The program now consists of functions parseInt and withdraw, called against specific events `WITHDRAWAL_AMOUNT` and `WITHDRAW`. The state of the program has not been reflected directly into distinct objects. Instead, a program _function_ is called with the state resulting from the previous call, together with event data from any user interaction, in order to produce the starter state for the next. program resembles an iterative, recursive function. Yet, calls to program occur asynchronously. Just as with the object-oriented ATM program, a user may begin the functional ATM program by first selecting a withdrawal amount, _then_ clicking withdraw:
 
@@ -563,15 +596,45 @@ The imperative shell (i.e the store) maintains a reference to the state resultin
 
 Unlike object-oriented programming, functional programming provides no model for traditional time. Mathematical functions are time*less*. Computation of a function f(x) a “second time” with the same argument will produce the same result _whenever_ computed; a mathematical statement like f(20) = 80 will not be made any less true by insinuating time. Similarly, time is no matter against procedures that model mathematical function computation. Simple functions,
 
-<iframe src="https://medium.com/media/364010e1acaf29399bc700270c53f856" frameborder=0></iframe>
+```js
+const decrement100 = (x) => 100 - x;
+
+decrement100(20); // 80
+```
 
 compositions of functions,
 
-<iframe src="https://medium.com/media/e60784287b2156938c66d5053ccbf88d" frameborder=0></iframe>
+```js
+const square = (x) => x * x;
+const sum = (x, y) => x + y;
+
+const sumOfSquares = (x, y, z) => sum(sum(square(x), square(y)), square(z));
+
+sumOfSquares(1, 2, 3); // 14
+```
 
 as well as “program” functions like the ATM program introduced above,
 
-<iframe src="https://medium.com/media/ec34c99898f28f134d3d5882c33be57b" frameborder=0></iframe>
+```js
+const withdraw = (balance, amount) => balance - amount;
+
+const ATM = (state = { balance: 100, amount: 10 }, event) => {
+  switch (event.type) {
+    case "WITHDRAW":
+      return {
+        ...state,
+        balance: withdraw(state.balance, state.amount),
+      };
+    case "WITHDRAWAL_AMOUNT":
+      return {
+        ...state,
+        amount: parseInt(event.amount),
+      };
+    default:
+      return state;
+  }
+};
+```
 
 will produce the same output provided the same input _whenever_ evaluated, independent of time.
 
