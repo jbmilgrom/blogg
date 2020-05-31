@@ -359,23 +359,89 @@ It simple cannot change and without change, the output can depend only on the si
 
 Moreover, changeability _implies_ an object. The rational number “2/3” cannot change, for example. Change the denominator of “2/3” from 3 to 5 and its identity changes as well to “2/5”. Increase the number of units represented by “24” and it may change to “25.”
 
-<iframe src="https://medium.com/media/1f05de610f57b27758d36b2e3816c126" frameborder=0></iframe>
+```js
+const HOURS_IN_DAY = 24;
+
+/**
+ * NOT VALID; imagined API for mutating numbers
+ */
+24.increment();
+
+HOURS_IN_DAY === 25; // true
+```
+<figcaption>JavaScript implements number literals as immutable primitive values, preventing this imagined change.
+</figcaption>
 
 Similarly, change the molecular construction of “iron” and it may very well change to “gold” or the wave length of “green” and it may change to “red”. The rational number “2/3”, the integer “24”, the metal “iron” and the color “green” are unchangeable things that are not recognizable as objects. Conversely, find changeability and find an object. A cup that is two-thirds full of water can be poured, an iron rod can be dented, a green house can be painted. “That cup” remains that cup notwithstanding less water; “that rod” remains that rod notwithstanding a dent; “that house” remains that house notwithstanding a fresh coat of paint. A “cup”, “rod” and “house” are changeable things that _are_ recognizable as objects. Coincidence of “changeability” and “object” is not happenstance. That parts can change without changing the identity of the whole _distinguishes_ an identity distinct from underlying parts. Changeability distinguishes an object. “Object” in a sense articulates this ability to change.
 
 Said another way, a new notion of “sameness” emerges with changeability. Unchangeable things can be identified as “the same” simply by examining contents. For example, because _immutable_ rational number implementations, r1 and r2,
 
-<iframe src="https://medium.com/media/8ee6e4baa6a8b889e8e7a4893f9ecff7" frameborder=0></iframe>
+```ts
+type RationalNumber = readonly [number /* numerator */, number /* denominator */];
+
+// turn into decimal form before comparing in order to reduce fraction
+const isEqual = (a: RationalNumber, b: RationalNumber) => (a[0] / a[1]) === (b[0] / b[1]);
+
+const r1: RationalNumber = [2, 3];
+const r2: RationalNumber = [2, 3];
+const r3: RationalNumber = [2, 5];
+
+isEqual(r1, r2); // => true
+isEqual(r1, r3); // => false
+```
+<figcaption>TypeScript’s <code>readonly</code> qualifier prevents mutative actions (e.g. <code>p2[1] = 3</code>) at compile time.
+</figcaption>
 
 will _always_ be comprised of 2 in the first slot and 3 in the second and reduce to two-thirds, a reasonable conclusion is that they are the same. To be sure, substitute one for the other and the meaning of a program is unchanged.[⁶](#cc5a) By contrast, consider when two *mutable (changeable) *rational number implementations may be deemed the “same.”
 
-<iframe src="https://medium.com/media/6c9bbececb4972829551f8d1573ee643" frameborder=0></iframe>
+```ts
+type RationalNumber = [number /* numerator */, number /* denominator */];
+
+// turn into decimal form before comparing in order to reduce fraction
+const isEqual = (a: RationalNumber, b: RationalNumber) => (a[0] / a[1]) === (b[0] / b[1]);
+
+const r1: RationalNumber = [2, 3];
+const r2: RationalNumber = [2, 3];
+const r3: RationalNumber = [2, 5];
+
+r2[1] = 5;
+
+isEqual(r1, r2); // => false
+isEqual(r2, r3); // => true
+```
+<figcaption>
+Absent the <code>readonly</code> qualifier, <code>RationalNumber</code>'s are mutable at compile time. At runtime, JavaScript’s <code>const</code> binding only prevents reassignment; it does not prevent mutation of an underlying array.
+</figcaption>
 
 r1 may have the same contents as r2 to start, but this affect is shortly lived. Substitute one for the other and the meaning of the program is changed — references to r2 now incorrectly reduce to two-fifths instead of two-thirds. r1 and r2 are not exactly “the same” in this case. Since two changeable things may evolve independently notwithstanding an analysis of parts performed at any one point in time, a new notion of “sameness” above an examination of parts must be admitted. Remarkably, this “new” notion is less remarkable with intentional object-oriented programming, where the creation of a new identity — i.e. an _object_ — is precisely the goal. georgesAccount and elainesAccount, for example,
 
-<iframe src="https://medium.com/media/8eb7f05a1cb2f139fc8d0f9e60914d04" frameborder=0></iframe>
+```ts
+/**
+ * Reference equality check
+ */
+const areAccountsEqual = (a: BankAccount, b: BankAccount) => a === b;
 
-may share a balance at some point in time. But even if they start with the same funds, georgesAccount and elainesAccount can register different balances at some other point in time because they are\* _in fact_ _different_ objects\*. Of course, that two distinct objects can evolve independently goes without saying. That is because “object” clearly articulates the creation of an identity that is not tied to any part, arrangement or quality — “object” names the ability to change.[⁷](#6d03)
+const elainesAccount = new BankAccount(100);
+const georgesAccount = new BankAccount(100);
+
+elainesAccount.checkBalance(); // 100
+georgesAccount.checkBalance(); // 100
+
+areAccountsEqual(elainesAccount, elainesAccount); // true
+areAccountsEqual(elainesAccount, georgesAccount); // false (eventhough identical funds)
+
+georgesAccount.withdraw(75);
+
+elainesAccount.checkBalance(); // 100
+georgesAccount.checkBalance(); // 25
+
+areAccountsEqual(elainesAccount, elainesAccount); // true
+areAccountsEqual(elainesAccount, georgesAccount); // false
+```
+<figcaption>We may determine equality b/w 2 objects by whether they are the same object — i.e. reference equality.
+</figcaption>
+
+may share a balance at some point in time. But even if they start with the same funds, georgesAccount and elainesAccount can register different balances at some other point in time because they are in fact different _objects_. Of course, that two distinct objects can evolve independently goes without saying. That is because “object” clearly articulates the creation of an identity that is not tied to any part, arrangement or quality — “object” names the ability to change.[⁷](#6d03)
 
 ## Mutually Exclusive
 
@@ -385,7 +451,19 @@ In this light, object-oriented can be seen as the opposite of functional program
 
 Mutual exclusion forks the road. When writing programs, we may choose mutability or immutability, objects or functions, but not both at once. Yet, whatever paradigm we choose must include a model for state, and perhaps time. As we saw above, programs that are composed of functions themselves model well-behaved state*less* mathematical functions,
 
-<iframe src="https://medium.com/media/d99ec0e53ba5937a17ad3454833098d2" frameborder=0></iframe>
+```js
+const square = x => x * x;
+const sum = (x, y) => x + y;
+
+// PSUEDO CODE
+sum(sum(square(USER_INPUT_1), square(USER_INPUT_2)), square(USER_INPUT_3));
+
+// REPL PSUEDO CODE
+// > run functionalProgram.js with USER_INPUT_1=1, USER_INPUT_2=2, USER_INPUT_3=3,
+// > 14
+```
+<figcaption>The output of this program depends only on its input.
+</figcaption>
 
 since they produce the same output provided the same input. Some real programs also simply produce output based on input. Compilers, for example, must output the same binaries provided the same input files. More frequently, however, programs require state, and the current state of the program, _together_ with any user input, will determine the next state or output of the program. The current balance, for example, is crucial to calculating any subsequent balance post withdrawal. ATM machines are stateful programs.
 
@@ -395,7 +473,7 @@ since they produce the same output provided the same input. Some real programs a
 
 Object-oriented programming provides intuitive building-blocks for creating stateful programs. An ATM program, for example, that allows the user to set a “withdrawal amount” and effect a withdraw,
 
-<iframe src="https://medium.com/media/1101e2b8dba4410d7c1eebfff271b58d" frameborder=0></iframe>
+<script async src="//jsfiddle.net/jmilgrom/notc93Lv/embed/"></script>
 
 breaks down naturally into withdrawalAmount, representing the chosen amount to be withdrawn, and bankAccount, representing the user account underlying the session. The withdrawal amounts are incorporated by and read from withdrawalAmount. Withdrawals are incorporated by, and balance confirmations are read from, bankAccount. The current balance and the amount to potentially withdraw — the state of the program — are reflected directly by the state of bankAccount and withdrawalAmount — the state of its composite objects.
 

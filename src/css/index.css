@@ -48,6 +48,11 @@ figcaption {
   font-style: italic;
 }
 
+figcaption code {
+  font-style: normal;
+  font-size: 1.2em;
+}
+
 blockquote {
   font-style: italic;
 }
@@ -148,4 +153,8 @@ main {
   background: var(--sweetbeige);
   padding: 1px 0;
   border-bottom: 2px solid var(--lakeryellow);
+}
+
+.post iframe[src="http://jsfiddle.net/notc93Lv/embedded/?username=jmilgrom"] {
+  min-height: 320px;
 }

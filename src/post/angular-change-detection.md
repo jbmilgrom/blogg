@@ -1,5 +1,5 @@
 ---
-title: watch, watchGroup, watchCollection and Deep Watching in AngularJS
+title: Watch, watchGroup, watchCollection and Deep Watching in AngularJS
 date: 2016-05-20
 tags: post
 layout: layouts/post.liquid
