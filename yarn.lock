@@ -2040,6 +2040,11 @@ markdown-it-anchor@^5.3.0:
   resolved "https://snapchat.jfrog.io/snapchat/api/npm/npm-virtual/markdown-it-anchor/-/markdown-it-anchor-5.3.0.tgz#d549acd64856a8ecd1bea58365ef385effbac744"
   integrity sha1-1Ums1khWqOzRvqWDZe84Xv+6x0Q=
 
+markdown-it-footnote@^3.0.2:
+  version "3.0.2"
+  resolved "https://snapchat.jfrog.io/snapchat/api/npm/npm-virtual/markdown-it-footnote/-/markdown-it-footnote-3.0.2.tgz#1575ee7a093648d4e096aa33386b058d92ac8bc1"
+  integrity sha1-FXXuegk2SNTglqozOGsFjZKsi8E=
+
 markdown-it@^10.0.0:
   version "10.0.0"
   resolved "https://snapchat.jfrog.io/snapchat/api/npm/npm-virtual/markdown-it/-/markdown-it-10.0.0.tgz#abfc64f141b1722d663402044e43927f1f50a8dc"

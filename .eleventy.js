@@ -1,6 +1,7 @@
 const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 const markdownIt = require("markdown-it");
 const markdownItAnchor = require("markdown-it-anchor");
+const markdownItFootnote = require("markdown-it-footnote");
 
 const sourceDirectory = "src";
 const md = markdownIt({
@@ -12,7 +13,7 @@ md.use(markdownItAnchor, {
   permalink: true,
   permalinkClass: "direct-link",
   permalinkSymbol: "#",
-});
+}).use(markdownItFootnote);
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy(`${sourceDirectory}/media`);

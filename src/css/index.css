@@ -91,12 +91,19 @@ main {
   border-bottom: 1px solid var(--darkgray);
 }
 
+.post sup a {
+  padding: unset;
+  border-bottom: unset;
+}
+
 .post pre.language-text,
 .post pre.language-js,
 .post pre.language-ts,
+.post pre.language-elm,
 .post code.language-text,
 .post code.language-js,
-.post code.language-ts {
+.post code.language-ts,
+.post code.language-elm {
   font-size: 0.9em;
 }
 
