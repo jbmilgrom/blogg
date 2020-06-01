@@ -8,6 +8,7 @@
   --border-size: 2px;
   --border: var(--border-size) solid var(--sweetbeige);
   --native-header-margin: 0.83em;
+  --main-width: 680px;
 }
 
 a,
@@ -38,10 +39,6 @@ h2 {
   font-weight: 400;
 }
 
-img {
-  max-width: 640px;
-}
-
 figcaption {
   text-align: center;
   font-size: 0.8em;
@@ -62,7 +59,7 @@ header {
 }
 
 header h2 {
-  max-width: calc(680px + 2 * var(--main-margin));
+  max-width: calc(var(--main-width) + 2 * var(--main-margin));
   margin: 1em auto;
 }
 
@@ -77,7 +74,7 @@ header h2 .title {
 }
 
 main {
-  max-width: 680px;
+  max-width: var(--main-width);
   margin: 0 auto;
   padding: 8px var(--main-margin);
 }

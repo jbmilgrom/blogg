@@ -745,7 +745,7 @@ No wonder the functional model may still illicit disbelief. This essay can be se
 
 > Until those changes had occurred, language itself resisted the invention and introduction of the sought after new theories. The same resistance by language is, I take it, the reason for Planck’s switch from ‘‘element’’ and ‘‘resonator’’ to ‘‘quantum’’ and ‘‘oscillator.’’ Violation or distortion of a previously unproblematic scientific language is the touchstone for revolutionary change. — Thomas Kuhn, [What are Scientific Revolutions?](http://sites.fas.harvard.edu/~hsci161/Sci._Rev._Reader/12_S6_Kuhn.pdf)
 
-As a result, teaching functional programming is like teaching a Ptolemaic astronomer about Copernican astronomy or a Newtonian physicist about quantum mechanics. We lack the basic language to articulate the underlying concepts. Worse still, the language we do have is endemic to a conflicting paradigm. Perhaps the disparity between the efficacy[⁹](https://medium.com/p/1017699112d7/edit) and popularity[<sup>10</sup>](#5a4c) of functional programming languages is best explained in this light.
+As a result, teaching functional programming is like teaching a Ptolemaic astronomer about Copernican astronomy or a Newtonian physicist about quantum mechanics. We lack the basic language to articulate the underlying concepts. Worse still, the language we do have is endemic to a conflicting paradigm. Perhaps the disparity between the efficacy[^10] and popularity[^11] of functional programming languages is best explained in this light.
 
 > A new scientific truth does not triumph by convincing its opponents and making them see the light, but rather because its opponents eventually die, and a new generation grows up that is familiar with it — Max Plank, [autobiography](https://pubs.acs.org/doi/pdf/10.1021/ed027p288.1), quoted by Thomas Kuhn, [The Structure of Scientific Revolutions](https://en.wikipedia.org/wiki/The_Structure_of_Scientific_Revolutions)
 
@@ -879,22 +879,22 @@ Nevertheless, the functional view is indeed expressible as a result of the work 
 
     can be seen [here](https://elm-lang.org/examples/buttons) tracking counter state, even though a user may of course click the counter buttons asynchronously. Like garbage collection in JavaScript, Elm hides any imperative code dedicated to communication between asynchronous scripts from the programmer’s view.
 
-[⁹](#cafa) There are many advantages to functional programming. Programs that deal with mutation are “drastically more difficult” to reason about than ones that do not.
+[^10]: There are many advantages to functional programming. Programs that deal with mutation are “drastically more difficult” to reason about than ones that do not.
 
-> Referential transparency is violated when we include set! [i.e. assignment operations] in our computer language. This makes it tricky to determine when we can simplify expressions by substituting equivalent expressions. Consequently, reasoning about programs that use assignment becomes drastically more difficult — SICP Section 3.1.3
+    > Referential transparency is violated when we include set! [i.e. assignment operations] in our computer language. This makes it tricky to determine when we can simplify expressions by substituting equivalent expressions. Consequently, reasoning about programs that use assignment becomes drastically more difficult — SICP Section 3.1.3
 
-In particular, functions avoid [temporal coupling](https://www.yegor256.com/2015/12/08/temporal-coupling-between-method-calls.html) since there is no time,
+    In particular, functions avoid [temporal coupling](https://www.yegor256.com/2015/12/08/temporal-coupling-between-method-calls.html) since there is no time,
 
-> In general, programming with assignment forces us to carefully consider the relative orders of the assignments to make sure that each statement is using the correct version of the variables that have been changed. This issue simply does not arise in functional programs. — SICP Section 3.1.3
+    > In general, programming with assignment forces us to carefully consider the relative orders of the assignments to make sure that each statement is using the correct version of the variables that have been changed. This issue simply does not arise in functional programs. — SICP Section 3.1.3
 
-and dramatically reduce debugging and unit testing complexity since there is no meaningful context.
+    and dramatically reduce debugging and unit testing complexity since there is no meaningful context.
 
-> “And that is the problem with places. You have this sort of global state that you have to reproduce in order to debug a field problem. That is very very tough.” Rich Hickey, [The Value of Values](https://github.com/matthiasn/talk-transcripts/blob/master/Hickey_Rich/ValueOfValuesLong.md)
+    > “And that is the problem with places. You have this sort of global state that you have to reproduce in order to debug a field problem. That is very very tough.” Rich Hickey, [The Value of Values](https://github.com/matthiasn/talk-transcripts/blob/master/Hickey_Rich/ValueOfValuesLong.md)
 
-Reified state couches in writing what must otherwise live as thoughts in programmers’ heads — each member of a team can read a function signature instead of building up (hopefully) the same working memory for each object. Couching state in language makes it accessible to static language analysis tools. [A compiler may exhaustively permute the set of application states](https://blog.ploeh.dk/2019/07/01/yes-silver-bullet/#bd2d47d8dac2401e936ca7902bc9109d) without actually running manually-written (exhaust*ing*) unit tests. Functional programs are more easily parallelized since they are just functions with no internal model for time.
+    Reified state couches in writing what must otherwise live as thoughts in programmers’ heads — each member of a team can read a function signature instead of building up (hopefully) the same working memory for each object. Couching state in language makes it accessible to static language analysis tools. [A compiler may exhaustively permute the set of application states](https://blog.ploeh.dk/2019/07/01/yes-silver-bullet/#bd2d47d8dac2401e936ca7902bc9109d) without actually running manually-written (exhaust*ing*) unit tests. Functional programs are more easily parallelized since they are just functions with no internal model for time.
 
-> Unfortunately, the complexities introduced by assignment become even more problematic in the presence of concurrency. — SICP Section 3.4
+    > Unfortunately, the complexities introduced by assignment become even more problematic in the presence of concurrency. — SICP Section 3.4
 
-These advantages have been known for decades. John Backus “gave high visibility to functional programming” (SICP Section 3.5.5; also see Simon Peyton-Jones, [Escape from the ivory tower: the Haskel journey](https://www.youtube.com/watch?v=re96UgMk6GQ)) through his [Turing Award lecture](https://www.thocp.net/biographies/papers/backus_turingaward_lecture.pdf) in 1978, seven years before the creation of [C++](https://en.wikipedia.org/wiki/C%2B%2B) and thirteen before [Java](https://en.wikipedia.org/wiki/Java_%28programming_language%29).
+    These advantages have been known for decades. John Backus “gave high visibility to functional programming” (SICP Section 3.5.5; also see Simon Peyton-Jones, [Escape from the ivory tower: the Haskel journey](https://www.youtube.com/watch?v=re96UgMk6GQ)) through his [Turing Award lecture](https://www.thocp.net/biographies/papers/backus_turingaward_lecture.pdf) in 1978, seven years before the creation of [C++](https://en.wikipedia.org/wiki/C%2B%2B) and thirteen before [Java](https://en.wikipedia.org/wiki/Java_%28programming_language%29).
 
-[¹⁰](#cafa) The [20 most popular languages](https://www.tiobe.com/tiobe-index/) are predominantly imperative or object-oriented.
+[^11]: The [20 most popular languages](https://www.tiobe.com/tiobe-index/) are predominantly imperative or object-oriented.
