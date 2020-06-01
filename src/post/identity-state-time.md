@@ -1,5 +1,5 @@
 ---
-title: The Juxtaposition of Functional and Object-Oriented Program Semantics Reveals a New Model for State, Change & Time
+title: The Juxtaposition of Functional and Object-Oriented Program Semantics Reveals an Alternative Model for State, Change & Time
 description: This is a post on My Blog about agile frameworks
 date: 2020-03-09
 tags: post

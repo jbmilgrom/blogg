@@ -8,7 +8,7 @@
   --border-size: 2px;
   --border: var(--border-size) solid var(--sweetbeige);
   --native-header-margin: 0.83em;
-  --main-width: 680px;
+  --main-width: 640px;
 }
 
 a,
@@ -80,7 +80,7 @@ main {
 }
 
 .post p {
-  line-height: 1.6;
+  line-height: 1.65;
 }
 
 .post a {
