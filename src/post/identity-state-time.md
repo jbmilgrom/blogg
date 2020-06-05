@@ -10,7 +10,7 @@ That functional programming opposes object-oriented programming in some fundamen
 
 ## Functional Programming
 
-Procedures that produce the same result when provided the same argument can be viewed as computing mathematical functions. For example, a decrement100 procedure in JavaScript[^1],
+Procedures that produce the same result when provided the same argument can be viewed as computing mathematical functions. For example, a `decrement100` procedure in JavaScript[^1],
 
 ```js
 const decrement100 = function (x) {
@@ -32,7 +32,7 @@ can be viewed as computing the mathematical function `f(x) = 100 — x`,
 
     f(20) = 80; where f(x) = 100 - x
 
-since the return value of decrement100 depends only on the input value just as f(x) depends only on x. Invoke decrement100 a second time with 20 and it will return 80 once again, regardless of time and place within a program’s runtime. By contrast, an alternative implementation
+since the return value of decrement100 depends only on the input value just as `f(x)` depends only on `x`. Invoke `decrement100` a second time with `20` and it will return `80` once again, regardless of time and place within a program’s runtime. By contrast, an alternative implementation
 
 ```js
 let oneHundred = 100;
@@ -43,7 +43,7 @@ oneHundred = 80;
 decrementOneHundred(20); // 60
 ```
 
-involving a mutable binding does not model computing a mathematical function, since its behavior may depend on variable information in addition to its input. Invoke decrementOneHundred a second time with 20 and it will _not_ return 80 once again when such binding is intermediately reassigned.
+involving a mutable binding does not model computing a mathematical function, since its behavior may depend on variable information in addition to its input. Invoke `decrementOneHundred` a second time with `20` and it will _not_ return `80` once again when such binding is intermediately reassigned.
 
 Functional procedures are not limited to numbers. Procedures that involve character strings, for example,
 
@@ -53,7 +53,7 @@ const space = (w1, w2) => `${w1} ${w2}`;
 space("hello", "world"); // => "hello world"
 ```
 
-<figcaption>“hello world” will result from (‘hello’, ‘world’) regardless of program context.</figcaption>
+<figcaption><code>“hello world”</code> will result from <code>("hello", "world")</code> regardless of program context.</figcaption>
 
 a list of strings,
 
@@ -64,7 +64,7 @@ const sentence = (words) => `${words.reduce(space)}.`;
 sentence(["i", "heart", "functions"]); // => "i heart functions."
 ```
 
-<figcaption>“i heart functions” will results from [‘i’, ‘heart’, ‘functions’] regardless of program context.</figcaption>
+<figcaption><code>"i heart functions"</code> will results from <code>["i", "heart", "functions"]</code> regardless of program context.</figcaption>
 
 or other arbitrary data types and compositions may return the same value provided the same argument. Larger functional procedures can be composed of smaller ones,
 
@@ -119,9 +119,9 @@ bankAccount.withdraw(20);
 bankAccount.checkBalance(); // 80
 ```
 
-<figcaption>This example is based on the “withdraw” procedure introduced in SICP Section 3.1.</figcaption>
+<figcaption>This example is based on the "withdraw" procedure introduced in SICP Section 3.1.</figcaption>
 
-stores balance data in a private attribute and exposes privileged methods checkBalance and withdraw, which proscribe the manner in which access to balance can occur. Together, these constructs create a computational object — e.g. bankAccount — that behaves like a “bank account”, carrying a balance that may be diminished through “withdraw” and viewed through “check balance” actions. Less abstract objects can be modeled with the same set of tools — an apple may have a bite method that reduces an internal bites state in order to model an “apple” and a house may have a paint method that changes an internal color state in order to model a “house.” More abstract objects can be modeled with the same set of tools as well— a userMetaData object may have a setEmail method that updates an internal email state in order to model “user meta data.”
+stores balance data in a private attribute and exposes privileged methods `checkBalance` and `withdraw`, which proscribe the manner in which access to `balance` can occur. Together, these constructs create a computational object — e.g. `bankAccount` — that behaves like a “bank account”, carrying a balance that may be diminished through “withdraw” and viewed through “check balance” actions. Less abstract objects can be modeled with the same set of tools — an `apple` may have a `bite` method that reduces an internal `bites` state in order to model an “apple” and a `house` may have a `paint` method that changes an internal `color` state in order to model a “house.” More abstract objects can be modeled with the same set of tools as well— a `userMetaData` object may have a `setEmail` method that updates an internal `email` state in order to model “user meta data.”
 
 ### An Evolution of Imperative Programming
 
@@ -229,7 +229,7 @@ bankAccount.checkBalance(); // 80, eventhough no funds have been withdrawn
 
 Now, balance can magically change without a withdrawal ever having occurred, undermining the “bank account” abstraction. new, class and public constructs obscure the actual semantics in this case.[^5]
 
-With functional programming, syntax is also beside the point. The use of functional syntactic constructs is necessary to perform computation against arguments. function and => (i.e. “arrow function”) syntax may express functional programming intent as well. However, they cannot alone achieve functional semantics. Indeed, a method of an object may use the => syntax without correctly modeling computing mathematical functions.
+With functional programming, syntax is also beside the point. The use of functional syntactic constructs is necessary to perform computation against arguments. function and `=>` (i.e. “arrow function”) syntax may express functional programming intent as well. However, they cannot alone achieve functional semantics. Indeed, a method of an object may use the => syntax without correctly modeling computing mathematical functions.
 
 ```js
 const makeBankAccount = (balance) => ({
