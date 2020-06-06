@@ -127,13 +127,13 @@ stores balance data in a private attribute and exposes privileged methods `check
 
 > And a key characteristic here is that objects have methods… They are operationally defined. And we use them to provide a layer of abstraction over the places that our program uses. — Rich Hickey, [The Value of Values](https://github.com/matthiasn/talk-transcripts/blob/master/Hickey_Rich/ValueOfValuesLong.md)
 
-Private state enforces the object abstraction together with privileged, public methods. Expose balance directly (i.e. make it public), for example, and it can “magically” change from say `100` to `10` despite no withdrawal ever having occurred. Expose color directly and it can “magically” change from say `WHITE` to `BLUE` despite no painting ever having occurred. In other words, object-oriented programming provides the means for identifying objects (bankAccount) and associated behaviors (withdraw)
+Private state enforces the object abstraction together with privileged, public methods. Expose `balance` directly (i.e. make it public), for example, and it can “magically” change from say `100` to `10` despite no `withdraw`al ever having occurred. Expose `color` directly and it can “magically” change from say `WHITE` to `BLUE` despite no `paint`ing ever having occurred. In other words, object-oriented programming provides the means for identifying objects (`bankAccount`) and associated behaviors (`withdraw`)
 
 ```js
 bankAccount.withdraw(20);
 ```
 
-in place of imperative, direct manipulation of variables (balance) ad hoc.
+in place of imperative, direct manipulation of variables (`balance`) ad hoc.
 
 ```js
 let balance = 100;
@@ -142,7 +142,7 @@ balance = balance - 20;
 
 <figcaption>Does "balance" represent a withdrawal or something else entirely?</figcaption>
 
-Coincidentally, the private data / public methods dynamic also provides the means for data encapsulation. That data is stored in private attributes, accessible only through privileged methods, proscribes the ways in which such data may be viewed or changed. The balance data of bankAccount can only be changed by withdraw or read by checkBalance, in one sense, because it may not be accessed directly.
+Coincidentally, the private data / public methods dynamic also provides the means for data encapsulation. That data is stored in private attributes, accessible only through privileged methods, proscribes the ways in which such data may be viewed or changed. The `balance` data of `bankAccount` can only be changed by `withdraw` or read by `checkBalance`, in one sense, because it may not be accessed directly.
 
 ### Place-Oriented Programming
 
@@ -150,7 +150,7 @@ Nevertheless, object-oriented and imperative programming share a fundamental ori
 
 > But mutable objects are actually abstractions of places. They do not actually have meaning other than that. They are little barricades we have set up in front of memory, so that we do not have to directly manipulate memory addresses any more. So we have this abstraction that is an object, that helps us manipulate that place without too much craziness…So I have a new label for this. It is called PLOP, and PLOP is place-oriented programming. — Rich Hickey, [The Value of Values](https://github.com/matthiasn/talk-transcripts/blob/master/Hickey_Rich/ValueOfValuesLong.md)
 
-A method call to withdraw effectively overwrites a balance reference
+A method call to `withdraw` effectively overwrites a `balance` reference
 
 ```js
 const bankAccount = new BankAccount(100); // (this.balance = 100)
@@ -168,7 +168,7 @@ A mutable variable and a place in memory underly the reassignments in both cases
 
 ## Semantics, Not Syntax
 
-Syntactic constructs like this, new, class, private and public clearly express object-oriented intent — _this_ instance of a _class_ of things *private*ly maintains data through *public*ly available APIs — and are common to object-oriented programming languages. However, they are not necessary. Object-oriented semantics may be achieved with nontraditional syntax. For example, this bankAccount object also stores the balance data privately;
+Syntactic constructs like `this`, `new`, `class`, `private` and `public` clearly express object-oriented intent — _this_ instance of a _class_ of things *private*ly maintains data through *public*ly available APIs — and are common to object-oriented programming languages. However, they are not necessary. Object-oriented semantics may be achieved with nontraditional syntax. For example, this `bankAccount` object also stores the `balance` data privately;
 
 ```js
 const makeBankAccount = (balance) => ({
@@ -181,7 +181,7 @@ bankAccount.withdraw(20);
 bankAccount.checkBalance(); // 80
 ```
 
-balance is accessible only through the functions checkBalance and withdraw, which proscribe the manner in which such access can occur. bankAccount behaves like a “bank account” even though the functions checkBalance and withdraw have gained privileged access to private data through the use of a function closure instead of through explicit syntactic constructs in this case. Object-oriented syntax is also insufficient in and of itself to achieve object-oriented semantics. A bankAccount “object” that avoids maintaining any underlying balance state
+`balance` is accessible only through the functions `checkBalance` and `withdraw`, which proscribe the manner in which such access can occur. `bankAccount` behaves like a “bank account” even though the functions `checkBalance` and `withdraw` have gained privileged access to private data through the use of a function closure instead of through explicit syntactic constructs in this case. Object-oriented syntax is also insufficient in and of itself to achieve object-oriented semantics. A `bankAccount` “object” that avoids maintaining any underlying balance state
 
 ```ts
 class BankAccount {
@@ -201,7 +201,7 @@ bankAccount.checkBalance(100); // 100; whoops, shouldn't this be 80?
 
 <figcaption>Is "BankAccount" really a bank account?</figcaption>
 
-allows “its” balance to evolve in an unspecified manner, which undermines the “bank account” abstraction. new, class and public constructs obscure the actual semantics in this case. The same can be said of a bankAccount object that publicly exposes the balance attribute, as was alluded to above.
+allows “its” balance to evolve in an unspecified manner, which undermines the “bank account” abstraction. `new`, `class` and `public` constructs obscure the actual semantics in this case. The same can be said of a `bankAccount` object that publicly exposes the balance attribute, as was alluded to above.
 
 ```ts
 class BankAccount {
@@ -227,9 +227,9 @@ bankAccount.checkBalance(); // 80, eventhough no funds have been withdrawn
 
 <figcaption>Is "BankAccount" really a bank account?</figcaption>
 
-Now, balance can magically change without a withdrawal ever having occurred, undermining the “bank account” abstraction. new, class and public constructs obscure the actual semantics in this case.[^5]
+Now, `balance` can magically change without a `withdraw`al ever having occurred, undermining the “bank account” abstraction. `new`, `class` and `public` constructs obscure the actual semantics in this case.[^5]
 
-With functional programming, syntax is also beside the point. The use of functional syntactic constructs is necessary to perform computation against arguments. function and `=>` (i.e. “arrow function”) syntax may express functional programming intent as well. However, they cannot alone achieve functional semantics. Indeed, a method of an object may use the => syntax without correctly modeling computing mathematical functions.
+With functional programming, syntax is also beside the point. The use of functional syntactic constructs is necessary to perform computation against arguments. `function` and `=>` (i.e. “arrow function”) syntax may express functional programming intent as well. However, they cannot alone achieve functional semantics. Indeed, a method of an object may use the `=>` syntax without correctly modeling computing mathematical functions.
 
 ```js
 const makeBankAccount = (balance) => ({
@@ -238,7 +238,7 @@ const makeBankAccount = (balance) => ({
 });
 ```
 
-Subsequent calls to checkBalance return different results despite identical inputs (i.e. undefined) by design.
+Subsequent calls to `checkBalance` return different results despite identical inputs (i.e. `undefined`) by design.
 
 ```js
 const bankAccount = makeBankAccount(100);
@@ -248,7 +248,7 @@ bankAccount.withdraw(20);
 bankAccount.checkBalance(); // 80
 ```
 
-Additionally, an alternative implementation of “decrement one hundred” in JavaScript may fall short of correctly modeling a mathematical function even though an => construct is used, as was alluded to above.
+Additionally, an alternative implementation of “decrement one hundred” in JavaScript may fall short of correctly modeling a mathematical function even though an `=>` construct is in use, as was alluded to above.
 
 ```js
 let oneHundred = 100;
@@ -267,7 +267,7 @@ Objects can change. An apple can be bitten, a house painted, and a bank account 
 
 > [W]e make computational objects…whose behavior changes with time. We model state with local state variables, and we model the changes of state with assignments to those variables. — SICP Section 3.1.2
 
-— bite’ing an apple changes bites state, paint’ing a house changes color state and withdraw’ing from a bankAccount changes balance state. The class implementation of a bank account object
+— `bite`ing an `apple` changes `bites` state, `paint`ing a `house` changes `color` state and `withdraw`ing from a `bankAccount` changes `balance` state. The class implementation of a bank account object
 
 ```ts
 class BankAccount {
@@ -293,7 +293,7 @@ bankAccount.checkBalance(); // 80
 
 <figcaption>The bank account’s balance is overwritten by the withdraw method.</figcaption>
 
-involves overwriting balance as much as the closure implementation does.
+involves overwriting `balance` as much as the closure implementation does.
 
 ```js
 const makeBankAccount = (balance) => ({
@@ -308,7 +308,7 @@ bankAccount.checkBalance(); // 80
 
 <figcaption>The bank account’s balance is overwritten by the withdraw method.</figcaption>
 
-As mentioned above, a state*less* “object” (e.g. bankAccount) that avoids maintaining any underlying state (e.g. balance)
+As mentioned above, a state*less* “object” (e.g. `bankAccount`) that avoids maintaining any underlying state (e.g. `balance`)
 
 ```ts
 class BankAccount {
@@ -332,13 +332,13 @@ also avoids modeling any underlying object (e.g. “bank account”).
 
 ## Unchangeability is Fundamental to Functional Semantics
 
-On the other hand, changeable things undermine functional semantics. The decrement100 procedure can be viewed as computing a mathematical function because its output depends only on its input; there is no other _variable_ information on which it depends. decrementOneHundred introduces a changeable thing. As the value of the mutable let binding changes, so does the behavior of decrementOneHundred as a side-effect. Consequently, decrementOneHundred depends on the ongoing value of some contextual thing in addition to its input x and does not resemble computing a mathematical function as a result.
+On the other hand, changeable things undermine functional semantics. The `decrement100` procedure can be viewed as computing a mathematical function because its output depends only on its input; there is no other _variable_ information on which it depends. `decrementOneHundred` introduces a changeable thing. As the value of the mutable `let` binding changes, so does the behavior of `decrementOneHundred` as a side-effect. Consequently, `decrementOneHundred` depends on the ongoing value of some contextual thing in addition to its input `x` and does not resemble computing a mathematical function as a result.
 
 Conversely, immutability restores functional semantics. No contextual changes means no side-effects, and no side-effects means functional behavior:
 
 > So long as we do not use assignments, two evaluations of the same procedure with the same arguments will produce the same result, so that procedures can be viewed as computing mathematical functions. Programming without any use of assignment…is accordingly known as _functional programming_. — SICP Section 3.1.3
 
-An externally scoped variable cannot change the semantics of decrementOneHundred when immutable.
+An externally scoped variable cannot change the semantics of `decrementOneHundred` when immutable.
 
 ```js
 const oneHundred = 100; // <-- now a `const` instead of a `let`
@@ -371,7 +371,7 @@ HOURS_IN_DAY === 25; // true
 
 Similarly, change the molecular construction of “iron” and it may very well change to “gold” or the wave length of “green” and it may change to “red”. The rational number “2/3”, the integer “24”, the metal “iron” and the color “green” are unchangeable things that are not recognizable as objects. Conversely, find changeability and find an object. A cup that is two-thirds full of water can be poured, an iron rod can be dented, a green house can be painted. “That cup” remains that cup notwithstanding less water; “that rod” remains that rod notwithstanding a dent; “that house” remains that house notwithstanding a fresh coat of paint. A “cup”, “rod” and “house” are changeable things that _are_ recognizable as objects. Coincidence of “changeability” and “object” is not happenstance. That parts can change without changing the identity of the whole _distinguishes_ an identity distinct from underlying parts. Changeability distinguishes an object. “Object” in a sense articulates this ability to change.
 
-Said another way, a new notion of “sameness” emerges with changeability. Unchangeable things can be identified as “the same” simply by examining contents. For example, because _immutable_ rational number implementations, r1 and r2,
+Said another way, a new notion of “sameness” emerges with changeability. Unchangeable things can be identified as “the same” simply by examining contents. For example, because _immutable_ rational number implementations, `r1` and `r2`,
 
 ```ts
 type RationalNumber = readonly [
@@ -394,7 +394,7 @@ isEqual(r1, r3); // => false
 <figcaption>TypeScript’s <code>readonly</code> qualifier prevents mutative actions (e.g. <code>p2[1] = 3</code>) at compile time.
 </figcaption>
 
-will _always_ be comprised of 2 in the first slot and 3 in the second and reduce to two-thirds, a reasonable conclusion is that they are the same. To be sure, substitute one for the other and the meaning of a program is unchanged.[^7] By contrast, consider when two *mutable (changeable) *rational number implementations may be deemed the “same.”
+will _always_ be comprised of `2` in the first slot and `3` in the second and reduce to two-thirds, a reasonable conclusion is that they are the same. To be sure, substitute one for the other and the meaning of a program is unchanged.[^7] By contrast, consider when two *mutable (changeable) *rational number implementations may be deemed the “same.”
 
 ```ts
 type RationalNumber = [number /* numerator */, number /* denominator */];
@@ -417,7 +417,7 @@ isEqual(r2, r3); // => true
 Absent the <code>readonly</code> qualifier, <code>RationalNumber</code>'s are mutable at compile time. At runtime, JavaScript’s <code>const</code> binding only prevents reassignment; it does not prevent mutation of an underlying array.
 </figcaption>
 
-r1 may have the same contents as r2 to start, but this affect is shortly lived. Substitute one for the other and the meaning of the program is changed — references to r2 now incorrectly reduce to two-fifths instead of two-thirds. r1 and r2 are not exactly “the same” in this case. Since two changeable things may evolve independently notwithstanding an analysis of parts performed at any one point in time, a new notion of “sameness” above an examination of parts must be admitted. Remarkably, this “new” notion is less remarkable with intentional object-oriented programming, where the creation of a new identity — i.e. an _object_ — is precisely the goal. georgesAccount and elainesAccount, for example,
+`r1` may have the same contents as `r2` to start, but this affect is shortly lived. Substitute one for the other and the meaning of the program is changed — references to r2 now incorrectly reduce to two-fifths instead of two-thirds. `r1` and `r2` are not exactly “the same” in this case. Since two changeable things may evolve independently notwithstanding an analysis of parts performed at any one point in time, a new notion of “sameness” above an examination of parts must be admitted. Remarkably, this “new” notion is less remarkable with intentional object-oriented programming, where the creation of a new identity — i.e. an _object_ — is precisely the goal. `georgesAccount` and `elainesAccount`, for example,
 
 ```ts
 /**
@@ -446,7 +446,7 @@ areAccountsEqual(elainesAccount, georgesAccount); // false
 <figcaption>We may determine equality b/w 2 objects by whether they are the same object — i.e. reference equality.
 </figcaption>
 
-may share a balance at some point in time. But even if they start with the same funds, georgesAccount and elainesAccount can register different balances at some other point in time because they are in fact different _objects_. Of course, that two distinct objects can evolve independently goes without saying. That is because “object” clearly articulates the creation of an identity that is not tied to any part, arrangement or quality — “object” names the ability to change.[^8]
+may share a balance at some point in time. But even if they start with the same funds, `georgesAccount` and `elainesAccount` can register different balances at some other point in time because they are in fact different _objects_. Of course, that two distinct objects can evolve independently goes without saying. That is because “object” clearly articulates the creation of an identity that is not tied to any part, arrangement or quality — “object” names the ability to change.[^8]
 
 ## Mutually Exclusive
 
@@ -481,13 +481,13 @@ Object-oriented programming provides intuitive building-blocks for creating stat
 
 <script async src="//jsfiddle.net/jmilgrom/notc93Lv/embed/"></script>
 
-breaks down naturally into withdrawalAmount, representing the chosen amount to be withdrawn, and bankAccount, representing the user account underlying the session. The withdrawal amounts are incorporated by and read from withdrawalAmount. Withdrawals are incorporated by, and balance confirmations are read from, bankAccount. The current balance and the amount to potentially withdraw — the state of the program — are reflected directly by the state of bankAccount and withdrawalAmount — the state of its composite objects.
+breaks down naturally into `withdrawalAmount`, representing the chosen amount to be withdrawn, and `bankAccount`, representing the user account underlying the session. The withdrawal amounts are incorporated by and read from `withdrawalAmount`. Withdrawals are incorporated by, and balance confirmations are read from, `bankAccount`. The current balance and the amount to potentially withdraw — the state of the program — are reflected directly by the state of `bankAccount` and `withdrawalAmount` — the state of its composite objects.
 
 ### Time
 
 > If we wish to write programs that model this kind of natural decomposition in our world (as we see it from our viewpoint as a part of that world) with structures in our computer, we make computational objects that… must change with time. — SICP Section 3.5.5
 
-Objects are intuitive in large part because they are consistent with a familiar model for time. Objects change — as we discussed, the notion of an “object,” having parts that change without changing the identity of the whole, articulates this ability. The flip-side to change is time. Since objects change, _when_ an object is examined is vital to the examination, it goes without saying. The “having parts that can change without changing the identity of the whole” quality of bankAccount, for example, is implemented by withdraw.
+Objects are intuitive in large part because they are consistent with a familiar model for time. Objects change — as we discussed, the notion of an “object,” having parts that change without changing the identity of the whole, articulates this ability. The flip-side to change is time. Since objects change, _when_ an object is examined is vital to the examination, it goes without saying. The “having parts that can change without changing the identity of the whole” quality of `bankAccount`, for example, is implemented by `withdraw`.
 
 ```ts
 class BankAccount {
@@ -499,7 +499,7 @@ class BankAccount {
 }
 ```
 
-Underlying withdraw lies a mutable balance binding that may be assigned new values. Calls to withdraw change the associated balance of bankAccount as a side-effect, without altering the identity of bankAccount, by design.
+Underlying `withdraw` lies a mutable `balance` binding that may be assigned new values. Calls to `withdraw` change the associated balance of `bankAccount` as a side-effect, without altering the identity of `bankAccount`, by design.
 
 ```ts
 const bankAccount = new BankAccount(100);
@@ -509,17 +509,17 @@ bankAccount.withdraw(20);
 bankAccount.checkBalance(); // 80
 ```
 
-The flip-side to change is time. Any call to withdraw also “delineates moments in time” _when_ balance _may_ change. As a result, the meaning of bankAccount.checkBalance() “depends not only on the expression itself, but also on whether the evaluation occurs before or after these moments.” By modeling objects, “we are forced to admit time into our computational models.” (SICP Section 3.4)
+The flip-side to change is time. Any call to `withdraw` also “delineates moments in time” _when_ `balance` _may_ change. As a result, the meaning of `bankAccount.checkBalance()` “depends not only on the expression itself, but also on whether the evaluation occurs before or after these moments.” By modeling objects, “we are forced to admit time into our computational models.” (SICP Section 3.4)
 
 ### Stateful
 
-Object-oriented programming reifies objects — objects can be composed in other objects, received and returned by object methods, and generally manipulated like numbers, strings and other [citizens](https://en.wikipedia.org/wiki/First-class_citizen) of the program. On the other hand, object-oriented programming presents no direct representation of state. Since object methods proscribe the ways in which state may be viewed or changed, state may not be accessed directly. Rather, state is a _quality_ of objects — i.e. “stateful” or “statefulness” — that may be available at runtime to the extent proscribed by object definitions. bankAccount and withdrawalAmount, for example, may together incorporate the state of the ATM program — the statefulness of the program is reflect by the statefulness of its composite objects. However, access to such state is hidden by methods checkBalance and get. The state of program may only be “expressed” by _calling_ both getters at runtime, like any other attribute, characteristic or object quality.
+Object-oriented programming reifies objects — objects can be composed in other objects, received and returned by object methods, and generally manipulated like numbers, strings and other [citizens](https://en.wikipedia.org/wiki/First-class_citizen) of the program. On the other hand, object-oriented programming presents no direct representation of state. Since object methods proscribe the ways in which state may be viewed or changed, state may not be accessed directly. Rather, state is a _quality_ of objects — i.e. “stateful” or “statefulness” — that may be available at runtime to the extent proscribed by object definitions. `bankAccount` and `withdrawalAmount`, for example, may together incorporate the state of the ATM program — the statefulness of the program is reflect by the statefulness of its composite objects. However, access to such state is hidden by methods `checkBalance` and `get`. The state of program may only be “expressed” by _calling_ both getters at runtime, like any other attribute, characteristic or object quality.
 
 That objects indeed lack any express notion of state is highlighted by object signatures with more than one getter, where any such notion may only exist through definition, signature by signature:
 
 > How can you perceive a mutable object that has more than one getter? … How do you it? … Who could say right now how to do this? No one can, right? You cannot do this, because you need this other thing. You need the recipe for doing this, and the recipe is something that everybody has to make up over and over and over again. … We cannot actually perceive the whole. Cannot do it without help. Without these recipes. — Rich Hickey, [The Value of Values](https://github.com/matthiasn/talk-transcripts/blob/master/Hickey_Rich/ValueOfValuesLong.md)
 
-An object with a single read method (like bankAccount) in a sense defines _the_ method for accessing the whole of an object’s state. However, each additional read method dilutes this claim, underscoring the need for a method specific to the task (e.g. toJSON, serialize, inspect, etc.). In stark contrast to numbers, string and objects themselves, state may be expressed only through programmer-defined constructs evaluated at runtime.
+An object with a single read method (like `bankAccount`) in a sense defines _the_ method for accessing the whole of an object’s state. However, each additional read method dilutes this claim, underscoring the need for a method specific to the task (e.g. `toJSON`, `serialize`, `inspect`, etc.). In stark contrast to numbers, string and objects themselves, state may be expressed only through programmer-defined constructs evaluated at runtime.
 
 ## Stateful Functional Programs
 
@@ -543,7 +543,7 @@ factorial(2); // => 2
 factorial(3); // => 6
 ```
 
-maintains iteration and running total state through assignments to n and total, respectively, with every iteration. An alternative implementation avoids mutation by returning the iteration and running total state from an iteration function,
+maintains iteration and running total state through assignments to `n` and `total`, respectively, with every iteration. An alternative implementation avoids mutation by returning the iteration and running total state from an iteration function,
 
 ```js
 const factorial = (n) => {
@@ -562,7 +562,7 @@ factorial(3); // => 6
 
 which may be used by the same function to calculate the next values in the next iteration.
 
-Stateful functional programs can be constructed in a similar fashion — state that is returned from the previous turn of some larger, iterative “program” function becomes the starter state for the next — with one caveat. With _synchronous_ iteration, results of the previous run can simply be passed to the next. The total result from factorial iteration, for example, is passed directly to the next. In a JavaScript web application, however, events are initiated _asynchronously_ as the user interacts with the page, calling callbacks bound to such events, which run pieces of the program so encoded.
+Stateful functional programs can be constructed in a similar fashion — state that is returned from the previous turn of some larger, iterative “program” function becomes the starter state for the next — with one caveat. With _synchronous_ iteration, results of the previous run can simply be passed to the next. The `total` result from `factorial` iteration, for example, is passed directly to the next. In a JavaScript web application, however, events are initiated _asynchronously_ as the user interacts with the page, calling callbacks bound to such events, which run pieces of the program so encoded.
 
     event → callback → javascript
     event → callback → javascript
@@ -574,23 +574,23 @@ Communication between _asynchronous_ scripts is performed through shared referen
     click → onclick → "bankAccount.withdraw(withdrawalAmount.get())"
     ...
 
-The “click withdraw” script occurs asynchronously sometime after the “select withdrawal amount” script has completed. Communication between the two scripts occurs through shared reference to the amount variable underlying the withdrawalAmount object. Calls to withdrawalAmount.get() will return updates by withdrawalAmount.set(value), notwithstanding the asynchrony of such reads and writes.
+The “click withdraw” script occurs asynchronously sometime after the “select withdrawal amount” script has completed. Communication between the two scripts occurs through shared reference to the `amount` variable underlying the `withdrawalAmount` object. Calls to `withdrawalAmount.get()` will return updates by `withdrawalAmount.set(value)`, notwithstanding the asynchrony of such reads and writes.
 
 Synchronous functions can communicate by simply passing around results. The result from one function becomes the input of another. Asynchronous scripts, by contrast, share a mutable place in memory instead of the values themselves. Consequently, we must also share a mutable place in memory to communicate between asynchronous scripts in the functional program implementation. On the other hand, with a light amount of infrastructure, we can usher such imperative code to the application perimeter and carve out space for a functional core, creating a “[functional core, imperative shell](https://www.destroyallsoftware.com/screencasts/catalog/functional-core-imperative-shell).”
 
 <script async src="//jsfiddle.net/jmilgrom/mv2187zo/embed/js,html,result/"></script>
 
-The program now consists of functions parseInt and withdraw, called against specific events `WITHDRAWAL_AMOUNT` and `WITHDRAW`. The state of the program has not been reflected directly into distinct objects. Instead, a program _function_ is called with the state resulting from the previous call, together with event data from any user interaction, in order to produce the starter state for the next. program resembles an iterative, recursive function. Yet, calls to program occur asynchronously. Just as with the object-oriented ATM program, a user may begin the functional ATM program by first selecting a withdrawal amount, _then_ clicking withdraw:
+The program now consists of functions `parseInt` and `withdraw`, called against specific events `WITHDRAWAL_AMOUNT` and `WITHDRAW`. The state of the program has not been reflected directly into distinct objects. Instead, a `program` _function_ is called with the state resulting from the previous call, together with event data from any user interaction, in order to produce the starter state for the next. `program` resembles an iterative, recursive function. Yet, calls to `program` occur asynchronously. Just as with the object-oriented ATM program, a user may begin the functional ATM program by first selecting a withdrawal amount, _then_ clicking withdraw:
 
     select → onchange → "store.publish('WITHDRAWAL_AMOUNT', {amount:value})"
     click → onclick → "store.publish('WITHDRAW')"
     ...
 
-The imperative shell (i.e the store) maintains a reference to the state resulting from the previous call to program, in order to pass such state to the next, orchestrating communication between asynchronous calls to program.
+The imperative shell (i.e the `store`) maintains a reference to the `state` resulting from the previous call to `program`, in order to pass such `state` to the next, orchestrating communication between asynchronous calls to `program`.
 
 ### Time as a Series of States
 
-Unlike object-oriented programming, functional programming provides no model for traditional time. Mathematical functions are time*less*. Computation of a function f(x) a “second time” with the same argument will produce the same result _whenever_ computed; a mathematical statement like f(20) = 80 will not be made any less true by insinuating time. Similarly, time is no matter against procedures that model mathematical function computation. Simple functions,
+Unlike object-oriented programming, functional programming provides no model for traditional time. Mathematical functions are time*less*. Computation of a function `f(x)` a “second time” with the same argument will produce the same result _whenever_ computed; a mathematical statement like `f(20) = 80` will not be made any less true by insinuating time. Similarly, time is no matter against procedures that model mathematical function computation. Simple functions,
 
 ```js
 const decrement100 = (x) => 100 - x;
@@ -634,7 +634,7 @@ const ATM = (state = { balance: 100, amount: 10 }, event) => {
 
 will produce the same output provided the same input _whenever_ evaluated, independent of time.
 
-Where we once saw object state change as time _elapsed_, we now see the program jump from one state to the next at individual (i.e. discrete!) *moments in time, *as if producing entries in a list, log, “stream of information,” or other time-denominated series. Iterative, recursive functions model this same behavior. factorial, for example, produces a value, say F, for each step, say i:
+Where we once saw object state change as time _elapsed_, we now see the program jump from one state to the next at individual (i.e. discrete!) *moments in time, *as if producing entries in a list, log, “stream of information,” or other time-denominated series. Iterative, recursive functions model this same behavior. `factorial`, for example, produces a value, say `F`, for each step, say `i`:
 
     F₀: 1
     F₁: 1
@@ -642,7 +642,7 @@ Where we once saw object state change as time _elapsed_, we now see the program 
     ...
     factorial(i): iterate(Fᵢ₋₁ * i, i - 1)
 
-Each run of iterate against the result of the previous run produces a new value just _after_ _the_ _last_ — a discrete piece of information that can viewed together with the rest on the same list. Individual program events can be similarly listed,
+Each run of `iterate` against the result of the previous run produces a new value just _after_ _the_ _last_ — a discrete piece of information that can viewed together with the rest on the same list. Individual program events can be similarly listed,
 
     E₀: DEFAULT_EVENT
     E₁: WITHDRAWAL_AMOUNT, amount:20
@@ -658,7 +658,7 @@ as can individual program states:
     ...
     S(i): program(Sᵢ₋₁, Eᵢ)
 
-Each run of program against the result of the previous run, together with event data, produces a new value _after_ the last. Yet, program is a timeless function. With the object-oriented approach, we decompose the state of the program into objects _within_ the program. Each object houses mutable state, and each piece of state may underly a mutative expression that “delineates moments in time” when evaluated.
+Each run of `program` against the result of the previous run, together with event data, produces a new value _after_ the last. Yet, `program` is a timeless function. With the object-oriented approach, we decompose the state of the program into objects _within_ the program. Each object houses mutable state, and each piece of state may underly a mutative expression that “delineates moments in time” when evaluated.
 
 > We modeled real-world objects with local state by computational objects with local variables. We identified time variation in the real world with time variation in the computer. We implemented the time variation of the states of the model objects in the computer with assignments to the local variables of the model objects. — SICP Section 3.5
 
@@ -674,19 +674,19 @@ Unlike object-oriented programs, functional programs reify state. State can be p
 
 <script async src="//jsfiddle.net/jmilgrom/jfmea63q/embed/js,html,result/"></script>
 
-we can print (to the console) a representation of the each state of the program in sequence. This change is trivial precisely because state is a known quantity of the program and generally manipulable by program code. inspectReturn takes direct advantage of this quality, printing state to the console and returning state from the internal curried function.
+we can print (to the console) a representation of the each state of the program in sequence. This change is trivial precisely because state is a known quantity of the program and generally manipulable by program code. `inspectReturn` takes direct advantage of this quality, printing state to the console and returning state from the internal curried function.
 
 ## Resolving the Time Paradox
 
 > “No man can ever cross the same river twice.” Because what’s a river? I mean, we love this idea of objects; like there’s this thing that changes. Right? There’s no river. Right? There’s water there at one point-in-time. And another point-in-time, there’s other water there. — Rich Hickey, [Are We There Yet](https://github.com/matthiasn/talk-transcripts/blob/master/Hickey_Rich/AreWeThereYet.md), quoting Heraclitus.
 
-From the perspective of a user, a functional program may appear stateful. Interact with the functional ATM program above and notice the program remembering previous encounters. On the one hand, this is not surprising. We included an imperative layer to remember previous states. Instead of decomposing the state of the program into distinct objects, like bankAccount and withdrawalAmount, we created a single global object, the store. On the other hand, focusing on the “object” portion of the program betrays an object-oriented predisposition. The imperative piece of the program is merely syntax, a construct used to facilitate a computation based asynchronously on another; it is not semantics. One can even imagine a programming language where such a construct is built into the language itself, hiding any imperative implementation from the programmer’s view. In fact, such a language exists that compiles to JavaScript.[^9] The semantics of the program better align with the semantics of a recursive, iterative function, having state S at a discrete step i — run the functional ATM program with the output of the previous run to produce the input for the next.
+From the perspective of a user, a functional program may appear stateful. Interact with the functional ATM program above and notice the program remembering previous encounters. On the one hand, this is not surprising. We included an imperative layer to remember previous states. Instead of decomposing the state of the program into distinct objects, like `bankAccount` and `withdrawalAmount`, we created a single global object, the `store`. On the other hand, focusing on the “object” portion of the program betrays an object-oriented predisposition. The imperative piece of the program is merely syntax, a construct used to facilitate a computation based asynchronously on another; it is not semantics. One can even imagine a programming language where such a construct is built into the language itself, hiding any imperative implementation from the programmer’s view. In fact, such a language exists that compiles to JavaScript.[^9] The semantics of the program better align with the semantics of a recursive, iterative function, having state S at a discrete step i — run the functional ATM program with the output of the previous run to produce the input for the next.
 
 That a program with a functional, stateless and timeless core can maintain state is surprising, to say the least. Look around the room, bus, park or wherever you find yourself reading this sentence, and you will likely identify “a collection of distinct objects,” such as dogs, people, and trees, “whose behaviors may change over time.” Look around the functional ATM program, on the other hand, and there are no identifiable objects to be found. Yet, the program appears to have state just like any other object in the room.
 
 > One way to resolve this paradox is to realize that it is the user’s temporal existence that imposes state on the system. If the user could step back from the interaction and think in terms of streams of balances rather than individual transactions, the system would appear stateless — SICP Section 3.5.5
 
-In other words, the ostensible “paradox” dissipates when the augmentation of our conception of time extends beyond the functional program to include the rest of our physical reality. Instead of viewing the world as the sum of its objects, each reflecting its latest state as time elapses, we may also think in terms of discrete state histories. We may interpret the dog at the park as moving in discrete steps S(i) to S(i+1), just as we interpret the state of our functional program as moving in discrete steps S(i) to S(i+1).
+In other words, the ostensible “paradox” dissipates when the augmentation of our conception of time extends beyond the functional program to include the rest of our physical reality. Instead of viewing the world as the sum of its objects, each reflecting its latest state as time elapses, we may also think in terms of discrete state histories. We may interpret the dog at the park as moving in discrete steps `S(i)` to `S(i+1)`, just as we interpret the state of our functional program as moving in discrete steps `S(i)` to `S(i+1)`.
 
 Consider video media. To movie scenes, we may attribute the same object-oriented semantics. Character and inanimate objects shift, interact and evolve as time elapses.
 
@@ -713,7 +713,7 @@ directly precipitate a series of program states:
     ...
     S(i): program(Sᵢ₋₁, Eᵢ)
 
-In both cases, pieces of static information may be listed, one _after_ another. Moreover, both lists can be plotted along the same discrete timeline\* *i. User interactions come in a certain order U(i), triggering a run of the program function against the result of the previous run S(i-1) and event data E(i), in order to produce S(i). Our reality can be viewed as a time-series of states, just as it can be viewed as a collection of objects. Functional programming models a time-series of states, just as as object-oriented programming models objects. When the program and world *alike\* can be viewed as “streams of information that flow in the system,” (Section 3) the world can flow into the program and the program back into the world.
+In both cases, pieces of static information may be listed, one _after_ another. Moreover, both lists can be plotted along the same discrete timeline `i`. User interactions come in a certain order `U(i)`, triggering a run of the program function against the result of the previous run `S(i-1)` and event data `E(i)`, in order to produce `S(i)`. Our reality can be viewed as a time-series of states, just as it can be viewed as a collection of objects. Functional programming models a time-series of states, just as as object-oriented programming models objects. When the program and world *alike* can be viewed as “streams of information that flow in the system,” (Section 3) the world can flow into the program, and the program back into the world.
 
 ## Addendum
 
@@ -755,7 +755,7 @@ Nevertheless, the functional view is indeed expressible as a result of the work 
 
     > JavaScript’s functions are first class objects with (mostly) lexical scoping. JavaScript is the first lambda language to go mainstream. Deep down, JavaScript has more in common with Lisp and Scheme than with Java. It is Lisp in C’s clothing. — Douglas Crockford, [JavaScript: The Good Parts](https://www.oreilly.com/library/view/javascript-the-good/9780596517748/ch01s02.html)
 
-    There is even an ongoing [academic effort](https://sicp.comp.nus.edu.sg/) to translate the full text of SICP into JavaScript. Also considered, JavaScript is a close cousin of TypeScript, which enables traditional object-oriented constructs like private and public and functional constructs like readonly and as const at compile time. Perhaps in JavaScript (and TypeScript), we get enough support of functional and object-oriented programming paradigms to enable a discussion of both within a single, ubiquitous language.
+    There is even an ongoing [academic effort](https://sicp.comp.nus.edu.sg/) to translate the full text of SICP into JavaScript. Also considered, JavaScript is a close cousin of TypeScript, which enables traditional object-oriented constructs like `private` and `public` and functional constructs like `readonly` and `as const` at compile time. Perhaps in JavaScript (and TypeScript), we get enough support of functional and object-oriented programming paradigms to enable a discussion of both within a single, ubiquitous language.
 
 [^2]: Immutability is an important part of the equation as well. We’ll cover this soon in the section titled _Unchangeability is Fundamental to Functional Programming._
 [^3]: Object-oriented programming is also traditionally associated with code reuse through inheritance, among other patterns, that reinforce the object model.
@@ -768,7 +768,7 @@ Nevertheless, the functional view is indeed expressible as a result of the work 
 
     > …any mutation that is ever done to any of these is to rebind local variables…that doesn’t affect the fact that these objects are immutable from an outside perspective” Gary Bernhardt, [Functional Core, Imperative Shell](https://www.destroyallsoftware.com/screencasts/catalog/functional-core-imperative-shell)
 
-    decrement100 may be implemented with internal mutability, for example,
+    `decrement100` may be implemented with internal mutability, for example,
 
       ```js
       const decrement100 = (x) => {
@@ -780,7 +780,7 @@ Nevertheless, the functional view is indeed expressible as a result of the work 
       decrement100(20); // => 80
       ```
 
-    without affecting external semantics; the output of decrement100 still depends only on the input. Even block-scoped looping constructs like while, for and do may be part of procedures that produce the same output provided the same input, notwithstanding reassignment of variables tracking iteration state (e.g. <code>i</code>, <code>j</code>, <code>k</code>, <code>n</code>, etc.) with every loop.
+    without affecting external semantics; the output of `decrement100` still depends only on the input. Even block-scoped looping constructs like `while`, `for` and `do` may be part of procedures that produce the same output provided the same input, notwithstanding reassignment of variables tracking iteration state (e.g. `i`, `j`, `k`, `n`, etc.) with every loop.
 
       ```js
       const factorial = (n) => {
@@ -800,7 +800,7 @@ Nevertheless, the functional view is indeed expressible as a result of the work 
 
     <figcaption>The mutability of <code>f</code> and <code>n</code> does not impact the functional semantics of <code>factorial</code></figcaption>
 
-    <code>factorial</code> will produce the same output provided the same input. On the other hand, changeability that is internal to one procedure definition may be positioned externally to another when [lexical procedural nesting is supported](https://en.wikipedia.org/wiki/Nested_function). <code>balance</code>, for example,
+    `factorial` will produce the same output provided the same input. On the other hand, changeability that is internal to one procedure definition may be positioned externally to another when [lexical procedural nesting is supported](https://en.wikipedia.org/wiki/Nested_function). `balance`, for example,
 
       ```js
       const makeBankAccount = (balance) => ({
@@ -813,7 +813,7 @@ Nevertheless, the functional view is indeed expressible as a result of the work 
       bankAccount.checkBalance(); // 80
       ```
 
-    is external to withdraw although internal to makeBankAccount and undermines the functional semantics of withdrawal as a result, as discussed above. [Notoriously unintuitive effects](https://stackoverflow.com/questions/750486/javascript-closure-inside-loops-simple-practical-example/750506) manifest when looping is combined with procedural nesting.
+    is external to `withdraw` although internal to `makeBankAccount` and undermines the functional semantics of `withdraw` as a result, as discussed above. [Notoriously unintuitive effects](https://stackoverflow.com/questions/750486/javascript-closure-inside-loops-simple-practical-example/750506) manifest when looping is combined with procedural nesting.
 
       ```js
       const buildCallbacks = (items) => {
