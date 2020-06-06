@@ -28,11 +28,11 @@ const decrement100 = (x) => 100 - x;
 decrement100(20); // 80
 ```
 
-can be viewed as computing the mathematical function `f(x) = 100 — x`,
+can be viewed as computing the mathematical function `f(x) = 100 — x`:
 
     f(20) = 80; where f(x) = 100 - x
 
-since the return value of decrement100 depends only on the input value just as `f(x)` depends only on `x`. Invoke `decrement100` a second time with `20` and it will return `80` once again, regardless of time and place within a program’s runtime. By contrast, an alternative implementation
+since the return value of `decrement100` depends only on the input value just as `f(x)` depends only on `x`. Invoke `decrement100` a second time with `20` and it will return `80` once again, regardless of time and place within a program’s runtime. By contrast, an alternative implementation
 
 ```js
 let oneHundred = 100;
@@ -64,7 +64,7 @@ const sentence = (words) => `${words.reduce(space)}.`;
 sentence(["i", "heart", "functions"]); // => "i heart functions."
 ```
 
-<figcaption><code>"i heart functions"</code> will results from <code>["i", "heart", "functions"]</code> regardless of program context.</figcaption>
+<figcaption><code>"i heart functions"</code> will result from <code>["i", "heart", "functions"]</code> regardless of program context.</figcaption>
 
 or other arbitrary data types and compositions may return the same value provided the same argument. Larger functional procedures can be composed of smaller ones,
 
@@ -95,7 +95,7 @@ When the output of one functional procedure becomes the input of another, the wr
 
 ## Object-Oriented Programming
 
-_Object-oriented programming_ has come to signify a common language for modeling the behavior of objects.[^3] Methods leverage privileged access to proscribe the ways in which private attributes may be viewed or changed. A class specifies the blueprint for creating object instances of a certain kind. Together, these constructs may create computational objects that simulate real objects. This bankAccount object in TypeScript, for example,
+_Object-oriented programming_ has come to signify a common language for modeling the behavior of objects.[^3] Methods leverage privileged access to proscribe the ways in which private attributes may be viewed or changed. A class specifies the blueprint for creating object instances of a certain kind. Together, these constructs may create computational objects that simulate real objects. This `bankAccount` object in TypeScript, for example,
 
 ```ts
 class BankAccount {
@@ -121,13 +121,26 @@ bankAccount.checkBalance(); // 80
 
 <figcaption>This example is based on the "withdraw" procedure introduced in SICP Section 3.1.</figcaption>
 
-stores balance data in a private attribute and exposes privileged methods `checkBalance` and `withdraw`, which proscribe the manner in which access to `balance` can occur. Together, these constructs create a computational object — e.g. `bankAccount` — that behaves like a “bank account”, carrying a balance that may be diminished through “withdraw” and viewed through “check balance” actions. Less abstract objects can be modeled with the same set of tools — an `apple` may have a `bite` method that reduces an internal `bites` state in order to model an “apple” and a `house` may have a `paint` method that changes an internal `color` state in order to model a “house.” More abstract objects can be modeled with the same set of tools as well— a `userMetaData` object may have a `setEmail` method that updates an internal `email` state in order to model “user meta data.”
+stores balance data in a private attribute and exposes privileged methods `checkBalance` and `withdraw`, which proscribe the manner in which access to `balance` can occur. Together, these constructs create a computational object  `bankAccount` that behaves like a “bank account”, carrying a balance that may be diminished through “withdraw” and viewed through “check balance” actions. Less abstract objects can be modeled with the same set of tools. An `apple` may have a `bite` method that reduces an internal `bites` state in order to model an “apple” and a `house` may have a `paint` method that changes an internal `color` state in order to model a “house.” More abstract objects can be modeled with the same set of tools as well. A `userMetaData` object may have a `setEmail` method that updates an internal `email` state in order to model “user meta data.”
 
 ### An Evolution of Imperative Programming
 
 > And a key characteristic here is that objects have methods… They are operationally defined. And we use them to provide a layer of abstraction over the places that our program uses. — Rich Hickey, [The Value of Values](https://github.com/matthiasn/talk-transcripts/blob/master/Hickey_Rich/ValueOfValuesLong.md)
 
-Private state enforces the object abstraction together with privileged, public methods. Expose `balance` directly (i.e. make it public), for example, and it can “magically” change from say `100` to `10` despite no `withdraw`al ever having occurred. Expose `color` directly and it can “magically” change from say `WHITE` to `BLUE` despite no `paint`ing ever having occurred. In other words, object-oriented programming provides the means for identifying objects (`bankAccount`) and associated behaviors (`withdraw`)
+Private state enforces the object abstraction together with privileged, public methods. Expose `balance` directly (i.e. make it public), for example, and it can “magically” change from say `100` to `10` despite no `withdraw`al ever having occurred.
+
+```ts
+class BankAccount {
+  public balance;
+  ...
+}
+
+const bankAccount = new BankAccount(100);
+bankAccount.balance = 80; // 80
+```
+<figcaption>Did a withdrawal occur? Does bankAccount accurately represent a "bank account"?</figcaption>
+
+Expose `color` directly and it can magically change from say `WHITE` to `BLUE` despite no `paint`ing ever having occurred. In other words, object-oriented programming provides the means for identifying objects (`bankAccount`) and associated behaviors (`withdraw`)
 
 ```js
 bankAccount.withdraw(20);
@@ -140,7 +153,7 @@ let balance = 100;
 balance = balance - 20;
 ```
 
-<figcaption>Does "balance" represent a withdrawal or something else entirely?</figcaption>
+<figcaption>Did a withdrawal occur? Does "balance" represent a "bank account" or something else entirely?</figcaption>
 
 Coincidentally, the private data / public methods dynamic also provides the means for data encapsulation. That data is stored in private attributes, accessible only through privileged methods, proscribes the ways in which such data may be viewed or changed. The `balance` data of `bankAccount` can only be changed by `withdraw` or read by `checkBalance`, in one sense, because it may not be accessed directly.
 
@@ -164,7 +177,7 @@ let balance = 100;
 balance = balance - 20;
 ```
 
-A mutable variable and a place in memory underly the reassignments in both cases.[^4]
+A mutable variable underlies the reassignment in both cases, whether or not an object method mediates such reassignment, and a place in memory underlies every mutable variable.[^4]
 
 ## Semantics, Not Syntax
 
@@ -181,7 +194,7 @@ bankAccount.withdraw(20);
 bankAccount.checkBalance(); // 80
 ```
 
-`balance` is accessible only through the functions `checkBalance` and `withdraw`, which proscribe the manner in which such access can occur. `bankAccount` behaves like a “bank account” even though the functions `checkBalance` and `withdraw` have gained privileged access to private data through the use of a function closure instead of through explicit syntactic constructs in this case. Object-oriented syntax is also insufficient in and of itself to achieve object-oriented semantics. A `bankAccount` “object” that avoids maintaining any underlying balance state
+`balance` is accessible only through the functions `checkBalance` and `withdraw`, which proscribe the manner in which such access can occur. `bankAccount` behaves like a “bank account” even though the functions `checkBalance` and `withdraw` have gained privileged access to private data through the use of a function closure, instead of through explicit syntactic constructs. Object-oriented syntax is also insufficient in and of itself to achieve object-oriented semantics. A `bankAccount` “object” that avoids maintaining any underlying balance state
 
 ```ts
 class BankAccount {
@@ -201,7 +214,7 @@ bankAccount.checkBalance(100); // 100; whoops, shouldn't this be 80?
 
 <figcaption>Is "BankAccount" really a bank account?</figcaption>
 
-allows “its” balance to evolve in an unspecified manner, which undermines the “bank account” abstraction. `new`, `class` and `public` constructs obscure the actual semantics in this case. The same can be said of a `bankAccount` object that publicly exposes the balance attribute, as was alluded to above.
+allows “its” balance to evolve in an unspecified manner, undermining the “bank account” abstraction. `new`, `class` and `public` constructs obscure the actual semantics in this case. The same can be said of a `bankAccount` object that publicly exposes the balance attribute, as was alluded to above.
 
 ```ts
 class BankAccount {
@@ -227,9 +240,9 @@ bankAccount.checkBalance(); // 80, eventhough no funds have been withdrawn
 
 <figcaption>Is "BankAccount" really a bank account?</figcaption>
 
-Now, `balance` can magically change without a `withdraw`al ever having occurred, undermining the “bank account” abstraction. `new`, `class` and `public` constructs obscure the actual semantics in this case.[^5]
+Now, `balance` can magically change without a `withdraw`al ever having occurred, which undermines the “bank account” abstraction. `new`, `class` and `public` constructs obscure the actual semantics in this case.[^5]
 
-With functional programming, syntax is also beside the point. The use of functional syntactic constructs is necessary to perform computation against arguments. `function` and `=>` (i.e. “arrow function”) syntax may express functional programming intent as well. However, they cannot alone achieve functional semantics. Indeed, a method of an object may use the `=>` syntax without correctly modeling computing mathematical functions.
+With functional programming, syntax is also beside the point. The use of functional syntactic constructs is necessary to perform computation against arguments. `function` and `=>` (the “arrow function”) constructs may express functional programming intent as well. However, they cannot alone achieve functional semantics. Indeed, a method of an object may use the `=>` construct without correctly modeling computing mathematical functions.
 
 ```js
 const makeBankAccount = (balance) => ({
@@ -248,7 +261,7 @@ bankAccount.withdraw(20);
 bankAccount.checkBalance(); // 80
 ```
 
-Additionally, an alternative implementation of “decrement one hundred” in JavaScript may fall short of correctly modeling a mathematical function even though an `=>` construct is in use, as was alluded to above.
+Additionally, an alternative implementation of “decrement one hundred” in JavaScript may fall short of correctly modeling a mathematical function even though an `=>` construct is used, as was alluded to above.
 
 ```js
 let oneHundred = 100;
@@ -259,15 +272,15 @@ oneHundred = 80;
 decrementOneHundred(20); // 60
 ```
 
-Invoking this procedure a second time with the same argument produces a different result when the let binding is amended between invocations.
+Invoking this procedure a second time with the same argument produces a different result when the `let` binding is amended between invocations.
 
 ## Changeability is Fundamental to Object Semantics
 
-Objects can change. An apple can be bitten, a house painted, and a bank account withdrawn from. Object implementations follow suit —
+Since objects can change - an apple can be bitten, a house painted, and a bank account withdrawn from - effective object representations must follow suit.
 
-> [W]e make computational objects…whose behavior changes with time. We model state with local state variables, and we model the changes of state with assignments to those variables. — SICP Section 3.1.2
+> [W]e make computational objects…whose behavior changes with time. We model state with local state variables, and we model the changes of state with assignments to those variables. — [SICP](https://web.mit.edu/alexmv/6.037/sicp.pdf) Section 3.1.2
 
-— `bite`ing an `apple` changes `bites` state, `paint`ing a `house` changes `color` state and `withdraw`ing from a `bankAccount` changes `balance` state. The class implementation of a bank account object
+`bite`ing an `apple` changes `bites` state, `paint`ing a `house` changes `color` state and `withdraw`ing from a `bankAccount` changes `balance` state. The class implementation of a bank account object
 
 ```ts
 class BankAccount {
@@ -332,13 +345,13 @@ also avoids modeling any underlying object (e.g. “bank account”).
 
 ## Unchangeability is Fundamental to Functional Semantics
 
-On the other hand, changeable things undermine functional semantics. The `decrement100` procedure can be viewed as computing a mathematical function because its output depends only on its input; there is no other _variable_ information on which it depends. `decrementOneHundred` introduces a changeable thing. As the value of the mutable `let` binding changes, so does the behavior of `decrementOneHundred` as a side-effect. Consequently, `decrementOneHundred` depends on the ongoing value of some contextual thing in addition to its input `x` and does not resemble computing a mathematical function as a result.
+On the other hand, changeable things undermine functional semantics. The `decrement100` procedure can be viewed as computing a mathematical function because its output depends only on its input; there is no other _variable_ information on which it depends. By contrast, as the value of the mutable `let` binding underlying `decrementOneHundred` _changes_, so does the behavior of `decrementOneHundred` as a side-effect. Consequently, `decrementOneHundred` depends on the ongoing value of some contextual thing in addition to its input `x` and cannot resemble computing a mathematical function. A changeable thing precludes functional semantics.
 
-Conversely, immutability restores functional semantics. No contextual changes means no side-effects, and no side-effects means functional behavior:
+Conversely, unchangeability restores functional semantics. No contextual changes means no side-effects, and no side-effects means functional behavior:
 
-> So long as we do not use assignments, two evaluations of the same procedure with the same arguments will produce the same result, so that procedures can be viewed as computing mathematical functions. Programming without any use of assignment…is accordingly known as _functional programming_. — SICP Section 3.1.3
+> So long as we do not use assignments, two evaluations of the same procedure with the same arguments will produce the same result, so that procedures can be viewed as computing mathematical functions. Programming without any use of assignment…is accordingly known as _functional programming_. — [SICP](https://web.mit.edu/alexmv/6.037/sicp.pdf) Section 3.1.3
 
-An externally scoped variable cannot change the semantics of `decrementOneHundred` when immutable.
+An externally scoped variable cannot change the semantics of `decrementOneHundred` when immutable and unchangeable.
 
 ```js
 const oneHundred = 100; // <-- now a `const` instead of a `let`
@@ -349,7 +362,7 @@ decrementOneHundred(20); // 80
 decrementOneHundred(20); // 80
 ```
 
-It simple cannot change and without change, the output can depend only on the single thing that can — i.e. the input.[^6]
+Since JavaScript's `const` binding endows `oneHundred` with immutability, it simply cannot change. And without change, the output of `decrementOneHundred` can depend only on the single thing that can: its input.[^6]
 
 ## “Object” Names Changeability
 
@@ -471,11 +484,11 @@ sum(sum(square(USER_INPUT_1), square(USER_INPUT_2)), square(USER_INPUT_3));
 <figcaption>The output of this program depends only on its input.
 </figcaption>
 
-since they produce the same output provided the same input. Some real programs also simply produce output based on input. Compilers, for example, must output the same binaries provided the same input files. More frequently, however, programs require state, and the current state of the program, _together_ with any user input, will determine the next state or output of the program. The current balance, for example, is crucial to calculating any subsequent balance post withdrawal. ATM machines are stateful programs.
+since they produce the same output provided the same input. Some real programs also are designed to produce output based on input. Ideally, compilers output the same binaries provided the same input files, for example. More frequently, however, programs require state, and the current state of the program, _together_ with any user input, will determine the next state or output of the program. The current balance, for example, is crucial to calculating any subsequent balance post withdrawal. ATM machines are stateful programs.
 
 ## Stateful Object-Oriented Programs
 
-> Modeling with objects is powerful and intuitive, largely because this matches the perception of interacting with a world of which we are part. — SICP Section 3.5.5
+> Modeling with objects is powerful and intuitive, largely because this matches the perception of interacting with a world of which we are part. — [SICP](https://web.mit.edu/alexmv/6.037/sicp.pdf) Section 3.5.5
 
 Object-oriented programming provides intuitive building-blocks for creating stateful programs. An ATM program, for example, that allows the user to set a “withdrawal amount” and effect a withdraw,
 
@@ -485,7 +498,7 @@ breaks down naturally into `withdrawalAmount`, representing the chosen amount to
 
 ### Time
 
-> If we wish to write programs that model this kind of natural decomposition in our world (as we see it from our viewpoint as a part of that world) with structures in our computer, we make computational objects that… must change with time. — SICP Section 3.5.5
+> If we wish to write programs that model this kind of natural decomposition in our world (as we see it from our viewpoint as a part of that world) with structures in our computer, we make computational objects that… must change with time. — [SICP](https://web.mit.edu/alexmv/6.037/sicp.pdf) Section 3.5.5
 
 Objects are intuitive in large part because they are consistent with a familiar model for time. Objects change — as we discussed, the notion of an “object,” having parts that change without changing the identity of the whole, articulates this ability. The flip-side to change is time. Since objects change, _when_ an object is examined is vital to the examination, it goes without saying. The “having parts that can change without changing the identity of the whole” quality of `bankAccount`, for example, is implemented by `withdraw`.
 
@@ -509,7 +522,7 @@ bankAccount.withdraw(20);
 bankAccount.checkBalance(); // 80
 ```
 
-The flip-side to change is time. Any call to `withdraw` also “delineates moments in time” _when_ `balance` _may_ change. As a result, the meaning of `bankAccount.checkBalance()` “depends not only on the expression itself, but also on whether the evaluation occurs before or after these moments.” By modeling objects, “we are forced to admit time into our computational models.” (SICP Section 3.4)
+The flip-side to change is time. Any call to `withdraw` also “delineates moments in time” _when_ `balance` _may_ change. As a result, the meaning of `bankAccount.checkBalance()` “depends not only on the expression itself, but also on whether the evaluation occurs before or after these moments.” By modeling objects, “we are forced to admit time into our computational models.” ([SICP](https://web.mit.edu/alexmv/6.037/sicp.pdf) Section 3.4)
 
 ### Stateful
 
@@ -523,7 +536,7 @@ An object with a single read method (like `bankAccount`) in a sense defines _the
 
 ## Stateful Functional Programs
 
-> Is there another approach? Can we avoid identifying time in the computer with time in the modeled world? Must we make the model change with time in order to model phenomena in a changing world? — SICP Section 3.5
+> Is there another approach? Can we avoid identifying time in the computer with time in the modeled world? Must we make the model change with time in order to model phenomena in a changing world? — [SICP](https://web.mit.edu/alexmv/6.037/sicp.pdf) Section 3.5
 
 Building stateful functional programs is less intuitive. To start, notice that imperative iteration can be restructured into functional iteration by recursively calling an iterative function with the results of the previous call. An imperative implementation of factorial, for example,
 
@@ -660,11 +673,11 @@ as can individual program states:
 
 Each run of `program` against the result of the previous run, together with event data, produces a new value _after_ the last. Yet, `program` is a timeless function. With the object-oriented approach, we decompose the state of the program into objects _within_ the program. Each object houses mutable state, and each piece of state may underly a mutative expression that “delineates moments in time” when evaluated.
 
-> We modeled real-world objects with local state by computational objects with local variables. We identified time variation in the real world with time variation in the computer. We implemented the time variation of the states of the model objects in the computer with assignments to the local variables of the model objects. — SICP Section 3.5
+> We modeled real-world objects with local state by computational objects with local variables. We identified time variation in the real world with time variation in the computer. We implemented the time variation of the states of the model objects in the computer with assignments to the local variables of the model objects. — [SICP](https://web.mit.edu/alexmv/6.037/sicp.pdf) Section 3.5
 
 A collection of objects, each delineating moments in time when state may change _within_ the program, embeds a simulation of time within the program. By contrast, with the functional approach, state is kept at the application perimeter and _functions_ are composed together in order to transition the program from one state to another. No simulation of time can be found _within_ the program; no moments can be found within the program _when_ state _may_ change. Rather, the program _provides_ change from one state to the next (i.e. it produces state) and program states represent _discrete_ moments in time when state _has_ changed.
 
-> Think about the issue in terms of mathematical functions. We can describe the time-varying behavior of a quantity x as a function of time x(t). If we concentrate on x instant by instant, we think of it as a changing quantity. Yet if we concentrate on the entire time history of values, we do not emphasize change — the function itself does not change — SICP Section 3.5
+> Think about the issue in terms of mathematical functions. We can describe the time-varying behavior of a quantity x as a function of time x(t). If we concentrate on x instant by instant, we think of it as a changing quantity. Yet if we concentrate on the entire time history of values, we do not emphasize change — the function itself does not change — [SICP](https://web.mit.edu/alexmv/6.037/sicp.pdf) Section 3.5
 
 Said another way, in object-oriented programs, we hold the identity of objects constant through change. Objects endure change as time elapses, and thus we model time. In functional programs, we forgo object identity. Change creates something new instead of altering something of old, and thus we model change directly. Change is described succinctly by functions as well as by an “entire time history,” list, log, stream, or other series of resulting states.
 
@@ -684,7 +697,7 @@ From the perspective of a user, a functional program may appear stateful. Intera
 
 That a program with a functional, stateless and timeless core can maintain state is surprising, to say the least. Look around the room, bus, park or wherever you find yourself reading this sentence, and you will likely identify “a collection of distinct objects,” such as dogs, people, and trees, “whose behaviors may change over time.” Look around the functional ATM program, on the other hand, and there are no identifiable objects to be found. Yet, the program appears to have state just like any other object in the room.
 
-> One way to resolve this paradox is to realize that it is the user’s temporal existence that imposes state on the system. If the user could step back from the interaction and think in terms of streams of balances rather than individual transactions, the system would appear stateless — SICP Section 3.5.5
+> One way to resolve this paradox is to realize that it is the user’s temporal existence that imposes state on the system. If the user could step back from the interaction and think in terms of streams of balances rather than individual transactions, the system would appear stateless — [SICP](https://web.mit.edu/alexmv/6.037/sicp.pdf) Section 3.5.5
 
 In other words, the ostensible “paradox” dissipates when the augmentation of our conception of time extends beyond the functional program to include the rest of our physical reality. Instead of viewing the world as the sum of its objects, each reflecting its latest state as time elapses, we may also think in terms of discrete state histories. We may interpret the dog at the park as moving in discrete steps `S(i)` to `S(i+1)`, just as we interpret the state of our functional program as moving in discrete steps `S(i)` to `S(i+1)`.
 
@@ -721,7 +734,7 @@ In both cases, pieces of static information may be listed, one _after_ another. 
 
 > We were all object-oriented programmers at one point in time — Rich Hickey, [The Value of Values](https://github.com/matthiasn/talk-transcripts/blob/master/Hickey_Rich/ValueOfValuesLong.md)
 
-Assimilation of functional semantics with any regular conception of the physical world is no easy task. I kicked around chapter 3 of SICP for over a year before wrapping my head around it. Look again around the room, bus or park and you will likely still identify distinct objects that may change over time. That we may still be experiencing disbelief at the thought of a new model for time suggests a larger game at play.
+Assimilation of functional semantics with any regular conception of the physical world is no easy task. I kicked around chapter 3 of [SICP](https://web.mit.edu/alexmv/6.037/sicp.pdf) for over a year before wrapping my head around it. Look again around the room, bus or park and you will likely still identify distinct objects that may change over time. That we may still be experiencing disbelief at the thought of a new model for time suggests a larger game at play.
 
 Dominant scientific paradigms pervade our language, on the one hand, and way of thinking, on the other.
 
@@ -735,7 +748,7 @@ Rather, in order to “make or to assimilate such a discovery one must alter the
 
 Similarly, object-orientation pervades our language, on the one hand. That “objects change as time elapses” is a statement of obvious fact betrays the object-oriented presumption embedded in our language. “Object” (and “identity”), “change” (and “state”), and “time” work together to describe a coherent _object-oriented_ view. On the other hand, objects orient our perception of our own physical reality.
 
-> Modeling with objects is powerful and intuitive, largely because this matches the perception of interacting with a world of which we are part. — SICP Section 3.5.5
+> Modeling with objects is powerful and intuitive, largely because this matches the perception of interacting with a world of which we are part. — [SICP](https://web.mit.edu/alexmv/6.037/sicp.pdf) Section 3.5.5
 
 Look again around the room, bus, park or wherever you find yourself reading this sentence, and you will likely identify “a collection of distinct objects ,” such as dogs, people, and trees, “whose behaviors may change over time.”
 
@@ -751,19 +764,19 @@ As a result, teaching functional programming is like teaching a Ptolemaic astron
 
 Nevertheless, the functional view is indeed expressible as a result of the work put in above. We can see change as creating something new, instead of altering something of old, and time as a series of successive states. We can alter our language and reimagine our physical reality to support a functional view of change, state and time.
 
-[^1]: Many of these insights can be found in original form in the [Structure and Interpretation of Computer Programs ](https://web.mit.edu/alexmv/6.037/sicp.pdf)(SICP). There you will find a life-altering discussion of the same topics using Scheme, a Lisp dialect like Clojure. All code examples included here however, even if borrowed, will be couched in terms of JavaScript. If you know JavaScript and are unfamiliar with Scheme, this article may be immediately accessible to you without first learning how “[to balance all those parens](https://crockford.com/javascript/javascript.html).” Little is lost in translation as well. JavaScript has first-class functions (i.e. lambdas), closures (i.e. function-delimited lexical scoping) and generally thrives when used functionally.
+[^1]: Many of the insights underlying this post can be found in original form in the [Structure and Interpretation of Computer Programs ](https://web.mit.edu/alexmv/6.037/sicp.pdf) (SICP). There you will find a life-altering discussion of the same topics using Scheme, a Lisp dialect like Clojure. All code examples included here however, even if borrowed, will be couched in terms of JavaScript. If you know JavaScript and are unfamiliar with Scheme, this article may be immediately accessible to you without first learning how “[to balance all those parens](https://crockford.com/javascript/javascript.html).” Little is lost in translation as well. JavaScript has first-class functions (i.e. lambdas), closures (i.e. function-delimited lexical scoping) and generally thrives when used functionally.
 
     > JavaScript’s functions are first class objects with (mostly) lexical scoping. JavaScript is the first lambda language to go mainstream. Deep down, JavaScript has more in common with Lisp and Scheme than with Java. It is Lisp in C’s clothing. — Douglas Crockford, [JavaScript: The Good Parts](https://www.oreilly.com/library/view/javascript-the-good/9780596517748/ch01s02.html)
 
     There is even an ongoing [academic effort](https://sicp.comp.nus.edu.sg/) to translate the full text of SICP into JavaScript. Also considered, JavaScript is a close cousin of TypeScript, which enables traditional object-oriented constructs like `private` and `public` and functional constructs like `readonly` and `as const` at compile time. Perhaps in JavaScript (and TypeScript), we get enough support of functional and object-oriented programming paradigms to enable a discussion of both within a single, ubiquitous language.
 
-[^2]: Immutability is an important part of the equation as well. We’ll cover this soon in the section titled _Unchangeability is Fundamental to Functional Programming._
-[^3]: Object-oriented programming is also traditionally associated with code reuse through inheritance, among other patterns, that reinforce the object model.
+[^2]: Immutability is an important part of the equation as well. We’ll cover this soon in the section titled [Unchangeability is Fundamental to Functional Programming](#unchangeability-is-fundamental-to-functional-semantics).
+[^3]: Traditionally, object-oriented programming is also associated with code reuse through inheritance, among other patterns, that reinforce the object model.
 [^4]: The creator of Clojure at it again:
 
     > But as soon as we introduce… the idea that the value of a variable can change, a variable can no longer be simply a name. Now a variable somehow refers to a place where a value can be stored, and the value stored at this place can change.” — Rich Hickey, [The Value of Values](https://github.com/matthiasn/talk-transcripts/blob/master/Hickey_Rich/ValueOfValuesLong.md)
 
-[^5]: Never has the delineation between syntax and semantics been more pronounced than with [value objects](https://martinfowler.com/bliki/ValueObject.html), which commandeer object-oriented syntax to effect _non_-object semantics — i.e. immutable values. If not for the divergence between syntax and semantics, so-called “value objects” would be a contradiction in terms. We’ll cover the inherent mutability of objects soon in the sections titled _Changeability is Fundamental to Object Semantics_ and _“Object” Names Changeability_.
+[^5]: Never has the delineation between syntax and semantics been more pronounced than with [value objects](https://martinfowler.com/bliki/ValueObject.html), which commandeer object-oriented syntax to effect _non_-object semantics — i.e. immutable values. If not for the divergence between syntax and semantics, so-called “value objects” would be a contradiction in terms. We’ll cover the inherent mutability of objects soon in the sections titled [Changeability is Fundamental to Object Semantics](#changeability-is-fundamental-to-object-semantics) and [“Object” Names Changeability](#“object”-names-changeability).
 [^6]: Contextual immutability says nothing of local variables. In fact, a variable that is reassigned within the same procedure in which it was initialized cannot impact the semantics of such procedure.
 
     > …any mutation that is ever done to any of these is to rebind local variables…that doesn’t affect the fact that these objects are immutable from an outside perspective” Gary Bernhardt, [Functional Core, Imperative Shell](https://www.destroyallsoftware.com/screencasts/catalog/functional-core-imperative-shell)
