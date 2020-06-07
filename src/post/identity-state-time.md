@@ -351,7 +351,7 @@ Conversely, unchangeability restores functional semantics. No contextual changes
 
 > So long as we do not use assignments, two evaluations of the same procedure with the same arguments will produce the same result, so that procedures can be viewed as computing mathematical functions. Programming without any use of assignment…is accordingly known as _functional programming_. — [SICP](https://web.mit.edu/alexmv/6.037/sicp.pdf) Section 3.1.3
 
-An externally scoped variable cannot change the semantics of `decrementOneHundred` when immutable and unchangeable.
+An externally scoped variable cannot change the semantics of `decrementOneHundred` when unchangeable.
 
 ```js
 const oneHundred = 100; // <-- now a `const` instead of a `let`
