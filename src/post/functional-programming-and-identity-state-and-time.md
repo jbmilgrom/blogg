@@ -351,7 +351,7 @@ Conversely, unchangeability restores functional semantics. No contextual changes
 
 > So long as we do not use assignments, two evaluations of the same procedure with the same arguments will produce the same result, so that procedures can be viewed as computing mathematical functions. Programming without any use of assignment…is accordingly known as _functional programming_. — [SICP](https://web.mit.edu/alexmv/6.037/sicp.pdf) Section 3.1.3
 
-An externally scoped variable cannot change the semantics of `decrementOneHundred` when unchangeable.
+Even an externally scoped variable cannot change the semantics of `decrementOneHundred` when unchangeable.
 
 ```js
 const oneHundred = 100; // <-- now a `const` instead of a `let`
@@ -366,7 +366,7 @@ Since JavaScript's `const` binding endows `oneHundred` with immutability, it sim
 
 ## “Object” Names Changeability
 
-Moreover, changeability _implies_ an object. The rational number “2/3” cannot change, for example. Change the denominator of “2/3” from 3 to 5 and its identity changes as well to “2/5”. Increase the number of units represented by “24” and it may change to “25.”
+Moreover, changeability _implies_ an object. The rational number “2/3” cannot change, for example. Change the denominator of “2/3” from 3 to 5 and its identity changes as well to “2/5”. Neither can the integer "24." Increase the number of units represented by “24” and it may change to “25.”
 
 ```js
 const HOURS_IN_DAY = 24;
@@ -379,10 +379,10 @@ const HOURS_IN_DAY = 24;
 HOURS_IN_DAY === 25; // true
 ```
 
-<figcaption>JavaScript implements number literals as immutable primitive values, preventing this imagined change.
+<figcaption>JavaScript implements number literals as immutable primitive values, preventing this unexpected behavior.
 </figcaption>
 
-Similarly, change the molecular construction of “iron” and it may very well change to “gold” or the wave length of “green” and it may change to “red”. The rational number “2/3”, the integer “24”, the metal “iron” and the color “green” are unchangeable things that are not recognizable as objects. Conversely, find changeability and find an object. A cup that is two-thirds full of water can be poured, an iron rod can be dented, a green house can be painted. “That cup” remains that cup notwithstanding less water; “that rod” remains that rod notwithstanding a dent; “that house” remains that house notwithstanding a fresh coat of paint. A “cup”, “rod” and “house” are changeable things that _are_ recognizable as objects. Coincidence of “changeability” and “object” is not happenstance. That parts can change without changing the identity of the whole _distinguishes_ an identity distinct from underlying parts. Changeability distinguishes an object. “Object” in a sense articulates this ability to change.
+The rational number “2/3” and the integer “24” are unchangeable things that are not recognizable as objects. Similarly, change the molecular construction of “iron” and it may very well change to “gold” or the wave length of “green” and it may change to “red”. Conversely, find changeability and find an object. A cup that is two-thirds full of water can be poured, an iron rod can be dented, a green house can be painted. “That cup” remains that cup notwithstanding less water; “that rod” remains that rod notwithstanding a dent; “that house” remains that house notwithstanding a fresh coat of paint. A “cup”, “rod” and “house” are changeable things that _are_ recognizable as objects. Coincidence of “changeability” and “object” is not happenstance. That parts can change without changing the identity of the whole _distinguishes_ an identity distinct from underlying parts. Changeability distinguishes an object. “Object” in a sense articulates this ability to change.
 
 Said another way, a new notion of “sameness” emerges with changeability. Unchangeable things can be identified as “the same” simply by examining contents. For example, because _immutable_ rational number implementations, `r1` and `r2`,
 
@@ -407,7 +407,7 @@ isEqual(r1, r3); // => false
 <figcaption>TypeScript’s <code>readonly</code> qualifier prevents mutative actions (e.g. <code>p2[1] = 3</code>) at compile time.
 </figcaption>
 
-will _always_ be comprised of `2` in the first slot and `3` in the second and reduce to two-thirds, a reasonable conclusion is that they are the same. To be sure, substitute one for the other and the meaning of a program is unchanged.[^7] By contrast, consider when two *mutable (changeable) *rational number implementations may be deemed the “same.”
+will _always_ be comprised of `2` in the first slot and `3` in the second and reduce to two-thirds, a reasonable conclusion is that they are the same. To be sure, substitute one for the other and the meaning of a program is unchanged.[^7] By contrast, consider when two *mutable* rational number implementations may be deemed the “same.”
 
 ```ts
 type RationalNumber = [number /* numerator */, number /* denominator */];
@@ -427,7 +427,7 @@ isEqual(r2, r3); // => true
 ```
 
 <figcaption>
-Absent the <code>readonly</code> qualifier, <code>RationalNumber</code>'s are mutable at compile time. At runtime, JavaScript’s <code>const</code> binding only prevents reassignment; it does not prevent mutation of an underlying array.
+Absent the <code>readonly</code> qualifier, <code>RationalNumber</code>'s are mutable at compile time. And at runtime, JavaScript’s <code>const</code> binding only prevents reassignment of such binding; it does not prevent mutations of an underlying array.
 </figcaption>
 
 `r1` may have the same contents as `r2` to start, but this affect is shortly lived. Substitute one for the other and the meaning of the program is changed — references to r2 now incorrectly reduce to two-fifths instead of two-thirds. `r1` and `r2` are not exactly “the same” in this case. Since two changeable things may evolve independently notwithstanding an analysis of parts performed at any one point in time, a new notion of “sameness” above an examination of parts must be admitted. Remarkably, this “new” notion is less remarkable with intentional object-oriented programming, where the creation of a new identity — i.e. an _object_ — is precisely the goal. `georgesAccount` and `elainesAccount`, for example,
@@ -461,13 +461,11 @@ areAccountsEqual(elainesAccount, georgesAccount); // false
 
 may share a balance at some point in time. But even if they start with the same funds, `georgesAccount` and `elainesAccount` can register different balances at some other point in time because they are in fact different _objects_. Of course, that two distinct objects can evolve independently goes without saying. That is because “object” clearly articulates the creation of an identity that is not tied to any part, arrangement or quality — “object” names the ability to change.[^8]
 
-## Mutually Exclusive
+## Now What About Programs
 
-In this light, object-oriented can be seen as the opposite of functional programming. Objects are inherently changeable. In fact, changeability and “object” are intertwined as concepts. Yet, changeability undermines functional programming. Just as oil cannot inhabit the same physical space as water, object-oriented cannot occupy the same virtual space as functional programming. Use of one necessarily excludes the other.
+In this light, object-oriented programming can be seen as the opposite of functional programming. Objects are inherently changeable. In fact, changeability and “object” are intertwined as concepts. Yet, changeability undermines functional programming. Just as oil cannot inhabit the same physical space as water, object-oriented cannot occupy the same virtual space as functional programming. Use of one necessarily excludes the other. As a result, when writing programs, we may choose mutability or immutability, objects or functions, but not both at once.
 
-## Program Semantics
-
-Mutual exclusion forks the road. When writing programs, we may choose mutability or immutability, objects or functions, but not both at once. Yet, whatever paradigm we choose must include a model for state, and perhaps time. As we saw above, programs that are composed of functions themselves model well-behaved state*less* mathematical functions,
+Yet, whatever paradigm we choose must include a model for state, and perhaps time. As we saw above, programs that are composed of functions themselves model well-behaved state*less* mathematical functions,
 
 ```js
 const square = (x) => x * x;

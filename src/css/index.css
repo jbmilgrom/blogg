@@ -79,6 +79,10 @@ main {
   padding: 8px var(--main-margin);
 }
 
+img {
+  max-width: var(--main-width);
+}
+
 .post p {
   line-height: 1.65;
 }
@@ -97,10 +101,12 @@ main {
 .post pre.language-js,
 .post pre.language-ts,
 .post pre.language-elm,
+.post pre.language-ruby,
 .post code.language-text,
 .post code.language-js,
 .post code.language-ts,
-.post code.language-elm {
+.post code.language-elm,
+.post code.language-ruby {
   font-size: 0.9em;
 }
 
