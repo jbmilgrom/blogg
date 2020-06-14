@@ -102,11 +102,13 @@ img {
 .post pre.language-ts,
 .post pre.language-elm,
 .post pre.language-ruby,
+.post pre.language-html,
 .post code.language-text,
 .post code.language-js,
 .post code.language-ts,
 .post code.language-elm,
-.post code.language-ruby {
+.post code.language-ruby,
+.post code.language-html {
   font-size: 0.9em;
 }
 

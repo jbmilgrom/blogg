@@ -9,19 +9,40 @@ layout: layouts/post.liquid
 
 Keep this example controller function in mind:
 
-<iframe src="https://medium.com/media/ce8179ec6b3bd230a1a5389411959cf3" frameborder=0></iframe>
+```js
+angular.module('myModule').controller('fileUploadCtrl', function($scope, FileUploader){
+
+    $scope.uploader = new FileUploader({
+        settings: {}
+    });
+
+    var reader = new FileReader(); 
+    
+    reader.onload = function(event) {
+      var img = new Image();
+      img.onload = onLoadImage;
+    }
+
+});
+```
 
 ### Javascript memory management — garbage collector
 
 Memory [will be allocated for an object when created](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Memory_Management).
 
-<iframe src="https://medium.com/media/eaa0ade63f1c1bfc01e8f3ce93bcc440" frameborder=0></iframe>
+```js
+var o = {iThink: ‘thereforeIAm’}; // memory allocated for an object and a string
+```
 
-You may then _console.log(o.iThink)_ and *‘thereforeIAm’ *will be read from its place in memory and printed to the console.
+You may then _console.log(o.iThink)_ and *‘thereforeIAm’* will be read from its place in memory and printed to the console.
 
 If you wanted to create a new string and lost the _need_ for the _{iThink: ‘thereforeIAm’}_ object, you may decide to overwrite _o_ instead of introducing a new variable.
 
-<iframe src="https://medium.com/media/d2aa843adb04ca10b220b622083b0e8b" frameborder=0></iframe>
+```js
+var o = {iThink: ‘thereforeIAm’}; // memory allocated for an object and a string
+
+o = ‘helloImANewString’;
+```
 
 Fortunately, references (or lack thereof) send a clear message internally to javascript’s garbage collector as to whether a piece of finite memory should remain allocated or freed to perform other tasks. In this case, no reference remains to the object and string previously allocated for _{iThink: ‘thereforeIAm’}_ and the corresponding memory may be freed (i.e. “garbage-collected”) as result.
 
