@@ -20,6 +20,8 @@ a:visited {
 body {
   font-family: "Lora", serif;
   color: var(--darkgray);
+  background: hsl(51, 100%, 59%);
+  font-size: 1.1em;
 }
 
 .badge {

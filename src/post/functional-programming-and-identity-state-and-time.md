@@ -463,7 +463,7 @@ may share a balance at some point in time. But even if they start with the same 
 
 ## Now What About Programs
 
-In this light, object-oriented programming can be seen as the opposite of functional programming. Objects are inherently changeable. In fact, changeability and “object” are intertwined as concepts. Yet, changeability undermines functional programming. Just as oil cannot inhabit the same physical space as water, object-oriented cannot occupy the same virtual space as functional programming. Use of one necessarily excludes the other. As a result, when writing programs, we may choose mutability or immutability, objects or functions, but not both at once.
+In this light, object-oriented programming can be seen as the opposite of functional programming. Objects are inherently changeable. Moreover, changeability and “object” are intertwined as concepts. Yet, changeability undermines functional programming. Just as oil cannot inhabit the same physical space as water, object-oriented cannot occupy the same virtual space as functional programming. Use of one necessarily excludes the other. As a result, when writing programs, we may choose mutability or immutability, objects or functions, but not both at once.
 
 Yet, whatever paradigm we choose must include a model for state, and perhaps time. As we saw above, programs that are composed of functions themselves model well-behaved state*less* mathematical functions,
 
@@ -482,7 +482,7 @@ sum(sum(square(USER_INPUT_1), square(USER_INPUT_2)), square(USER_INPUT_3));
 <figcaption>The output of this program depends only on its input.
 </figcaption>
 
-since they produce the same output provided the same input. Some real programs also are designed to produce output based on input. Ideally, compilers output the same binaries provided the same input files, for example. More frequently, however, programs require state, and the current state of the program, _together_ with any user input, will determine the next state or output of the program. The current balance, for example, is crucial to calculating any subsequent balance post withdrawal. ATM machines are stateful programs.
+since they produce the same output provided the same input. Some real programs also are designed to produce output based on input. Ideally, compilers output the same binaries provided the same input files, for example. More frequently, however, programs require state, and the current state of the program, _together_ with any user input, will determine the next state or output of the program. Such is the case with our example ATM example. The current balance is crucial to calculating any subsequent balance post withdrawal. ATM machines are stateful programs.
 
 ## Stateful Object-Oriented Programs
 
@@ -492,13 +492,15 @@ Object-oriented programming provides intuitive building-blocks for creating stat
 
 <script async src="//jsfiddle.net/jmilgrom/notc93Lv/embed/"></script>
 
-breaks down naturally into `withdrawalAmount`, representing the chosen amount to be withdrawn, and `bankAccount`, representing the user account underlying the session. The withdrawal amounts are incorporated by and read from `withdrawalAmount`. Withdrawals are incorporated by, and balance confirmations are read from, `bankAccount`. The current balance and the amount to potentially withdraw — the state of the program — are reflected directly by the state of `bankAccount` and `withdrawalAmount` — the state of its composite objects.
+breaks down naturally into `withdrawalAmount` and and `bankAccount` objects, representing the chosen amount to be withdrawn and the user account underlying the session. respectively. The withdrawal amounts are incorporated by and read from `withdrawalAmount`. Withdrawals are incorporated by, and balance confirmations are read from, `bankAccount`. The current balance and the amount to potentially withdraw — the state of the program — are reflected directly by the state of `bankAccount` and `withdrawalAmount` — the state of its composite objects.
 
 ### Time
 
 > If we wish to write programs that model this kind of natural decomposition in our world (as we see it from our viewpoint as a part of that world) with structures in our computer, we make computational objects that… must change with time. — [SICP](https://web.mit.edu/alexmv/6.037/sicp.pdf) Section 3.5.5
 
-Objects are intuitive in large part because they are consistent with a familiar model for time. Objects change — as we discussed, the notion of an “object,” having parts that change without changing the identity of the whole, articulates this ability. The flip-side to change is time. Since objects change, _when_ an object is examined is vital to the examination, it goes without saying. The “having parts that can change without changing the identity of the whole” quality of `bankAccount`, for example, is implemented by `withdraw`.
+Objects are intuitive in large part because they are consistent with a familiar model for time. Objects change — as we discussed, the notion of an “object,” having parts that change without changing the identity of the whole, articulates this ability. The flip-side to change is time. Since objects change, _when_ an object is examined is vital to the examination, it goes without saying.
+
+Look no further than the object representations of our computer programs.  The “having parts that can change without changing the identity of the whole” quality of `bankAccount` in our ATM program, for example, is implemented by `withdraw`.
 
 ```ts
 class BankAccount {
@@ -520,7 +522,7 @@ bankAccount.withdraw(20);
 bankAccount.checkBalance(); // 80
 ```
 
-The flip-side to change is time. Any call to `withdraw` also “delineates moments in time” _when_ `balance` _may_ change. As a result, the meaning of `bankAccount.checkBalance()` “depends not only on the expression itself, but also on whether the evaluation occurs before or after these moments.” By modeling objects, “we are forced to admit time into our computational models.” ([SICP](https://web.mit.edu/alexmv/6.037/sicp.pdf) Section 3.4)
+The flip-side to change is time. Any call to `withdraw` “delineates moments in time” _when_ `balance` _may_ change. This can be seen in the meaning of `bankAccount.checkBalance()`, which “depends not only on the expression itself, but also on whether the evaluation occurs before or after these moments.” As a result, by modeling objects, “we are forced to admit time into our computational models.” ([SICP](https://web.mit.edu/alexmv/6.037/sicp.pdf) Section 3.4)
 
 ### Stateful
 
