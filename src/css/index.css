@@ -1,12 +1,16 @@
 :root {
+  --black: #000;
+  --transparent-black: rgba(0,0,0,.2);
   --darkgray: #333;
   --lakeryellow: #fdb927;
   --lakerpurple: #552583;
+  --skyblue: rgb(135, 206, 250);
+  --cornflowerblue: rgb(100, 149, 237);
   --lightestgray: rgba(0, 0, 0, 0.05);
   --sweetbeige: #f5f2f0;
   --main-margin: 16px;
   --border-size: 2px;
-  --border: var(--border-size) solid var(--sweetbeige);
+  --underline: var(--border-size) solid var(--transparent-black);
   --native-header-margin: 0.83em;
   --main-width: 624px;
 }
@@ -19,14 +23,9 @@ a:visited {
 
 body {
   font-family: "Lora", serif;
-  color: var(--darkgray);
+  color: var(--black);
   background: hsl(51, 100%, 59%);
   font-size: 1.1em;
-}
-
-.badge {
-  background: var(--sweetbeige);
-  padding: var(--native-header-margin) var(--main-margin);
 }
 
 h1,
@@ -65,16 +64,6 @@ header h2 {
   margin: 1em auto;
 }
 
-header h2 .title {
-  color: var(--lakerpurple);
-  text-decoration: underline;
-  text-decoration-color: var(--lakeryellow);
-}
-
-.direct-link {
-  font-size: 0.9em;
-}
-
 main {
   max-width: var(--main-width);
   margin: 0 auto;
@@ -85,18 +74,43 @@ img {
   max-width: var(--main-width);
 }
 
+.badge {
+  background: var(--sweetbeige);
+  padding: var(--native-header-margin) var(--main-margin);
+  border: 2px solid var(--lakeryellow);
+}
+
+.badge .title {
+  color: var(--lakerpurple);
+  text-decoration: underline;
+  text-decoration-color: var(--lakeryellow);
+}
+
+.direct-link {
+  font-size: 0.9em;
+}
+
 .post p {
   line-height: 1.65;
 }
 
 .post a {
   padding: 1px 0;
-  border-bottom: 1px solid var(--darkgray);
+  border-bottom: var(--underline);
 }
 
 .post sup a {
   padding: unset;
   border-bottom: unset;
+}
+.post pre.language-text,
+.post pre.language-js,
+.post pre.language-ts,
+.post pre.language-elm,
+.post pre.language-ruby,
+.post pre.language-html,
+.post code.language-text {
+  border: 2px solid var(--lakeryellow);
 }
 
 .post pre.language-text,
@@ -110,62 +124,59 @@ img {
 .post code.language-ts,
 .post code.language-elm,
 .post code.language-ruby,
-.post code.language-html {
+.post code.language-html,
+.post code.language-text {
   font-size: 0.9em;
 }
 
 .post-list {
-  line-height: 1.3;
+  line-height: 1.5;
   font-family: "Roboto", sans-serif;
 }
 
 .post-list .year-title {
   box-sizing: border-box;
   padding: 0;
-  margin: 1em 0;
-  border-bottom: var(--border);
+  margin: 2em 0 1em 0;
+  font-weight: 700;
 }
 
 .post-list .year-title span {
-  color: var(--lakerpurple);
-  text-decoration: underline;
-  text-decoration-color: var(--lakeryellow);
-  background: var(--sweetbeige);
-  padding: 8px;
-  margin-left: -8px;
-  margin-bottom: calc(-1 * var(--border-size));
-  font-size: 1.2em;
+  color: var(--black);
+  font-size: 2em;
 }
 
 .post-list ul {
   margin-top: 0;
-  padding: 0;
+  padding: 0 64px 0 0 ;
 }
 
 .post-list li {
-  display: flex;
   margin-bottom: 1em;
+  list-style: none;
 }
 
 .post-list .name {
-  flex: 5;
-  font-weight: 500;
+  font-size: 1.1em;
+  margin-right: 4px;
+}
+
+.post-list .name a {
+  border-bottom: var(--underline);
+}
+
+.post-list .name a:hover {
+  border-bottom: 2px solid var(--black);
 }
 
 .post-list .date {
-  flex: 1;
-}
-
-.post-list li span {
-  margin-right: 16px;
+  color: rgba(0,0,0,.6);
 }
 
 .post a:hover {
-  color: var(--lakerpurple);
   text-decoration: none;
-  background: var(--sweetbeige);
   padding: 1px 0;
-  border-bottom: 2px solid var(--lakeryellow);
+  border-bottom: 2px solid var(--black);
 }
 
 .post iframe#JSFEMB_18413 {

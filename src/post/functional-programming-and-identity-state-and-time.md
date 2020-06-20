@@ -1,5 +1,5 @@
 ---
-title: The Juxtaposition of Functional and Object-Oriented Program Semantics Reveals an Alternative Model for State, Change & Time
+title: The Semantics of Change, State & Time in Functional Programmming
 description: This is a post on My Blog about agile frameworks
 date: 2020-03-09
 tags: post
@@ -500,7 +500,7 @@ breaks down naturally into `withdrawalAmount` and and `bankAccount` objects, rep
 
 Objects are intuitive in large part because they are consistent with a familiar model for time. Objects change — as we discussed, the notion of an “object,” having parts that change without changing the identity of the whole, articulates this ability. The flip-side to change is time. Since objects change, _when_ an object is examined is vital to the examination, it goes without saying.
 
-Look no further than the object representations of our computer programs.  The “having parts that can change without changing the identity of the whole” quality of `bankAccount` in our ATM program, for example, is implemented by `withdraw`.
+Look no further than the object representations of our computer programs.  The “having parts that can change without changing the identity of the whole” quality of `bankAccount` in our ATM program, for example, is implemented by `withdraw`, in our bank account example.
 
 ```ts
 class BankAccount {
@@ -522,7 +522,7 @@ bankAccount.withdraw(20);
 bankAccount.checkBalance(); // 80
 ```
 
-The flip-side to change is time. Any call to `withdraw` “delineates moments in time” _when_ `balance` _may_ change. This can be seen in the meaning of `bankAccount.checkBalance()`, which “depends not only on the expression itself, but also on whether the evaluation occurs before or after these moments.” As a result, by modeling objects, “we are forced to admit time into our computational models.” ([SICP](https://web.mit.edu/alexmv/6.037/sicp.pdf) Section 3.4)
+The flip-side to change is time. In addition to changing the associated balance, any call to `withdraw` also “delineates moments in time” _when_ `balance` _may_ change. Whether `bankAccount.checkBalance()` resolves to `100` or `80` “depends not only on the expression itself, but also on whether the evaluation occurs before or after these moments.” As a result, by modeling objects, “we are forced to admit time into our computational models.” ([SICP](https://web.mit.edu/alexmv/6.037/sicp.pdf) Section 3.4)
 
 ### Stateful
 
