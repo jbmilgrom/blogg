@@ -11,7 +11,7 @@ So, I've moved to a self-managed website.
 
 ## Theme
 
-The primary colors, link interactions and list layout were adapted from [this beautifully simple blog](https://tonsky.me/) by [Niki Tonsky](https://twitter.com/nikitonsky). The serif font and sans-serif title combination was inspired by [Medium](https://medium.com). The purple and gold colors that can be seen in the "Software for Days" badge and elsewhere are the [purple and gold](https://teamcolorcodes.com/los-angeles-lakers-color-codes/) of the venerable Los Angeles Lakers organization.   
+The primary colors, link interactions and list layout were adapted from [this beautifully simple blog](https://tonsky.me/) by [Niki Tonsky](https://twitter.com/nikitonsky). The serif font and sans-serif title combination was inspired by [Medium](https://medium.com). The purple and gold that can be seen draping the "Software for Days" badge in championship appeal are indeed the [purple and gold](https://teamcolorcodes.com/los-angeles-lakers-color-codes/) of the venerable Los Angeles Lakers organization.   
 
 ## Build Tech
 
