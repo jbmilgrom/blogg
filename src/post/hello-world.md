@@ -133,5 +133,5 @@ Medium does (did?) a great job at providing managed-blog services. However, it g
     
     ```md
       - and my personal favorite, automatic footnote anchor tag generation with [markdown-it-footnote](https://github.com/markdown-it/markdown-it-footnote)[^1]
-      [^1]: How cool is this? I get footnote generation and bi-directional anchor tag navigation form just this markdown...
+      [^1]: How cool is this? I get footnote generation and bi-directional anchor tag navigation form just this markdown:
     ``` 
