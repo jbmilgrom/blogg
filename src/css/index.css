@@ -1,6 +1,6 @@
 :root {
   --black: #000;
-  --transparent-black: rgba(0,0,0,.2);
+  --transparent-black: rgba(0,0,0,.25);
   --darkgray: #333;
   --lakeryellow: #fdb927;
   --lakerpurple: #552583;
@@ -25,13 +25,14 @@ body {
   font-family: "Lora", serif;
   color: var(--black);
   background: hsl(51, 100%, 59%);
-  font-size: 1.1em;
+  font-size: 1.15em;
 }
 
 h1,
 h2,
 h3,
-h4 {
+h4,
+.badge {
   font-family: "Roboto", sans-serif;
 }
 
@@ -77,13 +78,20 @@ img {
 .badge {
   background: var(--sweetbeige);
   padding: var(--native-header-margin) var(--main-margin);
-  border: 2px solid var(--lakeryellow);
+  border: 3px solid var(--lakeryellow);
+  color: var(--lakerpurple);
 }
 
-.badge .title {
+.footer {
+  margin-top: 3em;
+}
+
+.footer .badge a,
+.footer .badge a:hover,
+.badge a {
   color: var(--lakerpurple);
-  text-decoration: underline;
-  text-decoration-color: var(--lakeryellow);
+  text-decoration: none;
+  border-bottom: 3px solid var(--lakeryellow);
 }
 
 .direct-link {
@@ -126,7 +134,7 @@ img {
 .post code.language-ruby,
 .post code.language-html,
 .post code.language-text {
-  font-size: 0.9em;
+  font-size: 0.85em;
 }
 
 .post-list {
@@ -137,8 +145,12 @@ img {
 .post-list .year-title {
   box-sizing: border-box;
   padding: 0;
-  margin: 2em 0 1em 0;
+  margin: 1em 0 1em 0;
   font-weight: 700;
+}
+
+.post-list .year-title:not(:first-child) {
+  margin-top: 3em;
 }
 
 .post-list .year-title span {
@@ -179,6 +191,7 @@ img {
   border-bottom: 2px solid var(--black);
 }
 
-.post iframe#JSFEMB_18413 {
+.post iframe[src="http://jsfiddle.net/notc93Lv/embedded/?username=jmilgrom"],
+.post iframe[src="http://jsfiddle.net/mv2187zo/embedded/js,html,result/?username=jmilgrom"] {
   min-height: 320px;
 }

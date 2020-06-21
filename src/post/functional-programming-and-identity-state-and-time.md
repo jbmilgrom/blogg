@@ -1,5 +1,5 @@
 ---
-title: The Semantics of Change, State & Time in Functional Programmming
+title: Functional Programming and the Semantics of Change, State & Time
 description: This is a post on My Blog about agile frameworks
 date: 2020-03-09
 tags: post
