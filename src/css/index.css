@@ -14,6 +14,7 @@
   --native-header-margin: 0.83em;
   --main-width: 624px;
   --main-yellow: hsl(51, 100%, 59%);
+  --light-yellow: rgb(255, 255, 224);
 }
 
 a,
