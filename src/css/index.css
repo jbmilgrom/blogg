@@ -13,6 +13,7 @@
   --underline: var(--border-size) solid var(--transparent-black);
   --native-header-margin: 0.83em;
   --main-width: 624px;
+  --main-yellow: hsl(51, 100%, 59%);
 }
 
 a,
@@ -24,7 +25,7 @@ a:visited {
 body {
   font-family: "Lora", serif;
   color: var(--black);
-  background: hsl(51, 100%, 59%);
+  background: var(--main-yellow);
   font-size: 1.15em;
 }
 
@@ -77,8 +78,8 @@ img {
 
 .badge {
   background: var(--sweetbeige);
-  padding: var(--native-header-margin) var(--main-margin);
   border: 3px solid var(--lakeryellow);
+  padding: var(--native-header-margin) var(--main-margin);
   color: var(--lakerpurple);
 }
 
@@ -92,6 +93,7 @@ img {
   color: var(--lakerpurple);
   text-decoration: none;
   border-bottom: 3px solid var(--lakeryellow);
+  font-weight: 500;
 }
 
 .direct-link {
