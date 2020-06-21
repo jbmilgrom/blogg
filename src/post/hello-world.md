@@ -43,7 +43,7 @@ Posts are written in markdown and converted to HTML using [markdown-it](https://
 ```
 <figcaption>Partial source of the generated HTML file that you are currently viewing <span class="emoji">&#128563;</span></figcaption>
 
-markdown-it converts the above markdown file into HTML; liquidjs is directed by the XML header at the top of such file to embed the generated HTML file inside `layouts/post.liquid` template, which looks like this,
+`markdown-it` converts the above markdown file into HTML. `liquidjs` is directed by the XML header at the top of such file to embed the generated HTML file inside `layouts/post.liquid` template,
 
 ```html
 ---
@@ -59,7 +59,7 @@ templateClass: post
     <span class="badge"><a href="/">← Home</a></span>
 </p>
 ```
-resulting in the page you are looking at, more or less.
+resulting in the page of HTML you are viewing.
 
 This process is orchestrated by [llty](https://www.11ty.dev/), a "a simpler static site generator," as advertised. In the root of my blog directory, the command `yarn eleventy serve` tells `eleventy` to read this config file
 
