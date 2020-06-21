@@ -50,15 +50,20 @@ Importantly, note that garbage collection happens internally. No code has to be 
 
 ### Angular memory management — $scope.$destroy
 
-Unfortunately, the cleanup tasks related to _\$scope_ removal* cannot be inferred* by the javascript garbage collector based on* reference alone*; additional code is required.
+Unfortunately, the cleanup tasks related to _$scope_ removal* cannot be inferred* by the javascript garbage collector based on* reference alone*; additional code is required.
 
 That is because _\$scope_ objects embody a concept more complex than any ol’ javascript object. In particular, when no use remains in your application for a certain _\$scope_ object, no use *must also remain *for any associated _\$\$watchers_ previously registered with the _$scope.$watch_ method and no use _must also remain_ for “children” _\$scope_ objects. The javascript garbage collector cannot infer this relationship from simple reference removal. Setting _\$scope_ to *null *will certainly clear the memory allocated directly for such object, but not much else can be accomplished.
 
-<iframe src="https://medium.com/media/da926651a5fea089a2703a3ac13d9e8d" frameborder=0></iframe>
+```js
+$scope = null; // $scope object will be garbage collected, but nothing else
+```
 
 In other words, the garbage collector has to be told what to do ([and when to do it](https://github.com/angular/angular.js/blob/v1.5.5/src/ng/directive/ngIf.js#L113)), which is exactly what the [_$scope.$destroy_ method](https://github.com/angular/angular.js/blob/v1.5.3/src/ng/rootScope.js#L895) does. Note these lines in particular:
 
-<iframe src="https://medium.com/media/f2652d920afc47f6b9ec9659ace8e855" frameborder=0></iframe>
+```js
+$scope.$parent = $scope.$$nextSibling = $scope.$$prevSibling = $scope.$$childHead =
+ $scope.$$childTail = $scope.$root = $scope.$$watchers = null;
+```
 
 ### The example controller function
 
@@ -70,4 +75,3 @@ In the example of the controller, _uploader_ and _reader_ objects are created an
 
 > Each product era can be divided into two phases: 1) _the gestation phase_, when the new platform is first introduced but is expensive, incomplete, and/or difficult to use, 2) _the growth phase_, when a new product comes along that solves those problems, kicking off a period of exponential growth. The Apple II was released in 1977 (and the Altair in 1975), but it was the release of the IBM PC in 1981 that kicked off the PC growth phase. The internet’s gestation phase took place in the [80s and early 90s](https://en.wikipedia.org/wiki/National_Science_Foundation_Network) when it was mostly a text-based tool used by academia and government. The release of the Mosaic web browser in 1993 started the growth phase, which has continued ever since.There were feature phones in the 90s and early smartphones like the Sidekick and Blackberry in the early 2000s, but the smartphone growth phase really started in 2007–8 with the release of the iPhone and then Android.
 > — [Chris Dixon](https://medium.com/software-is-eating-the-world/what-s-next-in-computing-e54b870b80cc#.jszig85hi)
-> Done in 1.77s.
