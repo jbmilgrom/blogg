@@ -7,7 +7,7 @@ layout: layouts/post.liquid
 
 Had a good run using Medium as my blogging platform. It served as my "google doc," a web-based document editor with automatic content uploads, and my content-management system, publishing drafts that correspond one-to-one in appearance with the published form. Medium was seemingly optimized for a reader-writer experience, including clean out-of-the-box styling, draft-sharing, and gist and other code-sharing embeds. Some of these features remain. However, over the last year, the reader-writer experience began to deteriorate. Now, draft sharing is login-gated. Content recommendation surfaces click-bait'y titles instead of interest areas (e.g. software). Finally, anchor tags break ostensibly because of "become a member" prompts in the page header, the anvil that broke this camel's back. 
 
-So, I've moved to a self-managed website, as you can see if you're viewing this web page.
+So, I've moved to a self-managed website.
 
 ## Theme
 
@@ -15,7 +15,7 @@ The primary colors, link interactions and list layout were adapted from [this be
 
 ## Build Tech
 
-This site is statically generated; each page of HTML, including this one, was generated from sources files at build time, in advance of any request for this page.
+This site is statically generated; each page of HTML, including this one, is generated from sources files at build time, in advance of any request for this page.
 
 Posts are written in markdown and converted to HTML using [markdown-it](https://github.com/markdown-it/markdown-it) in combination with the templating engine [liquidjs](https://liquidjs.com/). This post, for example, currently looks like this, as I write: 
 
@@ -29,7 +29,7 @@ layout: layouts/post.liquid
 
 Had a good run using Medium as my blogging platform. It served as my "google doc," a web-based document editor with automatic content uploads, and my content-management system, publishing drafts that correspond one-to-one in appearance with the published form. Medium was seemingly optimized for a reader-writer experience, including clean out-of-the-box styling, draft-sharing, and gist and other code-sharing embeds. Some of these features remain. However, over the last year, the reader-writer experience began to deteriorate. Now, draft sharing is login-gated. Content recommendation surfaces click-bait'y titles instead of interest areas (e.g. software). Finally, anchor tags break ostensibly because of "become a member" prompts in the page header, the anvil that broke this camel's back. 
 
-So, I've moved to a self-managed website, as you can see if you're viewing this web page. 
+So, I've moved to a self-managed website.
 
 ## Theme
 
@@ -37,7 +37,7 @@ The primary colors, link interactions and list layout were adapted from [this be
 
 ## Build Tech
 
-This site is statically generated; each page of HTML, including this one, was generated from sources files at build time, in advance of any request for this page.
+This site is statically generated; each page of HTML, including this one, is generated from sources files at build time, in advance of any request for this page.
 
 Posts are written in markdown and converted to HTML using [markdown-it](https://github.com/markdown-it/markdown-it) in combination with the templating engine [liquidjs](https://liquidjs.com/). This post, for example, currently looks like this as I write
 ```
