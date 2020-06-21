@@ -48,6 +48,12 @@ figcaption {
   font-style: italic;
 }
 
+figcaption .emoji {
+  font-style: normal;
+  font-size: 1.5em;
+  margin: 0 4px;
+}
+
 figcaption code {
   font-style: normal;
   font-size: 1.2em;
