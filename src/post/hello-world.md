@@ -127,7 +127,7 @@ Wow this was easier than expected. With [netlify](https://www.netlify.com/), I h
 
 Great.
 
-Medium does (did?) a great job at providing managed-blog services. However, it goes without saying that no finite *product* can serve the idiosyncratic needs of one person better than that person. Ultimately, the deterioration in Medium's services forced what would always have been an beneficial move. I now have complete control over the development, presentation and distribution of my content - if Lakers colors aren't enough, well there's always automatic footnote generation with bi-directional anchor tag navigation for the obvious win.
+Medium does (did?) a great job at providing managed-blog services. However, it goes without saying that no finite *product* can serve the idiosyncratic needs of one person better than that person. Ultimately, the deterioration in Medium's services forced what would always have been a beneficial move. I now have complete control over the development, presentation and distribution of my content - if Lakers colors aren't enough, well there's always automatic footnote generation with bi-directional anchor tag navigation for the obvious win.
 
   [^1]: How cool is this? I get footnote generation and bi-directional anchor tag navigation from just this markdown:
     
