@@ -61,7 +61,7 @@ templateClass: post
 ```
 resulting in the page of HTML you are viewing.
 
-This process is orchestrated by [llty](https://www.11ty.dev/), a "a simpler static site generator," as advertised. The command `yarn eleventy serve` tells `eleventy` to read this config file
+This process is orchestrated by [llty](https://www.11ty.dev/), a "a simpler static site generator," as advertised. The command `yarn eleventy --serve` tells `eleventy` to read this config file
 
 ```js
 const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
