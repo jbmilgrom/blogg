@@ -84,7 +84,7 @@ video {
   max-width: var(--main-width);
 }
 
-@media (max-width: 620px) {
+@media (max-width: 624px) {
   img,
   video {
     max-width: 100%;
