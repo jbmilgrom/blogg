@@ -465,7 +465,7 @@ may share a balance at some point in time. But even if they start with the same 
 
 ## Now What About Programs
 
-In this light, object-oriented programming can be seen as the opposite of functional programming. Objects are inherently changeable. Moreover, changeability and “object” are intertwined as concepts. Yet, changeability undermines functional programming. Just as oil cannot inhabit the same physical space as water, object-oriented cannot occupy the same virtual space as functional programming. Use of one necessarily excludes the other. As a result, when writing programs, we may choose mutability or immutability, objects or functions, but not both at once.
+In this light, object-oriented programming can be seen as the diametric opposite of functional programming. Objects are inherently changeable. Moreover, changeability and “object” are intertwined as concepts. Yet, changeability undermines functional programming. Just as oil cannot inhabit the same physical space as water, object-oriented cannot occupy the same virtual space as functional programming. Just as "up" means "not down" and vice versa, "object" means "not function" and vice versa. In other words, use of one necessarily excludes the other. As a result, when writing programs, we may choose mutability or immutability, objects or functions, but not both at once.
 
 Yet, whatever paradigm we choose must include a model for state, and perhaps time. As we saw above, programs that are composed of functions themselves model well-behaved state*less* mathematical functions,
 
@@ -484,7 +484,7 @@ sum(sum(square(USER_INPUT_1), square(USER_INPUT_2)), square(USER_INPUT_3));
 <figcaption>The output of this program depends only on its input.
 </figcaption>
 
-since they produce the same output provided the same input. Some real programs also are designed to produce output based on input. Ideally, compilers output the same binaries provided the same input files, for example. More frequently, however, programs require state, and the current state of the program, _together_ with any user input, will determine the next state or output of the program. Such is the case with our example ATM example. The current balance is crucial to calculating any subsequent balance post withdrawal. ATM machines are stateful programs.
+since they produce the same output provided the same input. Some real programs are also designed to produce output based on input. Ideally, compilers output the same binaries provided the same input files, for example. More frequently, however, programs require state, and the current state of the program, _together_ with any user input, will determine the next state or output of the program. Such is the case with our example ATM example, where the current balance is crucial to calculating any subsequent balance post withdrawal. ATM machines are stateful programs.
 
 ## Stateful Object-Oriented Programs
 
@@ -502,7 +502,7 @@ breaks down naturally into `withdrawalAmount` and and `bankAccount` objects, rep
 
 Objects are intuitive in large part because they are consistent with a familiar model for time. Objects change — as we discussed, the notion of an “object,” having parts that change without changing the identity of the whole, articulates this ability. The flip-side to change is time. Since objects change, _when_ an object is examined is vital to the examination, it goes without saying.
 
-Look no further than the object representations of our computer programs.  The “having parts that can change without changing the identity of the whole” quality of `bankAccount` in our ATM program, for example, is implemented by `withdraw`, in our bank account example.
+Look no further than the object representations of our computer programs.  The “having parts that can change without changing the identity of the whole” quality of `bankAccount` in our ATM program, for example, is implemented by `withdraw`.
 
 ```ts
 class BankAccount {
@@ -655,7 +655,7 @@ const ATM = (state = { balance: 100, amount: 10 }, event) => {
 
 will produce the same output provided the same input _whenever_ evaluated, independent of time.
 
-Where we once saw object state change as time _elapsed_, we now see the program jump from one state to the next at individual (i.e. discrete!) *moments in time, *as if producing entries in a list, log, “stream of information,” or other time-denominated series. Iterative, recursive functions model this same behavior. `factorial`, for example, produces a value, say `F`, for each step, say `i`:
+Where we once saw object state change as time _elapsed_, we now see the program jump from one state to the next at individual (i.e. discrete!) *moments in time*, as if producing entries in a list, log, “stream of information,” or other time-denominated series. Iterative, recursive functions model this same behavior. The functional `factorial` implementation shown above, for example, produces a value, say `F`, for each step, say `i`:
 
 ```text
 F₀: 1
@@ -685,11 +685,13 @@ S₂: balance:80, amount:20
 S(i): program(Sᵢ₋₁, Eᵢ)
 ```
 
-Each run of `program` against the result of the previous run, together with event data, produces a new value _after_ the last. Yet, `program` is a timeless function. With the object-oriented approach, we decompose the state of the program into objects _within_ the program. Each object houses mutable state, and each piece of state may underly a mutative expression that “delineates moments in time” when evaluated.
+Each run of `program` against the result of the previous run, together with event data, produces a new value _after_ the last. Yet, `program` is a timeless function.
+
+With the object-oriented approach, we decompose the state of the program into objects _within_ the program. Each object houses mutable state, and each piece of state may underly a mutative expression that “delineates moments in time” when evaluated.
 
 > We modeled real-world objects with local state by computational objects with local variables. We identified time variation in the real world with time variation in the computer. We implemented the time variation of the states of the model objects in the computer with assignments to the local variables of the model objects. — [SICP](https://web.mit.edu/alexmv/6.037/sicp.pdf) Section 3.5
 
-A collection of objects, each delineating moments in time when state may change _within_ the program, embeds a simulation of time within the program. By contrast, with the functional approach, state is kept at the application perimeter and _functions_ are composed together in order to transition the program from one state to another. No simulation of time can be found _within_ the program; no moments can be found within the program _when_ state _may_ change. Rather, the program _provides_ change from one state to the next (i.e. it produces state) and program states represent _discrete_ moments in time when state _has_ changed.
+A collection of objects, each delineating moments in time when state may change _within_ the program, embeds a simulation of time within the program. By contrast, with the functional approach, state is kept at the application perimeter and _functions_ are composed together in order to transition the program from one state to another. No simulation of time can be found _within_ the program; no moments can be found within the program _when_ state _may_ change. Rather, the program _provides_ change from one state to the next (i.e. it produces state). As a result, program states represent _discrete_ moments in time when state _has_ changed.
 
 > Think about the issue in terms of mathematical functions. We can describe the time-varying behavior of a quantity x as a function of time x(t). If we concentrate on x instant by instant, we think of it as a changing quantity. Yet if we concentrate on the entire time history of values, we do not emphasize change — the function itself does not change — [SICP](https://web.mit.edu/alexmv/6.037/sicp.pdf) Section 3.5
 
@@ -707,13 +709,13 @@ we can print (to the console) a representation of the each state of the program 
 
 > “No man can ever cross the same river twice.” Because what’s a river? I mean, we love this idea of objects; like there’s this thing that changes. Right? There’s no river. Right? There’s water there at one point-in-time. And another point-in-time, there’s other water there. — Rich Hickey, [Are We There Yet](https://github.com/matthiasn/talk-transcripts/blob/master/Hickey_Rich/AreWeThereYet.md), quoting Heraclitus.
 
-From the perspective of a user, a functional program may appear stateful. Interact with the functional ATM program above and notice the program remembering previous encounters. On the one hand, this is not surprising. We included an imperative layer to remember previous states. Instead of decomposing the state of the program into distinct objects, like `bankAccount` and `withdrawalAmount`, we created a single global object, the `store`. On the other hand, focusing on the “object” portion of the program betrays an object-oriented predisposition. The imperative piece of the program is merely syntax, a construct used to facilitate a computation based asynchronously on another; it is not semantics. One can even imagine a programming language where such a construct is built into the language itself, hiding any imperative implementation from the programmer’s view. In fact, such a language exists that compiles to JavaScript.[^9] The semantics of the program better align with the semantics of a recursive, iterative function, having state S at a discrete step i — run the functional ATM program with the output of the previous run to produce the input for the next.
+From the perspective of a user, a functional program may appear stateful. Interact with the functional ATM program above and notice the program remembering previous encounters. On the one hand, this is not surprising. We included an imperative layer to remember previous states. Instead of decomposing the state of the program into distinct objects, like `bankAccount` and `withdrawalAmount`, we created a single global object, the `store`. On the other hand, focusing on the “object” portion of the program betrays an object-oriented predisposition. The imperative piece of the program is merely syntax, a construct used to facilitate a computation based asynchronously on another; it is not semantics. One can even imagine a programming language where such a construct is built into the language itself, hiding any imperative implementation from the programmer’s view. In fact, such a language exists that compiles to JavaScript.[^9] The semantics of the program better align with the semantics of a recursive, iterative function, having state `S` at a discrete step `i` — run the functional ATM program with the output of the previous run to produce the input for the next.
 
 That a program with a functional, stateless and timeless core can maintain state is surprising, to say the least. Look around the room, bus, park or wherever you find yourself reading this sentence, and you will likely identify “a collection of distinct objects,” such as dogs, people, and trees, “whose behaviors may change over time.” Look around the functional ATM program, on the other hand, and there are no identifiable objects to be found. Yet, the program appears to have state just like any other object in the room.
 
 > One way to resolve this paradox is to realize that it is the user’s temporal existence that imposes state on the system. If the user could step back from the interaction and think in terms of streams of balances rather than individual transactions, the system would appear stateless — [SICP](https://web.mit.edu/alexmv/6.037/sicp.pdf) Section 3.5.5
 
-In other words, the ostensible “paradox” dissipates when the augmentation of our conception of time extends beyond the functional program to include the rest of our physical reality. Instead of viewing the world as the sum of its objects, each reflecting its latest state as time elapses, we may also think in terms of discrete state histories. We may interpret the dog at the park as moving in discrete steps `S(i)` to `S(i+1)`, just as we interpret the state of our functional program as moving in discrete steps `S(i)` to `S(i+1)`.
+However, the ostensible “paradox” dissipates when the augmentation of our conception of time extends beyond the functional program to include the rest of our physical reality. Instead of viewing the world as the sum of its objects, each reflecting its latest state as time elapses, we may also think in terms of discrete state histories. We may interpret the dog at the park as moving in discrete steps `S(i)` to `S(i+1)`, just as we interpret the state of our functional program as moving in discrete steps `S(i)` to `S(i+1)`.
 
 Consider video media. To movie scenes, we may attribute the same object-oriented semantics. Character and inanimate objects shift, interact and evolve as time elapses.
 
@@ -722,23 +724,29 @@ Consider video media. To movie scenes, we may attribute the same object-oriented
     <img src="/media/metavideo.mp4" title="Your browser does not support the mp4 video codec.">
 </video>
 
-Glancing above, for example, we may conclude that “a cat is dancing.” Yet, videos are comprised of static frames stitched together in a certain sequence at discrete time intervals. Each frame corresponds to a state of the video at a moment in time and the frames, taken together, a time-denominated series of discrete states. The media chosen above is intentionally meta. The video includes a TV animation of a scene mirrored by a flip-book, showing static frames strung together at discrete time intervals, which itself is mirrored by a flip-book in “real” life, showing static frames strung together at discrete time intervals. Take another step back to notice that the above gif media (or mp4 if your browser supports html5) being played on _your_ computer is comprised of static frames, strung together at discrete time intervals. There is nothing stopping us from taking another step back and interpreting the real world in which your computer currently sits as static frames, strung together at discrete time intervals. We _may_ attribute normal object-oriented semantics to the above gif, concluding that “a cat is dancing.” However, we may also attribute functional semantics, concluding that “a cat has arms above its head on frame fᵢ.” At a park in the real world, we may conclude that “a dog is chasing a squirrel.” However, we may also conclude that “a dog is in the running motion behind a squirrel in the running motion on frame fᵢ.” In both cases, we may identify a time-series of states instead of objects that change over time. The functional programming paradigm can be coherently applied to world and program alike.
+While playing the above video, for example, we may conclude that “a cat is dancing.” Yet, videos are comprised of static frames stitched together in a certain sequence at discrete time intervals. Each frame corresponds to a state of the video at a moment in time and the frames, taken together, a time-denominated series of discrete states. The media chosen above is intentionally meta. The video includes a TV animation of a scene mirrored by a flip-book, showing static frames strung together at discrete time intervals, which itself is mirrored by a flip-book in “real” life, showing static frames strung together at discrete time intervals. Take another step back to notice that the above gif media (or mp4 if your browser supports html5) being played on _your_ computer is comprised of static frames, strung together at discrete time intervals.
+
+There is nothing stopping us from taking another step back and interpreting the real world in which your computer currently sits as static frames, strung together at discrete time intervals. We _may_ attribute normal object-oriented semantics to the above gif, concluding that “a cat is dancing.” However, we may also attribute functional semantics, concluding that “a cat has arms above its head on frame fᵢ.” At a park in the real world, we may conclude that “a dog is chasing a squirrel.” However, we may also conclude that “a dog is in the running motion behind a squirrel in the running motion on frame fᵢ.” In both cases, we may identify a time-series of states instead of objects that change over time. The functional programming paradigm can be coherently applied to world and program alike.
 
 With a model for discrete time in mind, it is less surprising that functional programs can appear stateful. A user of the program may be viewed as a series of states, just like the program itself. A specific series of user states, for example,
 
-    U₀: "Open up this blog post"
-    U₁: “Select 20 option”
-    U₂: “Click withdraw”
-    ...
-    U(i): Uᵢ
+```text
+U₀: "Open up this blog post"
+U₁: “Select 20 option”
+U₂: “Click withdraw”
+...
+U(i): Uᵢ
+```
 
 directly precipitate a series of program states:
 
-    S₀: balance:100, amount:10
-    S₁: balance:100, amount:20
-    S₂: balance:80, amount:20
-    ...
-    S(i): program(Sᵢ₋₁, Eᵢ)
+```text
+S₀: balance:100, amount:10
+S₁: balance:100, amount:20
+S₂: balance:80, amount:20
+...
+S(i): program(Sᵢ₋₁, Eᵢ)
+```
 
 In both cases, pieces of static information may be listed, one _after_ another. Moreover, both lists can be plotted along the same discrete timeline `i`. User interactions come in a certain order `U(i)`, triggering a run of the program function against the result of the previous run `S(i-1)` and event data `E(i)`, in order to produce `S(i)`. Our reality can be viewed as a time-series of states, just as it can be viewed as a collection of objects. Functional programming models a time-series of states, just as as object-oriented programming models objects. When the program and world *alike* can be viewed as “streams of information that flow in the system,” (Section 3) the world can flow into the program, and the program back into the world.
 
