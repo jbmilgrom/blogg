@@ -104,7 +104,7 @@ module.exports = function (eleventyConfig) {
  
  You may notice in the above config file that `markdown-it` manifests ultimately as a plugin into `eleventy`'s build; `liquidjs` isn't mentioned explicitly only because it is used by `eleventy` by default. 
  
- Additional technologies plugged into the `eleventy` build:
+ Additional technologies plugged into the `eleventy` build include:
   1. [@11ty/eleventy-plugin-syntaxhighlight](https://github.com/11ty/eleventy-plugin-syntaxhighlight) converts code blocks into semantic HTML that is compatible with [prismjs](https://prismjs.com/) css. As a result, the syntax-highlighting-ready HTML you see above is generated at build time.
   
   1. Automatic anchor tag generation with [markdown-it-anchor](https://github.com/valeriangalliat/markdown-it-anchor).

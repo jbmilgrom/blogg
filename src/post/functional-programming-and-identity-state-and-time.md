@@ -30,7 +30,9 @@ decrement100(20); // 80
 
 can be viewed as computing the mathematical function `f(x) = 100 — x`:
 
-    f(20) = 80; where f(x) = 100 - x
+```text
+f(20) = 80; where f(x) = 100 - x
+```
 
 since the return value of `decrement100` depends only on the input value just as `f(x)` depends only on `x`. Invoke `decrement100` a second time with `20` and it will return `80` once again, regardless of time and place within a program’s runtime. By contrast, an alternative implementation
 
@@ -577,15 +579,19 @@ which may be used by the same function to calculate the next values in the next 
 
 Stateful functional programs can be constructed in a similar fashion — state that is returned from the previous turn of some larger, iterative “program” function becomes the starter state for the next — with one caveat. With _synchronous_ iteration, results of the previous run can simply be passed to the next. The `total` result from `factorial` iteration, for example, is passed directly to the next. In a JavaScript web application, however, events are initiated _asynchronously_ as the user interacts with the page, calling callbacks bound to such events, which run pieces of the program so encoded.
 
-    event → callback → javascript
-    event → callback → javascript
-    ...
+```text
+event → callback → javascript
+event → callback → javascript
+...
+```
 
 Communication between _asynchronous_ scripts is performed through shared references. One script updates (mutates!) a place in memory from which another script may later read. Look no further than the object-oriented ATM program above for a concrete example. A user may begin the program by first selecting a withdrawal amount, _then_ clicking withdraw:
 
-    select → onchange → "withdrawalAmount.set(value)"
-    click → onclick → "bankAccount.withdraw(withdrawalAmount.get())"
-    ...
+```text
+select → onchange → "withdrawalAmount.set(value)"
+click → onclick → "bankAccount.withdraw(withdrawalAmount.get())"
+...
+```
 
 The “click withdraw” script occurs asynchronously sometime after the “select withdrawal amount” script has completed. Communication between the two scripts occurs through shared reference to the `amount` variable underlying the `withdrawalAmount` object. Calls to `withdrawalAmount.get()` will return updates by `withdrawalAmount.set(value)`, notwithstanding the asynchrony of such reads and writes.
 
@@ -595,9 +601,11 @@ Synchronous functions can communicate by simply passing around results. The resu
 
 The program now consists of functions `parseInt` and `withdraw`, called against specific events `WITHDRAWAL_AMOUNT` and `WITHDRAW`. The state of the program has not been reflected directly into distinct objects. Instead, a `program` _function_ is called with the state resulting from the previous call, together with event data from any user interaction, in order to produce the starter state for the next. `program` resembles an iterative, recursive function. Yet, calls to `program` occur asynchronously. Just as with the object-oriented ATM program, a user may begin the functional ATM program by first selecting a withdrawal amount, _then_ clicking withdraw:
 
-    select → onchange → "store.publish('WITHDRAWAL_AMOUNT', {amount:value})"
-    click → onclick → "store.publish('WITHDRAW')"
-    ...
+```text
+select → onchange → "store.publish('WITHDRAWAL_AMOUNT', {amount:value})"
+click → onclick → "store.publish('WITHDRAW')"
+...
+```
 
 The imperative shell (i.e the `store`) maintains a reference to the `state` resulting from the previous call to `program`, in order to pass such `state` to the next, orchestrating communication between asynchronous calls to `program`.
 
@@ -649,27 +657,33 @@ will produce the same output provided the same input _whenever_ evaluated, indep
 
 Where we once saw object state change as time _elapsed_, we now see the program jump from one state to the next at individual (i.e. discrete!) *moments in time, *as if producing entries in a list, log, “stream of information,” or other time-denominated series. Iterative, recursive functions model this same behavior. `factorial`, for example, produces a value, say `F`, for each step, say `i`:
 
-    F₀: 1
-    F₁: 1
-    F₂: 2
-    ...
-    factorial(i): iterate(Fᵢ₋₁ * i, i - 1)
+```text
+F₀: 1
+F₁: 1
+F₂: 2
+...
+factorial(i): iterate(Fᵢ₋₁ * i, i - 1)
+```
 
 Each run of `iterate` against the result of the previous run produces a new value just _after_ _the_ _last_ — a discrete piece of information that can viewed together with the rest on the same list. Individual program events can be similarly listed,
 
-    E₀: DEFAULT_EVENT
-    E₁: WITHDRAWAL_AMOUNT, amount:20
-    E₂: WITHDRAWAL
-    ...
-    E(i): Eᵢ
+```text
+E₀: DEFAULT_EVENT
+E₁: WITHDRAWAL_AMOUNT, amount:20
+E₂: WITHDRAWAL
+...
+E(i): Eᵢ
+```
 
 as can individual program states:
 
-    S₀: balance:100, amount:10
-    S₁: balance:100, amount:20
-    S₂: balance:80, amount:20
-    ...
-    S(i): program(Sᵢ₋₁, Eᵢ)
+```text
+S₀: balance:100, amount:10
+S₁: balance:100, amount:20
+S₂: balance:80, amount:20
+...
+S(i): program(Sᵢ₋₁, Eᵢ)
+```
 
 Each run of `program` against the result of the previous run, together with event data, produces a new value _after_ the last. Yet, `program` is a timeless function. With the object-oriented approach, we decompose the state of the program into objects _within_ the program. Each object houses mutable state, and each piece of state may underly a mutative expression that “delineates moments in time” when evaluated.
 
@@ -703,7 +717,7 @@ In other words, the ostensible “paradox” dissipates when the augmentation of
 
 Consider video media. To movie scenes, we may attribute the same object-oriented semantics. Character and inanimate objects shift, interact and evolve as time elapses.
 
-<video id="metavideo" poster="/media/metavideoposter.gif" preload="none" style="margin:0;padding:0" width="480" height="270" controls>
+<video id="metavideo" poster="/media/metavideoposter.gif" preload="none" style="margin:0;padding:0" width="480" controls>
     <source src="/media/metavideo.mp4" type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;">
     <img src="/media/metavideo.mp4" title="Your browser does not support the mp4 video codec.">
 </video>

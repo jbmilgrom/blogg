@@ -79,8 +79,16 @@ main {
   padding: 8px var(--main-margin);
 }
 
-img {
+img,
+video {
   max-width: var(--main-width);
+}
+
+@media (max-width: 620px) {
+  img,
+  video {
+    max-width: 100%;
+  }
 }
 
 .badge {
@@ -169,7 +177,8 @@ img {
 
 .post-list ul {
   margin-top: 0;
-  padding: 0 64px 0 0 ;
+  max-width: calc(var(--main-width) - 64px);
+  padding: 0;
 }
 
 .post-list li {
@@ -192,6 +201,7 @@ img {
 
 .post-list .date {
   color: rgba(0,0,0,.6);
+  white-space: nowrap;
 }
 
 .post a:hover {
