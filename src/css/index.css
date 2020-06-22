@@ -128,15 +128,6 @@ video {
   padding: unset;
   border-bottom: unset;
 }
-.post pre.language-text,
-.post pre.language-js,
-.post pre.language-ts,
-.post pre.language-elm,
-.post pre.language-ruby,
-.post pre.language-html,
-.post code.language-text {
-  /*border: 2px solid var(--lakeryellow);*/
-}
 
 .post pre.language-text,
 .post pre.language-js,

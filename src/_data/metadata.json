@@ -1,15 +1,19 @@
 {
   "title": "Software for Days",
-  "url": "https://myurl.com/",
+  "url": "https://jonathanmilgrom.com/",
   "description": "I am writing about software.",
   "feed": {
     "subtitle": "I am writing about software.",
     "filename": "feed.xml",
     "path": "/feed/feed.xml",
-    "id": "https://myurl.com/"
+    "id": "https://jonathanmilgrom.com/"
   },
   "author": {
     "name": "Jonathan Milgrom",
     "email": "jbmilgrom@gmail.com"
+  },
+  "source": {
+    "url": "https://github.com/jbmilgrom/blogg",
+    "post": "/post/hello-world"
   }
 }
