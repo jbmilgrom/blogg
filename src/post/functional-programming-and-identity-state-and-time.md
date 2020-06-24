@@ -97,7 +97,7 @@ When the output of one functional procedure becomes the input of another, the wr
 
 ## Object-Oriented Programming
 
-_Object-oriented programming_ has come to signify a common language for modeling the behavior of objects.[^3] Methods leverage privileged access to proscribe the ways in which private attributes may be viewed or changed. A class specifies the blueprint for creating object instances of a certain kind. Together, these constructs may create computational objects that simulate real objects. This `bankAccount` object in TypeScript, for example,
+_Object-oriented programming_ has come to signify a common language for modeling the behavior of objects.[^3] _Methods_ leverage privileged access to proscribe the ways in which private attributes may be viewed or changed. A _class_ specifies the blueprint for creating object instances of a certain kind. Together, these constructs may create computational objects that simulate real objects. This `bankAccount` object in TypeScript, for example,
 
 ```ts
 class BankAccount {
@@ -347,7 +347,7 @@ also avoids modeling any underlying object (e.g. “bank account”).
 
 ## Unchangeability is Fundamental to Functional Semantics
 
-On the other hand, changeable things undermine functional semantics. The `decrement100` procedure can be viewed as computing a mathematical function because its output depends only on its input; there is no other _variable_ information on which it depends. By contrast, as the value of the mutable `let` binding underlying `decrementOneHundred` _changes_, so does the behavior of `decrementOneHundred` as a side-effect. Consequently, `decrementOneHundred` depends on the ongoing value of some contextual thing in addition to its input `x` and cannot resemble computing a mathematical function. A changeable thing precludes functional semantics.
+On the other hand, changeable things undermine functional semantics. The `decrement100` procedure can be viewed as computing a mathematical function because its output depends only on its input; there is no other _variable_ information on which it depends. By contrast, as the value of the mutable `let` binding underlying `decrementOneHundred` _changes_, so does the behavior of `decrementOneHundred` as a side-effect. Consequently, `decrementOneHundred` depends on the ongoing value of some contextual thing in addition to its input `x` and cannot resemble computing a mathematical function.
 
 Conversely, unchangeability restores functional semantics. No contextual changes means no side-effects, and no side-effects means functional behavior:
 
@@ -364,7 +364,7 @@ decrementOneHundred(20); // 80
 decrementOneHundred(20); // 80
 ```
 
-Since JavaScript's `const` binding endows `oneHundred` with immutability, it simply cannot change. And without change, the output of `decrementOneHundred` can depend only on the single thing that can: its input.[^6]
+Since JavaScript's `const` binding endows `oneHundred` with immutability, it simply cannot change (without throwing a runtime error). And without change, the output of `decrementOneHundred` can depend only on the single thing that can: its input.[^6]
 
 ## “Object” Names Changeability
 
@@ -384,7 +384,7 @@ HOURS_IN_DAY === 25; // true
 <figcaption>JavaScript implements number literals as immutable primitive values, preventing this unexpected behavior.
 </figcaption>
 
-The rational number “2/3” and the integer “24” are unchangeable things, and are not recognizable as objects. Similarly, change the molecular construction of “iron” (not an object) and it may very well change to “gold,” or the wave length of “green” (not an object) and it may change to “red”. Conversely, find changeability and find an object. A cup that is two-thirds full of water can be poured, an iron rod can be dented, a green house can be painted. “That cup” remains that cup notwithstanding less water; “that rod” remains that rod notwithstanding a dent; “that house” remains that house notwithstanding a fresh coat of paint. A “cup”, “rod” and “house” are changeable things that _are_ recognizable as objects. Coincidence of “changeability” and “object” is not happenstance. That parts can change without changing the identity of the whole _distinguishes_ an identity distinct from underlying parts. Changeability distinguishes an object. “Object” in a sense articulates this ability to change.
+The rational number “2/3” and the integer “24” are unchangeable things, and are not recognizable as objects. Similarly, change the molecular construction of “iron” (not an object) and it may very well change to “gold,” or the wave length of “green” (not an object) and it may change to “red”. Conversely, find changeability and find an object. A cup that is two-thirds full of water can be poured, an iron rod can be dented and a green house can be painted. “That cup” remains that cup notwithstanding less water; “that rod” remains that rod notwithstanding a dent; “that house” remains that house notwithstanding a fresh coat of paint. A “cup”, “rod” and “house” are changeable things that _are_ recognizable as objects. Coincidence of “changeability” and “object” is not happenstance. That parts can change without changing the identity of the whole _distinguishes_ an identity distinct from underlying parts. Changeability distinguishes an object. “Object” in a sense articulates this ability to change.
 
 Said another way, a new notion of “sameness” emerges with changeability. Unchangeable things can be identified as “the same” simply by examining contents. For example, because _immutable_ rational number implementations, `r1` and `r2`,
 
@@ -461,11 +461,11 @@ areAccountsEqual(elainesAccount, georgesAccount); // false
 <figcaption>We may determine equality b/w 2 objects by whether they are the same object — i.e. reference equality.
 </figcaption>
 
-may share a balance at some point in time. But even if they start with the same funds, `georgesAccount` and `elainesAccount` can register different balances at some other point in time because they are in fact different _objects_. Of course, that two distinct objects can evolve independently goes without saying. That is because “object” clearly articulates the creation of an identity that is not tied to any part, arrangement or quality — “object” names the ability to change.[^8]
+may share a balance at some point in time. But even if they start with the same funds, `georgesAccount` and `elainesAccount` can register different balances at some other point in time because they are in fact different _objects_. Of course, that two distinct objects can evolve independently goes without saying. That is because “object” clearly articulates the creation of an identity that is not tied to any part, arrangement or quality; “object” names the ability to change.[^8]
 
 ## Now What About Programs
 
-In this light, object-oriented programming can be seen as the diametric opposite of functional programming. Objects are inherently changeable. Moreover, changeability and “object” are intertwined as concepts. Yet, changeability undermines functional programming. Just as oil cannot inhabit the same physical space as water, object-oriented cannot occupy the same virtual space as functional programming. Just as "up" means "not down" and vice versa, "object" means "not function" and vice versa. In other words, use of one necessarily excludes the other. As a result, when writing programs, we may choose mutability or immutability, objects or functions, but not both at once.
+In this light, object-oriented programming can be seen as the diametric opposite of functional programming. Objects are inherently changeable. Moreover, changeability and “object” are intertwined as concepts. Yet, changeability undermines functional programming. Just as oil cannot inhabit the same physical space as water, object-oriented programming cannot occupy the same virtual space as functional programming. Just as "up" means "not down" in one sense, and vice versa, "object" means "not function" in one sense, and vice versa. In other words, use of one necessarily excludes the other. As a result, when writing programs, we may choose mutability or immutability, objects or functions, but not both at once.
 
 Yet, whatever paradigm we choose must include a model for state, and perhaps time. As we saw above, programs that are composed of functions themselves model well-behaved state*less* mathematical functions,
 
