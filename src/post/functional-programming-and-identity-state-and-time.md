@@ -6,7 +6,7 @@ tags: post
 layout: layouts/post.liquid
 ---
 
-That functional programming opposes object-oriented programming in some fundamental way is a widely-held programming cliche. We list features like immutability, functions and composition in contrast to mutability, classes and inheritance. We tout Clojure and Haskel as functional languages on one end of the spectrum and C++ and Java as object-oriented languages on the other. Articulating the makeup of the spectrum is another story altogether however. None of this trivia explains why certain features are seen together or apart, why languages themselves may skew in one direction or another, or any inherent differences in program semantics. Nevertheless, the “functions vs. objects” cliche is an artifact of a profound truth about program structures and semantics. Like up and down and oil and water, functional and object-oriented programming indeed cannot coexist. We may choose objects or functions, but not both at once, as advertised. Moreover, the choice between paradigms has dramatic implications for program semantics, offering competing “world-views” involving concepts as basic as identity, change, state and time. Where object-oriented programming focuses on “distinct objects whose behaviors may change _over time_,” functional programming focuses on state transitions between _discrete_ _moments in time_ that can be seen together as “streams of information that flow in the system.” — [Structure and Interpretation of Computer Programs](https://web.mit.edu/alexmv/6.037/sicp.pdf) (SICP), Section 3
+That functional programming opposes object-oriented programming in some fundamental way is a widely-held programming cliche. We list features like immutability, functions and composition in contrast to mutability, classes and inheritance. We tout Clojure and Haskel as functional languages on one end of the spectrum and C++ and Java as object-oriented languages on the other. Articulating the makeup of the spectrum is another story altogether however. None of this trivia explains why certain features are seen together or apart, why languages themselves may skew in one direction or another, or any inherent differences in program semantics. Nevertheless, the “functions vs. objects” cliche is an artifact of a profound truth about program structures and semantics. Like up and down and oil and water, functional and object-oriented programming indeed cannot coexist. We may choose objects or functions, but not both at once, as advertised. Moreover, the choice between paradigms has dramatic implications for program semantics, offering competing “world-views” involving concepts as basic as identity, change, state and time. Where object-oriented programming produces “distinct objects whose behaviors may change _over time_,” functional programming creates state transitions between _discrete_ _moments in time_ that can be seen together as “streams of information that flow in the system.” — [Structure and Interpretation of Computer Programs](https://web.mit.edu/alexmv/6.037/sicp.pdf) (SICP), Section 3
 
 ## Functional Programming
 
@@ -140,7 +140,7 @@ class BankAccount {
 const bankAccount = new BankAccount(100);
 bankAccount.balance = 80; // 80
 ```
-<figcaption>Did a withdrawal occur? Does bankAccount accurately represent a "bank account"?</figcaption>
+<figcaption>Did a withdrawal occur? Does <code>bankAccount</code> accurately represent a "bank account"?</figcaption>
 
 Expose `color` directly and it can magically change from say `WHITE` to `BLUE` despite no `paint`ing ever having occurred. In other words, object-oriented programming provides the means for identifying objects (`bankAccount`) and associated behaviors (`withdraw`)
 
@@ -155,7 +155,7 @@ let balance = 100;
 balance = balance - 20;
 ```
 
-<figcaption>Did a withdrawal occur? Does "balance" represent a "bank account" or something else entirely?</figcaption>
+<figcaption>Did a withdrawal occur? Does <code>balance</code> represent a "bank account" or something else entirely?</figcaption>
 
 Coincidentally, the private data / public methods dynamic also provides the means for data encapsulation. That data is stored in private attributes, accessible only through privileged methods, proscribes the ways in which such data may be viewed or changed. The `balance` data of `bankAccount` can only be changed by `withdraw` or read by `checkBalance`, in one sense, because it may not be accessed directly.
 
@@ -214,7 +214,7 @@ bankAccount.withdraw(100, 20); // 80
 bankAccount.checkBalance(100); // 100; whoops, shouldn't this be 80?
 ```
 
-<figcaption>Is "BankAccount" really a bank account?</figcaption>
+<figcaption>Is <code>bankAccount</code> really a "bank account"?</figcaption>
 
 allows “its” balance to evolve in an unspecified manner, undermining the “bank account” abstraction. `new`, `class` and `public` constructs obscure the actual semantics in this case. The same can be said of a `bankAccount` object that publicly exposes the balance attribute, as was alluded to above.
 
@@ -240,7 +240,7 @@ bankAccount.balance = 80;
 bankAccount.checkBalance(); // 80, eventhough no funds have been withdrawn
 ```
 
-<figcaption>Is "BankAccount" really a bank account?</figcaption>
+<figcaption>Is <code>bankAccount</code> really a "bank account"?</figcaption>
 
 Now, `balance` can magically change without a `withdraw`al ever having occurred, which undermines the “bank account” abstraction. `new`, `class` and `public` constructs obscure the actual semantics in this case.[^5]
 
@@ -341,7 +341,7 @@ bankAccount.withdraw(100, 20); // 80
 bankAccount.checkBalance(100); // 100; whoops, shouldn't this be 80?
 ```
 
-<figcaption>Is "BankAccount" really a bank account?</figcaption>
+<figcaption>Is <code>bankAccount</code> really a "bank account"?</figcaption>
 
 also avoids modeling any underlying object (e.g. “bank account”).
 
