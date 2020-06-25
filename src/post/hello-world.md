@@ -5,7 +5,7 @@ tags: post
 layout: layouts/post.liquid
 ---
 
-Had a good run using Medium as my blogging platform. It served as a "google doc," a web-based document editor with automatic content uploads, and a content-management system, publishing drafts that correspond one-to-one in appearance with the published form. Medium was seemingly optimized for a reader-writer experience, including clean out-of-the-box styling, draft-sharing, and gist and other code-sharing embeds. Some of these features remain. However, over the last year, the reader-writer experience began to deteriorate. Now, draft sharing is login-gated. Content recommendation surfaces click-bait'y titles instead of interest areas (e.g. software). Finally, anchor tags break ostensibly because of "become a member" prompts in the page header, the anvil that broke this camel's back. 
+Had a good run using Medium as my blogging platform. It served as a "google doc," a web-based document editor with automatic content uploads, and a content-management system, publishing drafts that correspond one-to-one in appearance with the published form. Medium was seemingly optimized for a reader-writer experience, including clean styling out-of-the-box, draft-sharing, and gist and other code-sharing embeds. Some of these features remain. However, over the last year, the reader-writer experience began to deteriorate. Now, draft sharing is login-gated. Content recommendation surfaces click-bait'y titles instead of interest areas (e.g. software). Finally, anchor tags break ostensibly because of "become a member" prompts in the page header, the anvil that broke this camel's back. 
 
 So, I've moved to a self-managed website.
 

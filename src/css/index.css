@@ -135,13 +135,14 @@ video {
 .post pre.language-elm,
 .post pre.language-ruby,
 .post pre.language-html,
+.post pre.language-md,
 .post code.language-text,
 .post code.language-js,
 .post code.language-ts,
 .post code.language-elm,
 .post code.language-ruby,
 .post code.language-html,
-.post code.language-text {
+.post code.language-md {
   font-size: 0.85em;
 }
 
