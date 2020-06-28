@@ -10,7 +10,9 @@
   },
   "author": {
     "name": "Jonathan Milgrom",
-    "email": "jbmilgrom@gmail.com"
+    "email": "jbmilgrom@gmail.com",
+    "twitter": "https://twitter.com/jbmilgrom",
+    "stackoverflow": "https://stackoverflow.com/users/3645851/jbmilgrom"
   },
   "source": {
     "url": "https://github.com/jbmilgrom/blogg",

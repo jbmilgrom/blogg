@@ -15,6 +15,7 @@
   --main-width: 624px;
   --main-yellow: hsl(51, 100%, 59%);
   --light-yellow: rgb(255, 255, 224);
+  --large-space: 4em;
 }
 
 a,
@@ -34,6 +35,7 @@ h1,
 h2,
 h3,
 h4,
+footer,
 .badge {
   font-family: "Roboto", sans-serif;
 }
@@ -80,7 +82,27 @@ header h2 {
 main {
   max-width: var(--main-width);
   margin: 0 auto;
-  padding: 8px var(--main-margin);
+  padding: 2px var(--main-margin);
+}
+
+footer {
+  max-width: var(--main-width);
+  padding: 2px var(--main-margin);
+  margin: var(--large-space) auto 0 auto;
+  font-size: 1rem;
+  border-top: 2px solid var(--black);
+}
+
+footer ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: -1em;
+  padding: 2em 0;
+}
+
+footer li {
+  margin: 1em 1.5em 0 0;
 }
 
 img,
@@ -100,10 +122,12 @@ video {
   border: 3px solid var(--lakeryellow);
   padding: var(--native-header-margin) var(--main-margin);
   color: var(--lakerpurple);
+  line-height: unset;
 }
 
 .footer {
-  margin-top: 3em;
+  margin-top: var(--large-space);
+  margin-left: calc(-1 * var(--main-margin));
 }
 
 .footer .badge a,
@@ -123,14 +147,10 @@ video {
   line-height: 1.65;
 }
 
-.post a {
+.post a,
+footer a {
   padding: 1px 0;
   border-bottom: var(--underline);
-}
-
-.post sup a {
-  padding: unset;
-  border-bottom: unset;
 }
 
 .post pre.language-text,
@@ -163,7 +183,7 @@ video {
 }
 
 .post-list .year-title:not(:first-child) {
-  margin-top: 4em;
+  margin-top: var(--large-space);
 }
 
 .post-list .year-title span {
@@ -200,6 +220,7 @@ video {
   white-space: nowrap;
 }
 
+footer a:hover,
 .post a:hover {
   text-decoration: none;
   padding: 1px 0;
