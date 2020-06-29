@@ -154,7 +154,7 @@ footer a:not(.contact) {
   border-bottom: var(--underline);
 }
 
-footer a.contact {
+footer a {
   color: var(--lightblack);
 }
 
