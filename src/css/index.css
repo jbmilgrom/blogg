@@ -1,6 +1,7 @@
 :root {
   --black: #000;
   --transparent-black: rgba(0,0,0,.25);
+  --lightblack: rgba(0,0,0,.6);
   --darkgray: #333;
   --lakeryellow: #fdb927;
   --lakerpurple: #552583;
@@ -148,9 +149,13 @@ video {
 }
 
 .post a,
-footer a {
+footer a:not(.contact) {
   padding: 1px 0;
   border-bottom: var(--underline);
+}
+
+footer a.contact {
+  color: var(--lightblack);
 }
 
 .post pre.language-text,
@@ -216,11 +221,11 @@ footer a {
 }
 
 .post-list .date {
-  color: rgba(0,0,0,.6);
+  color: var(--lightblack);
   white-space: nowrap;
 }
 
-footer a:hover,
+footer a:hover:not(.contact),
 .post a:hover {
   text-decoration: none;
   padding: 1px 0;
