@@ -225,7 +225,6 @@ footer a {
   white-space: nowrap;
 }
 
-footer a:hover:not(.contact),
 .post a:hover {
   text-decoration: none;
   padding: 1px 0;
