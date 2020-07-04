@@ -1,4 +1,5 @@
-const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
+const pluginSyntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
+const pluginRss = require("@11ty/eleventy-plugin-rss");
 const markdownIt = require("markdown-it");
 const markdownItAnchor = require("markdown-it-anchor");
 const markdownItFootnote = require("markdown-it-footnote");
@@ -19,11 +20,18 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy(`${sourceDirectory}/media`);
   eleventyConfig.addPassthroughCopy(`${sourceDirectory}/css`);
 
-  eleventyConfig.addPlugin(syntaxHighlight);
+  eleventyConfig.addPlugin(pluginSyntaxHighlight);
+  eleventyConfig.addPlugin(pluginRss);
 
   eleventyConfig.setLibrary("md", md);
 
   return {
+    templateFormats: [
+      "md",
+      "njk",
+      "html",
+      "liquid"
+    ],
     dir: {
       input: sourceDirectory,
     },

@@ -1,12 +1,12 @@
 {
   "title": "Software for Days",
   "url": "https://jonathanmilgrom.com/",
-  "description": "I am writing about software.",
+  "description": "Software for absolute days.",
   "feed": {
-    "subtitle": "I am writing about software.",
+    "subtitle": "Software for absolute days.",
     "filename": "feed.xml",
     "path": "/feed/feed.xml",
-    "id": "https://jonathanmilgrom.com/"
+    "id": "https://softwarefordays.com/"
   },
   "author": {
     "name": "Jonathan Milgrom",
