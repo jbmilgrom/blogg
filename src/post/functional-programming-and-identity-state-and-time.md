@@ -8,6 +8,92 @@ layout: layouts/post.liquid
 
 That functional programming opposes object-oriented programming in some fundamental way is a widely-held programming cliche. We list features like immutability, functions and composition in contrast to mutability, classes and inheritance. We tout Clojure and Haskel as functional languages on one end of the spectrum and C++ and Java as object-oriented languages on the other. Articulating the makeup of the spectrum is another story altogether however. None of this trivia reveals why certain features are seen together or apart, why languages themselves may skew in one direction or another, or any inherent differences in program semantics. Nevertheless, the “functions vs. objects” cliche is an artifact of a profound truth about program structures and semantics. Like up and down and oil and water, functional and object-oriented programming indeed cannot coexist. We may choose objects or functions, but not both at once, as advertised. Moreover, the choice between paradigms has dramatic implications for program semantics, offering competing “world-views” involving concepts as basic as identity, change, state and time. Where object-oriented programming produces “distinct objects whose behaviors may change _over time_,” functional programming creates state transitions between _discrete_ _moments in time_ that can be seen together as “streams of information that flow in the system.” — [Structure and Interpretation of Computer Programs](https://web.mit.edu/alexmv/6.037/sicp.pdf) (SICP), Section 3
 
+## Object-Oriented Programming
+
+_Object-oriented programming_ has come to signify a common language for modeling the behavior of objects.[^3] _Methods_ leverage privileged access to proscribe the ways in which private attributes may be viewed or changed. A _class_ specifies the blueprint for creating object instances of a certain kind. Together, these constructs may create computational objects that simulate real objects. This `bankAccount` object in TypeScript, for example,
+
+```ts
+class BankAccount {
+  private balance;
+
+  constructor(funds) {
+    this.balance = funds;
+  }
+
+  public withdraw(amount) {
+    this.balance = this.balance - amount;
+  }
+
+  public checkBalance() {
+    return this.balance;
+  }
+}
+
+const bankAccount = new BankAccount(100);
+bankAccount.withdraw(20);
+bankAccount.checkBalance(); // 80
+```
+
+<figcaption>This example is based on the "withdraw" procedure introduced in SICP Section 3.1.</figcaption>
+
+stores balance data in a private attribute and exposes privileged methods `checkBalance` and `withdraw`, which proscribe the manner in which access to `balance` can occur. Together, these constructs create a computational object  `bankAccount` that behaves like a “bank account”, carrying a balance that may be diminished through “withdraw” and viewed through “check balance” actions. Less abstract objects can be modeled with the same set of tools. An `apple` may have a `bite` method that reduces an internal `bites` state in order to model an “apple” and a `house` may have a `paint` method that changes an internal `color` state in order to model a “house.” More abstract objects can be modeled with the same set of tools as well. A `userMetaData` object may have a `setEmail` method that updates an internal `email` state in order to model “user meta data.”
+
+### An Evolution of Imperative Programming
+
+> And a key characteristic here is that objects have methods… They are operationally defined. And we use them to provide a layer of abstraction over the places that our program uses. — Rich Hickey, [The Value of Values](https://github.com/matthiasn/talk-transcripts/blob/master/Hickey_Rich/ValueOfValuesLong.md)
+
+Private state enforces the object abstraction together with privileged, public methods. Expose `balance` directly (i.e. make it public), for example, and it can “magically” change from say `100` to `10` despite no `withdraw`al ever having occurred.
+
+```ts
+class BankAccount {
+  public balance;
+  ...
+}
+
+const bankAccount = new BankAccount(100);
+bankAccount.balance = 80; // 80
+```
+<figcaption>Did a withdrawal occur? Does <code>bankAccount</code> accurately represent a "bank account"?</figcaption>
+
+Expose `color` directly and it can magically change from say `WHITE` to `BLUE` despite no `paint`ing ever having occurred. In other words, object-oriented programming provides the means for identifying objects (`bankAccount`) and associated behaviors (`withdraw`)
+
+```js
+bankAccount.withdraw(20);
+```
+
+in place of imperative, direct manipulation of variables (`balance`) ad hoc.
+
+```js
+let balance = 100;
+balance = balance - 20;
+```
+
+<figcaption>Did a withdrawal occur? Does <code>balance</code> represent a "bank account" or something else entirely?</figcaption>
+
+Coincidentally, the private data / public methods dynamic also provides the means for data encapsulation. That data is stored in private attributes, accessible only through privileged methods, proscribes the ways in which such data may be viewed or changed. The `balance` data of `bankAccount` can only be changed by `withdraw` or read by `checkBalance`, in one sense, because it may not be accessed directly.
+
+### Place-Oriented Programming
+
+Nevertheless, object-oriented and imperative programming share a fundamental orientation towards places in memory.
+
+> But mutable objects are actually abstractions of places. They do not actually have meaning other than that. They are little barricades we have set up in front of memory, so that we do not have to directly manipulate memory addresses any more. So we have this abstraction that is an object, that helps us manipulate that place without too much craziness…So I have a new label for this. It is called PLOP, and PLOP is place-oriented programming. — Rich Hickey, [The Value of Values](https://github.com/matthiasn/talk-transcripts/blob/master/Hickey_Rich/ValueOfValuesLong.md)
+
+A method call to `withdraw` effectively overwrites a `balance` reference
+
+```js
+const bankAccount = new BankAccount(100); // (this.balance = 100)
+bankAccount.withdraw(20); // (this.balance = this.balance - 20)
+```
+
+just as any direct assignment that circumvents a method.
+
+```js
+let balance = 100;
+balance = balance - 20;
+```
+
+A mutable variable underlies the reassignment in both cases, whether or not an object method mediates such reassignment, and a place in memory underlies every mutable variable.[^4]
+
 ## Functional Programming
 
 Procedures that produce the same result when provided the same argument can be viewed as computing mathematical functions. For example, a `decrement100` procedure in JavaScript[^1],
@@ -94,92 +180,6 @@ sum(sum(square(USER_INPUT_1), square(USER_INPUT_2)), square(USER_INPUT_3));
 ```
 
 When the output of one functional procedure becomes the input of another, the wrapping program or procedure itself can be viewed as computing a mathematical function; a second run with the same input results in the same output.[^2]
-
-## Object-Oriented Programming
-
-_Object-oriented programming_ has come to signify a common language for modeling the behavior of objects.[^3] _Methods_ leverage privileged access to proscribe the ways in which private attributes may be viewed or changed. A _class_ specifies the blueprint for creating object instances of a certain kind. Together, these constructs may create computational objects that simulate real objects. This `bankAccount` object in TypeScript, for example,
-
-```ts
-class BankAccount {
-  private balance;
-
-  constructor(funds) {
-    this.balance = funds;
-  }
-
-  public withdraw(amount) {
-    this.balance = this.balance - amount;
-  }
-
-  public checkBalance() {
-    return this.balance;
-  }
-}
-
-const bankAccount = new BankAccount(100);
-bankAccount.withdraw(20);
-bankAccount.checkBalance(); // 80
-```
-
-<figcaption>This example is based on the "withdraw" procedure introduced in SICP Section 3.1.</figcaption>
-
-stores balance data in a private attribute and exposes privileged methods `checkBalance` and `withdraw`, which proscribe the manner in which access to `balance` can occur. Together, these constructs create a computational object  `bankAccount` that behaves like a “bank account”, carrying a balance that may be diminished through “withdraw” and viewed through “check balance” actions. Less abstract objects can be modeled with the same set of tools. An `apple` may have a `bite` method that reduces an internal `bites` state in order to model an “apple” and a `house` may have a `paint` method that changes an internal `color` state in order to model a “house.” More abstract objects can be modeled with the same set of tools as well. A `userMetaData` object may have a `setEmail` method that updates an internal `email` state in order to model “user meta data.”
-
-### An Evolution of Imperative Programming
-
-> And a key characteristic here is that objects have methods… They are operationally defined. And we use them to provide a layer of abstraction over the places that our program uses. — Rich Hickey, [The Value of Values](https://github.com/matthiasn/talk-transcripts/blob/master/Hickey_Rich/ValueOfValuesLong.md)
-
-Private state enforces the object abstraction together with privileged, public methods. Expose `balance` directly (i.e. make it public), for example, and it can “magically” change from say `100` to `10` despite no `withdraw`al ever having occurred.
-
-```ts
-class BankAccount {
-  public balance;
-  ...
-}
-
-const bankAccount = new BankAccount(100);
-bankAccount.balance = 80; // 80
-```
-<figcaption>Did a withdrawal occur? Does <code>bankAccount</code> accurately represent a "bank account"?</figcaption>
-
-Expose `color` directly and it can magically change from say `WHITE` to `BLUE` despite no `paint`ing ever having occurred. In other words, object-oriented programming provides the means for identifying objects (`bankAccount`) and associated behaviors (`withdraw`)
-
-```js
-bankAccount.withdraw(20);
-```
-
-in place of imperative, direct manipulation of variables (`balance`) ad hoc.
-
-```js
-let balance = 100;
-balance = balance - 20;
-```
-
-<figcaption>Did a withdrawal occur? Does <code>balance</code> represent a "bank account" or something else entirely?</figcaption>
-
-Coincidentally, the private data / public methods dynamic also provides the means for data encapsulation. That data is stored in private attributes, accessible only through privileged methods, proscribes the ways in which such data may be viewed or changed. The `balance` data of `bankAccount` can only be changed by `withdraw` or read by `checkBalance`, in one sense, because it may not be accessed directly.
-
-### Place-Oriented Programming
-
-Nevertheless, object-oriented and imperative programming share a fundamental orientation towards places in memory.
-
-> But mutable objects are actually abstractions of places. They do not actually have meaning other than that. They are little barricades we have set up in front of memory, so that we do not have to directly manipulate memory addresses any more. So we have this abstraction that is an object, that helps us manipulate that place without too much craziness…So I have a new label for this. It is called PLOP, and PLOP is place-oriented programming. — Rich Hickey, [The Value of Values](https://github.com/matthiasn/talk-transcripts/blob/master/Hickey_Rich/ValueOfValuesLong.md)
-
-A method call to `withdraw` effectively overwrites a `balance` reference
-
-```js
-const bankAccount = new BankAccount(100); // (this.balance = 100)
-bankAccount.withdraw(20); // (this.balance = this.balance - 20)
-```
-
-just as any direct assignment that circumvents a method.
-
-```js
-let balance = 100;
-balance = balance - 20;
-```
-
-A mutable variable underlies the reassignment in both cases, whether or not an object method mediates such reassignment, and a place in memory underlies every mutable variable.[^4]
 
 ## Semantics, Not Syntax
 
