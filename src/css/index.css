@@ -118,6 +118,20 @@ video {
   }
 }
 
+nav.table-of-contents {
+  line-height: 2;
+  padding-left: 1em;
+  border: 2px dashed var(--transparent-black);
+}
+
+.table-of-contents > ol {
+  list-style-type: lower-roman;
+}
+
+.table-of-contents > ol ol {
+  list-style-type: lower-alpha;
+}
+
 .badge {
   background: var(--sweetbeige);
   border: 3px solid var(--lakeryellow);
