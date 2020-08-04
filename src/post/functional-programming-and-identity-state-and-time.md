@@ -10,7 +10,7 @@ That functional programming opposes object-oriented programming in some fundamen
 
 [toc]
 
-## Introduction: Why JavaScript 
+## Preface: Why JavaScript 
 
 Many of the insights underlying this post can be found in original form in the [Structure and Interpretation of Computer Programs ](https://web.mit.edu/alexmv/6.037/sicp.pdf) (SICP). There you will find a life-altering discussion of the same topics using Scheme, a Lisp dialect like Clojure. All code examples included in this post, however, will be couched in terms of JavaScript, even if borrowed. If you know JavaScript and are unfamiliar with Scheme, this article may be immediately accessible to you without first learning how “[to balance all those parens](https://crockford.com/javascript/javascript.html).” Little is lost in translation as well. JavaScript has first-class functions (i.e. lambdas), closures (i.e. function-delimited lexical scoping) and generally thrives when used functionally.
 
