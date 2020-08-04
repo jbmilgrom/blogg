@@ -10,9 +10,17 @@ That functional programming opposes object-oriented programming in some fundamen
 
 [toc]
 
+## Introduction: Why JavaScript 
+
+Many of the insights underlying this post can be found in original form in the [Structure and Interpretation of Computer Programs ](https://web.mit.edu/alexmv/6.037/sicp.pdf) (SICP). There you will find a life-altering discussion of the same topics using Scheme, a Lisp dialect like Clojure. All code examples included in this post, however, will be couched in terms of JavaScript, even if borrowed. If you know JavaScript and are unfamiliar with Scheme, this article may be immediately accessible to you without first learning how “[to balance all those parens](https://crockford.com/javascript/javascript.html).” Little is lost in translation as well. JavaScript has first-class functions (i.e. lambdas), closures (i.e. function-delimited lexical scoping) and generally thrives when used functionally.
+
+ > JavaScript’s functions are first class objects with (mostly) lexical scoping. JavaScript is the first lambda language to go mainstream. Deep down, JavaScript has more in common with Lisp and Scheme than with Java. It is Lisp in C’s clothing. — Douglas Crockford, [JavaScript: The Good Parts](https://www.oreilly.com/library/view/javascript-the-good/9780596517748/ch01s02.html)
+
+There is even an ongoing [academic effort](https://sicp.comp.nus.edu.sg/) to translate the full text of SICP into JavaScript. Also considered, JavaScript is a close cousin of TypeScript, which enables traditional object-oriented constructs like `private` and `public` and functional constructs like `readonly` and `as const` at compile time. Perhaps in JavaScript (and TypeScript), we get enough support of functional and object-oriented programming paradigms to enable a discussion of both within a single, ubiquitous language.
+
 ## Object-Oriented Programming
 
-_Object-oriented programming_ has come to signify a common language for modeling the behavior of objects.[^3] _Methods_ leverage privileged access to proscribe the ways in which private attributes may be viewed or changed. A _class_ specifies the blueprint for creating object instances of a certain kind. Together, these constructs may create computational objects that simulate real objects. This `bankAccount` object in TypeScript[^1], for example,
+_Object-oriented programming_ has come to signify a common language for modeling the behavior of objects.[^3] _Methods_ leverage privileged access to proscribe the ways in which private attributes may be viewed or changed. A _class_ specifies the blueprint for creating object instances of a certain kind. Together, these constructs may create computational objects that simulate real objects. This `bankAccount` object in TypeScript, for example,
 
 ```ts
 class BankAccount {
@@ -787,12 +795,6 @@ As a result, teaching functional programming is like teaching a Ptolemaic astron
 > A new scientific truth does not triumph by convincing its opponents and making them see the light, but rather because its opponents eventually die, and a new generation grows up that is familiar with it — Max Plank, [autobiography](https://pubs.acs.org/doi/pdf/10.1021/ed027p288.1), quoted by Thomas Kuhn, [The Structure of Scientific Revolutions](https://en.wikipedia.org/wiki/The_Structure_of_Scientific_Revolutions)
 
 Nevertheless, the functional view is indeed expressible as a result of the work put in above. We can see change as creating something new, instead of altering something of old, and time as a series of successive states. We can alter our language and reimagine our physical reality to support a functional view of change, state and time.
-
-[^1]: Many of the insights underlying this post can be found in original form in the [Structure and Interpretation of Computer Programs ](https://web.mit.edu/alexmv/6.037/sicp.pdf) (SICP). There you will find a life-altering discussion of the same topics using Scheme, a Lisp dialect like Clojure. All code examples included here however, even if borrowed, will be couched in terms of JavaScript. If you know JavaScript and are unfamiliar with Scheme, this article may be immediately accessible to you without first learning how “[to balance all those parens](https://crockford.com/javascript/javascript.html).” Little is lost in translation as well. JavaScript has first-class functions (i.e. lambdas), closures (i.e. function-delimited lexical scoping) and generally thrives when used functionally.
-
-    > JavaScript’s functions are first class objects with (mostly) lexical scoping. JavaScript is the first lambda language to go mainstream. Deep down, JavaScript has more in common with Lisp and Scheme than with Java. It is Lisp in C’s clothing. — Douglas Crockford, [JavaScript: The Good Parts](https://www.oreilly.com/library/view/javascript-the-good/9780596517748/ch01s02.html)
-
-    There is even an ongoing [academic effort](https://sicp.comp.nus.edu.sg/) to translate the full text of SICP into JavaScript. Also considered, JavaScript is a close cousin of TypeScript, which enables traditional object-oriented constructs like `private` and `public` and functional constructs like `readonly` and `as const` at compile time. Perhaps in JavaScript (and TypeScript), we get enough support of functional and object-oriented programming paradigms to enable a discussion of both within a single, ubiquitous language.
 
 [^2]: Immutability is an important part of the equation as well. We’ll cover this soon in the section titled [Unchangeability is Fundamental to Functional Programming](#unchangeability-is-fundamental-to-functional-semantics).
 [^3]: Traditionally, object-oriented programming is also associated with code reuse through inheritance, among other patterns, that reinforce the object model.
