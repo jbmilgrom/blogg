@@ -10,7 +10,7 @@ That functional programming opposes object-oriented programming in some fundamen
 
 ## Object-Oriented Programming
 
-_Object-oriented programming_ has come to signify a common language for modeling the behavior of objects.[^3] _Methods_ leverage privileged access to proscribe the ways in which private attributes may be viewed or changed. A _class_ specifies the blueprint for creating object instances of a certain kind. Together, these constructs may create computational objects that simulate real objects. This `bankAccount` object in TypeScript, for example,
+_Object-oriented programming_ has come to signify a common language for modeling the behavior of objects.[^3] _Methods_ leverage privileged access to proscribe the ways in which private attributes may be viewed or changed. A _class_ specifies the blueprint for creating object instances of a certain kind. Together, these constructs may create computational objects that simulate real objects. This `bankAccount` object in TypeScript[^1], for example,
 
 ```ts
 class BankAccount {
@@ -96,7 +96,7 @@ A mutable variable underlies the reassignment in both cases, whether or not an o
 
 ## Functional Programming
 
-Procedures that produce the same result when provided the same argument can be viewed as computing mathematical functions. For example, a `decrement100` procedure in JavaScript[^1],
+Procedures that produce the same result when provided the same argument can be viewed as computing mathematical functions. For example, a `decrement100` procedure in JavaScript,
 
 ```js
 const decrement100 = function (x) {
