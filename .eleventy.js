@@ -3,6 +3,7 @@ const pluginRss = require("@11ty/eleventy-plugin-rss");
 const markdownIt = require("markdown-it");
 const markdownItAnchor = require("markdown-it-anchor");
 const markdownItFootnote = require("markdown-it-footnote");
+const markdownItTOC = require("markdown-it-toc-done-right");
 
 const sourceDirectory = "src";
 const md = markdownIt({
@@ -10,11 +11,15 @@ const md = markdownIt({
   linkify: true,
   typographer: true,
 });
-md.use(markdownItAnchor, {
-  permalink: true,
-  permalinkClass: "direct-link",
-  permalinkSymbol: "#",
-}).use(markdownItFootnote);
+
+md
+  .use(markdownItAnchor, {
+    permalink: true,
+    permalinkClass: "direct-link",
+    permalinkSymbol: "#",
+  })
+  .use(markdownItFootnote)
+  .use(markdownItTOC, {listType: "ol"});
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy(`${sourceDirectory}/media`);
