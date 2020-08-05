@@ -120,7 +120,11 @@ video {
 }
 
 .toc-tag a {
-  border-bottom: var(--border-size) solid black;
+  border-bottom: var(--underline);
+}
+
+.toc-tag a:hover {
+  border-bottom: 2px solid var(--black);
 }
 
 @media (max-width: 624px) {
@@ -137,7 +141,8 @@ video {
     right: 1vw;
   }
 
-  .toc-tag a {
+  .toc-tag a,
+  .toc-tag a:hover {
     border-bottom: none;
   }
 }
