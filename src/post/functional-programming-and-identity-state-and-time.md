@@ -779,11 +779,11 @@ Similarly, object-orientation pervades our language, on the one hand. That “ob
 
 > Modeling with objects is powerful and intuitive, largely because this matches the perception of interacting with a world of which we are part. — [SICP](https://web.mit.edu/alexmv/6.037/sicp.pdf) Section 3.5.5
 
-Look again around the room, bus, park or wherever you find yourself reading this sentence, and you will likely identify “a collection of distinct objects ,” such as dogs, people, and trees, “whose behaviors may change over time.”
+Look again around the room, bus, park or wherever you find yourself reading this sentence, and you will likely identify “a collection of distinct objects,” such as dogs, people, and trees, “whose behaviors may change over time.”
 
 Yet, the behavior of a functional program cannot be described in terms that attribute change to the enduring identity of objects as time elapses. And because of the dominance of object-orientation as reflected in the presumptions of our natural language, we cannot so much as describe the semantics of a functional program except through altering our language and reconstituting our physical reality. Meaningful “identity” must disappear in favor of change itself. “State” must describe the result of change instead of an object quality. “Time” must describe discrete state changes rather than any continuous dynamicness attributable to all objects.
 
-No wonder the functional model may still illicit disbelief. This essay can be seen as an uphill climb against the gravity of a dominant paradigm. The functional view is perhaps expressible now, but only because of the arduous work put in above. Our natural language is not so easily distorted, violated and repurposed and our thought patterns are comorbid with our language.
+No wonder the functional model may still illicit disbelief. This essay can be seen as an uphill climb against the gravity of a dominant paradigm; the functional view is perhaps expressible now, but only because of the arduous work put in above. Our natural language is not so easily distorted, violated and repurposed and our thought patterns are comorbid with our language.
 
 > Until those changes had occurred, language itself resisted the invention and introduction of the sought after new theories. The same resistance by language is, I take it, the reason for Planck’s switch from ‘‘element’’ and ‘‘resonator’’ to ‘‘quantum’’ and ‘‘oscillator.’’ Violation or distortion of a previously unproblematic scientific language is the touchstone for revolutionary change. — Thomas Kuhn, [What are Scientific Revolutions?](http://sites.fas.harvard.edu/~hsci161/Sci._Rev._Reader/12_S6_Kuhn.pdf)
 
@@ -794,7 +794,7 @@ As a result, teaching functional programming is like teaching a Ptolemaic astron
 Nevertheless, the functional view is indeed expressible as a result of the work put in above. We can see change as creating something new, instead of altering something of old, and time as a series of successive states. We can alter our language and reimagine our physical reality to support a functional view of change, state and time.
 
 [^2]: Immutability is an important part of the equation as well. We’ll cover this soon in the section titled [Unchangeability is Fundamental to Functional Programming](#unchangeability-is-fundamental-to-functional-semantics).
-[^3]: Traditionally, object-oriented programming is also associated with data abstraction and code reuse through inheritance, among other patterns, that reinforce the object model.
+[^3]: Traditionally, [object-oriented programming](https://en.wikipedia.org/wiki/Object-oriented_programming) is also associated with data abstraction and code reuse through inheritance, among other patterns, that reinforce the object model.
 [^4]: The creator of Clojure at it again:
 
     > But as soon as we introduce… the idea that the value of a variable can change, a variable can no longer be simply a name. Now a variable somehow refers to a place where a value can be stored, and the value stored at this place can change.” — Rich Hickey, [The Value of Values](https://github.com/matthiasn/talk-transcripts/blob/master/Hickey_Rich/ValueOfValuesLong.md)
