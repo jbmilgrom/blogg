@@ -133,8 +133,8 @@ video {
 @media (max-width: 700px) {
   .toc-tag {
     font-size: 1.2em;
-    bottom: 1.5vw;
-    right: .8vw;
+    bottom: 2vw;
+    right: 1vw;
   }
 
   .toc-tag a {
