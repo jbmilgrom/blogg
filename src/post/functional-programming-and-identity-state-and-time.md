@@ -765,7 +765,7 @@ In both cases, pieces of static information may be listed, one _after_ another. 
 
 > We were all object-oriented programmers at one point in time — Rich Hickey, [The Value of Values](https://github.com/matthiasn/talk-transcripts/blob/master/Hickey_Rich/ValueOfValuesLong.md)
 
-Assimilation of functional semantics with any regular conception of the physical world is no easy task. I kicked around chapter 3 of [SICP](https://web.mit.edu/alexmv/6.037/sicp.pdf) for over a year before wrapping my head around it. Look again around the room, bus or park and you will likely still identify distinct objects that may change over time. That we may still be experiencing disbelief at the thought of a new model for time suggests a larger game at play.
+Assimilation of functional semantics with any regular conception of the physical world is no easy task. Look again around the room, bus or park and you will likely still identify distinct objects that may change over time. I kicked around chapter 3 of [SICP](https://web.mit.edu/alexmv/6.037/sicp.pdf) for over a year before wrapping my head around it. That we may still be experiencing disbelief at the thought of a new model for time suggests a larger game at play.
 
 Dominant scientific paradigms pervade our language, on the one hand, and way of thinking, on the other.
 
