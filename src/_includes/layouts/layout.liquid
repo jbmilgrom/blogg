@@ -23,8 +23,11 @@
     <main class="{{ templateClass }}">
 
       {{ content }}
-    </main>
 
+    </main>
+    {% if hasTOC %}
+      <span class="toc-tag"><a href="#toc">&#8593;</a></span>
+    {% endif %}
     <footer>
       <ul>
         <li>

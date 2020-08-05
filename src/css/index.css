@@ -112,10 +112,33 @@ video {
   max-width: var(--main-width);
 }
 
+.toc-tag {
+  position: fixed;
+  bottom: 1.5vw;
+  right: 1.5vw;
+  font-size: 1.4em;
+}
+
+.toc-tag a {
+  border-bottom: var(--border-size) solid black;
+}
+
 @media (max-width: 624px) {
   img,
   video {
     max-width: 100%;
+  }
+}
+
+@media (max-width: 700px) {
+  .toc-tag {
+    font-size: 1.2em;
+    bottom: 1.5vw;
+    right: .8vw;
+  }
+
+  .toc-tag a {
+    border-bottom: none;
   }
 }
 

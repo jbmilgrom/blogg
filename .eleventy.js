@@ -19,7 +19,7 @@ md
     permalinkSymbol: "#",
   })
   .use(markdownItFootnote)
-  .use(markdownItTOC, {listType: "ol"});
+  .use(markdownItTOC, {listType: "ol", containerId: "toc"});
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy(`${sourceDirectory}/media`);
