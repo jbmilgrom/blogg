@@ -6,11 +6,17 @@ layout: layouts/post.liquid
 hasTOC: yes
 ---
 
+[toc]
+
+## Introduction
+
 That functional programming opposes object-oriented programming in some fundamental way is a widely-held programming cliche. We list features like immutability, functions and composition in contrast to mutability, classes and inheritance. We tout Clojure and Haskel as functional languages on one end of the spectrum and C++ and Java as object-oriented languages on the other. Articulating the makeup of the spectrum is another story altogether however. None of this trivia reveals why certain features are seen together or apart, why languages themselves may skew in one direction or another, or any inherent differences in program semantics. 
 
-Nevertheless, the “functions vs. objects” cliche is an artifact of a profound truth about program structures and semantics. Like up and down and oil and water, functional and object-oriented programming indeed cannot coexist. We may choose objects or functions, but not both at once, as advertised. Moreover, the choice between paradigms has dramatic implications for program semantics, offering competing “world-views” involving concepts as basic as identity, change, state and even time. Object-oriented programs produce “distinct objects whose behaviors may _change over time_.” That may seem obvious. Look around the room, bus, park or wherever you find yourself reading this sentence, and you will also likely identify "a collection of distinct objects ," such as dogs, people or trees, "whose behaviors may change over time." However, the ubiquity of this interpretation obscures the fact of interpretation. It turns out that objects are not the only means by which to decompose and conceptualize the world and programs alike, and change can be reformulated along different lines. Functional programs offer an alternative world-view. They do not include identifiable objects. Yet, they may include state that changes over time. Subtract objects and keep change, and what remains is state transitions between _discrete_ _moments in time_ that may be seen together as “streams of information that flow.” — [Structure and Interpretation of Computer Programs](https://web.mit.edu/alexmv/6.037/sicp.pdf) (SICP), Section 3
+Nevertheless, the “functions vs. objects” cliche is an artifact of a profound truth about program structures and semantics. Like up and down and oil and water, functional and object-oriented programming indeed cannot coexist. We may choose objects or functions, but not both at once, as advertised. Moreover, the choice between paradigms has dramatic implications for program semantics, offering competing “world-views” that involve concepts as basic as identity, change, state and even time.
 
-[toc]
+The object-oriented world-view may seem so obvious as to be without alternative. Look around the room, bus, park or wherever you find yourself reading this sentence, and you will likely identify a collection of distinct objects, such as dogs, people or trees, whose behaviors may change over time. Similarly, object-oriented programs produce “distinct objects whose behaviors may _change over time_.” — [Structure and Interpretation of Computer Programs](https://web.mit.edu/alexmv/6.037/sicp.pdf) (SICP), Section 3
+
+However, the obviousness and ubiquity of this interpretation belie the fact of interpretation. It turns out that objects are not the only means by which to decompose and conceptualize world and program alike, and change can be reformulated along different lines. Indeed, functional programs offer an alternative world-view. They do not include identifiable objects. Suprisingly, however, they may include state and changes over time. What remains are state transitions between _discrete_ _moments in time_ that may be seen together as “streams of information that flow.” ([SICP](https://web.mit.edu/alexmv/6.037/sicp.pdf) Section 3)
 
 ## Preface: Why JavaScript 
 
@@ -208,7 +214,7 @@ bankAccount.withdraw(20);
 bankAccount.checkBalance(); // 80
 ```
 
-`balance` is accessible only through the functions `checkBalance` and `withdraw`, which proscribe the manner in which such access can occur. `bankAccount` behaves like a “bank account” even though the functions `checkBalance` and `withdraw` have gained privileged access to private data through the use of a function closure, instead of through explicit syntactic constructs. Object-oriented syntax is also insufficient in and of itself to achieve object-oriented semantics. A `bankAccount` “object” that avoids maintaining any underlying balance state
+`balance` is accessible only through the functions `checkBalance` and `withdraw`, which proscribe the manner in which such access can occur. `bankAccount` behaves like a “bank account” even though the functions `checkBalance` and `withdraw` have gained privileged access to private data through the use of a function closure, instead of through explicit syntax. Object-oriented syntax is also insufficient in and of itself to achieve object-oriented semantics. A `bankAccount` “object” that avoids maintaining any underlying balance state
 
 ```ts
 class BankAccount {
