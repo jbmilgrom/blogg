@@ -510,7 +510,7 @@ Object-oriented programming provides intuitive building-blocks for creating stat
 
 <script async src="//jsfiddle.net/jmilgrom/notc93Lv/embed/"></script>
 
-breaks down naturally into `withdrawalAmount` and and `bankAccount` objects, representing the chosen amount to be withdrawn and the user account underlying the session. respectively. The withdrawal amounts are incorporated by and read from `withdrawalAmount`. Withdrawals are incorporated by, and balance confirmations are read from, `bankAccount`. The current balance and the amount to potentially withdraw — the state of the program — are reflected directly by the state of `bankAccount` and `withdrawalAmount` — the state of its composite objects.
+breaks down naturally into `withdrawalAmount` and and `bankAccount` objects, representing the chosen amount to be withdrawn and the user account underlying the session, respectively. The withdrawal amounts are incorporated by and read from `withdrawalAmount`. Withdrawals are incorporated by, and balance confirmations are read from, `bankAccount`. The current balance and the amount to potentially withdraw — the state of the program — are reflected directly by the state of `bankAccount` and `withdrawalAmount` — the state of its composite objects.
 
 ### Time
 
