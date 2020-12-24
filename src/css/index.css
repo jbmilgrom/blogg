@@ -147,6 +147,11 @@ video {
   }
 }
 
+.introductory-caveat {
+  padding: 1em;
+  border: 2px dashed var(--transparent-black);
+}
+
 nav.table-of-contents {
   line-height: 2;
   padding-left: 1em;

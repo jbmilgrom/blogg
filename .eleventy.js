@@ -4,6 +4,8 @@ const markdownIt = require("markdown-it");
 const markdownItAnchor = require("markdown-it-anchor");
 const markdownItFootnote = require("markdown-it-footnote");
 const markdownItTOC = require("markdown-it-toc-done-right");
+const markdownItAttrs = require('markdown-it-attrs');
+
 
 const sourceDirectory = "src";
 const md = markdownIt({
@@ -19,7 +21,8 @@ md
     permalinkSymbol: "#",
   })
   .use(markdownItFootnote)
-  .use(markdownItTOC, {listType: "ol", containerId: "toc"});
+  .use(markdownItTOC, {listType: "ol", containerId: "toc"})
+  .use(markdownItAttrs);
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy(`${sourceDirectory}/media`);
