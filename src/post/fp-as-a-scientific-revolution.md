@@ -5,7 +5,7 @@ tags: post
 layout: layouts/post.liquid
 ---
 
-_Excerpted from [Functional Programming and the Semantics of Change, State & Time](/functional-programming-and-identity-state-and-time/#addendum%3A-functional-programming-as-a-scientific-revolution) because somethings you need to see the waterfall to want to take the hike._
+Excerpted from [Functional Programming and the Semantics of Change, State & Time](/post/functional-programming-and-identity-state-and-time/#addendum%3A-functional-programming-as-a-scientific-revolution) because sometimes you need to see the waterfall to want to take the hike.
 
 ____
 
@@ -30,7 +30,7 @@ Look again around the room, bus, park or wherever you find yourself reading this
 
 Yet, the behavior of a functional program cannot be described in terms that attribute change to the enduring identity of objects as time elapses. And because of the dominance of object-orientation as reflected in the presumptions of our natural language, we cannot so much as describe the semantics of a functional program except through altering our language and reconstituting our physical reality. Meaningful “identity” must disappear in favor of change itself. “State” must describe the result of change instead of an object quality. “Time” must describe discrete state changes rather than any continuous dynamicness attributable to all objects.
 
-No wonder the functional model may still illicit disbelief. This essay can be seen as an uphill climb against the gravity of a dominant paradigm; the functional view is perhaps expressible now, but only because of the arduous work put in above. Our natural language is not so easily distorted, violated and repurposed and our thought patterns are comorbid with our language.
+No wonder the functional model may still illicit disbelief. This essay can be seen as an uphill climb against the gravity of a dominant paradigm; the functional view is perhaps expressible now, but only because of [the arduous work put in above](/post/functional-programming-and-identity-state-and-time). Our natural language is not so easily distorted, violated and repurposed and our thought patterns are comorbid with our language.
 
 > Until those changes had occurred, language itself resisted the invention and introduction of the sought after new theories. The same resistance by language is, I take it, the reason for Planck’s switch from ‘‘element’’ and ‘‘resonator’’ to ‘‘quantum’’ and ‘‘oscillator.’’ Violation or distortion of a previously unproblematic scientific language is the touchstone for revolutionary change. — Thomas Kuhn, [What are Scientific Revolutions?](http://sites.fas.harvard.edu/~hsci161/Sci._Rev._Reader/12_S6_Kuhn.pdf)
 
@@ -38,4 +38,4 @@ As a result, teaching functional programming is like teaching a Ptolemaic astron
 
 > A new scientific truth does not triumph by convincing its opponents and making them see the light, but rather because its opponents eventually die, and a new generation grows up that is familiar with it — Max Plank, [autobiography](https://pubs.acs.org/doi/pdf/10.1021/ed027p288.1), quoted by Thomas Kuhn, [The Structure of Scientific Revolutions](https://en.wikipedia.org/wiki/The_Structure_of_Scientific_Revolutions)
 
-Nevertheless, the functional view is indeed expressible as a result of the work put in above. We can see change as creating something new, instead of altering something of old, and time as a series of successive states. We can alter our language and reimagine our physical reality to support a functional view of change, state and time.
+Nevertheless, the functional view is indeed expressible as a result of the [work put in above](/post/functional-programming-and-identity-state-and-time). We can see change as creating something new, instead of altering something of old, and time as a series of successive states. We can alter our language and reimagine our physical reality to support a functional view of change, state and time.
