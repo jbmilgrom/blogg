@@ -5,7 +5,7 @@ tags: post
 layout: layouts/post.liquid
 ---
 
-Excerpted from [Functional Programming and the Semantics of Change, State & Time](/post/functional-programming-and-identity-state-and-time/#addendum%3A-functional-programming-as-a-scientific-revolution) because sometimes you need to see the waterfall to want to take the hike.
+Excerpted from [Functional Programming and the Semantics of Change, State & Time](/post/functional-programming-and-identity-state-and-time/) because sometimes you need to see the waterfall to want to take the hike.
 
 ____
 
