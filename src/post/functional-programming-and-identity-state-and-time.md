@@ -6,8 +6,6 @@ layout: layouts/post.liquid
 hasTOC: yes
 ---
 
-[toc]
-
 ## Introduction
 
 That functional programming opposes object-oriented programming in some fundamental way is a widely-held programming cliche. We list features like immutability, functions and composition in contrast to mutability, classes and inheritance. We tout Clojure and Haskel as functional languages on one end of the spectrum and C++ and Java as object-oriented languages on the other. Articulating the makeup of the spectrum is another story altogether however. None of this trivia reveals why certain features are seen together or apart, why languages themselves may skew in one direction or another, or any inherent differences in program semantics. 
@@ -17,6 +15,8 @@ Nevertheless, the “functions vs. objects” cliche is an artifact of a profoun
 The object-oriented world-view may seem so obvious as to be without alternative. Look around the room, bus, park or wherever you find yourself reading this sentence, and you will likely identify a collection of distinct objects, such as dogs, people or trees, whose behaviors may change over time. Similarly, object-oriented programs produce “distinct objects whose behaviors may _change over time_.” — [Structure and Interpretation of Computer Programs](https://web.mit.edu/alexmv/6.037/sicp.pdf) (SICP), Section 3
 
 However, the obviousness and ubiquity of this interpretation belie the fact of interpretation. It turns out that objects are not the only means by which to decompose and conceptualize world and program alike, and change can be reformulated along different lines. Indeed, functional programs offer an alternative world-view. They do not include identifiable objects. Suprisingly, however, they may include state and changes over time. What remains are state transitions between _discrete_ _moments in time_ that may be seen together as “streams of information that flow.” ([SICP](https://web.mit.edu/alexmv/6.037/sicp.pdf) Section 3)
+
+[toc]
 
 ## Preface: Why JavaScript 
 
