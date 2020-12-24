@@ -5,6 +5,7 @@ tags: post
 layout: layouts/post.liquid
 ---
 
+____
 Excerpted from [Functional Programming and the Semantics of Change, State & Time](/post/functional-programming-and-identity-state-and-time/) because sometimes you need to see the waterfall to want to take the hike.
 
 ____
