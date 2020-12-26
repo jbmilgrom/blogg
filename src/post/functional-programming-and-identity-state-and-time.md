@@ -499,7 +499,7 @@ decomposes naturally into `withdrawalAmount` and and `bankAccount` objects, repr
 
 > If we wish to write programs that model this kind of natural decomposition in our world (as we see it from our viewpoint as a part of that world) with structures in our computer, we make computational objects that… must change with time. — [SICP](https://web.mit.edu/alexmv/6.037/sicp.pdf) Section 3.5.5
 
-Objects insinuate a familiar model for time. Objects change — as we discussed, the notion of an “object,” having parts that change without changing the identity of the whole, articulates this ability. The flip-side to change under enduring identify, however, is time. Since objects change, _when_ an object is examined is vital to the examination, it goes without saying.
+When we model objects, we also model time. Objects change — as we discussed, the notion of an “object,” having parts that change without changing the identity of the whole, articulates this ability. The flip-side to change under enduring identify, however, is time. Since objects change, _when_ an object is examined is vital to the examination, it goes without saying.
 
 Look no further than the object representations of our computer programs. The “having parts that can change without changing the identity of the whole” quality of `bankAccount` in our ATM program, for example, is implemented by `withdraw`.
 
@@ -539,7 +539,7 @@ An object with a single read method (like `bankAccount`) in a sense defines _the
 
 > Is there another approach? Can we avoid identifying time in the computer with time in the modeled world? Must we make the model change with time in order to model phenomena in a changing world? — [SICP](https://web.mit.edu/alexmv/6.037/sicp.pdf) Section 3.5
 
-Building stateful functional programs is less intuitive. To start, notice that imperative iteration can be restructured into functional iteration by recursively calling an iterative function with the results of the previous call. An imperative implementation of factorial, for example,
+Building stateful functional programs is less straightforward. To start, notice that imperative iteration can be restructured into functional iteration by recursively calling an iterative function with the results of the previous call. An imperative implementation of factorial, for example,
 
 ```js
 const factorial = (n) => {
