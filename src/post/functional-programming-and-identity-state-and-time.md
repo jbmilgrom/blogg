@@ -489,19 +489,19 @@ Now, what about programs. Some real programs are designed to produce output base
 
 > Modeling with objects is powerful and intuitive, largely because this matches the perception of interacting with a world of which we are part. — [SICP](https://web.mit.edu/alexmv/6.037/sicp.pdf) Section 3.5.5
 
-Object-oriented programming provides intuitive building-blocks for creating stateful programs. An ATM program, for example, that allows the user to set a “withdrawal amount” and effect a withdraw,
+Creating stateful object-oriented programs is straigtforward. An ATM program, for example, that allows the user to set a “withdrawal amount” and effect a withdraw,
 
 <script async src="//jsfiddle.net/jmilgrom/notc93Lv/embed/"></script>
 
-breaks down naturally into `withdrawalAmount` and and `bankAccount` objects, representing the chosen amount to be withdrawn and the user account underlying the session, respectively. The withdrawal amounts are incorporated by and read from `withdrawalAmount`. Withdrawals are incorporated by, and balance confirmations are read from, `bankAccount`. The current balance and the amount to potentially withdraw — the state of the program — are reflected directly by the state of `bankAccount` and `withdrawalAmount` — the state of its composite objects.
+decomposes naturally into `withdrawalAmount` and and `bankAccount` objects, representing the chosen amount to be withdrawn and the user account underlying the session, respectively. The withdrawal amounts are incorporated by and read from `withdrawalAmount`. Withdrawals are incorporated by, and balance confirmations are read from, `bankAccount`. The current balance and the amount to potentially withdraw — the state of the program — are reflected directly by the state of `bankAccount` and `withdrawalAmount` — the state of its composite objects.
 
 ### Time
 
 > If we wish to write programs that model this kind of natural decomposition in our world (as we see it from our viewpoint as a part of that world) with structures in our computer, we make computational objects that… must change with time. — [SICP](https://web.mit.edu/alexmv/6.037/sicp.pdf) Section 3.5.5
 
-Objects are intuitive in large part because they are consistent with a familiar model for time. Objects change — as we discussed, the notion of an “object,” having parts that change without changing the identity of the whole, articulates this ability. The flip-side to change is time. Since objects change, _when_ an object is examined is vital to the examination, it goes without saying.
+Objects insinuate a familiar model for time. Objects change — as we discussed, the notion of an “object,” having parts that change without changing the identity of the whole, articulates this ability. The flip-side to change under enduring identify, however, is time. Since objects change, _when_ an object is examined is vital to the examination, it goes without saying.
 
-Look no further than the object representations of our computer programs.  The “having parts that can change without changing the identity of the whole” quality of `bankAccount` in our ATM program, for example, is implemented by `withdraw`.
+Look no further than the object representations of our computer programs. The “having parts that can change without changing the identity of the whole” quality of `bankAccount` in our ATM program, for example, is implemented by `withdraw`.
 
 ```ts
 class BankAccount {
