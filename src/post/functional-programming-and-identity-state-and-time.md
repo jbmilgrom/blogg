@@ -499,7 +499,7 @@ decomposes naturally into `withdrawalAmount` and and `bankAccount` objects, repr
 
 > If we wish to write programs that model this kind of natural decomposition in our world (as we see it from our viewpoint as a part of that world) with structures in our computer, we make computational objects that… must change with time. — [SICP](https://web.mit.edu/alexmv/6.037/sicp.pdf) Section 3.5.5
 
-When we model objects, we also model time. Objects change — as we discussed, the notion of an “object,” having parts that change without changing the identity of the whole, articulates this ability. The flip-side to change, however, is time. Since objects change, _when_ an object is examined is vital to the examination, it goes without saying.
+When we model objects, we also model time. Objects change — as we discussed, the notion of an “object,” having parts that change without changing the identity of the whole, articulates this ability. The flip-side to changing objects, however, is time. Since objects change, _when_ an object is examined is vital to the examination, it goes without saying.
 
 Look no further than the object representations of our computer programs. The “having parts that can change without changing the identity of the whole” quality of `bankAccount` in our ATM program, for example, is implemented by `withdraw`.
 
@@ -523,7 +523,7 @@ bankAccount.withdraw(20);
 bankAccount.checkBalance(); // 80
 ```
 
-The flip-side to change is time. In addition to changing the associated balance, any call to `withdraw` also “delineates moments in time” _when_ `balance` _may_ change. Whether `bankAccount.checkBalance()` resolves to `100` or `80` “depends not only on the expression itself, but also on whether the evaluation occurs before or after these moments.” As a result, by modeling objects, “we are forced to admit time into our computational models.” ([SICP](https://web.mit.edu/alexmv/6.037/sicp.pdf) Section 3.4)
+The flip-side to changing objects is time. In addition to changing the associated balance, any call to `withdraw` also “delineates moments in time” _when_ `balance` _may_ change. Whether `bankAccount.checkBalance()` resolves to `100` or `80` “depends not only on the expression itself, but also on whether the evaluation occurs before or after these moments.” As a result, by modeling objects, “we are forced to admit time into our computational models.” ([SICP](https://web.mit.edu/alexmv/6.037/sicp.pdf) Section 3.4)
 
 ### Stateful
 
