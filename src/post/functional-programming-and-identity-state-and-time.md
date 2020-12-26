@@ -499,7 +499,7 @@ decomposes naturally into `withdrawalAmount` and and `bankAccount` objects, repr
 
 > If we wish to write programs that model this kind of natural decomposition in our world (as we see it from our viewpoint as a part of that world) with structures in our computer, we make computational objects that… must change with time. — [SICP](https://web.mit.edu/alexmv/6.037/sicp.pdf) Section 3.5.5
 
-When we model objects, we also model time. Objects change — as we discussed, the notion of an “object,” having parts that change without changing the identity of the whole, articulates this ability. The flip-side to changing objects, however, is time. Since objects change, _when_ an object is examined is vital to the examination, it goes without saying.
+When we model objects, we also model time. Objects change — as we discussed, the notion of an “object,” having parts that change without changing the identity of the whole, articulates this ability. The flip-side to changing objects is time. Since objects change, _when_ an object is examined is vital to the examination, it goes without saying.
 
 Look no further than the object representations of our computer programs. The “having parts that can change without changing the identity of the whole” quality of `bankAccount` in our ATM program, for example, is implemented by `withdraw`.
 
