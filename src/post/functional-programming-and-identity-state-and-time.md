@@ -12,7 +12,7 @@ Nevertheless, the “functions vs. objects” cliche is an artifact of a profoun
 
 The object-oriented world-view may seem so obvious as to be without alternative. Look around the room, bus, park or wherever you find yourself reading this sentence, and you will likely identify a collection of distinct objects, such as dogs, people and trees, whose behaviors may change over time. Similarly, object-oriented programs produce “distinct objects whose behaviors may change over time.” — [Structure and Interpretation of Computer Programs](https://web.mit.edu/alexmv/6.037/sicp.pdf) (SICP), Section 3
 
-However, the obviousness and ubiquity of this interpretation belie the fact of interpretation. It turns out that objects are not the only means by which to decompose and conceptualize world and program alike, and change can be reformulated along different lines. Indeed, functional programs offer an alternative world-view. They do not include identifiable objects. Suprisingly, however, they may include state and change over time. But the paradigm has shifted. Instead of objects that change over time, functional programs consist of state transitions between _discrete_ _moments in time_ that may be seen together as “streams of information that flow.” ([SICP](https://web.mit.edu/alexmv/6.037/sicp.pdf) Section 3)
+However, the obviousness and ubiquity of this interpretation belie the fact of interpretation. It turns out that objects are not the only means by which to decompose and conceptualize world and program alike, and change can be reformulated along different lines. Indeed, functional programs offer an alternative world-view. They do not include identifiable objects. Surprisingly, however, they may include state and change over time. But the paradigm has shifted. Instead of objects that change over time, functional programs consist of state transitions between _discrete_ _moments in time_ that may be seen together as “streams of information that flow.” ([SICP](https://web.mit.edu/alexmv/6.037/sicp.pdf) Section 3)
 
 [toc]
 
@@ -489,7 +489,7 @@ Now, what about programs. Some real programs are designed to produce output base
 
 > Modeling with objects is powerful and intuitive, largely because this matches the perception of interacting with a world of which we are part. — [SICP](https://web.mit.edu/alexmv/6.037/sicp.pdf) Section 3.5.5
 
-Creating stateful object-oriented programs is straigtforward. An ATM program, for example, that allows the user to set a “withdrawal amount” and effect a withdraw,
+Creating stateful object-oriented programs is straightforward. An ATM program, for example, that allows the user to set a “withdrawal amount” and effect a withdraw,
 
 <script async src="//jsfiddle.net/jmilgrom/notc93Lv/embed/"></script>
 
@@ -529,7 +529,7 @@ The flip-side to changing objects is time. In addition to changing the associate
 
 Object-oriented language constructs reify objects. Once identified expressly, objects can be composed in other objects, received and returned by object methods, and generally manipulated like numbers, strings and other [first-class citizens](https://en.wikipedia.org/wiki/First-class_citizen) of the program, even though merely constructs in an unexecuted file. No such affordances are made for the representation of state, on the other hand. State is a side-kick, a property, a quality (i.e. “stateful” or “statefulness”) adjacent to objects. And unlike the objects to which they may attach, state can only be _observed_ at runtime, rather than _expressed_ directly in a unexecuted file.
 
-`bankAccount` and `withdrawalAmount` identify objects, for example. Once identified, they can be recieved and returned from object methods and generally manipulated like other first-class citizens of the program, even though merely constructs in an unexectued file. By reifying these objects, however, the `balance` and `amount` state are religated to object qualities, observeable at runtime only through calls to `checkBalance` and `get`, respectively.
+`bankAccount` and `withdrawalAmount` identify objects, for example. Once identified, they can be received and returned from object methods and generally manipulated like other first-class citizens of the program, even though merely constructs in an unexecuted file. By reifying these objects, however, the `balance` and `amount` state are relegated to object qualities, observable at runtime only through calls to `checkBalance` and `get`, respectively.
 
 That objects indeed lack any express notion of state is highlighted by object signatures with more than one getter, where any such notion may only exist through definition, signature by signature:
 
