@@ -483,24 +483,7 @@ may share a balance at some point in time. But even if they start with the same 
 
 In this light, object-oriented programming can be seen as the diametric opposite of functional programming. Objects are inherently changeable. Moreover, changeability and “object” are intertwined as concepts. Yet, changeability undermines functional programming. Just as oil cannot inhabit the same physical space as water, object-oriented programming cannot occupy the same virtual space as functional programming. Use of one excludes the other. As a result, when writing programs, we may choose mutability or immutability, objects or functions, but not both at once.
 
-Yet, whatever paradigm we choose must include a model for state, and perhaps time. As we saw above, programs that are composed of functions themselves model well-behaved state*less* mathematical functions,
-
-```js
-const square = (x) => x * x;
-const sum = (x, y) => x + y;
-
-// PSUEDO CODE
-sum(sum(square(USER_INPUT_1), square(USER_INPUT_2)), square(USER_INPUT_3));
-
-// REPL PSUEDO CODE
-// > run functionalProgram.js with USER_INPUT_1=1, USER_INPUT_2=2, USER_INPUT_3=3,
-// > 14
-```
-
-<figcaption>The output of this program depends only on its input.
-</figcaption>
-
-since they produce the same output provided the same input. Some real programs are also designed to produce output based on input. Ideally, compilers output the same binaries provided the same input files, for example. More frequently, however, programs require state, and the current state of the program, _together_ with any user input, will determine the next state or output of the program. Such is the case with our example ATM example, where the current balance is crucial to calculating any subsequent balance post withdrawal. ATM machines are stateful programs.
+Now, what about programs. Some real programs are designed to produce output based solely on input. Ideally, compilers output the same binaries provided the same input files, for example. More frequently, however, programs require state, and the current state of the program, _together_ with any user input, will determine the next state or output of the program. Such is the case with our ATM example, where the current balance is crucial to calculating any subsequent balance post withdrawal. To be generally useful, either paradigm must include a model for state, and perhaps time, even if composed entirely of well-behaved state*less* mathematical functions.
 
 ## Stateful Object-Oriented Programs
 
