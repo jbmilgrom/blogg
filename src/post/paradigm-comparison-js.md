@@ -1,5 +1,5 @@
 ---
-title: Implementing the Same Stateful Program in both Object-Oriented and Functional Programming Paradigms, Using Javascript
+title: Using Javascript to Implement the Same Stateful Program in both Object-Oriented and Functional Programming Paradigms
 date: 2021-01-05
 tags: post
 layout: layouts/post.liquid
