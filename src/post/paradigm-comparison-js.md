@@ -3,14 +3,11 @@ title: Using Javascript to Implement the Same Stateful Program in both Object-Or
 date: 2021-01-05
 tags: post
 layout: layouts/post.liquid
-hasTOC: yes
 ---
 
 Excerpted from [Functional Programming and the Semantics of Change, State & Time](/post/functional-programming-and-identity-state-and-time/#now%2C-what-about-programs). {.introductory-caveat}
 
 Some real programs are designed to produce output based solely on input. Ideally, compilers output the same binaries provided the same input files, for example. More frequently, however, programs require state, and user input _together_ with the current state of the program determine the next state or output of the program. Such is the case with our ATM example, where the current balance is crucial to calculating any subsequent balance post withdrawal. To be generally useful, either paradigm must include a model for state, and perhaps time, even if composed entirely of well-behaved state*less* mathematical functions.
-
-[toc]
 
 ## Stateful Object-Oriented Programs
 
