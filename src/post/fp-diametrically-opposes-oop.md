@@ -1,5 +1,5 @@
 ---
-title: Functional Programming Diametrically Opposes Object-Oriented Programming
+title: Functional & Object-Oriented Programming are Diametrically Opposed
 date: 2021-01-07
 tags: post
 layout: layouts/post.liquid
