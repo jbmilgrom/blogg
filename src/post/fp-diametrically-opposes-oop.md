@@ -11,6 +11,8 @@ That functional programming opposes object-oriented programming in some fundamen
 
 Nevertheless, the “functions vs. objects” cliche is an artifact of a profound truth about program structures and semantics. Like up and down and oil and water, functional and object-oriented programming indeed cannot coexist. We may choose objects or functions, but not both at once, as advertised.
 
+[toc]
+
 ## Semantics, Not Syntax
 
 Syntactic constructs like `this`, `new`, `class`, `private` and `public` clearly express object-oriented intent — _this_ instance of a _class_ of things *private*ly maintains data through *public*ly available APIs — and are common to object-oriented programming languages. However, they are not necessary. Object-oriented semantics may be achieved with nontraditional syntax. For example, this `bankAccount` object also stores the `balance` data privately (in JavaScript[^1]);
