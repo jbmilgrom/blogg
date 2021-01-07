@@ -237,7 +237,7 @@ footer a {
 }
 
 .post-list .year-title:not(:first-child) {
-  margin-top: var(--large-space);
+  margin-top: 2em;
 }
 
 .post-list .year-title span {
