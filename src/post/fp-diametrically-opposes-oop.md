@@ -3,6 +3,7 @@ title: Functional & Object-Oriented Programming are Diametrically Opposed
 date: 2021-01-07
 tags: post
 layout: layouts/post.liquid
+hasTOC: yes
 ---
 
 Excerpted from [Functional Programming and the Semantics of Change, State & Time](/post/functional-programming-and-identity-state-and-time/). {.introductory-caveat}
