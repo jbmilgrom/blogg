@@ -714,7 +714,7 @@ From the perspective of a user, a functional program may appear stateful. Intera
 
 That a program with a functional, stateless and timeless core can maintain state is surprising, to say the least. Look around the room, bus, park or wherever you find yourself reading this sentence, and you will likely identify “a collection of distinct objects,” such as dogs, people, and trees, “whose behaviors may change over time.” Look around the functional ATM program, on the other hand, and there are no identifiable objects to be found. Yet, the program appears to have state just like any other object in the room.
 
-However, the ostensible “paradox” dissipates when the augmentation of our conception of time extends beyond the functional program to include the rest of our physical reality.
+However, the ostensible paradox dissipates when the augmentation of our conception of time extends beyond the functional program to include the rest of our physical reality.
 
 > One way to resolve this paradox is to realize that it is the user’s temporal existence that imposes state on the system. If the user could step back from the interaction and think in terms of streams of balances rather than individual transactions, the system would appear stateless — [SICP](https://web.mit.edu/alexmv/6.037/sicp.pdf) Section 3.5.5
 
