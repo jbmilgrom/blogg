@@ -39,7 +39,7 @@ h4,
 footer,
 nav,
 .badge {
-  font-family: "Verdana", "Helvetica", sans-serif;
+  font-family: "Helvetica", sans-serif;
 }
 
 h1,
@@ -226,7 +226,7 @@ footer a {
 
 .post-list {
   line-height: 1.5;
-  font-family: "Verdana", "Helvetica", sans-serif;
+  font-family: "Helvetica", sans-serif;
 }
 
 .post-list .year-title {
