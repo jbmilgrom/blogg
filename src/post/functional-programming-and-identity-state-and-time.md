@@ -6,7 +6,7 @@ layout: layouts/post.liquid
 hasTOC: yes
 ---
 
-The “functions vs. objects” cliche is an artifact of a profound truth about program structure and semantics. Like oil and water, functional and object-oriented programming cannot coexist; we may choose objects or functions, but not both at once. Moreover, the choice between paradigms has dramatic implications for our programs, installing a “world-view” that involves concepts as fundamental as identity, change, state and even time.
+The “functions vs. objects” cliche is an artifact of a profound truth about program structure and semantics. Like oil and water, functions expel objects and objects functions. Moreover, the choice between them has dramatic implications for our programs, installing a “world-view” that involves concepts as fundamental as identity, change, state and even time.
 
 The object-oriented world-view may seem so obvious as to be without alternative. Look around the room, bus, park or wherever you find yourself reading this sentence, and you will likely identify objects, such as dogs, people and trees, changing over time. Many programmers approach program design the same way, identifying “distinct objects whose behaviors may change over time.” ([SICP](https://web.mit.edu/alexmv/6.037/sicp.pdf) Section 3)
 
