@@ -226,7 +226,7 @@ bankAccount.checkBalance(100); // 100; whoops, shouldn't this be 80?
 
 <figcaption>Is <code>bankAccount</code> really a "bank account"?</figcaption>
 
-allows “its” balance to evolve in an unspecified manner, undermining the “bank account” abstraction. `new`, `class` and `public` constructs obscure the actual semantics in this case. The same can be said of a `bankAccount` object that publicly exposes the balance attribute, as was alluded to above.
+allows “its” balance to evolve in an unspecified manner, undermining the “bank account” abstraction. `new`, `class` and `public` constructs belie the actual semantics in this case. The same can be said of a `bankAccount` object that publicly exposes the balance attribute, as was alluded to above.
 
 ```ts
 class BankAccount {
@@ -252,7 +252,7 @@ bankAccount.checkBalance(); // 80, eventhough no funds have been withdrawn
 
 <figcaption>Is <code>bankAccount</code> really a "bank account"?</figcaption>
 
-Now, `balance` can magically change without a `withdraw`al ever having occurred, which undermines the “bank account” abstraction. `new`, `class` and `public` constructs obscure the actual semantics in this case.[^5]
+Now, `balance` can magically change without a `withdraw`al ever having occurred, which undermines the “bank account” abstraction. `new`, `class` and `public` constructs belie the actual semantics in this case.[^5]
 
 With functional programming, syntax is also beside the point. The use of functional syntactic constructs is necessary to perform computation against arguments. `function` and `=>` (the “arrow function”) constructs may express functional programming intent as well. However, they cannot alone achieve functional semantics. Indeed, a method of an object may use the `=>` construct without correctly modeling computing mathematical functions.
 
