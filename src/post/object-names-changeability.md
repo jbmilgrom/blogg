@@ -7,7 +7,7 @@ layout: layouts/post.liquid
 
 Excerpted from [Functional Programming and the Semantics of Change, State & Time](/post/functional-programming-and-identity-state-and-time/#“object”-names-changeability). {.introductory-caveat}
 
-Changeability _implies_ an object. The rational number “2/3” cannot change, for example. Change the denominator of “2/3” from 3 to 5 and its identity changes as well to “2/5”. ([SICP](https://web.mit.edu/alexmv/6.037/sicp.pdf) Section 3) Neither can the integer "24." Increase the number of units represented by “24” and it may change to “25.”
+Changeability _implies_ an object. The rational number “2/3” cannot change, for example. Change the denominator of “2/3” from 3 to 5 and its identity changes as well to “2/5”. Neither can the integer "24." Increase the number of units represented by “24” and it may change to “25.”
 
 ```js
 const HOURS_IN_DAY = 24;
