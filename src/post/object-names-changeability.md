@@ -101,3 +101,11 @@ areAccountsEqual(elainesAccount, georgesAccount); // false
 </figcaption>
 
 may share a balance at some point in time. But even if they start with the same funds, `georgesAccount` and `elainesAccount` can register different balances at some other point in time because they are in fact different _objects_. Of course, that two distinct objects can evolve independently goes without saying. That is because “object” clearly articulates the creation of an identity that is not tied to any part, arrangement or quality; “object” names the ability to change.[^8]
+
+[^8]: ❤️ The original insight️ ❤️
+
+    > In general, so long as we never modify data objects, we can regard a compound data object to be precisely the totality of its pieces. For example, a rational number is determined by giving its numerator and its denominator. But this view is no longer valid in the presence of change, where a compound data object has an “identity” that is something different from the pieces of which it is composed. A bank account is still “the same” bank account even if we change the balance by making a withdrawal; conversely, we could have two different bank accounts with the same state information. This complication is a consequence, not of our programming language, but of our perception of a bank account as an object. — SICP Section 3.1.3
+
+    Rich Hickey on the same subject:
+
+    > If it is immutable, it now taps into that definition of value we saw before. Because by being immutable we can go and take a string value, and another string value, and say: are they the same? Do they have the same magnitude? Are they talking about the same thing? Are they expressing the same specific meaning? All of those definitions of values apply to something that is not mutable. So that relative worth thing kicks in. — Rich Hickey, [The Value of Values](https://github.com/matthiasn/talk-transcripts/blob/master/Hickey_Rich/ValueOfValuesLong.md)
