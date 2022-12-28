@@ -473,11 +473,13 @@ areAccountsEqual(elainesAccount, georgesAccount); // false
 
 may share a balance at some point in time. But even if they start with the same funds, `georgesAccount` and `elainesAccount` can register different balances at some other point in time because they are in fact different _objects_. Of course, that two distinct objects can evolve independently goes without saying. That is because “object” clearly articulates the creation of an identity that is not tied to any part, arrangement or quality; “object” names the ability to change.[^8]
 
-## Now, What About Programs
+## Diametric Opposites
 
 In this light, object-oriented programming can be seen as the diametric opposite of functional programming. Objects are inherently changeable. Moreover, changeability and “object” are intertwined as concepts. Yet, changeability undermines functional programming. Just as oil cannot inhabit the same physical space as water, object-oriented programming cannot occupy the same virtual space as functional programming. Use of one excludes the other. As a result, when writing programs, we may choose mutability or immutability, objects or functions, but not both at once.
 
-What about stateful programs? To be generally useful, either paradigm must include a model for state, and perhaps time, even if composed entirely of well-behaved stateless mathematical functions. Some real programs are designed to produce output based solely on input. Ideally, compilers output the same binaries provided the same input files, for example. Frequently, however, programs require state, and some input _together_ with the current state of the program determine the output (or next state) of the program. Such is the case with our ATM example, where the current balance is crucial to calculating any subsequent balance post withdrawal.
+## Programs Though!
+
+Thus far, we have only shown excerpts; the remainder of any surrounding program has been omitted. Of particular concern, our functional excerpts have been stateless. Some complete programs are stateless, designed to produce output based solely on input - compilers ideally output the same binaries provided the same input files. More frequently, however, programs require state. Some input _together_ with the current state of the program determine the output (or next state) of the program. Such is the case with our ATM example, where the current balance is crucial to calculating any subsequent balance post withdrawal. To be generally useful, a programming paradigm should include a model for state. 
 
 ## Stateful Object-Oriented Programs
 
