@@ -13,7 +13,7 @@
   --border-size: 2px;
   --underline: var(--border-size) solid var(--transparent-black);
   --native-header-margin: 0.83em;
-  --main-width: 624px;
+  --main-width: 700px;
   --main-yellow: hsl(51, 100%, 59%);
   --light-yellow: rgb(255, 255, 224);
   --large-space: 4em;
@@ -55,6 +55,7 @@ figcaption {
   text-align: center;
   font-size: 0.8em;
   font-style: italic;
+  line-height: 1.3;
 }
 
 figcaption .emoji {
