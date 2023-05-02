@@ -13,7 +13,7 @@ Starting with a URL, this application retrieves an html document, parses out met
 The application supports a selection of chat and completion models below gpt-4, eventhough it has been optimized for the chat models (and `gpt-3.5-turbo` in particular) that are [1/10 the cost](https://platform.openai.com/docs/guides/chat/chat-vs-completions) of similar completion models like `text-davinci-003`. 
 
 ## The Algorithm 
-The GCP taxonomy is a tree. There are [21 root sibling nodes](https://google-product-categories.herokuapp.com/traverse) (`"Animals & Pet Supplies"`, `"Apparel & Accessories"`, ..., `"Vehicles & Parts"`). Each category may have sub-categories, and each sub-category additional sub-categories, etc. The application produces a final GCP through a series of multiple choice questions sent to OpenAI, where each question corresponds to a level in the tree and the path taken is dictated by OpenAI; the answer to the question provided by OpenAI determines the next question, which is comprised of the sub-categories at the next level. For example, a prompt-generater[^3]
+The GCP taxonomy is a tree. There are [21 root sibling nodes](https://google-product-categories.herokuapp.com/traverse) (`"Animals & Pet Supplies"`, `"Apparel & Accessories"`, ..., `"Vehicles & Parts"`). Each category may have sub-categories, and each sub-category additional sub-categories, etc. The application produces a final GPC through a series of multiple choice questions sent to OpenAI, where each question corresponds to a level in the tree and the path taken is directed by OpenAI; the answer to the question provided by OpenAI determines the next question, which is comprised of the sub-categories at the next level. For example, a prompt-generater[^3]
 
 ```ts
 export const generateChatPrompt = (choices: string[], metaTags: string): ChatCompletionRequestMessage[] => [
@@ -46,7 +46,7 @@ export const generateChatPrompt = (choices: string[], metaTags: string): ChatCom
   },
 ];
 ```
-is fed a string of scraped metadata
+that is fed scraped metadata
 
 ```html
 <meta name="description" content="The Men’s Pocket Tee. is the latest fit in your lineup of essentials. This supersoft, washed-and-worn basic fits&nbsp;generously through the body with a&nbsp;pocket detail&nbsp;that naturally torques like your favorite vintage tee. Handcrafted locally in L.A., this tee is designed to get (even) more character with age&nbsp;and&nbsp;wear. 50% P">
@@ -59,7 +59,7 @@ and a set of choices
 ```ts
 ["Animals & Pet Supplies", "Apparel & Accessories", "Arts & Entertainment", "Baby & Toddler", "Business & Industrial", "Cameras & Optics", "Electronics", "Food,  Beverages & Tobacco", "Furniture", "Hardware", "Health & Beauty", "Home & Garden", "Luggage & Bags", "Mature", "Media", "Office Supplies", "Religious & Ceremonial", "Software", "Sporting Goods", "Toys & Games", "Vehicles & Parts"]
 ```
-in order to generate the prompt 
+can generate the prompt 
 
 ```html
 system: You are a multiple-choice test taker. You may select one of the choices that best apply. Please respond with "None of the Above" if none are relevant.
@@ -85,14 +85,47 @@ user:
 
     choices: 1) Animals & Pet Supplies; 2) Apparel & Accessories; 3) Arts & Entertainment; 4) Baby & Toddler; 5) Business & Industrial; 6) Cameras & Optics; 7) Electronics; 8) Food, Beverages & Tobacco; 9) Furniture; 10) Hardware; 11) Health & Beauty; 12) Home & Garden; 13) Luggage & Bags; 14) Mature; 15) Media; 16) Office Supplies; 17) Religious & Ceremonial; 18) Software; 19) Sporting Goods; 20) Toys & Games; 21) Vehicles & Parts
 ```
+to be sent to OpenAI inorder to precipitate a response
+```text
+2) Apparel & Accessories
+```
+that correctly categorizes the website. With a category in hand, the program may retrieve the next set of choices by descending the tree to [the children of the category](https://google-product-categories.herokuapp.com/traverse?path=Apparel%20%26%20Accessories) in order to produce the next prompt, 
 
-For example, 
-The NodeJS runtime descends the GCP tree until a leaf node or a determination is made that GCP is the wrong overarching taxonomy for the page.  See [Ending Criteria](#ending-criteria) for more details.
+```html
+system: You are a multiple-choice test taker. You may select one of the choices that best apply. Please respond with "None of the Above" if none are relevant.
 
-### Ending Criteria
+user: 
+    Question: Which product category best describes the metadata?
 
-[^1]: e.g. `"Apparel & Accessories > Clothing > Shirts & Tops"` for [a t-shirt](https://google-product-categories.herokuapp.com/url?url=https%3A%2F%2Fthisisthegreat.com%2Fcollections%2Fthe-great-man%2Fproducts%2Fthe-mens-pocket-tee-heather-grey&model=default)
-[^2]: e.g. a newsite like [espn.com](https://google-product-categories.herokuapp.com/url?url=https%3A%2F%2Fespn.com&model=default)
+    metadata:
+    <meta name="description" content="Buy Kitchen Torch,Cooking Propane Blow Torch Lighter,700,000BTU Flamethrower Fire Gun,Food Culinary Torch with Safety Lock,Campfire Starter Grill Torch,BBQ Torch for Steak &amp; Creme Brulee: Cooking Torches - Amazon.com ✓ FREE DELIVERY possible on eligible purchases">
+    <meta name="title" content="Amazon.com: Kitchen Torch,Cooking Propane Blow Torch Lighter,700,000BTU Flamethrower Fire Gun,Food Culinary Torch with Safety Lock,Campfire Starter Grill Torch,BBQ Torch for Steak &amp; Creme Brulee : Home &amp; Kitchen">
+
+    choices: 1) Bathroom Accessories; 2) Business & Home Security; 3) Decor, Emergency Preparedness; 4) Fireplace & Wood Stove Accessories; 5) Fireplaces, Flood, Fire & Gas Safety; 6) Household Appliance Accessories; 7) Household Appliances; 8) Household Supplies; 9) Kitchen & Dining; 10) Lawn & Garden, Lighting; 11) Lighting Accessories; 12) Linens & Bedding; 13) Parasols & Rain Umbrellas; 14) Plants, Pool & Spa; 15) Smoking Accessories; 16) Umbrella Sleeves & Cases; 17) Wood Stoves
+
+assistant: 9) Kitchen & Dining
+
+user: 
+    Question: Which product category best describes the metadata?
+
+    metadata:
+    <meta name="description" content="The Men’s Pocket Tee. is the latest fit in your lineup of essentials. This supersoft, washed-and-worn basic fits&nbsp;generously through the body with a&nbsp;pocket detail&nbsp;that naturally torques like your favorite vintage tee. Handcrafted locally in L.A., this tee is designed to get (even) more character with age&nbsp;and&nbsp;wear. 50% P">
+    <meta property="og:title" content="The Men's Pocket Tee. -- Heather Grey">
+    <meta property="og:description" content="The Men’s Pocket Tee. is the latest fit in your lineup of essentials. This supersoft, washed-and-worn basic fits&nbsp;generously through the body with a&nbsp;pocket detail&nbsp;that naturally torques like your favorite vintage tee. Handcrafted locally in L.A., this tee is designed to get (even) more character with age&nbsp;and&nbsp;wear. 50% Polyester, 38% Cotton, 12% Rayon  Machine Wash Cold, Tumble Dry Low&nbsp; Made in the U.S.A.">
+
+    choices: 1) Clothing; 2) Clothing Accessories; 3) Costumes & Accessories; 4) Handbag & Wallet Accessories; 5) Handbags, Wallets & Cases; 6) Jewelry; 7) Shoe Accessories; 8) Shoes;
+```
+
+and so and so forth until a leaf node is found.
+
+## Exit Criteria & Correcting Mistakes
+The NodeJS runtime descends the GPC tree until a leaf node is found. It can return happily in this case with the GPC. This gets us 90% of the way there. Can we do even better? A node may not be found for rare items for which the GPC taxonomy is absent a specific category. If not found, or a determination is made that GCP is the wrong overarching taxonomy for the page.  See [Ending Criteria](#ending-criteria) for more details.
+
+## Final Thoughts
+The orchestration is provided by an ordinary programming runtime, in this case NodeJS; There is no BabyAGI or some other LangChain application whereby the LLM replaces a programming runtime as the ultimate  
+
+[^1]: For example, a [t-shirt](https://google-product-categories.herokuapp.com/url?url=https%3A%2F%2Fthisisthegreat.com%2Fcollections%2Fthe-great-man%2Fproducts%2Fthe-mens-pocket-tee-heather-grey&model=default) that produces the category: `Apparel & Accessories > Clothing > Shirts & Tops`.
+[^2]: For example, a newsite like [espn.com](https://google-product-categories.herokuapp.com/url?url=https%3A%2F%2Fespn.com&model=default) for which there is no relevant product category.
 [^3]: This [prompt generator](https://github.com/jbmilgrom/google-product-categories-openai/blob/main/src/openai/index.ts#L89) comforms to the [chat API](https://github.com/openai/openai-node/blob/master/api.ts#L31) of OpenAI's NodeJS client and uses the ["few shot"](https://lilianweng.github.io/posts/2023-03-15-prompt-engineering/#few-shot) technique. Notice how a final `{role: "assistant", ...}` object is left off of the end of the prompt array, since the underlying LLM plays the role of "assistant" and should compose this value as its response.
 
 
