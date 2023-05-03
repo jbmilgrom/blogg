@@ -158,6 +158,8 @@ nav.table-of-contents {
   padding-left: 1em;
   padding-right: 1em;
   border: 2px dashed var(--transparent-black);
+  margin-right: 1em;
+  margin-left: 1em;
 }
 
 .table-of-contents > ol {
