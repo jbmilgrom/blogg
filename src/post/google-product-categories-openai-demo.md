@@ -12,8 +12,8 @@ Starting with a URL, the application retrieves an html document, parses out meta
 ## Supported Models
 The application supports a selection of chat and completion models below gpt-4, eventhough it has been optimized for the chat models (and `gpt-3.5-turbo` in particular) that are [`1/10` the cost](https://platform.openai.com/docs/guides/chat/chat-vs-completions) of similar completion models like `text-davinci-003`.
 
-## The Algorithm
- No pretraining on GPCs has been performed. As a result, the LLM must be fed possible GPCs as part of the prompt, increasing the number of tokens and cost. On the other hand, the code can be run locally with your own OpenAI API key and perform just as well as a pretrained LLM. Of course, including all [5595](https://google-product-categories.herokuapp.com/gpc-stats) GPCs with every prompt is exceedingly expensive.[^0] Instead, the algorithm leverages the heirarchical nature of the GPC taxonomy and produces a "GPC" by finding a path through the tree. There are [21 root sibling nodes](https://google-product-categories.herokuapp.com/traverse) (`"Animals & Pet Supplies"`, ..., `"Vehicles & Parts"`) and each node may have children nodes. All nodes at a given level in the tree form a multiple choice questions to OpenAI, and the children of the answer form the next question. The NodeJS runtime descends the GPC tree, level by level, with OpenAI dictating the path until a GPC is found. For example, a prompt-generater[^3]
+## Tree Traversal with a Series of Mulitple-Choice Questions
+ No pretraining on GPCs has been performed. As a result, the LLM must be fed possible GPCs as part of the prompt, increasing the number of tokens and cost. On the other hand, the code can be run locally with your own OpenAI API key and perform just as well as a pretrained LLM. Of course, including all [5595](https://google-product-categories.herokuapp.com/gpc-stats) GPCs with every prompt is exceedingly expensive.[^0] Instead, the algorithm leverages the heirarchical nature of the GPC taxonomy[^8] and produces a result by finding a path through the tree. Only nodes at a given level in the tree are sent to OpenAI at any given time. The children of the answer form the next question. The NodeJS runtime descends the GPC tree, level by level, with OpenAI dictating the path until a GPC is found. For example, a prompt-generater[^3]
 
 ```ts
 export const generateChatPrompt = (choices: string[], metaTags: string): ChatCompletionRequestMessage[] => [
@@ -46,7 +46,7 @@ export const generateChatPrompt = (choices: string[], metaTags: string): ChatCom
   },
 ];
 ```
-<figcaption>This prompt leverages the <a href="https://lilianweng.github.io/posts/2023-03-15-prompt-engineering/#few-shot">"few shot"</a> technique</figcaption>
+<figcaption>This prompt leverages the <a href="https://lilianweng.github.io/posts/2023-03-15-prompt-engineering/#few-shot">"few shot"</a> technique to encourage a consistent response format</figcaption>
 
 that is fed scraped metadata
 
@@ -91,7 +91,7 @@ to encourage a response like
 ```text
 2) Apparel & Accessories
 ```
-that can deterministically[^4] be parsed into `"Apparel & Accessories"` and matched to a [node](https://google-product-categories.herokuapp.com/traverse?path=Apparel%20%26%20Accessories) on the GPC tree with children
+that can be parsed[^4] into `"Apparel & Accessories"` and matched to a [node](https://google-product-categories.herokuapp.com/traverse?path=Apparel%20%26%20Accessories) on the GPC tree with children
 
 ```ts
 ["Clothing", "Clothing Accessories", "Costumes & Accessories", "Handbag & Wallet Accessories", "Handbags,  Wallets & Cases", "Jewelry", "Shoe Accessories", "Shoes"]
@@ -126,7 +126,26 @@ user:
 and so and so forth.
 
 ## Exit Criteria & Correcting Mistakes
-If the algorithm stops once a leaf-node is reached, 6 requests would be issued to OpenAI in the worst-case and 3 on average, since there at most 7 levels in the tree, depending on the path, and on average 4.[^7] This is the happy path. This gets us 90% of the way there. A node may not be found for rare items for which the GPC taxonomy is absent a specific category. If not found, or a determination is made that GCP is the wrong overarching taxonomy for the page.  See [Ending Criteria](#ending-criteria) for more details.
+OpenAI is instructed to respond with `"None of the Above"` when the suggested product categories are inapplicable. An [input of https://espn.com](http://localhost:3003/url?model=default&url=https%3A%2F%2Fespn.com), for example, commonly results in the path `"Sporting Goods"` > `"Athletics"` > `"None of the Above"`, where OpenAI responds with "None of the Above" at level 3, or `"Arts & Entertainment"` > `"None of the Above"`, where OpenAI responds with `"None of the Above"` at level 2, for the scraped metadata:
+```html
+<meta name="description" content="Visit ESPN for live scores, highlights and sports news. Stream exclusive games on ESPN+ and play fantasy sports.">
+<meta name="title" content="ESPN - Serving Sports Fans. Anytime. Anywhere.">
+<meta property="og:title" content="ESPN - Serving Sports Fans. Anytime. Anywhere.">
+<meta property="og:description" content="Visit ESPN for live scores, highlights and sports news. Stream exclusive games on ESPN+ and play fantasy sports.">
+```
+
+ If the algorithm stops once a leaf-node is reached (i.e. a node with no children), 6 requests would be issued to OpenAI in the worst-case and 3 on average, since the longest path has 6 edges and the average has a little over 3.[^7] This behavior has yet to produce an incorrect result in my testing. That the algorithm produces exceedingly accurate results when a leaf-node is reached makes sense. In the GPC taxonomy, each child is a [subcategory](https://en.wikipedia.org/wiki/Subcategory) of its parent. As a result, in order to descend the GPC tree, OpenAI must pick subcategories of increasing specificity, and the farther down the tree, the more difficult any previously incorrect becomes to square with the latest bench of subcategories. In the ESPN example above, "Sportings Goods" and then "Athletics" seemed like fine choices, until presented with its subcategories,
+```text
+1) American Football; 2) Baseball & Softball; 3) Basketball; 4) Boxing & Martial Arts; 5) Broomball Equipment; 6) Cheerleading; 7) Coaching & Officiating; 8) Cricket; 9) Dancing; 10) Fencing; 11) Field Hockey & Lacrosse; 12) Figure Skating & Hockey; 13) General Purpose Athletic Equipment; 14) Gymnastics; 15) Racquetball & Squash; 16) Rounders; 17) Rugby; 18) Soccer; 19) Team Handball; 20) Tennis; 21) Track & Field; 22) Volleyball; 23) Wallyball Equipment; 24) Water Polo; 25) Wrestling
+```
+as did "Art & Entertainment" until presented its subcategories
+```text
+1) Event Tickets; 2) Hobbies & Creative Arts; 3) Party & Celebration
+```
+To get to a leaf-node, OpenAI must respond with a specific subcategory like [`"Cooking Torches"`](https://google-product-categories.herokuapp.com/traverse?path=Home%20%26%20Garden_Kitchen%20%26%20Dining_Kitchen%20Tools%20%26%20Utensils_Cooking%20Torches), [`"Rugby Gloves"`](https://google-product-categories.herokuapp.com/traverse?path=Sporting%20Goods_Athletics_Rugby_Rugby%20Gloves) or [`"Shirt & Tops"`](https://google-product-categories.herokuapp.com/traverse?path=Apparel%20%26%20Accessories_Clothing_Shirts%20%26%20Tops). Conversely, Non products...
+
+
+  This happy path gets us 90% of the way there. In   Two categories of mistakes can be made. First, A node may not be found for rare items for which the GPC taxonomy is absent a specific category. If not found, or a determination is made that GCP is the wrong overarching taxonomy for the page.  See [Ending Criteria](#ending-criteria) for more details.
 
 ## Prompt-Engineering an LLM to Map a Subject onto a Structured Taxonomy without Pretraining
 Pretraining a model on a particular domain like the GPCs would allow the model to classify material along those lines without including information about the domain in the prompt. Absent that pretraining The more general learning from the above exercise if that a taxonomy is well-suited for The orchestration logic is provided by an ordinary programming runtime. There is no BabyAGI or some other LangChain application, whereby some traditional programming model is swapped out in favor of LLM control. Here, NodeJS[^5] remains in control and delegates a string classification to OpenAI just like it's calling out to any ol' HTTP service. There's a while-loop and a stack and a queue, all of that wholesome goodness commonly used for graph traversal and backtracking. Nevertheless and despite the best of intentions, the program is nondeterministic like any ol' ML application. Try to load [this page](https://google-product-categories.herokuapp.com/url?url=https%3A%2F%2Fwww.nike.com%2Ft%2Fpegasus-40-womens-road-running-shoes-bF2QL9%2FDV3854-102&model=default) 5 times with homogeneous results. A key piece of the algorithm - i.e. which path to take - is determined by an LLM and the efficacy of the program as a result. Yet, 
@@ -143,6 +162,7 @@ The orchestration is provided by an ordinary programming runtime, in this case N
 [^4]: By slicing off a space-delimited prefix.
 [^5]: A garbage-collected, single-threaded, runtime with native async support via an event-loop on top of a CPU/Memory model with an intermediating OS, etc., etc. Please for the love of god, don't go away traditional programming model, you are so much fun!
 [^7]: [GPC stats](https://google-product-categories.herokuapp.com/gpc-stats) | [code](https://github.com/jbmilgrom/google-product-categories-openai/blob/main/src/index.ts#L74).
+[^8]: There are [21 root sibling nodes](https://google-product-categories.herokuapp.com/traverse) (`"Animals & Pet Supplies"`, ..., `"Vehicles & Parts"`) and each node may have children nodes.
 
 
 
