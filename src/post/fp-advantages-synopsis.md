@@ -1,11 +1,11 @@
 ---
-title: Quick Synopsis of the Paradigmatic Advantages of Functional Programming
+title: Paradigmatic Advantages of Functional Programming
 date: 2023-05-22
 tags: post
 layout: layouts/post.liquid
 ---
 
-Excerpted from [Functional Programming and the Semantics of Change, State & Time](/post/functional-programming-and-identity-state-and-time/) because sometimes 100 words is worth a 1000. {.introductory-caveat}
+Excerpted from [Functional Programming and the Semantics of Change, State & Time](/post/functional-programming-and-identity-state-and-time/) because sometimes 100 words are worth a 1000. {.introductory-caveat}
 
 There are many advantages to functional programming. Programs that deal with mutation are “drastically more difficult” to reason about than ones that do not.
 
@@ -19,7 +19,7 @@ and dramatically reduce debugging and unit testing complexity since there is no 
 
 > “And that is the problem with places. You have this sort of global state that you have to reproduce in order to debug a field problem. That is very very tough.” Rich Hickey, [The Value of Values](https://github.com/matthiasn/talk-transcripts/blob/master/Hickey_Rich/ValueOfValuesLong.md)
 
-Reified state couches in writing what must otherwise live in a programmer's heads — each member of aP team can read a function signature instead of building up (hopefully) the same working memory for each object. Couching state in language makes it accessible to static language analysis tools. [A compiler may exhaustively permute the set of application states](https://blog.ploeh.dk/2019/07/01/yes-silver-bullet/#bd2d47d8dac2401e936ca7902bc9109d) without actually running manually-written (exhaust*ing*) unit tests. Functional programs are more easily parallelized since they are just functions with no internal model for time.
+Reified state couches in writing what must otherwise live in a programmer's heads — each member of a team can read a function signature instead of building up (hopefully) the same working memory for each object. Couching state in language makes it accessible to static language analysis tools. [A compiler may exhaustively permute the set of application states](https://blog.ploeh.dk/2019/07/01/yes-silver-bullet/#bd2d47d8dac2401e936ca7902bc9109d) without actually running manually-written (exhaust*ing*) unit tests. Functional programs are more easily parallelized since they are just functions with no internal model for time.
 
 > Unfortunately, the complexities introduced by assignment become even more problematic in the presence of concurrency. — SICP Section 3.4
 
