@@ -13,10 +13,11 @@
   --border-size: 2px;
   --underline: var(--border-size) solid var(--transparent-black);
   --native-header-margin: 0.83em;
-  --main-width: 700px;
+  --main-width: 648px;
   --main-yellow: hsl(51, 100%, 59%);
   --light-yellow: rgb(255, 255, 224);
   --large-space: 4em;
+  --excerpt-margin-right: 1em;
 }
 
 a,
@@ -150,6 +151,7 @@ video {
 
 .introductory-caveat {
   padding: 1em;
+  margin-right: var(--excerpt-margin-right);
   border: 2px dashed var(--transparent-black);
 }
 
@@ -158,8 +160,7 @@ nav.table-of-contents {
   padding-left: 1em;
   padding-right: 1em;
   border: 2px dashed var(--transparent-black);
-  margin-right: 1em;
-  margin-left: 1em;
+  margin-right: var(--excerpt-margin-right);
 }
 
 .table-of-contents > ol {
