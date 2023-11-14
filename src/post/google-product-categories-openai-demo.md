@@ -5,7 +5,7 @@ tags: post
 layout: layouts/post.liquid
 ---
 
-[Application](https://google-product-categories.herokuapp.com/url) | [Code](https://github.com/jbmilgrom/google-product-categories-openai)
+[Application](https://google-product-categories.herokuapp.com/url) | [Code](https://github.sc-corp.net/jmilgrom/google-product-types)
 
 Starting with a URL, the application retrieves an html document, parses out metadata and categorizes the corresponding website according to the Google Product Categories [Taxonomy](https://www.google.com/basepages/producttype/taxonomy.en-US.txt) (GPCs) using OpenAI. In my testing, it has shown to be shockingly accurate at transforming semi-structured web metadata into structured data,  mapping product websites[^1] to an applicable GPC and non-product websites[^2] to `null`.
 
@@ -128,7 +128,7 @@ and so on and so forth.
 [If the algorithm stops once a leaf-node is reached (i.e. a node with no children), a maximum of 6 requests would be issued to OpenAI and 3 on average, since the longest path has 6 edges and the average has a little over 3.[^7]]
 
 ## Increasingly Low Probablity for False Positives
-As the algorithm descends the GPC tree, OpenAI is run through a series of multiple-choice questions with step-up increases in difficulty by level. In the GPC taxonomy, each child is a true [subcategory](https://en.wikipedia.org/wiki/Subcategory) of its parent. The farther down the tree, the more specific the set of subcategories. By the time the algorithm reaches a leaf-node, and there are no additional levels to descend or questions to ask, any product category response. [or questions to ask, OpenAI has been taken through the proverbial wringer.]  OpenAI is instructed to respond with `"None of the Above"` when the suggested product categories are inapplicable. An [input of https://espn.com](http://localhost:3003/url?model=default&url=https%3A%2F%2Fespn.com), for example, commonly results in the path `"Sporting Goods"` > `"Athletics"` > `"None of the Above"`, where OpenAI responds with "None of the Above" at level 3, or `"Arts & Entertainment"` > `"None of the Above"`, where OpenAI responds with `"None of the Above"` at level 2, for the scraped metadata:
+In the GPC taxonomy, each child is a true [subcategory](https://en.wikipedia.org/wiki/Subcategory) of its parent. The farther down the tree, the more specific the set of subcategories. As the algorithm descends the GPC tree, OpenAI is run through a series of multiple-choice questions with step-up increases in difficulty by level. In the GPC taxonomy, each child is a true [subcategory](https://en.wikipedia.org/wiki/Subcategory) of its parent. The farther down the tree, the more specific the set of subcategories. By the time the algorithm reaches a leaf-node, and there are no additional levels to descend or questions to ask, any product category response. [or questions to ask, OpenAI has been taken through the proverbial wringer.]  OpenAI is instructed to respond with `"None of the Above"` when the suggested product categories are inapplicable. An [input of https://espn.com](http://localhost:3003/url?model=default&url=https%3A%2F%2Fespn.com), for example, commonly results in the path `"Sporting Goods"` > `"Athletics"` > `"None of the Above"`, where OpenAI responds with "None of the Above" at level 3, or `"Arts & Entertainment"` > `"None of the Above"`, where OpenAI responds with `"None of the Above"` at level 2, for the scraped metadata:
 ```html
 <meta name="description" content="Visit ESPN for live scores, highlights and sports news. Stream exclusive games on ESPN+ and play fantasy sports.">
 <meta name="title" content="ESPN - Serving Sports Fans. Anytime. Anywhere.">
@@ -166,10 +166,10 @@ The orchestration is provided by an ordinary programming runtime, in this case N
 [^0]: And perhaps even impossible given token limits per prompts - I haven't even tried .
 [^1]: For example, a [t-shirt](https://google-product-categories.herokuapp.com/url?url=https%3A%2F%2Fthisisthegreat.com%2Fcollections%2Fthe-great-man%2Fproducts%2Fthe-mens-pocket-tee-heather-grey&model=default).
 [^2]: For example, a [news site](https://google-product-categories.herokuapp.com/url?url=https%3A%2F%2Fespn.com&model=default).
-[^3]: This [prompt generator](https://github.com/jbmilgrom/google-product-categories-openai/blob/main/src/openai/index.ts#L89) comforms to the [chat-completion API](https://github.com/openai/openai-node/blob/master/api.ts#L31) of OpenAI's NodeJS client. Notice how a final `{role: "assistant", ...}` object is, in a sense, left off of the end of the prompt array, since the underlying LLM plays the role of "assistant" and should fill-in this value as its response.
+[^3]: This [prompt generator](https://github.sc-corp.net/jmilgrom/google-product-types/blob/main/src/openai/index.ts#L89) comforms to the [chat-completion API](https://github.com/openai/openai-node/blob/master/api.ts#L31) of OpenAI's NodeJS client. Notice how a final `{role: "assistant", ...}` object is, in a sense, left off of the end of the prompt array, since the underlying LLM plays the role of "assistant" and should fill-in this value as its response.
 [^4]: By slicing off a space-delimited prefix.
 [^5]: A garbage-collected, single-threaded, runtime with native async support via an event-loop on top of a CPU/Memory model with an intermediating OS, etc., etc. Please for the love of god, don't go away traditional programming model, you are so much fun!
-[^7]: [GPC stats](https://google-product-categories.herokuapp.com/gpc-stats) | [code](https://github.com/jbmilgrom/google-product-categories-openai/blob/main/src/index.ts#L74).
+[^7]: [GPC stats](https://google-product-categories.herokuapp.com/gpc-stats) | [code](https://github.sc-corp.net/jmilgrom/google-product-types/blob/main/src/index.ts#L74).
 [^8]: There are [21 root sibling nodes](https://google-product-categories.herokuapp.com/traverse) (`"Animals & Pet Supplies"`, ..., `"Vehicles & Parts"`) and each node may have children nodes.
 
 
