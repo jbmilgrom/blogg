@@ -1,3 +1,17 @@
+## How AI will impact learning
+- Previously, learning happened through some combination of top-down and bottom up. Botton up always works in a sense. Take "Code ..." for example. Information theory lays the groundwork for binary counting, which lays the groundworks for ...., which lays the groud work for computer systems and CPU architecture. Secrets of a Javascript Ninja starts with ....
+- Examples of where it succeeded
+   - Big query
+   - Unix
+   - Git
+- Examples of where it failed
+   - Big Query
+   - Git
+- So is GPT4 a tutor?
+- Is GPT4 an employee?
+- Is GPT4 a tool? Is it a compiler?
+
+
 ## Understanding Pointers/Call-by-reference by comparisons b/w c, go and JavaScript
 
 ## Go, a beautiful language
