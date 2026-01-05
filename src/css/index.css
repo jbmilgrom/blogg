@@ -1,20 +1,20 @@
 :root {
-  --black: #000;
-  --transparent-black: rgba(0,0,0,.25);
-  --lightblack: rgba(0,0,0,.6);
-  --darkgray: #333;
+  --black: #1f2937;
+  --transparent-black: rgba(0,0,0,.15);
+  --lightblack: rgba(0,0,0,.5);
+  --darkgray: #374151;
   --lakeryellow: #fdb927;
-  --lakerpurple: #552583;
+  --lakerpurple: #6b21a8;
   --skyblue: rgb(135, 206, 250);
   --cornflowerblue: rgb(100, 149, 237);
-  --lightestgray: rgba(0, 0, 0, 0.05);
-  --sweetbeige: #f5f2f0;
+  --lightestgray: rgba(0, 0, 0, 0.03);
+  --sweetbeige: #fefefe;
   --main-margin: 16px;
   --border-size: 2px;
   --underline: var(--border-size) solid var(--transparent-black);
   --native-header-margin: 0.83em;
   --main-width: 624px;
-  --main-yellow: hsl(51, 100%, 59%);
+  --main-yellow: #ffffff;
   --light-yellow: rgb(255, 255, 224);
   --large-space: 4em;
 }
@@ -124,7 +124,7 @@ video {
 }
 
 .toc-tag a:hover {
-  border-bottom: 2px solid var(--black);
+  border-bottom: 2px solid var(--lakeryellow);
 }
 
 @media (max-width: 624px) {
@@ -169,7 +169,8 @@ nav.table-of-contents {
 
 .badge {
   background: var(--sweetbeige);
-  border: 3px solid var(--lakeryellow);
+  border: 1px solid rgba(253, 185, 39, 0.4);
+  border-radius: 6px;
   padding: var(--native-header-margin) var(--main-margin);
   color: var(--lakerpurple);
   line-height: unset;
@@ -265,7 +266,7 @@ footer a {
 }
 
 .post-list .name a:hover {
-  border-bottom: 2px solid var(--black);
+  border-bottom: 2px solid var(--lakeryellow);
 }
 
 .post-list .date {
@@ -276,7 +277,7 @@ footer a {
 .post a:hover {
   text-decoration: none;
   padding: 1px 0;
-  border-bottom: 2px solid var(--black);
+  border-bottom: 2px solid var(--lakeryellow);
 }
 
 .post iframe[src="http://jsfiddle.net/notc93Lv/embedded/?username=jmilgrom"],
