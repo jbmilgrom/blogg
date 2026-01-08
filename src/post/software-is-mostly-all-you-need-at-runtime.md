@@ -127,9 +127,7 @@ elif complaint_type == "fraud":
 
 The workflow orchestrator is traditional software. It calls out to neural networks for judgment tasks: classification, extraction, interpretation — the fuzzy pattern matching that cannot be specified as rules. Then it executes business logic itself, deterministically. The execution paths are explicit, auditable, and version-controlled.
 
-This is not a new pattern. It's how most production ML systems already work. A model classifies; code acts on the classification. What's new is recognizing that the _code_ side of this pattern can now be written by AI agents — and that this changes the economics of software development dramatically.
-
-The industry has framed this as a choice between RPA (deterministic but brittle) and AI agents (adaptive but unpredictable).[^10] But AI coding agents dissolve the tradeoff, since they write the deterministic code.
+This is not a new pattern. Production ML systems already work this way: a model classifies, code acts. What's new is that AI agents can write the code — dissolving the apparent tradeoff between RPA (deterministic but brittle) and AI agents (adaptive but unpredictable).[^10]
 
 ## Development Time Approaching Runtime
 
