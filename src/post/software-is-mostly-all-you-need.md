@@ -1,6 +1,6 @@
 ---
 title: Software is Mostly All You Need
-subtitle: Neural networks at buildtime, software at runtime
+subtitle: Neural Networks at Buildtime, Software at Runtime
 description: Robust AI architectures avoid neural networks at runtime, using them at buildtime instead.
 date: 2026-01-08
 tags: post
