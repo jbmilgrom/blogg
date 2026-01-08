@@ -3,6 +3,9 @@ layout: layouts/layout.liquid
 templateClass: post
 ---
 <h1>{{ title }}</h1>
+{% if subtitle %}
+<p class="subtitle">{{ subtitle }}</p>
+{% endif %}
 
 {{ content }}
 

@@ -1,7 +1,7 @@
 :root {
   --black: #1f2937;
-  --transparent-black: rgba(0,0,0,.15);
-  --lightblack: rgba(0,0,0,.5);
+  --transparent-black: rgba(0, 0, 0, 0.15);
+  --lightblack: rgba(0, 0, 0, 0.5);
   --darkgray: #374151;
   --lakeryellow: #fdb927;
   --lakerpurple: #6b21a8;
@@ -198,6 +198,15 @@ nav.table-of-contents {
   line-height: 1.65;
 }
 
+.post .subtitle {
+  font-family: "ColfaxAI", Helvetica, sans-serif;
+  font-size: 1.25em;
+  color: var(--lightblack);
+  margin-top: -0.75em;
+  margin-bottom: 1em;
+  line-height: 1.4;
+}
+
 .post .katex-display {
   line-height: normal;
 }
@@ -287,6 +296,7 @@ footer a {
 }
 
 .post iframe[src="http://jsfiddle.net/notc93Lv/embedded/?username=jmilgrom"],
-.post iframe[src="http://jsfiddle.net/mv2187zo/embedded/js,html,result/?username=jmilgrom"] {
+.post iframe[src="http://jsfiddle.net/mv2187zo/embedded/js,html,result/?username=jmilgrom"]
+{
   min-height: 320px;
 }
