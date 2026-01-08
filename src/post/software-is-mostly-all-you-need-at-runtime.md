@@ -147,7 +147,7 @@ The difference in representation matters. Neural networks encode behavior in opa
 
 The symbolic substrate preserves the properties that production systems often require: interpretability, debuggability, auditability, and surgical modifiability. When the learned update mechanism provides adaptability, you get the benefits of RL without the costs.
 
-## Conclusion
+## Adaptable Software Systems
 
 Ironically, software is still mostly all you need at runtime.
 
