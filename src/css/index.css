@@ -198,6 +198,10 @@ nav.table-of-contents {
   line-height: 1.65;
 }
 
+.post .katex-display {
+  line-height: normal;
+}
+
 .post a,
 footer a:not(.contact) {
   padding: 1px 0;

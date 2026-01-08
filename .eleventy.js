@@ -5,6 +5,7 @@ const markdownItAnchor = require("markdown-it-anchor");
 const markdownItFootnote = require("markdown-it-footnote");
 const markdownItTOC = require("markdown-it-toc-done-right");
 const markdownItAttrs = require('markdown-it-attrs');
+const markdownItKatex = require('markdown-it-katex');
 
 
 const sourceDirectory = "src";
@@ -22,7 +23,8 @@ md
   })
   .use(markdownItFootnote)
   .use(markdownItTOC, {listType: "ol", containerId: "toc"})
-  .use(markdownItAttrs);
+  .use(markdownItAttrs)
+  .use(markdownItKatex);
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy(`${sourceDirectory}/media`);
