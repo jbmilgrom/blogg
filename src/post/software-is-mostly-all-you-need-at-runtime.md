@@ -34,14 +34,14 @@ Dominant agent architectures conflate judgment and execution, frequently using n
 
 Frameworks like browser-use and Stagehand embody this conflation. Consider browser-use:
 
-```python
+```py
 agent = Agent(task="Find the top HN post", llm=llm, browser=browser)
 await agent.run()
 ```
 
 Or Stagehand:
 
-```typescript
+```ts
 await stagehand.act("click on the stagehand repo");
 await agent.execute("Get to the latest PR");
 ```
@@ -54,7 +54,7 @@ Neural networks lack the properties that execution requires: determinism, audita
 
 Consider this business logic from a system that processes medical equipment orders from Docflow's own repo:
 
-```typescript
+```ts
 // Fallback 1: Try scriptedMachine field
 const scriptedMachineCode = extractMachineCodeFromScripted(scriptedMachine);
 if (scriptedMachineCode && machineType) {
@@ -104,7 +104,7 @@ Same judgment, different artifact. The selector should be durable build output, 
 
 Neural nets may remain at runtime when tackling judgments. Every other LLM agent belongs at buildtime accelerating the production of executable software.
 
-```python
+```py
 # Orchestrator: traditional software
 
 complaint_text = get_complaint()
