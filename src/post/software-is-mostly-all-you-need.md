@@ -158,7 +158,7 @@ An architecture where neural networks handle runtime judgment, software handles 
 
 ---
 
-This is what we're building at [Docflow Labs](https://docflowlabs.com): adaptive systems with a symbolic substrate. If this resonates, say hello on [Twitter](https://twitter.com/jbmilgrom).
+This is what we're building at [Docflow Labs](https://docflowlabs.com): adaptive systems with a symbolic substrate. If this resonates, say [hello](https://twitter.com/jbmilgrom)!
 
 [^1]: Gartner predicts over 40% of agentic AI projects will be canceled by 2027 due to escalating costs, unclear business value, or inadequate risk controls (https://www.gartner.com/en/newsroom/press-releases/2025-06-25-gartner-predicts-over-40-percent-of-agentic-ai-projects-will-be-canceled-by-end-of-2027). S&P Global reports 42% of companies abandoned most AI initiatives in 2024, up from 17% the prior year. The WebArena benchmark shows best agents achieve ~60% success vs 78% for humans (https://arxiv.org/abs/2307.13854). Klarna's customer service AI was rolled back in 2025 after quality eroded (https://www.bloomberg.com/news/articles/2025-05-07/klarna-reverses-ai-push-with-plan-to-add-more-customer-service-staff).
 [^2]: Simon Willison, "I think 'agent' may finally have a widely enough agreed upon definition to be useful jargon now," September 2025. https://simonwillison.net/2025/Sep/18/agents/
