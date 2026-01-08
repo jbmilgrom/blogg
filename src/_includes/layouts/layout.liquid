@@ -8,7 +8,26 @@
     {% else %}
       <title>{{ metadata.title }}</title>
     {% endif %}
-    <meta name="Description" content="{{ metadata.description }}">
+    <meta name="description" content="{{ description | default: metadata.description }}">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="{{ title | default: metadata.title }}">
+    <meta property="og:description" content="{{ description | default: metadata.description }}">
+    <meta property="og:url" content="{{ metadata.url }}{{ page.url }}">
+    <meta property="og:type" content="{% if title %}article{% else %}website{% endif %}">
+    <meta property="og:site_name" content="{{ metadata.title }}">
+    {% if image %}
+    <meta property="og:image" content="{{ metadata.url }}{{ image }}">
+    {% endif %}
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="{{ title | default: metadata.title }}">
+    <meta name="twitter:description" content="{{ description | default: metadata.description }}">
+    {% if image %}
+    <meta name="twitter:image" content="{{ metadata.url }}{{ image }}">
+    {% endif %}
+
     <link href="/media/favicon_io/favicon-32x32.png" rel="icon" sizes="32x32">
     <link rel="stylesheet" href="/css/prism.css">
     <link rel="stylesheet" href="/css/index.css">
