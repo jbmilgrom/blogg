@@ -24,15 +24,15 @@ Meanwhile, a different paradigm has precipitated significant productivity gains.
 
 These failures and successes reflect a fundamental architectural difference.
 
-## Judgment vs. Execution
+## Judgment and Execution Historically
 
-Humans have been doing two different jobs for two different reasons. AI changes each differently.
+Humans have historically done two different types of jobs for different reasons, and AI changes each differently.
 
-**Judgment** is fuzzy classification that cannot be specified as explicit rules. This handwritten letter is a B, not a P; this customer complaint is about a refund, not fraud; this image contains a receipt; this element on some unfamiliar page is "the login button." Humans did these tasks because traditional Turing machines simply cannot. The rules cannot be written down — the "rule" exists only as a learned boundary in high-dimensional space. Minimization of a loss function via gradient descent in this vastly dimensional space draws these boundaries without the nouns and verbs of English, C or even Rust (lol) and underpins the effectiveness of neural networks.
+**Judgment** is fuzzy classification that cannot be specified as explicit rules. This handwritten letter is a "B", not a "P"; this customer complaint is about a refund, not fraud; this image contains a receipt; this element on some unfamiliar page is "the login button." Humans did these tasks because traditional CPU-based Von Neumann machines simply could not. The rules could not be written down, and even today exists only as a learned boundaries in high-dimensional space. Minimization of a loss function via gradient descent in this vastly dimensional space draws these boundaries without the nouns and verbs of English, C, or even Rust (lol) inside of neural networks.
 
-**Execution** is discrete logic that _can_ be specified as explicit rules. If complaint type is refund and days since purchase is less than 30, approve; if machine type is CPAP and facility code is X, the SKU is ABC-123; click the element with selector `a[href="/login"]`. Humans did these tasks even though machines are perfectly capable, more reliable, and faster because writing and operating software systems that encode these rules _was_ expensive, not because of any fuzziness inherent to the task. AI coding agents can now write this code.
+**Execution** is discrete logic that _can_ be specified as explicit rules. If complaint type is refund and days since purchase is less than 30, approve; if machine type is CPAP and facility code is X, the SKU is ABC-123; click the element with selector `a[href="/login"]`. Humans did these tasks, even though Von Neumann machines theoretically could and are more reliable and faster, because writing and operating software systems that encode these rules _was_ expensive. The investement was not worth the savings not because of any fuzziness inherent to the task.
 
-## Common Conflations
+## Common Conflations Today
 
 Dominant agent architectures conflate judgment and execution, frequently using neural networks for both. The consensus definition of an agent — "an LLM runs tools in a loop to achieve a goal"[^2] — clarifies the mechanism but not the problem space.
 
