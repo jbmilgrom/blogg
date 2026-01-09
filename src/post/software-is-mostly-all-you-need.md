@@ -52,7 +52,7 @@ await agent.execute("Get to the latest PR");
 
 In both cases, the LLM performs judgment (which element is "the stagehand repo"?) _and_ execution (click it, figure out the next step, click that). The entire loop is neural. No durable artifact emerges. The LLM _is_ the runtime.[^3][^4]
 
-## Why Execution Requires Software
+## Why Execution Requires Traditional Software
 
 Neural networks lack the properties that execution requires: determinism, auditability, and precision on edge cases.
 
