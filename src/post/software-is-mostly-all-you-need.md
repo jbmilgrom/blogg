@@ -18,7 +18,7 @@ The best performing architectures use the right tool for the right job, delegati
 
 ## The Failure Rate
 
-Many agentic AI projects are failing[^1] and the industry has named the symptoms without the cause. IBM calls it "agentic drift" — when underlying models update, training data shifts, or business contexts change, agents that performed perfectly yesterday offer degraded or incorrect responses today.[^7] Enterprise teams report that debugging AI agents "isn't like debugging deterministic code" — you can't just read stdout/stderr, you need to replay the agent's decision process and inspect what it saw and why it acted.[^8] Even Cognition acknowledges that Devin "can't independently tackle an ambiguous coding project end-to-end like a senior engineer could."[^9]
+Many agentic AI projects are failing[^1] and the industry has named the symptoms without the cause. IBM calls it "agentic drift" — when underlying models update, training data shifts, or business contexts change, agents that performed perfectly yesterday offer degraded or incorrect responses today.[^2] Enterprise teams report that debugging AI agents "isn't like debugging deterministic code" — you can't just read stdout/stderr, you need to replay the agent's decision process and inspect what it saw and why it acted.[^3] Even Cognition acknowledges that Devin "can't independently tackle an ambiguous coding project end-to-end like a senior engineer could."[^4]
 
 Meanwhile, a different paradigm has precipitated significant productivity gains. Claude Code does not offer complete autonomy even if performing chunks of work at a time; it writes code that humans review and deploy. Most importantly, Claude Code produces an artifact that is durable, version-controlled, deterministic, auditable, and executable by a Von Neumann machine just like any ol' software has always been.
 
@@ -34,7 +34,7 @@ Humans have been doing two different jobs for two different reasons. AI changes 
 
 ## Common Conflations
 
-Dominant agent architectures conflate judgment and execution, frequently using neural networks for both. The consensus definition of an agent — "an LLM runs tools in a loop to achieve a goal"[^2] — clarifies the mechanism but not the problem space.
+Dominant agent architectures conflate judgment and execution, frequently using neural networks for both. The consensus definition of an agent — "an LLM runs tools in a loop to achieve a goal"[^5] — clarifies the mechanism but not the problem space.
 
 Frameworks like browser-use and Stagehand embody this conflation. Consider browser-use:
 
@@ -50,7 +50,7 @@ await stagehand.act("click on the stagehand repo");
 await agent.execute("Get to the latest PR");
 ```
 
-In both cases, the LLM performs judgment (which element is "the stagehand repo"?) _and_ execution (click it, figure out the next step, click that). The entire loop is neural. No durable artifact emerges. The LLM _is_ the runtime.[^3][^4]
+In both cases, the LLM performs judgment (which element is "the stagehand repo"?) _and_ execution (click it, figure out the next step, click that). The entire loop is neural. No durable artifact emerges. The LLM _is_ the runtime.[^6][^7]
 
 ## Why Execution Requires Software
 
@@ -94,19 +94,19 @@ A neural network approximating this function cannot provide these properties. It
 
 ## Stagehand: Half Right
 
-Stagehand, the browser automation framework from Browserbase, is half right.[^5]
+Stagehand, the browser automation framework from Browserbase, is kind of right.[^8]
 
 Stagehand's `act("click on the stagehand repo")` correctly implements judgment via a neural network in some sense. Which element on any dynamically chosen page corresponds to the "stagehand repo" cannot be represented in traditional software. There are too many permutations of page layout. The fuzziness of these boundaries is best approached by neural networks in massively multidimensional space minimizing some loss function against many examples.
 
-In another sense however, Stagehand's architecture is misguided. We probably know ahead of time what webpage we're attempting a click against (GitHub perhaps?). More importantly, Stagehand produces no semantically transparent and executable artifact. Instead, the LLM returns a selector, which gets cached opaquely outside version control. On cache miss, the LLM re-engages at runtime to re-interpret the instruction.
+In another sense however, Stagehand's architecture is limited. We may know ahead of time which webpage we are attempting a click against and it may change infrequently, requiring only a one-time (or few-time) judgement. Yet, Stagehand produces no executable artifact by design. Instead, the LLM returns a selector, which gets cached opaquely outside version control. On cache miss, the LLM re-engages at runtime to re-interpret the instruction.
 
-A better architecture might still allow the LLM to make a judgment and return a selector, but position this judgment squarely at buildtime. The selector gets emitted as code into a Playwright script. The script is committed to version control, reviewed, deployed. On failure — because the site changed and the selector broke — the _development process_ re-engages. An AI agent rewrites the script.
+A better architecture might still allow the LLM to make a judgment and return a selector, but afford positioning this judgment squarely at buildtime. The selector gets emitted as code into a Playwright script. The script is committed to version control, reviewed, and deployed. On failure — because the site changed and the selector broke — the _development process_ re-engages. An AI agent rewrites the script.
 
-Same judgment, different artifact. The selector should be durable build output, not ephemeral runtime state.[^6]
+Same judgment, different artifact. The selector becomes a semantically transparent piece of the underlying software system, not ephemeral runtime state.[^9]
 
 ## A Better Architecture
 
-Neural nets may remain at runtime when tackling judgments. Every other LLM agent belongs at buildtime accelerating the production of executable software.
+Neural nets may remain at runtime when tackling judgments that can only be made dynamically at runtime. Every other LLM agent belongs at buildtime accelerating the production of executable software.
 
 ```py
 # Orchestrator: traditional software
