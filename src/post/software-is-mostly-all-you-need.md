@@ -54,7 +54,7 @@ In both cases, the LLM performs judgment (which element is "the stagehand repo"?
 
 Neural networks lack the properties that execution requires: determinism, auditability, and precision on edge cases.
 
-Consider this business logic from a system that processes medical equipment orders (from [Docflow](https://docflowlabs.com), my startup):
+Consider this business logic from a system that processes medical equipment orders (from [Docflow Labs](https://docflowlabs.com), my startup):
 
 ```ts
 // Fallback 1: Try scriptedMachine field
