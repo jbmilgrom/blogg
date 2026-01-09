@@ -88,21 +88,21 @@ if (!machineSku || machineSku.trim() === "") {
 }
 ```
 
-This code handles combinations that may occur once a year — a rare facility, an unusual machine type, a specific classification. Training data will never cover the combinatorial space. Moreover, when a billing dispute arises and someone asks why the system chose rental versus purchase for a particular patient, the logic can be traced line by line. The code provides 100% precision; not 95%. It lives in version control and is semantically transparent, reviewable, and auditable.
+This code handles combinations that may occur once a year — a rare facility, an unusual machine type, a specific classification. Training data will never cover the combinatorial space. Moreover, when a billing dispute arises and someone asks why the system chose rental versus purchase for a particular patient, the logic can be traced line by line. The code provides 100% precision. It lives in version control and is semantically transparent, deterministic, and auditable.
 
-A neural network approximating this function cannot provide these properties. It blurs boundaries that business requires to be sharp. And it fails opaquely — gradients and activations offer no affordance for debugging, ultimately achieving 95% accuracy at best where 100% is the only acceptable outcome. Decisions in this substrate are semantically opaque, non-reviewable, and untraceable.
+A neural network approximating this function cannot provide these properties. It blurs boundaries that business requires to be sharp. And it fails opaquely — gradients and activations offer no affordance for debugging and achieve 95% accuracy at best. Decisions in this substrate are semantically opaque, non-deterministic, and untraceable.
 
-## Stagehand: Half Right
+## The Stagehand Example: Half Right
 
 Stagehand, the browser automation framework from Browserbase, is kind of right.[^5]
 
 Stagehand's `act("click on the stagehand repo")` correctly implements judgment via a neural network in some sense. Which element on any dynamically chosen page corresponds to the "stagehand repo" cannot be represented in traditional software. There are too many permutations of page layout. The fuzziness of these boundaries is best approached by neural networks in massively multidimensional space minimizing some loss function against many examples.
 
-In another sense however, Stagehand's architecture is limited. We may know ahead of time which webpage we are attempting a click against and it may change infrequently, requiring only a one-time (or few-time) judgement. Yet, Stagehand produces no executable artifact by design. Instead, the LLM returns a selector, which gets cached opaquely outside version control. On cache miss, the LLM re-engages at runtime to re-interpret the instruction.
+In another sense however, Stagehand's architecture is limited. We may know ahead of time which webpage we are attempting a click against and it may change infrequently, requiring only a one-time (or few-time) judgment.
 
-A better architecture might still allow the LLM to make a judgment and return a selector, but afford positioning this judgment squarely at buildtime. The selector gets emitted as code into a Playwright script. The script is committed to version control, reviewed, and deployed. On failure — because the site changed and the selector broke — the _development process_ re-engages. An AI agent rewrites the script.
+Yet Stagehand produces no executable artifact by design. Instead, the LLM returns a selector, which gets cached opaquely outside version control. On cache miss, the LLM re-engages at runtime to re-interpret the instruction, invoking a neural net.
 
-Same judgment, different artifact. The selector becomes a semantically transparent piece of the underlying software system, not ephemeral runtime state.[^6]
+A better architecture might still allow the LLM to make a judgment and return a selector, but afford positioning this judgment squarely at buildtime. The selector gets emitted as code into a Playwright script. The script is committed to version control, reviewed, and deployed. On failure — because the site changed and the selector broke — the _development process_ re-engages. An AI agent rewrites the script. Same judgment, different artifact. The selector becomes a semantically transparent piece of the underlying software system, not ephemeral runtime state.[^6]
 
 ## A Better Architecture
 
