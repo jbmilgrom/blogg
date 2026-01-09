@@ -90,7 +90,7 @@ if (!machineSku || machineSku.trim() === "") {
 
 This code handles combinations that may occur once a year — a rare facility, an unusual machine type, a specific classification. Training data will never cover the combinatorial space. Moreover, when a billing dispute arises and someone asks why the system chose rental versus purchase for a particular patient, the logic can be traced line by line. The code provides 100% precision. It lives in version control and is semantically transparent, deterministic, and auditable.
 
-A neural network approximating this function cannot provide these properties. It blurs boundaries that business requires to be sharp. And it fails opaquely — gradients and activations offer no affordance for debugging and achieve 95% accuracy at best. Decisions in this substrate are semantically opaque, non-deterministic, and untraceable.
+A neural network approximating this function cannot provide these properties. It blurs boundaries that business requires to be sharp. And it fails opaquely — gradients and activations offer no affordance for debugging. Decisions in this substrate are semantically opaque, non-deterministic, and untraceable.
 
 ## The Stagehand Example: Half Right
 
