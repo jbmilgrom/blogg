@@ -16,7 +16,7 @@ The best performing architectures use the right tool for the right job, delegati
 
 [toc]
 
-## The Failure Rate
+## Some Agents in Practice
 
 Many agentic AI projects are failing[^1] — agentic drift, opaque debugging, brittle autonomy.[^2][^3][^4] Meanwhile, Claude Code has driven significant productivity gains by doing something different: it writes code that humans review and deploy, producing artifacts that are durable, version-controlled, and deterministic.
 
