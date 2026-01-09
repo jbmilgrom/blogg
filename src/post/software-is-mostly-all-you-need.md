@@ -12,7 +12,7 @@ As AI coding agents improve, development time decreases from days to hours, minu
 
 Not all agentic systems are reaping the benefits because they conflate two distinct tasks: _judgment_ and _execution_. Neural networks excel at judgment — fuzzy classification that cannot be specified in language. Traditional software excels at discrete logic that can be specified as explicit instructions and executed by any universal Turing machine. AI transforms both tasks in different ways: neural networks augment humans for judgment at runtime, while AI coding agents augment humans for writing execution logic at buildtime.
 
-The best performing architectures use the right tool for the right job, delegating judgment to neural networks and execution to traditional software even if the execution artifacts are produced entirely by AI.
+The best performing architectures use the right tool for the right job, delegating judgment to neural networks and execution to traditional software even if the executable artifacts are produced entirely by AI.
 
 [toc]
 
