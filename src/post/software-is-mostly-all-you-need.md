@@ -18,9 +18,7 @@ The best performing architectures use the right tool for the right job, delegati
 
 ## The Failure Rate
 
-Many agentic AI projects are failing[^1] and the industry has named the symptoms without the cause. IBM calls it "agentic drift" — when underlying models update, training data shifts, or business contexts change, agents that performed perfectly yesterday offer degraded or incorrect responses today.[^7] Enterprise teams report that debugging AI agents "isn't like debugging deterministic code" — you can't just read stdout/stderr, you need to replay the agent's decision process and inspect what it saw and why it acted.[^8] Even Cognition acknowledges that Devin "can't independently tackle an ambiguous coding project end-to-end like a senior engineer could."[^9]
-
-Meanwhile, a different paradigm has precipitated significant productivity gains. Claude Code does not offer complete autonomy even if performing chunks of work at a time; it writes code that humans review and deploy. Most importantly, Claude Code produces an artifact that is durable, version-controlled, deterministic, auditable, and executable by a Von Neumann machine just like any ol' software has always been.
+Many agentic AI projects are failing[^1] — agentic drift, opaque debugging, brittle autonomy.[^2][^3][^4] Meanwhile, Claude Code has driven significant productivity gains by doing something different: it writes code that humans review and deploy, producing artifacts that are durable, version-controlled, and deterministic.
 
 These failures and successes reflect a fundamental architectural difference.
 
@@ -28,13 +26,13 @@ These failures and successes reflect a fundamental architectural difference.
 
 Humans have historically done two different types of jobs for different reasons, and AI changes each differently.
 
-**Judgment** is fuzzy classification that cannot be specified as explicit rules. This handwritten letter is a "B", not a "P"; this customer complaint is about a refund, not fraud; this image contains a receipt; this element on some unfamiliar page is "the login button." Humans did these tasks because traditional CPU-based Von Neumann machines simply could not. The rules could not be written down, and even today exists only as learned boundaries in high-dimensional space. Minimization of a loss function via gradient descent in this vastly dimensional space draws these boundaries without the nouns and verbs of English, C, or even Rust (lol) inside of neural networks.
+**Judgment** is fuzzy classification that cannot be specified as explicit rules. This handwritten letter is a "B", not a "P"; this customer complaint is about a refund, not fraud; this image contains a receipt; this element on some unfamiliar page is "the login button." Humans did these tasks because traditional CPU-based Von Neumann machines simply could not. The rules could not be written down, and even today exist only as learned boundaries in high-dimensional space. Minimization of a loss function via gradient descent in this vastly dimensional space draws these boundaries without the nouns and verbs of English, C, or even Rust (lol) inside of neural networks.
 
 **Execution** is discrete logic that _can_ be specified as explicit rules. If complaint type is refund and days since purchase is less than 30, approve; if machine type is CPAP and facility code is X, the SKU is ABC-123; click the element with selector `a[href="/login"]`. Humans did these tasks, even though Von Neumann machines theoretically could and are more reliable and faster, because writing and operating software systems that encode these rules _was_ expensive. The investement was not worth the savings not because of any fuzziness inherent to the task.
 
 ## Common Conflations Today
 
-Dominant agent architectures conflate judgment and execution, frequently using neural networks for both. The consensus definition of an agent — "an LLM runs tools in a loop to achieve a goal"[^2] — clarifies the mechanism but not the problem space.
+Dominant agent architectures conflate judgment and execution, frequently using neural networks for both. The consensus definition of an agent — "an LLM runs tools in a loop to achieve a goal"[^5] — clarifies the mechanism but not the problem space.
 
 Frameworks like browser-use and Stagehand embody this conflation. Consider browser-use:
 
@@ -50,7 +48,7 @@ await stagehand.act("click on the stagehand repo");
 await agent.execute("Get to the latest PR");
 ```
 
-In both cases, the LLM performs judgment (which element is "the stagehand repo"?) _and_ execution (click it, figure out the next step, click that). The entire loop is neural. No durable artifact emerges. The LLM _is_ the runtime.[^3][^4]
+In both cases, the LLM performs judgment (which element is "the stagehand repo"?) _and_ execution (click it, figure out the next step, click that). The entire loop is neural. No durable artifact emerges. The LLM _is_ the runtime.[^6][^7]
 
 ## Why Execution Requires Traditional Software
 
@@ -94,7 +92,7 @@ A neural network approximating this function cannot provide these properties. It
 
 ## The Stagehand Example: Half Right
 
-Stagehand, the browser automation framework from Browserbase, is kind of right.[^5]
+Stagehand, the browser automation framework from Browserbase, is kind of right.[^8]
 
 Stagehand's `act("click on the stagehand repo")` correctly implements judgment via a neural network in some sense. Which element on any dynamically chosen page corresponds to the "stagehand repo" cannot be represented in traditional software. There are too many permutations of page layout. The fuzziness of these boundaries is best approached by neural networks in massively multidimensional space minimizing some loss function against many examples.
 
@@ -102,7 +100,7 @@ In another sense however, Stagehand's architecture is limited. We may know ahead
 
 Yet Stagehand produces no executable artifact by design. Instead, the LLM returns a selector, which gets cached opaquely outside version control. On cache miss, the LLM re-engages at runtime to re-interpret the instruction, invoking a neural net.
 
-A better architecture might still allow the LLM to make a judgment and return a selector, but afford positioning this judgment squarely at buildtime. The selector gets emitted as code into a Playwright script. The script is committed to version control, reviewed, and deployed. On failure — because the site changed and the selector broke — the _development process_ re-engages. An AI agent rewrites the script. Same judgment, different artifact. The selector becomes a semantically transparent piece of the underlying software system, not ephemeral runtime state.[^6]
+A better architecture might still allow the LLM to make a judgment and return a selector, but afford positioning this judgment squarely at buildtime. The selector gets emitted as code into a Playwright script. The script is committed to version control, reviewed, and deployed. On failure — because the site changed and the selector broke — the _development process_ re-engages. An AI agent rewrites the script. Same judgment, different artifact. The selector becomes a semantically transparent piece of the underlying software system, not ephemeral runtime state.[^9]
 
 ## A Better Architecture
 
@@ -153,19 +151,19 @@ Ironically, software is still mostly all you need at runtime.
 
 Neural networks are best reserved for judgment — the fuzzy tasks we cannot otherwise specify in language — and for buildtime acceleration. Neural networks will not replace traditional software, but rather enable its proliferation into corners of the economy that could benefit from reliable discrete logical execution at a fraction of historical costs.
 
-An architecture where neural networks handle runtime judgment, software handles execution, and AI agents accelerate buildtime creates a symbolic substrate that is nonetheless adaptable - the auditability, determinism, and precision of traditional software alongside the adaptability of learned systems.
+An architecture where neural networks handle runtime judgment, software handles execution, and AI agents accelerate buildtime creates a symbolic substrate that is nonetheless adaptable — auditability, determinism, and precision alongside the adaptability of learned systems.
 
 ---
 
 This is what we're building at [Docflow Labs](https://docflowlabs.com): adaptive systems with a symbolic substrate. If this resonates, say [hello](https://twitter.com/jbmilgrom)!
 
-[^1]: [Gartner predicts](https://www.gartner.com/en/newsroom/press-releases/2025-06-25-gartner-predicts-over-40-percent-of-agentic-ai-projects-will-be-canceled-by-end-of-2027) over 40% of agentic AI projects will be canceled by 2027 due to escalating costs, unclear business value, or inadequate risk controls. S&P Global reports 42% of companies abandoned most AI initiatives in 2024, up from 17% the prior year. The [WebArena benchmark](https://arxiv.org/abs/2307.13854) shows best agents achieve ~60% success vs 78% for humans. [Klarna's customer service AI](https://www.bloomberg.com/news/articles/2025-05-07/klarna-reverses-ai-push-with-plan-to-add-more-customer-service-staff) was rolled back in 2025 after quality eroded.
-[^2]: Simon Willison, ["I think 'agent' may finally have a widely enough agreed upon definition to be useful jargon now,"](https://simonwillison.net/2025/Sep/18/agents/) September 2025.
-[^3]: [browser-use](https://github.com/browser-use/browser-use) GitHub repository.
-[^4]: [Stagehand](https://github.com/browserbase/stagehand) GitHub repository.
-[^5]: [Stagehand documentation](https://www.stagehand.dev/) describes the framework as "the first browser automation framework built for the AI era—giving you both the predictability of code and the adaptability of AI."
-[^6]: [Stagehand's documentation](https://www.browserbase.com/blog/ai-web-agent-sdk) acknowledges this tension. They position themselves against "full agent-based solutions like OpenAI Operator or Anthropic Computer Use" which "promise full automation from just a prompt" but where "developers can end up with unpredictable outcomes." Stagehand offers more control than pure agents but stops short of buildtime AI. The cached selectors remain opaque, live outside git, and when something breaks in production and the LLM "self-heals" by finding a new selector, production behavior changes without code change, review, or approval.
-[^7]: IBM, ["The hidden risk that degrades AI agent performance,"](https://www.ibm.com/think/insights/agentic-drift-hidden-risk-degrades-ai-agent-performance) November 2025.
-[^8]: ["5 Fatal Mistakes: Why Your AI Agent Keeps Failing in Production,"](https://dev.to/agentsphere/5-fatal-mistakes-why-your-ai-agent-keeps-failing-in-production-4pk3) DEV Community, September 2025.
-[^9]: Cognition, ["Devin's 2025 Performance Review: Learnings From 18 Months of Agents At Work,"](https://cognition.ai/blog/devin-annual-performance-review-2025) 2025.
-[^10]: Multimodal, ["Agentic AI vs. RPA: What's the Difference?"](https://www.multimodal.dev/post/agentic-ai-vs-rpa), June 2025.
+[^1]: Gartner predicts over 40% of agentic AI projects will be canceled by 2027 due to escalating costs, unclear business value, or inadequate risk controls (https://www.gartner.com/en/newsroom/press-releases/2025-06-25-gartner-predicts-over-40-percent-of-agentic-ai-projects-will-be-canceled-by-end-of-2027). S&P Global reports 42% of companies abandoned most AI initiatives in 2024, up from 17% the prior year. The WebArena benchmark shows best agents achieve ~60% success vs 78% for humans (https://arxiv.org/abs/2307.13854). Klarna's customer service AI was rolled back in 2025 after quality eroded (https://www.bloomberg.com/news/articles/2025-05-07/klarna-reverses-ai-push-with-plan-to-add-more-customer-service-staff).
+[^2]: IBM, "The hidden risk that degrades AI agent performance," November 2025. https://www.ibm.com/think/insights/agentic-drift-hidden-risk-degrades-ai-agent-performance
+[^3]: "5 Fatal Mistakes: Why Your AI Agent Keeps Failing in Production," DEV Community, September 2025. https://dev.to/agentsphere/5-fatal-mistakes-why-your-ai-agent-keeps-failing-in-production-4pk3
+[^4]: Cognition, "Devin's 2025 Performance Review: Learnings From 18 Months of Agents At Work," 2025. https://cognition.ai/blog/devin-annual-performance-review-2025
+[^5]: Simon Willison, "I think 'agent' may finally have a widely enough agreed upon definition to be useful jargon now," September 2025. https://simonwillison.net/2025/Sep/18/agents/
+[^6]: browser-use GitHub repository. https://github.com/browser-use/browser-use
+[^7]: Stagehand GitHub repository. https://github.com/browserbase/stagehand
+[^8]: Stagehand documentation and README describe the framework as "the first browser automation framework built for the AI era—giving you both the predictability of code and the adaptability of AI." https://www.stagehand.dev/
+[^9]: Stagehand's own documentation acknowledges this tension. They position themselves against "full agent-based solutions like OpenAI Operator or Anthropic Computer Use" which "promise full automation from just a prompt" but where "developers can end up with unpredictable outcomes." Stagehand offers more control than pure agents but stops short of buildtime AI. The cached selectors remain opaque, live outside git, and when something breaks in production and the LLM "self-heals" by finding a new selector, production behavior changes without code change, review, or approval. https://www.browserbase.com/blog/ai-web-agent-sdk
+[^10]: Multimodal, "Agentic AI vs. RPA: What's the Difference?", June 2025. https://www.multimodal.dev/post/agentic-ai-vs-rpa
