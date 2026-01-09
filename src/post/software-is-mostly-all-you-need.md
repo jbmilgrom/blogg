@@ -135,29 +135,25 @@ This is not a new pattern. Production ML systems already work this way: a model 
 
 ## Development Time Approaching Runtime
 
-Software systems have historically maintained a clear separation between two domains: development (humans writing code, days or weeks) and execution (CPUs running code, nanoseconds). AI coding agents collapse this gap.
-
-We can express the collapse as a limit:
+Software systems have historically maintained a clear separation between two domains: development (humans writing code, days or weeks) and execution (CPUs running code, nanoseconds). AI coding agents close this gap. The theoretical limit as development time approaches zero is runtime:
 
 $$\lim_{\text{devtime} \to 0} \text{buildtime} = \text{runtime}$$
 
-As development time approaches zero, the distinction between "writing code" and "running code" becomes less temporally distinct. Even if AI never achieves nanosecond times for writing software, timescales of hours, minutes, and perhaps seconds allow software systems to adapt to feedback as it arrives.
+Even if AI never achieves nanosecond times for writing software, timescales of hours, minutes, and perhaps even seconds allow software systems to adapt to feedback as it arrives.
 
-What emerges resembles reinforcement learning with a different substrate. In traditional RL, a neural network observes state, outputs an action, receives a reward signal, and updates its weights. The network _is_ the adaptive element.
+As AI agents get more capable, the distinction between "writing code" and "running code" may dissolve. What emerges resembles reinforcement learning with a different substrate. In traditional RL, a neural network observes state, outputs an action, receives a reward signal, and updates its weights. The network _is_ the adaptive element.
 
 Substitute software for the neural network and the structure remains identical. The system observes data — requests, errors, metrics, user complaints. Code executes a response. Feedback arrives. An AI agent updates the code. Same adaptive loop, different computable substrate.
 
-The difference in representation matters. Neural networks encode behavior in opaque weight matrices. Software encodes behavior in symbolic, human-readable form. Software can be audited, debugged, and surgically modified if necessary. A single fallback chain can be altered without retraining an entire model and hoping it generalizes correctly.
-
-The symbolic substrate preserves the properties that production systems often require: interpretability, debuggability, auditability, and surgical modifiability. When the learned update mechanism provides adaptability, you get the benefits of RL without the costs.
+The difference in representation matters. Neural networks encode behavior in opaque weight matrices. Software encodes behavior in symbolic, human-readable form. Software can be audited, debugged, and surgically modified if necessary. A single fallback chain can be altered without retraining an entire model and hoping it generalizes correctly. The symbolic substrate preserves the properties that production systems often require: interpretability, debuggability, auditability, and surgical modifiability. When the learned update mechanism provides adaptability, you get the benefits of RL without the costs.
 
 ## Adaptable Software Systems
 
 Ironically, software is still mostly all you need at runtime.
 
-Neural networks are best reserved for judgment — the fuzzy tasks we cannot otherwise specify in language — and for buildtime acceleration. Neural networks will not replace traditional software, but rather enable its proliferation into corners of the economy that could benefit from reliable discrete logical execution.
+Neural networks are best reserved for judgment — the fuzzy tasks we cannot otherwise specify in language — and for buildtime acceleration. Neural networks will not replace traditional software, but rather enable its proliferation into corners of the economy that could benefit from reliable discrete logical execution at a fraction of historical costs.
 
-An architecture where neural networks handle runtime judgment, software handles execution, and AI agents accelerate buildtime creates a symbolic substrate that is nonetheless adaptable. Somehow we get both: the auditability, determinism, and precision of traditional software alongside the adaptability of learned systems.
+An architecture where neural networks handle runtime judgment, software handles execution, and AI agents accelerate buildtime creates a symbolic substrate that is nonetheless adaptable - the auditability, determinism, and precision of traditional software alongside the adaptability of learned systems.
 
 ---
 
