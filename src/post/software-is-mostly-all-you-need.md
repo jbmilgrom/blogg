@@ -92,11 +92,9 @@ A neural network approximating this function cannot provide these properties. Sp
 
 ## The Stagehand Example: Half Right
 
-Stagehand, the browser automation framework from Browserbase, is kind of right.[^8]
+Stagehand's `act("click on the stagehand repo")` correctly implements judgment via a neural network in some sense.[^8] Which element on any dynamically chosen page corresponds to the "stagehand repo" cannot be represented in traditional software. There are too many permutations of page layout. The fuzziness of these boundaries is best approached by neural networks in massively multidimensional space minimizing some loss function against many examples.
 
-Stagehand's `act("click on the stagehand repo")` correctly implements judgment via a neural network in some sense. Which element on any dynamically chosen page corresponds to the "stagehand repo" cannot be represented in traditional software. There are too many permutations of page layout. The fuzziness of these boundaries is best approached by neural networks in massively multidimensional space minimizing some loss function against many examples.
-
-In another sense however, Stagehand's architecture is limited. We may know ahead of time which webpage we are attempting a click against and it may change infrequently, requiring only a one-time (or few-time) judgment.
+In another sense, however, Stagehand's architecture is limited. We may know ahead of time which webpage we are attempting a click against and it may change infrequently, requiring only a one-time (or few-time) judgment.
 
 Yet Stagehand produces no executable artifact by design. Instead, the LLM returns a selector, which gets cached opaquely outside version control. On cache miss, the LLM re-engages at runtime to re-interpret the instruction, invoking a neural net.
 
