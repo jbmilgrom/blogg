@@ -26,7 +26,7 @@ These failures and successes reflect a fundamental architectural difference.
 
 Humans have historically done two different types of jobs for different reasons, and AI changes each differently.
 
-**Judgment** is fuzzy classification that cannot be specified as explicit rules. This handwritten letter is a "B", not a "P"; this customer complaint is about a refund, not fraud; this image contains a receipt; this element on some unfamiliar page is "the login button." Humans did these tasks because traditional CPU-based Von Neumann machines simply could not. The rules could not be written down, and even today exist only as learned boundaries in high-dimensional space. Minimization of a loss function via gradient descent in this vastly dimensional space draws these boundaries inside neural networks without confinement to the nouns and verbs of English, C, or even Rust (lol).
+**Judgment** is fuzzy classification that cannot be specified as explicit rules. This handwritten letter is a "B", not a "P"; this customer complaint is about a refund, not fraud; this image contains a receipt; this element on some unfamiliar page is "the login button." Humans did these tasks because traditional CPU-based Von Neumann machines simply could not. The rules could not be written down, and even today exist only as learned boundaries in high-dimensional space. Minimization of a loss function via gradient descent in a vastly dimensional space draws these boundaries inside neural networks without confinement to the nouns and verbs of English, C, or even Rust (lol).
 
 **Execution** is discrete logic that _can_ be specified as explicit rules. If complaint type is refund and days since purchase is less than 30, approve; if machine type is CPAP and facility code is X, the SKU is ABC-123; click the element with selector `a[href="/login"]`. Humans did these tasks, even though Von Neumann machines theoretically could and are more reliable and faster, because writing and operating software systems that encode these rules _was_ expensive. The investment was not worth the savings not because of any fuzziness inherent to the task.
 
@@ -86,9 +86,9 @@ if (!machineSku || machineSku.trim() === "") {
 }
 ```
 
-This code handles combinations that may occur once a year — a rare facility, an unusual machine type, a specific classification. Training data will never cover the combinatorial space. Moreover, when a billing dispute arises and someone asks why the system chose rental versus purchase for a particular patient, the logic can be traced line by line. The code provides 100% precision. It lives in version control and is semantically transparent, deterministic, and auditable.
+This code handles combinations that may occur once a year — a rare facility, an unusual machine type, a specific classification. The code provides 100% precision even for edge cases. When a billing dispute arises and someone asks why the system chose rental versus purchase for a particular patient, the logic can be traced line by line. It lives in version control and is semantically transparent, deterministic, and auditable.
 
-A neural network approximating this function cannot provide these properties. It blurs boundaries that business requires to be sharp. And it fails opaquely — gradients and activations offer no affordance for debugging. Decisions in this substrate are semantically opaque, non-deterministic, and untraceable.
+A neural network approximating this function cannot provide these properties. Sparse training data will never cover the combinatorial space. Moreover, it blurs boundaries that business requires to be sharp. And it fails opaquely — gradients and activations offer no affordance for debugging. Decisions in this substrate are semantically opaque, non-deterministic, and untraceable.
 
 ## The Stagehand Example: Half Right
 
