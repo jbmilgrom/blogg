@@ -75,7 +75,7 @@
 
   <!-- ASCII art style main title -->
   <g font-family="Courier New, monospace" filter="url(#strongGlow)">
-    <text x="600" y="290" fill="#0f3" font-size="52" text-anchor="middle" font-weight="bold">SOFTWARE FOR DAYS</text>
+    <text x="600" y="290" fill="#0f3" font-size="72" text-anchor="middle" font-weight="bold">SOFTWARE FOR DAYS</text>
     <text x="600" y="340" fill="#0af" font-size="20" text-anchor="middle">[ ai | functional programming | web | philosophy ]</text>
   </g>
 
