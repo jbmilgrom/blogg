@@ -84,8 +84,9 @@
     <text x="130" y="400" font-size="16">
       <tspan fill="#0f3">user@softwarefordays</tspan><tspan fill="#fff">:</tspan><tspan fill="#5af">~</tspan><tspan fill="#fff">$</tspan><tspan fill="#0f3"> ./explore_blog.sh</tspan>
     </text>
-    <text x="130" y="430" font-size="14" fill="#888">[INFO] Loading infinite knowledge stream...</text>
-    <text x="130" y="455" font-size="16">
+    <text x="130" y="425" font-size="14" fill="#888">[INFO] Loading infinite knowledge stream...</text>
+    <text x="130" y="450" font-size="16" fill="#0f3">&gt; softwarefordays.com</text>
+    <text x="130" y="475" font-size="16">
       <tspan fill="#0f3">user@softwarefordays</tspan><tspan fill="#fff">:</tspan><tspan fill="#5af">~</tspan><tspan fill="#fff">$</tspan><tspan fill="#0f3" opacity="0.7"> █</tspan>
     </text>
   </g>

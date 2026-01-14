@@ -1,7 +1,7 @@
 {
-  "title": "Software for Days",
+  "title": "Software for Days | AI, Functional Programming & Philosophy",
   "url": "https://softwarefordays.com",
-  "description": "Software for absolute days.",
+  "description": "A technical blog covering AI, functional programming paradigms, web development patterns, and the philosophy behind great software.",
   "feed": {
     "subtitle": "Software for absolute days.",
     "filename": "feed.xml",
