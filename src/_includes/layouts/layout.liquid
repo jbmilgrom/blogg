@@ -16,17 +16,13 @@
     <meta property="og:url" content="{{ metadata.url }}{{ page.url }}">
     <meta property="og:type" content="{% if title %}article{% else %}website{% endif %}">
     <meta property="og:site_name" content="{{ metadata.title }}">
-    {% if image %}
-    <meta property="og:image" content="{{ metadata.url }}{{ image }}">
-    {% endif %}
+    <meta property="og:image" content="{{ metadata.url }}{{ image | default: '/media/og-image.png' }}">
 
     <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary">
+    <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{ title | default: metadata.title }}">
     <meta name="twitter:description" content="{{ description | default: metadata.description }}">
-    {% if image %}
-    <meta name="twitter:image" content="{{ metadata.url }}{{ image }}">
-    {% endif %}
+    <meta name="twitter:image" content="{{ metadata.url }}{{ image | default: '/media/og-image.png' }}">
 
     <link href="/media/favicon_io/favicon-32x32.png" rel="icon" sizes="32x32">
     <link rel="stylesheet" href="/css/prism.css">

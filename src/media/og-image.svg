@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <!-- CRT scanline effect -->
+    <pattern id="scanlines" patternUnits="userSpaceOnUse" width="4" height="4">
+      <rect width="4" height="2" fill="rgba(0,0,0,0.3)"/>
+    </pattern>
+    <!-- Glow filter for text -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <!-- Stronger glow for main title -->
+    <filter id="strongGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#0a0a0a"/>
+
+  <!-- Matrix-style falling characters (background decoration) -->
+  <g fill="#0f3" opacity="0.15" font-family="Courier New, monospace" font-size="14">
+    <text x="50" y="30">01001000 01100001 01100011</text>
+    <text x="150" y="60">function* yield async</text>
+    <text x="80" y="90">const λ = x => x</text>
+    <text x="200" y="120">#!/usr/bin/env node</text>
+    <text x="30" y="150">import { reality } from</text>
+    <text x="120" y="180">while(true) { hack(); }</text>
+    <text x="60" y="210">0xDEADBEEF 0xCAFEBABE</text>
+
+    <text x="800" y="50">git push origin master</text>
+    <text x="850" y="80">npm run build &amp;&amp; deploy</text>
+    <text x="780" y="110">ssh root@mainframe</text>
+    <text x="900" y="140">SELECT * FROM knowledge</text>
+    <text x="820" y="170">sudo make me_a_sandwich</text>
+    <text x="750" y="200">&lt;script&gt;hack()&lt;/script&gt;</text>
+
+    <text x="100" y="480">pipe(map, filter, reduce)</text>
+    <text x="50" y="510">curry(compose(f, g, h))</text>
+    <text x="180" y="540">Y = λf.(λx.f(x x))(λx.f(x x))</text>
+    <text x="80" y="570">tail -f /var/log/reality</text>
+    <text x="150" y="600">chmod +x ./universe.sh</text>
+
+    <text x="850" y="460">grep -r "meaning" ./life</text>
+    <text x="780" y="490">find . -name "*.truth"</text>
+    <text x="900" y="520">cat /dev/random | head</text>
+    <text x="820" y="550">ping localhost -c ∞</text>
+    <text x="750" y="580">traceroute enlightenment</text>
+  </g>
+
+  <!-- Terminal window frame -->
+  <rect x="100" y="140" width="1000" height="350" fill="none" stroke="#0f3" stroke-width="2" rx="5"/>
+
+  <!-- Terminal title bar -->
+  <rect x="100" y="140" width="1000" height="30" fill="#1a1a1a" rx="5"/>
+  <circle cx="125" cy="155" r="6" fill="#ff5f56"/>
+  <circle cx="145" cy="155" r="6" fill="#ffbd2e"/>
+  <circle cx="165" cy="155" r="6" fill="#27ca40"/>
+  <text x="550" y="160" fill="#666" font-family="Courier New, monospace" font-size="12" text-anchor="middle">bash -- 80x24</text>
+
+  <!-- Terminal prompt and content -->
+  <g fill="#0f3" font-family="Courier New, monospace" filter="url(#glow)">
+    <text x="130" y="210" font-size="16">
+      <tspan fill="#0f3">user@softwarefordays</tspan><tspan fill="#fff">:</tspan><tspan fill="#5af">~</tspan><tspan fill="#fff">$</tspan><tspan fill="#0f3"> cat welcome.txt</tspan>
+    </text>
+  </g>
+
+  <!-- ASCII art style main title -->
+  <g font-family="Courier New, monospace" filter="url(#strongGlow)">
+    <text x="600" y="290" fill="#0f3" font-size="52" text-anchor="middle" font-weight="bold">SOFTWARE FOR DAYS</text>
+    <text x="600" y="340" fill="#0af" font-size="20" text-anchor="middle">[ ai | functional programming | web | philosophy ]</text>
+  </g>
+
+  <!-- Bottom prompt -->
+  <g fill="#0f3" font-family="Courier New, monospace" filter="url(#glow)">
+    <text x="130" y="400" font-size="16">
+      <tspan fill="#0f3">user@softwarefordays</tspan><tspan fill="#fff">:</tspan><tspan fill="#5af">~</tspan><tspan fill="#fff">$</tspan><tspan fill="#0f3"> ./explore_blog.sh</tspan>
+    </text>
+    <text x="130" y="430" font-size="14" fill="#888">[INFO] Loading infinite knowledge stream...</text>
+    <text x="130" y="455" font-size="16">
+      <tspan fill="#0f3">user@softwarefordays</tspan><tspan fill="#fff">:</tspan><tspan fill="#5af">~</tspan><tspan fill="#fff">$</tspan><tspan fill="#0f3" opacity="0.7"> █</tspan>
+    </text>
+  </g>
+
+  <!-- Decorative binary streams on sides -->
+  <g fill="#0f3" opacity="0.3" font-family="Courier New, monospace" font-size="10">
+    <text x="20" y="250" transform="rotate(-90 20 250)">10110100101101001011010010110100</text>
+    <text x="40" y="250" transform="rotate(-90 40 250)">01001011010010110100101101001011</text>
+    <text x="1160" y="380" transform="rotate(90 1160 380)">11010010110100101101001011010010</text>
+    <text x="1180" y="380" transform="rotate(90 1180 380)">00101101001011010010110100101101</text>
+  </g>
+
+  <!-- CRT scanline overlay -->
+  <rect width="1200" height="630" fill="url(#scanlines)" opacity="0.5"/>
+
+  <!-- Vignette effect -->
+  <rect width="1200" height="630" fill="url(#vignette)" opacity="0.3">
+    <defs>
+      <radialGradient id="vignette">
+        <stop offset="60%" stop-color="transparent"/>
+        <stop offset="100%" stop-color="#000"/>
+      </radialGradient>
+    </defs>
+  </rect>
+</svg>
