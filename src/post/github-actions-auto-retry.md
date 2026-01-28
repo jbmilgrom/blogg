@@ -10,7 +10,7 @@ hasTOC: no
 
 Do you find yourself babysitting your CI environment because of transients failures like `ETIMEDOUT`. `ECONNRESET`. `npm ERR! network`. `502 Bad Gateway`? Yeah us too.
 
-Our problem has gotten even worse for us lately because of all the AI coding agents under our command. Great throughput requires great responsibility.
+Our problem has gotten even worse lately because of all the AI coding agents under our command. Great throughput requires great responsibility.
 
 ## The Solution: A Simple Auto-Retry Workflow
 
