@@ -13,7 +13,7 @@
   --border-size: 2px;
   --underline: var(--border-size) solid var(--transparent-black);
   --native-header-margin: 0.83em;
-  --main-width: 624px;
+  --main-width: 680px;
   --main-yellow: #ffffff;
   --light-yellow: rgb(255, 255, 224);
   --large-space: 4em;
@@ -202,6 +202,34 @@ nav.table-of-contents {
   line-height: 1.65;
 }
 
+.post table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5em 0;
+  font-size: 0.95em;
+}
+
+.post th,
+.post td {
+  text-align: left;
+  padding: 0.35em 0.75em;
+  border-bottom: 1px solid var(--transparent-black);
+}
+
+.post th {
+  font-family: "ColfaxAI", Helvetica, sans-serif;
+  font-weight: 600;
+  border-bottom: 2px solid var(--black);
+}
+
+.post tr:last-child td {
+  border-bottom: none;
+}
+
+.post td code {
+  font-size: 0.9em;
+}
+
 .post .subtitle {
   font-family: "ColfaxAI", Helvetica, sans-serif;
   font-size: 1.25em;
@@ -233,6 +261,7 @@ footer a {
 .post pre.language-ruby,
 .post pre.language-html,
 .post pre.language-md,
+.post pre.language-yaml,
 .post code.language-text,
 .post code.language-js,
 .post code.language-ts,
@@ -240,7 +269,8 @@ footer a {
 .post code.language-elm,
 .post code.language-ruby,
 .post code.language-html,
-.post code.language-md {
+.post code.language-md,
+.post code.language-yaml {
   font-size: 0.85em;
 }
 
