@@ -14,7 +14,7 @@ Our problem has gotten even worse for us lately because of all the AI coding age
 
 ## The Solution: A Simple Auto-Retry Workflow
 
-In walks this sweet retry loop:
+This retry loop:
 
 ```yaml
 name: Auto-Retry Failed Workflows
