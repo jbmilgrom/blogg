@@ -79,13 +79,38 @@ jobs:
             --repo ${{ github.repository }}
 ```
 
-That's it. Drop this in `.github/workflows/auto-retry.yml` and you're done.
+That's it, drop this in `.github/workflows/auto-retry.yml` and you're done - I'm seeing anything in here specific to our infra besides the name of our github token in the secrets config and the "main" workflow we want watched, plus some branch names.
 
 By the way, this entire workflow was vibecoded. I described the problem to Claude, it wrote the workflow, I reviewed and merged... case in point about the compounding nature of the problem.
 
 ## How It Works
 
-**Event-driven trigger.** The `workflow_run` event fires immediately when your main workflow completes.
+**Event-driven trigger.** The `workflow_run` event fires immediately when your main workflow completes. The connection is by **name**, not filename. In our case, `workflows: ["Deploy"]` matches the `name: Deploy` field in our deploy workflow. When _any_ of the child jobs fail, the entire workflow is marked as failed, and the retry workflow fires.
+
+> ```yaml
+> # deploy.yml
+> name: Deploy # <-- This is what workflow_run matches on
+>
+> on:
+>   push:
+>     branches: [main, dev]
+>
+> jobs:
+>   lint:
+>     runs-on: ubuntu-latest
+>     steps: [...]
+>
+>   typecheck:
+>     runs-on: ubuntu-latest
+>     steps: [...]
+>
+>   deploy:
+>     needs: [lint, typecheck] # Runs after lint & typecheck pass
+>     runs-on: ubuntu-latest
+>     steps: [...]
+> ```
+>
+> All these jobs - `lint`, `typecheck`, `deploy` - are part of the single "Deploy" workflow. If `lint` fails due to `ETIMEDOUT`, the retry workflow sees the whole "Deploy" workflow failed and can surgically re-run just the `lint` job.
 
 **Smart retry logic.** GitHub tracks `run_attempt` automatically. We check if we're under 3 total attempts before retrying.
 
