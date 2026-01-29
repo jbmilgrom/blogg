@@ -239,6 +239,14 @@ nav.table-of-contents {
   line-height: 1.4;
 }
 
+.post .publish-date {
+  font-family: "ColfaxAI", Helvetica, sans-serif;
+  font-size: 0.9em;
+  color: var(--lightblack);
+  text-align: right;
+  margin: 0 0 0.5em 0;
+}
+
 .post .katex-display {
   line-height: normal;
 }

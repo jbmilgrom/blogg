@@ -2,6 +2,7 @@
 layout: layouts/layout.liquid
 templateClass: post
 ---
+<p class="publish-date">{{ date | date: "%B %e, %Y" }}</p>
 <h1>{{ title }}</h1>
 {% if subtitle %}
 <p class="subtitle">{{ subtitle }}</p>
