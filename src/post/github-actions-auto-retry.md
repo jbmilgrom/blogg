@@ -118,7 +118,49 @@ By the way, this entire workflow was vibecoded. I described the problem to Claud
 
 **Surgical retry.** `gh run rerun --failed` only re-runs the jobs that failed, not the entire workflow.
 
-**Slack notifications.** Sends a message when retrying (so you know it's operating and handling) and when it gives up after max attempts (so you know to look). You stay informed without having to check.
+**Slack notifications.** Sends a message when retrying (so you know it's on it) and when it gives up after max attempts (so you know to look) by adding the sections below and updating your GH repo secrets with your slack info.
+
+```yaml
+- name: Notify Slack - Retrying
+  if: steps.check.outputs.should_retry == 'true' && steps.analyze.outputs.is_transient == 'true'
+  uses: 8398a7/action-slack@v3
+  with:
+    status: custom
+    custom_payload: |
+      {
+        "text": ":recycle: Auto-retrying failed workflow (attempt ${{ github.event.workflow_run.run_attempt }}/3)",
+        "attachments": [{
+          "color": "warning",
+          "fields": [
+            { "title": "Branch", "value": "${{ github.event.workflow_run.head_branch }}", "short": true },
+            { "title": "Error", "value": "${{ steps.analyze.outputs.matched_pattern }}", "short": true },
+            { "title": "Run", "value": "<${{ github.event.workflow_run.html_url }}|View Failed Run>", "short": false }
+          ]
+        }]
+      }
+  env:
+    SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+- name: Notify Slack - Final Failure
+  if: steps.check.outputs.should_retry == 'false' || steps.analyze.outputs.is_transient == 'false'
+  uses: 8398a7/action-slack@v3
+  with:
+    status: custom
+    custom_payload: |
+      {
+        "text": ":x: Workflow failed after ${{ github.event.workflow_run.run_attempt }} attempts (not auto-retrying)",
+        "attachments": [{
+          "color": "danger",
+          "fields": [
+            { "title": "Branch", "value": "${{ github.event.workflow_run.head_branch }}", "short": true },
+            { "title": "Reason", "value": "${{ steps.check.outputs.should_retry == 'false' && 'Max retries exceeded' || 'Non-transient failure' }}", "short": true },
+            { "title": "Run", "value": "<${{ github.event.workflow_run.html_url }}|View Failed Run>", "short": false }
+          ]
+        }]
+      }
+  env:
+    SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+```
 
 ## The Transient Pattern List
 
