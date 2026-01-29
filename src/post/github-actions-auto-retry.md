@@ -79,7 +79,7 @@ jobs:
             --repo ${{ github.repository }}
 ```
 
-That's it, drop this in `.github/workflows/auto-retry.yml` and you're done - I'm seeing anything in here specific to our infra besides the name of our github token in the secrets config and the "main" workflow we want watched, plus some branch names.
+That's it, drop this in `.github/workflows/auto-retry.yml` and you're mostly done - there's not much in here specific to our infra besides the name of our github token in the secrets config, the "main" workflow we want watched, and some branch names.
 
 By the way, this entire workflow was vibecoded. I described the problem to Claude, it wrote the workflow, I reviewed and merged... case in point about the compounding nature of the problem.
 
