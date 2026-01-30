@@ -133,7 +133,7 @@ Even if AI never achieves nanosecond times for writing software, timescales of h
 
 As AI agents get more capable, the distinction between "writing code" and "running code" may dissolve. What emerges resembles reinforcement learning with a different substrate. In traditional RL, a neural network observes state, outputs an action, receives a reward signal, and updates its weights. The network _is_ the adaptive element.
 
-Substitute software for the neural network and the structure remains identical. The system observes data — requests, errors, metrics, user complaints. Code executes a response. Feedback arrives. An AI agent updates the code. Same adaptive loop, different computable substrate.
+Substitute software for the neural network and the structure remains identical. The system observes data — requests, errors, metrics, user complaints - code executes a response, feedback arrives, and An AI agent updates the code. Same adaptive loop, different computable substrate.
 
 The difference in representation matters. Neural networks encode behavior in opaque weight matrices. Software encodes behavior in symbolic, human-readable form. Software can be audited, debugged, and surgically modified if necessary. A single fallback chain can be altered without retraining an entire model and hoping it generalizes correctly. The symbolic substrate preserves the properties that production systems often require: interpretability, debuggability, auditability, and surgical modifiability. When the learned update mechanism provides adaptability, you get the benefits of RL without the costs.
 
