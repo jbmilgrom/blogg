@@ -18,7 +18,7 @@ Coding agents get this exactly right, since by definition they are making a seri
 
 ## Judgment and Execution Historically
 
-Humans have historically done two different types of jobs for different reasons, and AI changes each differently.
+Humans have historically performed both judgment and execution, but for different reasons.
 
 **Judgment** is fuzzy classification that cannot be specified as explicit rules. This variable should be made private, not public; this handwritten letter is a "B", not a "P"; this customer complaint is about a refund, not fraud; this image contains a receipt; this element on some unfamiliar page is "the login button." Humans did these tasks because traditional CPU-based Von Neumann machines simply could not. The rules could not be written down, and even today exist only as learned boundaries in high-dimensional space. Minimization of a loss function via gradient descent in a vastly dimensional space draws these boundaries inside neural networks without confinement to the nouns and verbs of English, C, or even Rust (lol).
 
