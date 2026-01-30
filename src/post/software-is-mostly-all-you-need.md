@@ -135,7 +135,7 @@ As AI agents get more capable, the distinction between "writing code" and "runni
 
 Substitute software for the neural network and the structure remains identical. The system observes data — requests, errors, metrics, user complaints - code executes a response, feedback arrives, and An AI agent updates the code. Same adaptive loop, different computable substrate.
 
-The difference in representation matters. Neural networks encode behavior in opaque weight matrices. Software encodes behavior in symbolic, human-readable form. Software can be audited, debugged, and surgically modified if necessary. A single fallback chain can be altered without retraining an entire model and hoping it generalizes correctly. The symbolic substrate preserves the properties that production systems often require: interpretability, debuggability, auditability, and surgical modifiability. When the learned update mechanism provides adaptability, you get the benefits of RL without the costs.
+The difference in representation matters. Neural networks encode behavior in opaque weight matrices, while software encodes behavior in symbolic, human-readable form. Unlike neural networks, software can be audited, debugged, and surgically modified if necessary. A single fallback chain can be altered without retraining an entire model and hoping it generalizes correctly. Interpretability, debuggability, auditability, and surgical modifiability are often required by production systems and when the learned update mechanism provides adaptability, you get the benefits of RL without the costs.
 
 ## Adaptable Software Systems
 
