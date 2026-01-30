@@ -44,9 +44,9 @@ await agent.execute("Get to the latest PR");
 
 In both cases, the LLM performs judgment (which element is "the stagehand repo"?) _and_ execution (click it, figure out the next step, click that). The entire loop is neural. No durable artifact emerges. The LLM _is_ the runtime.[^6][^7]
 
-## Why Execution Requires Traditional Software
+## Why Execution Benefits from Traditional Software
 
-Neural networks lack the properties that execution requires: determinism, auditability, and precision on edge cases.
+Neural networks lack the properties that execution often requires: determinism, auditability, and precision on edge cases.
 
 Consider this business logic from a system that processes medical equipment orders (from [Docflow Labs](https://docflowlabs.com), my startup):
 
@@ -83,6 +83,8 @@ if (!machineSku || machineSku.trim() === "") {
 This code handles combinations that may occur once a year — a rare facility, an unusual machine type, a specific classification. The code provides 100% precision even for edge cases. When a billing dispute arises and someone asks why the system chose rental versus purchase for a particular patient, the logic can be traced line by line. It lives in version control and is semantically transparent, deterministic, and auditable.
 
 A neural network approximating this function cannot provide these properties. Sparse training data will never cover the combinatorial space. Moreover, it blurs boundaries that business requires to be sharp. And it fails opaquely — gradients and activations offer no affordance for debugging. Decisions in this substrate are semantically opaque, non-deterministic, and untraceable.
+
+Humans do no better. In comparison to Von Neumann machines, we are slow, expensive, inconsistent, and error-prone at repetitive rule-following. A human processing this fallback chain might misread a facility code, skip a step when tired, or apply the rules differently on Monday than Friday. Machines execute the same instructions identically, billions of times per second, for fractions of a cent.
 
 ## The Stagehand Example: Half Right
 
