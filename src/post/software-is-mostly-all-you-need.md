@@ -10,17 +10,11 @@ hasTOC: yes
 
 Over the last 6 months and the last 6 weeks in particular, AI coding agents have shown to be incredibly capable at writing software. Tasks that traditionally required weeks of human labor can now be done in days if not hours. Even more incredibly, software systems that are designed from the start to harness AI coding agents exhibit many of the characteristics of the neural nets that were integral to their creation in the first place. These AI-native software systems are learned, not designed. Code is the policy, deployment is the episode, and the bug report is the reward signal - well-architected coding agents can drive this loop with little human intervention. Unlike traditional reinforcement learning architectures, they are encoded in CPU instruction sets instead of neural network weights, but they are learned just the same.
 
-The success of coding agents and the software systems built thereon carry lessons about where to apply AI agents in general as well. Coding, like many other creative tasks, requires _judgment_. How best to implement some function with input A and output B; how to name some variable; whether to share some function or implement a new version; etc. Neural networks excel at judgment (more on why below). Yet many of the agentic deployments we are seeing in the wild are against tasks that can be fully specified as explicit instructions. Of course, traditional software excels at _executing_ explicit instructions. Any programming language can be executed on today's machinery at billions of instructions per second.
+The success of coding agents and the software systems built thereon carry lessons about where to apply AI agents in general as well. Coding, like many other creative tasks, requires _judgment_. How best to implement some function with input A and output B; how to name some variable; whether to share some function or implement a new version; etc. Neural networks excel at judgment (more on why below). Yet many of the agentic deployments we are seeing in the wild are against tasks that can be fully specified as explicit instructions.[^2][^3][^4] Of course, traditional software excels at _executing_ explicit instructions. Any programming language can be executed on today's machinery at billions of instructions per second.
 
 Coding agents get this exactly right, since by definition they are making a series of judgments when writing code at buildtime and leaving the execution of such code to machines operating at runtime. The best performing architectures follow suit, delegating judgment to neural networks and execution to traditional software, even when the executable artifacts are produced entirely by AI.
 
 [toc]
-
-## Some Agents in Practice
-
-Many agentic AI projects are failing[^1] — agentic drift, opaque debugging, brittle autonomy.[^2][^3][^4] Meanwhile, Claude Code has driven significant productivity gains by doing something different: it writes code that humans review and deploy, producing artifacts that are durable, version-controlled, and deterministic.
-
-These failures and successes reflect a fundamental architectural difference.
 
 ## Judgment and Execution Historically
 
@@ -155,7 +149,6 @@ An architecture where neural networks handle runtime judgment, software handles 
 
 This is what we're building at [Docflow Labs](https://docflowlabs.com/#contact): adaptive systems with a symbolic substrate. If this resonates, say [hello](https://twitter.com/jbmilgrom)!
 
-[^1]: Gartner predicts over 40% of agentic AI projects will be canceled by 2027 due to escalating costs, unclear business value, or inadequate risk controls ([Gartner](https://www.gartner.com/en/newsroom/press-releases/2025-06-25-gartner-predicts-over-40-percent-of-agentic-ai-projects-will-be-canceled-by-end-of-2027)). S&P Global reports 42% of companies abandoned most AI initiatives in 2024, up from 17% the prior year ([S&P Global](https://www.spglobal.com/market-intelligence/en/news-insights/research/2025/10/generative-ai-shows-rapid-growth-but-yields-mixed-results)). The WebArena benchmark shows best agents achieve ~60% success vs 78% for humans ([arXiv](https://arxiv.org/abs/2307.13854)). Klarna's customer service AI was rolled back in 2025 after quality eroded ([Bloomberg](https://www.bloomberg.com/news/articles/2025-05-07/klarna-reverses-ai-push-with-plan-to-add-more-customer-service-staff)).
 [^2]: IBM, ["The hidden risk that degrades AI agent performance,"](https://www.ibm.com/think/insights/agentic-drift-hidden-risk-degrades-ai-agent-performance) November 2025.
 [^3]: ["5 Fatal Mistakes: Why Your AI Agent Keeps Failing in Production,"](https://dev.to/agentsphere/5-fatal-mistakes-why-your-ai-agent-keeps-failing-in-production-4pk3) DEV Community, September 2025.
 [^4]: Cognition, ["Devin's 2025 Performance Review: Learnings From 18 Months of Agents At Work,"](https://cognition.ai/blog/devin-annual-performance-review-2025) 2025.
