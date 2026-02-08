@@ -6,15 +6,19 @@ layout: layouts/post.liquid
 hasTOC: yes
 ---
 
-The “functions vs. objects” cliche is an artifact of a profound truth about program structure and semantics. Like oil and water, functions expel objects and objects functions. Moreover, the choice between them has dramatic implications for our programs, installing a “world-view” that involves concepts as fundamental as identity, change, state and even time. The object-oriented world-view may seem so obvious as to be without alternative. Look around the room, bus, park or wherever you find yourself reading this sentence, and you will likely identify objects, such as dogs, people and trees, changing over time. Many programmers approach program design the same way, identifying “distinct objects whose behaviors may change over time.” ([SICP](https://web.mit.edu/alexmv/6.037/sicp.pdf) Section 3) The ubiquity of this interpretation, however, belies the fact of interpretation. Change can be reformulated along different lines. Functional programs do not include identifiable objects. Yet, they may include state. They shift the paradigm. Instead of objects that change over time, functional programs consist of state transitions between _discrete_ _moments in time_ that may be seen together as “streams of information that flow.” ([SICP](https://web.mit.edu/alexmv/6.037/sicp.pdf) Section 3)
+The “functions vs. objects” cliche is an artifact of a profound truth about program structures and semantics. Like oil and water, functions expel objects and objects functions. Moreover, the choice between them has dramatic implications for our programs, installing a “world-view” that involves concepts as fundamental as identity, change, state and even time.
+
+The object-oriented world-view may seem so obvious as to be without alternative. Look around the room, bus, park or wherever you find yourself reading this sentence, and you will likely identify objects, such as dogs, people and trees, changing over time. Many programmers approach program design the same way, identifying “distinct objects whose behaviors may change over time.” ([SICP](https://web.mit.edu/alexmv/6.037/sicp.pdf) Section 3)
+
+The ubiquity of this interpretation, however, belies the fact of interpretation. Change can be reformulated along different lines. Functional programs do not include identifiable objects. Yet, they may include state. They shift the paradigm. Instead of objects that change over time, functional programs consist of state transitions between _discrete_ _moments in time_ that may be seen together as “streams of information that flow.” ([SICP](https://web.mit.edu/alexmv/6.037/sicp.pdf) Section 3)
 
 [toc]
 
-## Preface: Why JavaScript 
+## Preface: Why JavaScript
 
 Many of the insights underlying this post can be found in original form in the [Structure and Interpretation of Computer Programs ](https://web.mit.edu/alexmv/6.037/sicp.pdf) (SICP). There you may find a life-altering discussion of the same topics using Scheme, a Lisp dialect like Clojure. All code examples included in this post, however, will be couched in terms of JavaScript. If you know JavaScript and are unfamiliar with Scheme, this post may be immediately accessible to you without first learning how “[to balance all those parens](https://crockford.com/javascript/javascript.html).” Little is lost in translation as well. JavaScript has first-class functions (i.e. lambdas), closures (i.e. function-delimited lexical scoping) and generally thrives when used functionally.
 
- > JavaScript’s functions are first class objects with (mostly) lexical scoping. JavaScript is the first lambda language to go mainstream. Deep down, JavaScript has more in common with Lisp and Scheme than with Java. It is Lisp in C’s clothing. — Douglas Crockford, [JavaScript: The Good Parts](https://www.oreilly.com/library/view/javascript-the-good/9780596517748/ch01s02.html)
+> JavaScript’s functions are first class objects with (mostly) lexical scoping. JavaScript is the first lambda language to go mainstream. Deep down, JavaScript has more in common with Lisp and Scheme than with Java. It is Lisp in C’s clothing. — Douglas Crockford, [JavaScript: The Good Parts](https://www.oreilly.com/library/view/javascript-the-good/9780596517748/ch01s02.html)
 
 There is even an ongoing [academic effort](https://sicp.comp.nus.edu.sg/) to translate the full text of SICP into JavaScript. Also considered, JavaScript is a close cousin of TypeScript, which enables traditional object-oriented constructs like `private` and `public` and functional constructs like `readonly` and `as const` at compile time. Perhaps in JavaScript (and TypeScript), we get enough support of functional and object-oriented programming paradigms to enable a discussion of both within a single, ubiquitous language.
 
@@ -46,7 +50,7 @@ bankAccount.checkBalance(); // 80
 
 <figcaption>This example is based on the "withdraw" procedure introduced in SICP Section 3.1.</figcaption>
 
-stores balance data in a private attribute and exposes privileged methods `checkBalance` and `withdraw`, which proscribe the manner in which access to `balance` can occur. Together, these constructs create a computational object  `bankAccount` that behaves like a “bank account”, carrying a balance that may be diminished through “withdraw” and viewed through “check balance” actions. Less abstract objects can be modeled with the same set of tools. An `apple` may have a `bite` method that reduces an internal `bites` state in order to model an “apple” and a `house` may have a `paint` method that changes an internal `color` state in order to model a “house.” More abstract objects can be modeled with the same set of tools as well. A `userMetaData` object may have a `setEmail` method that updates an internal `email` state in order to model “user meta data.”
+stores balance data in a private attribute and exposes privileged methods `checkBalance` and `withdraw`, which proscribe the manner in which access to `balance` can occur. Together, these constructs create a computational object `bankAccount` that behaves like a “bank account”, carrying a balance that may be diminished through “withdraw” and viewed through “check balance” actions. Less abstract objects can be modeled with the same set of tools. An `apple` may have a `bite` method that reduces an internal `bites` state in order to model an “apple” and a `house` may have a `paint` method that changes an internal `color` state in order to model a “house.” More abstract objects can be modeled with the same set of tools as well. A `userMetaData` object may have a `setEmail` method that updates an internal `email` state in order to model “user meta data.”
 
 ### An Evolution of Imperative Programming
 
@@ -63,6 +67,7 @@ class BankAccount {
 const bankAccount = new BankAccount(100);
 bankAccount.balance = 80; // 80
 ```
+
 <figcaption>Did a withdrawal occur? Does <code>bankAccount</code> accurately represent a "bank account"?</figcaption>
 
 Expose `color` directly and it can magically change from say `WHITE` to `BLUE` despite no `paint`ing ever having occurred. In other words, object-oriented programming provides the means for identifying objects (`bankAccount`) and associated behaviors (`withdraw`)
@@ -419,7 +424,7 @@ isEqual(r1, r3); // => false
 <figcaption>TypeScript’s <code>readonly</code> qualifier prevents mutative actions (e.g. <code>p2[1] = 3</code>) at compile time.
 </figcaption>
 
-will _always_ be comprised of `2` in the first slot and `3` in the second and reduce to two-thirds, a reasonable conclusion is that they are the same. To be sure, substitute one for the other and the meaning of a program is unchanged.[^7] By contrast, consider when two *mutable* rational number implementations may be deemed the “same.”
+will _always_ be comprised of `2` in the first slot and `3` in the second and reduce to two-thirds, a reasonable conclusion is that they are the same. To be sure, substitute one for the other and the meaning of a program is unchanged.[^7] By contrast, consider when two _mutable_ rational number implementations may be deemed the “same.”
 
 ```ts
 type RationalNumber = [number /* numerator */, number /* denominator */];
@@ -479,7 +484,7 @@ In this light, object-oriented programming can be seen as the diametric opposite
 
 ## Programs Though!
 
-Thus far, we have only shown excerpts; the remainder of any surrounding program has been omitted. Of particular concern, our functional excerpts have been stateless. Some complete programs are stateless, designed to produce output based solely on input - compilers ideally output the same binaries provided the same input files. More frequently, however, programs require state. Some input _together_ with the current state of the program determine the output (or next state) of the program. Such is the case with our ATM example, where the current balance is crucial to calculating any subsequent balance post withdrawal. To be generally useful, a programming paradigm should include a model for state. 
+Thus far, we have only shown excerpts; the remainder of any surrounding program has been omitted. Of particular concern, our functional excerpts have been stateless. Some complete programs are stateless, designed to produce output based solely on input - compilers ideally output the same binaries provided the same input files. More frequently, however, programs require state. Some input _together_ with the current state of the program determine the output (or next state) of the program. Such is the case with our ATM example, where the current balance is crucial to calculating any subsequent balance post withdrawal. To be generally useful, a programming paradigm should include a model for state.
 
 ## Stateful Object-Oriented Programs
 
@@ -652,7 +657,7 @@ const ATM = (state = { balance: 100, amount: 10 }, event) => {
 
 will produce the same output provided the same input _whenever_ evaluated, independent of time.
 
-Where we once saw object state change as time _elapsed_, we now see the program jump from one state to the next at individual (i.e. discrete!) *moments in time*, as if producing entries in a list, log, “stream of information,” or other time-denominated series. Iterative, recursive functions model this same behavior. The functional `factorial` implementation shown above, for example, produces a value, say `F`, for each step, say `i`:
+Where we once saw object state change as time _elapsed_, we now see the program jump from one state to the next at individual (i.e. discrete!) _moments in time_, as if producing entries in a list, log, “stream of information,” or other time-denominated series. Iterative, recursive functions model this same behavior. The functional `factorial` implementation shown above, for example, produces a value, say `F`, for each step, say `i`:
 
 ```text
 F₀: 1
@@ -747,7 +752,7 @@ S₂: balance:80, amount:20
 S(i): program(Sᵢ₋₁, Eᵢ)
 ```
 
-In both cases, pieces of static information may be listed, one _after_ another. Moreover, both lists can be plotted along the same discrete timeline `i`. User interactions come in a certain order `U(i)`, triggering a run of the program function against the result of the previous run `S(i-1)` and event data `E(i)`, in order to produce `S(i)`. Our reality can be viewed as a time-series of states, just as it can be viewed as a collection of objects. Functional programming models a time-series of states, just as as object-oriented programming models objects. When the program and world *alike* can be viewed as “streams of information that flow in the system,” (Section 3) the world can flow into the program, and the program back into the world.
+In both cases, pieces of static information may be listed, one _after_ another. Moreover, both lists can be plotted along the same discrete timeline `i`. User interactions come in a certain order `U(i)`, triggering a run of the program function against the result of the previous run `S(i-1)` and event data `E(i)`, in order to produce `S(i)`. Our reality can be viewed as a time-series of states, just as it can be viewed as a collection of objects. Functional programming models a time-series of states, just as as object-oriented programming models objects. When the program and world _alike_ can be viewed as “streams of information that flow in the system,” (Section 3) the world can flow into the program, and the program back into the world.
 
 ## Addendum: Functional Programming as a Scientific Revolution
 
@@ -788,81 +793,82 @@ Nevertheless, the functional view is indeed expressible as a result of the work 
     > But as soon as we introduce… the idea that the value of a variable can change, a variable can no longer be simply a name. Now a variable somehow refers to a place where a value can be stored, and the value stored at this place can change.” — Rich Hickey, [The Value of Values](https://github.com/matthiasn/talk-transcripts/blob/master/Hickey_Rich/ValueOfValuesLong.md)
 
 [^5]: Never has the delineation between syntax and semantics been more pronounced than with [value objects](https://martinfowler.com/bliki/ValueObject.html), which commandeer object-oriented syntax to effect _non_-object semantics — i.e. immutable values. If not for the divergence between syntax and semantics, so-called “value objects” would be a contradiction in terms. We’ll cover the inherent mutability of objects soon in the sections titled [Changeability is Fundamental to Object Semantics](#changeability-is-fundamental-to-object-semantics) and [“Object” Names Changeability](#“object”-names-changeability).
-
-[^6]: Contextual immutability says nothing of local variables. In fact, a variable that is reassigned within the same procedure in which it was initialized cannot impact the semantics of such procedure.
+[^6]:
+    Contextual immutability says nothing of local variables. In fact, a variable that is reassigned within the same procedure in which it was initialized cannot impact the semantics of such procedure.
 
     > …any mutation that is ever done to any of these is to rebind local variables…that doesn’t affect the fact that these objects are immutable from an outside perspective” Gary Bernhardt, [Functional Core, Imperative Shell](https://www.destroyallsoftware.com/screencasts/catalog/functional-core-imperative-shell)
 
     `decrement100` may be implemented with internal mutability, for example,
 
-      ```js
-      const decrement100 = (x) => {
-        let r = 100;
-        r = 100 - x;
-        return r;
-      };
-    
-      decrement100(20); // => 80
-      ```
+    ```js
+    const decrement100 = (x) => {
+      let r = 100;
+      r = 100 - x;
+      return r;
+    };
+
+    decrement100(20); // => 80
+    ```
 
     without affecting external semantics; the output of `decrement100` still depends only on the input. Even block-scoped looping constructs like `while`, `for` and `do` may be part of procedures that produce the same output provided the same input, notwithstanding reassignment of variables tracking iteration state (e.g. `i`, `j`, `k`, `n`, etc.) with every loop.
 
-      ```js
-      const factorial = (n) => {
-        let total = 1;
-        while (n > 0) {
-          total = total * n;
-          n = n - 1;
-        }
-        return total;
-      };
-    
-      factorial(0); // => 1
-      factorial(1); // => 1
-      factorial(2); // => 2
-      factorial(3); // => 6
-      ```
+    ```js
+    const factorial = (n) => {
+      let total = 1;
+      while (n > 0) {
+        total = total * n;
+        n = n - 1;
+      }
+      return total;
+    };
+
+    factorial(0); // => 1
+    factorial(1); // => 1
+    factorial(2); // => 2
+    factorial(3); // => 6
+    ```
 
     <figcaption>The mutability of <code>f</code> and <code>n</code> does not impact the functional semantics of <code>factorial</code></figcaption>
 
     `factorial` will produce the same output provided the same input. On the other hand, changeability that is internal to one procedure definition may be positioned externally to another when [lexical procedural nesting is supported](https://en.wikipedia.org/wiki/Nested_function). `balance`, for example,
 
-      ```js
-      const makeBankAccount = (balance) => ({
-        withdraw: (amount) => (balance = balance - amount),
-        checkBalance: () => balance,
-      });
-    
-      const bankAccount = makeBankAccount(100);
-      bankAccount.withdraw(20);
-      bankAccount.checkBalance(); // 80
-      ```
+    ```js
+    const makeBankAccount = (balance) => ({
+      withdraw: (amount) => (balance = balance - amount),
+      checkBalance: () => balance,
+    });
+
+    const bankAccount = makeBankAccount(100);
+    bankAccount.withdraw(20);
+    bankAccount.checkBalance(); // 80
+    ```
 
     is external to `withdraw` although internal to `makeBankAccount` and undermines the functional semantics of `withdraw` as a result, as discussed above. [Notoriously unintuitive effects](https://stackoverflow.com/questions/750486/javascript-closure-inside-loops-simple-practical-example/750506) manifest when looping is combined with procedural nesting.
 
-      ```js
-      const buildCallbacks = (items) => {
-        const callbacks = [];
-        let i;
-        for (i = 0; i < items.length; i++) {
-          callbacks.push(() => items[i]);
-        }
-        return callbacks;
-      };
-    
-      const callbacks = buildCallbacks(["hello", "cruel", "world"]);
-    
-      callbacks.length; // => 3
-      callbacks[0](); // => undefined
-      callbacks[1](); // => undefined
-      callbacks[2](); // => undefined
-      ```
+    ```js
+    const buildCallbacks = (items) => {
+      const callbacks = [];
+      let i;
+      for (i = 0; i < items.length; i++) {
+        callbacks.push(() => items[i]);
+      }
+      return callbacks;
+    };
+
+    const callbacks = buildCallbacks(["hello", "cruel", "world"]);
+
+    callbacks.length; // => 3
+    callbacks[0](); // => undefined
+    callbacks[1](); // => undefined
+    callbacks[2](); // => undefined
+    ```
 
     <figcaption>Initializing <code>let</code> above the block scopes the variable above the for-loop. Each iteration points at the same reference in memory as a result. By the time the callbacks are called, i has been updated to <code>3</code> and is outside the <code>callback</code>'s upper bound.</figcaption>
 
     As a result, comprehensive immutability can be seen as defending functional programming in the face of procedural nesting. It also appears that functional semantics could theoretically coincide with traditional looping constructs and other locally-scoped mutation so long as procedural nesting was prohibited. Nevertheless, immutability is generally considered an inseparable part of functional programming; no distinction is made in SICP and elsewhere (that I have encountered). Perhaps there is something else to be said here about lambda calculus and a more formal definition of functional programming. Or, perhaps the many benefits of nested procedures (e.g. modules, closures, etc.) so obviously outweigh the superficial “costs” of forgoing looping to even consider such crazy talk. Recursive procedures can do anything looping constructs can and without performance regressions because of tail recursion and other optimization techniques at the compiler level.
 
-[^7]: That two equivalent expressions may be substituted for one another without altering the meaning of the program is known as [referential transparency](https://en.wikipedia.org/wiki/Referential_transparency).
+[^7]:
+    That two equivalent expressions may be substituted for one another without altering the meaning of the program is known as [referential transparency](https://en.wikipedia.org/wiki/Referential_transparency).
 
     > A language that supports the concept that “equals can be substituted for equals” in an expression without changing the value of the expression is said to be referentially transparent — SICP Section 3.1.3
 
@@ -874,37 +880,39 @@ Nevertheless, the functional view is indeed expressible as a result of the work 
 
     > If it is immutable, it now taps into that definition of value we saw before. Because by being immutable we can go and take a string value, and another string value, and say: are they the same? Do they have the same magnitude? Are they talking about the same thing? Are they expressing the same specific meaning? All of those definitions of values apply to something that is not mutable. So that relative worth thing kicks in. — Rich Hickey, [The Value of Values](https://github.com/matthiasn/talk-transcripts/blob/master/Hickey_Rich/ValueOfValuesLong.md)
 
-[^9]: [Elm](https://guide.elm-lang.org/) programs are trivially made to be stateful, notwithstanding the exclusive use of pure functions _and_ the asynchrony of user interactions! This counter program
+[^9]:
+    [Elm](https://guide.elm-lang.org/) programs are trivially made to be stateful, notwithstanding the exclusive use of pure functions _and_ the asynchrony of user interactions! This counter program
 
-      ```elm
-      import Browser
-      import Html exposing (Html, button, div, text)
-      import Html.Events exposing (onClick)
-    
-      main =
-      Browser.sandbox { init = 0, update = update, view = view }
-    
-      type Msg = Increment | Decrement
-    
-      update msg model =
-      case msg of
-      Increment ->
-        model + 1
-    
-      Decrement ->
-        model - 1
-    
-      view model =
-      div []
-      [ button [ onClick Decrement ] [ text "-" ]
-      , div [] [ text (String.fromInt model) ]
-      , button [ onClick Increment ] [ text "+" ]
-      ]
-      ```
+    ```elm
+    import Browser
+    import Html exposing (Html, button, div, text)
+    import Html.Events exposing (onClick)
+
+    main =
+    Browser.sandbox { init = 0, update = update, view = view }
+
+    type Msg = Increment | Decrement
+
+    update msg model =
+    case msg of
+    Increment ->
+      model + 1
+
+    Decrement ->
+      model - 1
+
+    view model =
+    div []
+    [ button [ onClick Decrement ] [ text "-" ]
+    , div [] [ text (String.fromInt model) ]
+    , button [ onClick Increment ] [ text "+" ]
+    ]
+    ```
 
     can be seen [here](https://elm-lang.org/examples/buttons) tracking counter state, even though a user may of course click the counter buttons asynchronously. Like garbage collection in JavaScript, Elm hides any imperative code dedicated to communication between asynchronous scripts from the programmer’s view.
 
-[^10]: There are many advantages to functional programming. Programs that deal with mutation are “drastically more difficult” to reason about than ones that do not.
+[^10]:
+    There are many advantages to functional programming. Programs that deal with mutation are “drastically more difficult” to reason about than ones that do not.
 
     > Referential transparency is violated when we include set! [i.e. assignment operations] in our computer language. This makes it tricky to determine when we can simplify expressions by substituting equivalent expressions. Consequently, reasoning about programs that use assignment becomes drastically more difficult — SICP Section 3.1.3
 
@@ -923,5 +931,4 @@ Nevertheless, the functional view is indeed expressible as a result of the work 
     These advantages have been known for decades. John Backus “gave high visibility to functional programming” (SICP Section 3.5.5; also see Simon Peyton-Jones, [Escape from the ivory tower: the Haskel journey](https://www.youtube.com/watch?v=re96UgMk6GQ)) through his [Turing Award lecture](https://www.thocp.net/biographies/papers/backus_turingaward_lecture.pdf) in 1978, seven years before the creation of [C++](https://en.wikipedia.org/wiki/C%2B%2B) and thirteen before [Java](https://en.wikipedia.org/wiki/Java_%28programming_language%29).
 
 [^11]: The [20 most popular languages](https://www.tiobe.com/tiobe-index/) are predominantly imperative or object-oriented.
-
 [^12]: A flip-book [has been suggested](https://softwareengineering.stackexchange.com/a/245409/369472) as a valuable mental model for state in functional programming
