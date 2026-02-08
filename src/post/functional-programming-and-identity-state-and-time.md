@@ -6,9 +6,9 @@ layout: layouts/post.liquid
 hasTOC: yes
 ---
 
-The “functions vs. objects” cliche is an artifact of a profound truth about program structures and semantics. Like oil and water, functions expel objects and objects functions. Moreover, the choice between them has dramatic implications for our programs, installing a “world-view” that involves concepts as fundamental as identity, change, state and even time.
+The “functions vs. objects” cliche is an artifact of a profound truth about program structures and semantics. They are indeed opposites on some almost physiological level much like oil and water. As a result, the choice between them has dramatic implications for our programs, installing a world-view that delineates concepts as fundamental as identity, change, state and even time.
 
-The object-oriented world-view may seem so obvious as to be without alternative. Look around the room, bus, park or wherever you find yourself reading this sentence, and you will likely identify objects, such as dogs, people and trees, changing over time. Many programmers approach program design the same way, identifying “distinct objects whose behaviors may change over time.” ([SICP](https://web.mit.edu/alexmv/6.037/sicp.pdf) Section 3)
+The object-oriented world-view may seem so obvious as to be without alternative. Look around the room, bus, park or wherever you find yourself reading this sentence, and you will likely identify objects, such as dogs, people and trees, changing over time. Not surprisingly perhaps, many programmers approach program design the same way, identifying “distinct objects whose behaviors may change over time.” ([SICP](https://web.mit.edu/alexmv/6.037/sicp.pdf) Section 3)
 
 The ubiquity of this interpretation, however, belies the fact of interpretation. Change can be reformulated along different lines. Functional programs do not include identifiable objects. Yet, they may include state. They shift the paradigm. Instead of objects that change over time, functional programs consist of state transitions between _discrete_ _moments in time_ that may be seen together as “streams of information that flow.” ([SICP](https://web.mit.edu/alexmv/6.037/sicp.pdf) Section 3)
 
