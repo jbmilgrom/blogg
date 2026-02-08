@@ -480,7 +480,7 @@ may share a balance at some point in time. But even if they start with the same 
 
 ## Diametric Opposites
 
-In this light, object-oriented programming can be seen as the diametric opposite of functional programming. Objects are inherently changeable. Moreover, changeability and “object” are intertwined as concepts. Yet, changeability undermines functional programming. Just as oil cannot inhabit the same physical space as water, object-oriented programming cannot occupy the same virtual space as functional programming. Use of one excludes the other. As a result, when writing programs, we may choose mutability or immutability, objects or functions, but not both at once.
+In this light, object-oriented programming can be seen as the diametric opposite of functional programming. Objects are inherently changeable. Moreover, changeability and “object” are intertwined as concepts. Yet, changeability undermines functional programming. Just as oil cannot inhabit the same physical space as water, object-oriented programming cannot occupy the same virtual space as functional programming. Use of one excludes the other. When writing programs, we may choose mutability or immutability, objects or functions, but not both at once.
 
 ## Programs Though!
 
