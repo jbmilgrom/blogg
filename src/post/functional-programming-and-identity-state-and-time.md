@@ -6,7 +6,7 @@ layout: layouts/post.liquid
 hasTOC: yes
 ---
 
-The “functions vs. objects” cliche is an artifact of a profound truth about program structures and semantics. They are indeed opposites on some almost physiological level much like oil and water. As a result, the choice between them has dramatic implications for our programs, installing a world-view that delineates concepts as fundamental as identity, change, state and even time.
+The “functions vs. objects” cliche is an artifact of a profound truth about program structures and semantics. They are indeed opposites on some almost physiological level much like oil and water. And the choice between them has dramatic implications for our programs, installing a world-view that delineates concepts as fundamental as identity, change, state and even time.
 
 The object-oriented world-view may seem so obvious as to be without alternative. Look around the room, bus, park or wherever you find yourself reading this sentence, and you will likely identify objects, such as dogs, people and trees, changing over time. Not surprisingly perhaps, many programmers approach program design the same way, identifying “distinct objects whose behaviors may change over time.” ([SICP](https://web.mit.edu/alexmv/6.037/sicp.pdf) Section 3)
 
