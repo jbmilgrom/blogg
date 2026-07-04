@@ -6,8 +6,6 @@ layout: layouts/post.liquid
 hasTOC: yes
 ---
 
-# The Description Tape: A Theory of AI-Era Software Engineering
-
 Software rots over time. Documentation drifts, conventions erode, and the codebase grows faster than anyone's ability to hold it in their head.
 
 > Systems program building is an entropy-decreasing process, hence inherently metastable. Program maintenance is an entropy-increasing process, and even its most skillful execution only delays the subsidence of the system into unfixable obsolescence.[^brooks]
