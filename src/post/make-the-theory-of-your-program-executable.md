@@ -1,16 +1,16 @@
 ---
 title: Make the Theory of Your Program Executable
-subtitle: Software Decays Because Its Theory Lives in Heads. It No Longer Has To.
-description: Naur was right for forty years — a program is a theory held by its builders, and it dies when they disperse. AI gives the theory a second place to live, and organizations that don't move it there keep the decay with more horsepower.
+subtitle: Software Decay is No Longer Inevitable
+description: Naur was right for forty years — a program is a theory held by its builders, and it dies when they disperse. AI gives the theory a second place to live, and organizations that don't move it there will decay event faster.
 date: 2026-07-07
 tags: post
 layout: layouts/post.liquid
 hasTOC: yes
 ---
 
-In 1985, Peter Naur argued that a program is not its source code but a theory: the understanding, held in the minds of its builders, of how the code maps to the world and why it is shaped the way it is. The theory cannot be reconstructed from the code and its documentation, and when the team holding it disperses, the program dies — it still runs, but "demands for modifications cannot be intelligently answered."[^naur] Forty years of dead codebases and orphaned modules have confirmed him.
+In 1985, Peter Naur argued that a program is more than its source code. The theory held in the minds of its builders of how the code maps to the world and why it is shaped the way it is cannot so easily be reconstructed from the code and its documentation. When the team holding it disperses, the program dies in effect. It may still run, but "demands for modifications cannot be intelligently answered."[^naur] Forty years of dead codebases and orphaned modules have confirmed him.
 
-Naur's constraint was never about the theory itself. It was about where the theory had to live. Heads are a specific kind of storage: rival (a senior engineer's attention goes to one person at a time), non-accumulating (knowledge transferred by conversation is re-paid each time, not banked), and lossy (it walks out the door). Knowledge stored that way cannot compound, so every organization bought its theory as labor, over and over, and decay was the default at any level of effort or talent. AI is the first technology that lets the theory live somewhere else: in artifacts that machines read, act on, and help maintain. Make the theory of your program executable, and decay stops being the default. Decline, and you keep the decay — with more horsepower behind it.
+People are a specific kind of storage: rival (a senior engineer's attention goes to one person at a time), non-accumulating (knowledge transferred by conversation is re-paid each time, not banked), and lossy (it walks out the door). Knowledge stored that way cannot compound, so every organization bought its theory as labor, over and over, and decay was the default at any level of effort or talent. AI is the first technology that lets the theory live somewhere else: in artifacts that machines read, act on, and help maintain. Make the theory of your program executable, and decay stops being the default. Decline, and you keep the decay — with more horsepower behind it.
 
 The industry is currently running this experiment, and the early results split. Google's 2025 DORA report, surveying roughly a hundred thousand practitioners, found that AI _amplifies_ what an organization already is, widening the gap between the strong and the struggling.[^dora] The degrading half cannot see itself: in a randomized trial by METR, experienced developers were 19% slower with AI tools while believing they had been roughly 20% faster.[^metr] "Software factory" and "loop engineering" are the buzzwords of the season, and the practice literature is full of genuinely good mechanics — conventions files, harness configuration — but it offers no account of why tending the loop compounds while merely adopting the tools does not, or why identical technology is splitting the field in two.[^genre] The answer to both questions is Naur's.
 
